@@ -1,0 +1,79 @@
+{namespace ServiceDesk.Templates.Errors}
+
+/**
+ * @param  title - title of error
+ * @param  error - error to display (first paragraph)
+ * @param? error2 - error to display (second paragraph)
+ * @param? actionLink - action link, without contextPath()
+ * @param? actionText - action text to display
+ */
+{template .errorPage}
+    <html>
+        <head>
+        </head>
+        <body class="aui-layout aui-theme-default page-type-message ">
+            <div class="aui-page-panel sd-error-page">
+                <div class="aui-page-panel-inner">
+                    <section class="aui-page-panel-content sd-error-panel">
+                        <header>
+                            <h2>{if $title}{$title}{else}{getText('sd.admin.servicedesk.common.error')}{/if}</h2>
+                        </header>
+                        <p class="sd-error-message">
+                            {$error}
+                        </p>
+                        {if $error2}
+                            <p class="sd-error-message">
+                                {$error2}
+                            </p>
+                        {/if}
+                        <p class="sd-error-action">
+                            {if $actionLink and $actionText}
+                                <a href="{contextPath()}{$actionLink}">{$actionText}</a>
+                            {else}
+                                <a href="{contextPath()}/">{getText('sd.admin.servicedesk.common.error.action')}</a>
+                            {/if}
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </body>
+    </html>
+{/template}
+
+
+/**
+ * @param title - title of error
+ * @param error - as string
+ * @param lastSDKey - key of last visited Service Desk
+ * @param lastSDName = name of last visited Service Desk
+ */
+{template .errorPageWithSDLink}
+    {let $actionLink}
+        /servicedesk/agent/{$lastSDKey}/queues
+    {/let}
+
+    {call .errorPage}
+        {param title: $title/}
+        {param error: $error/}
+        {param actionLink: $actionLink/}
+        {param actionText: getText('sd.admin.servicedesk.common.error.action.sd', $lastSDName)/}
+    {/call}
+{/template}
+
+
+/**
+* @param title - title of error
+*/
+{template .licenseErrorPage}
+    {let $actionLink}
+        /secure/admin/AgentAllocation.jspa
+    {/let}
+
+    {call .errorPage}
+        {param title: $title/}
+        {param error: getText('sd.agent.servicedesk.error.licence.message1')/}
+        {param error2: getText('sd.agent.servicedesk.error.licence.message2')/}
+        {param actionLink: $actionLink/}
+        {param actionText: getText('sd.agent.servicedesk.error.licence.action')/}
+    {/call}
+{/template}

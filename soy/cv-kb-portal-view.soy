@@ -1,0 +1,63 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+ * Kb View
+ * @param kbPage the article
+ * @param fallbackView
+ */
+{template .kbPortalView}
+    {let $renderLink: $kbPage.backUrl and $kbPage.backText /}
+    {if $renderLink}
+        <a class="js-cv-kb-portal-view-back cv-kb-portal-view-back" href="{$kbPage.backUrl}">{$kbPage.backText}</a>
+    {/if}
+    <h2 class="cv-kb-portal-view-title" title="{$kbPage.title}">{$kbPage.title}</h2>
+    <div class="cv-kb-view-iframe-container {if $renderLink}with-back-link{/if}">
+        {if $fallbackView}
+            <div class="cv-kb-fallback-view-container">
+                <div class="cv-kb-fallback-view-icon"></div>
+                <b>{getText('sd.kb.fallback.view.title')}</b>
+                <p>{getText('sd.kb.fallback.view.text')}</p>
+                {if $kbPage.confluencePageUrl}
+                    {call aui.buttons.button}
+                        {param text : getText('sd.kb.fallback.view.button') /}
+                        {param type : 'button' /}
+                        {param href: $kbPage.confluencePageUrl /}
+                        {param extraAttributes: ['type':'button', 'target': '_blank'] /}
+                        {param extraClasses: 'cv-kb-fallback-view-button' /}
+                    {/call}
+                {/if}
+            </div>
+        {else}
+            <form class="kb-article-iframe-data-poster" target="kb-article-viewer-iframe" method="post">
+            </form>
+            <iframe name="kb-article-viewer-iframe" class="kb-view-iframe js-kb-view-iframe hidden" frameBorder="0"></iframe>
+            <aui-spinner size="large"></aui-spinner>
+        {/if}
+    </div>
+    <div class="cv-kb-portal-view-footer">
+        <div class="cv-kb-portal-view-footer-container">
+            {if $kbPage.confluencePageUrl}
+                {let $icon}
+                    {call aui.icons.icon}
+                        {param useIconFont: true /}
+                        {param icon: 'shortcut' /}
+                        {param extraClasses: 'cv-kb-portal-view-fallback-link-icon' /}
+                    {/call}
+                {/let}
+                <div class="cv-kb-portal-view-fallback-link-container">
+                    {getText('sd.kb.fallback.link.text', $kbPage.confluencePageUrl, $icon) |noAutoescape}
+                </div>
+            {/if}
+            <sd-kb-feedback-collector{sp}
+                {if $renderLink}
+                    href="{$kbPage.backUrl}"
+                    text="{$kbPage.backText}"
+                {/if}
+            ></sd-kb-feedback-collector>
+        </div>
+        {if $renderLink and not ($kbPage.appLinkId == 'CONFLUENCE_CLOUD')}
+            <div class="cv-kb-portal-next-previous-results-container">
+            </div>
+        {/if}
+    </div>
+{/template}

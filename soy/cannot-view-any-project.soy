@@ -1,0 +1,24 @@
+{namespace ServiceDesk.Templates.FirstLoginErrors}
+
+/**
+ * Used by FirstLoginCannotViewAnyProjectAction
+ */
+{template .cannotViewAnyProject}
+<html>
+    <head>
+        <title>{getText('sd.common.words.serviceDesk')}</title>
+    </head>
+    <body>
+        <div class="aui-page-panel js-page-contents">
+            <section id="cannot-view-any-project">
+                <div class="image"></div>
+
+                <div class="content">
+                    <p>{getText('sd.renaissance.onboarding.no.permission.intro.message')}</p>
+                    <p>{getText('sd.renaissance.onboarding.no.permission.message')}</p>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>
+{/template}

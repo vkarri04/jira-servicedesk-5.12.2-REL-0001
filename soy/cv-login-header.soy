@@ -1,0 +1,53 @@
+{namespace ServiceDesk.Templates.Customer.Login.Header}
+
+/**
+* Login Form Header
+* @param loginAnnouncementHeader - header message of announcement
+* @param loginAnnouncementMessage - message body of announcement
+*/
+{template .header}
+    {call .title /}
+    {if $loginAnnouncementHeader or $loginAnnouncementMessage}
+        {call .announcement}
+            {param loginAnnouncementHeader: $loginAnnouncementHeader /}
+            {param loginAnnouncementMessage: $loginAnnouncementMessage /}
+        {/call}
+    {/if}
+{/template}
+
+/**
+* login title message
+*/
+{template .title}
+    <h1>{getText('cv.login.title')}</h1>
+{/template}
+
+/**
+* login announcement
+* @param loginAnnouncementHeader - header message of announcement
+* @param loginAnnouncementMessage - message body of announcement
+*/
+{template .announcement}
+    <div class="cv-login-announcement">
+        {if $loginAnnouncementHeader}
+            <h3 class="cv-login-announcement-header">{$loginAnnouncementHeader}</h3>
+        {/if}
+        {if $loginAnnouncementMessage}
+            <div class="cv-login-announcement-message">{$loginAnnouncementMessage|noAutoescape}</div>
+        {/if}
+    </div>
+{/template}
+
+/**
+* error message
+* @param errorMessage
+* @param title
+*/
+{template .simpleErrorMessage}
+    <div class="aui-message aui-message-error">
+        {if $title}
+            <p class="title">{$title}</p>
+        {/if}
+        {$errorMessage}
+    </div>
+{/template}

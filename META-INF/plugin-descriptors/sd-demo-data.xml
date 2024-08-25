@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-demo-data description="Service Desk demo project">
+
+    <!--================================
+     DEMO DATA
+     =================================-->
+
+    <demo-project key="sd-demo-project-itil-v2" weight="125">
+        <label key="sd.project.template.itil.v2.template.label"/>
+        <description key="sd.project.template.itil.v2.template.description"/>
+        <longDescription key="sd.project.template.itil.v2.template.description.long"/>
+
+        <icon location="img/project-template/project-template-itil-service-desk-icon.png" content-type="image/png" />
+        <backgroundIcon location="img/project-template/transparent-background.gif"/>
+
+
+        <importFile location="/demo-data/jsd-demo-data-itil-v2.json"/>
+        <projectTemplate key="com.atlassian.servicedesk:itil-v2-service-desk-project"/>
+        <projectType key="service_desk"/>
+
+        <conditions type="AND">
+            <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+            <condition class="com.atlassian.servicedesk.internal.conditions.HasWritableDirectoryCondition" />
+        </conditions>
+    </demo-project>
+
+</sd-demo-data>

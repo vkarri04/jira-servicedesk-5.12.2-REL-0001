@@ -1,0 +1,21 @@
+#if ($isFieldEnabled)
+
+    ## We do not want to preload the script when we are in textOnly mode
+    #if (!$textOnly)
+        <script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!custom_field_jsd-organizations-field'));</script>
+    #end
+
+    #if (!$value.isEmpty())
+        #if ($textOnly)
+            #foreach($organisation in $value)$textutils.htmlEncode($organisation.name)#commaonly($value)#end
+        #else
+            #set($organisationsJson = $customField.customFieldType.getOrganisationsAsJsonString($value))
+
+            <sd-customer-organizations data-organisations="$organisationsJson">
+            ## I am rendered by sd-organizations-list.js
+            </sd-customer-organizations>
+        #end
+    #else
+        $i18n.getText('sd.common.words.none')
+    #end
+#end

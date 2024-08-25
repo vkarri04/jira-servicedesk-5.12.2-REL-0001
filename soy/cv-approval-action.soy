@@ -1,0 +1,192 @@
+{namespace ServiceDesk.Templates.Customer.Approval.Action}
+
+/**
+* This template is used to render the Skeleton Editor.
+* When this template is used, we know that either the FF is disabled or WYSIWYG is disabled.
+* @param approvalAction object containing attributes pertaining to approval action
+* @param portal object containing attributes pertaining to the portal
+* @param reqDetails object containing attributes pertaining to the request
+*/
+{template .main}
+    {if $approvalAction.errors and $approvalAction.errors.length > 0}
+        {call .errorMessage data="all"/}
+    {elseif not $approvalAction.decided}
+        {call .commentApprovalForm data="all"/}
+    {elseif $approvalAction.decided}
+        {call .successMessage data="all"/}
+    {else}
+        {nil}
+    {/if}
+{/template}
+
+/**
+* @param portalBaseUrl URL for the portal associated with the approval
+* @param portalName name of the portal associated with the approval
+* @param requestDetailsBaseUrl URL of the request/issue associated with the approval
+* @param requestKey Key of the request/issue associated with the approval
+* @param issueSummary Summary of the request/issue associated with the approval
+*/
+{template .header}
+    <div class="approval-action-header">
+        <div class="approval-action-links">
+            <a class="approval-action-links__link" href={$portalBaseUrl}>{$portalName}</a>
+            <span class="approval-action-links__separator">/</span>
+            <a class="approval-action-links__link" href={$requestDetailsBaseUrl}>{$requestKey}</a>
+        </div>
+        <div class="approval-action-issue-summary">
+            {$issueSummary}
+        </div>
+    </div>
+{/template}
+
+/**
+ * WYSIWIG Comment Form
+ *
+ * !!!IMPORTANT: Ensure to have dependency on auiplugin-soy as long as ServiceDesk.Util.Files.DragDrop.browseFiles is used and has a aui dependency!!!
+ *
+ * @param reqDetails
+ * @param portal
+ * @param approvalAction
+ * @param env
+ */
+{template .commentApprovalForm}
+    {call .header}
+        {param portalBaseUrl: $portal.portalBaseUrl /}
+        {param portalName: $portal.name /}
+        {param requestDetailsBaseUrl: $reqDetails.requestDetailsBaseUrl /}
+        {param requestKey: $reqDetails.key /}
+        {param issueSummary: $reqDetails.issue.summary /}
+    {/call}
+    <form action="#" method="post" class="answer-form vp-form aui js-request-comment-form">
+        <h1 class="answer-form__title">
+            {if $approvalAction.action == 'approve'}
+                {getText('cv.approvals.actions.confirm.approve.title')}
+            {else}
+                {getText('cv.approvals.actions.confirm.decline.title')}
+            {/if}
+        </h1>
+        <div class="answer-form__description">
+            {getText('cv.approvals.actions.confirm.decline.content')}
+            {if $approvalAction.isCommentsForApprovalFeatureEnabled and $approvalAction.isCommentRequired}
+                <span class="aui-icon icon-required" aria-hidden="true"></span>
+            {/if}
+        </div>
+
+        <div class="creator-section">
+            <span>{getText('sd.common.words.creator')}:&nbsp</span>
+            {call ServiceDesk.Templates.Shared.Utils.user}
+                {param displayName: $reqDetails.reporter.displayName /}
+                {param avatarUrl: $reqDetails.reporter.avatarUrl /}
+                {param avatarSize: 'small' /}
+            {/call}
+        </div>
+
+        <div class="form-body">
+            {if not $approvalAction.isCommentsForApprovalFeatureEnabled or not $approvalAction.isWysiwygEnabled}
+                {let $placeholderText}
+                    {if $approvalAction.isCommentsForApprovalFeatureEnabled and $approvalAction.isCommentRequired}
+                        {getText('sd.approval.comment.required')}
+                    {else}
+                        {nil}
+                    {/if}
+                {/let}
+                <textarea id="answer-form__comment" class="textarea" placeholder="{$placeholderText}"></textarea>
+            {/if}
+        </div>
+        <div class="sd-thumbnail-container"></div>
+        <div class="buttons">
+            //Using 'input' instead of 'button' here to work with form-mixin.js
+            <input class="aui-button aui-button-primary" disabled type="submit"
+                   value={$approvalAction.action == 'approve' ? getText('cv.approvals.actions.confirm.approve.button') : getText('cv.approvals.actions.confirm.decline.button')}>
+            {if $reqDetails.canCreateAttachments and $approvalAction.isApprovalAttachmentsFeatureEnabled}
+                <div class="comment-attachment">
+                    {call ServiceDesk.Util.Files.DragDrop.browseFiles}
+                        {param ariaLabelledBy: '' /}
+                    {/call}
+                    <div id='attach-max-size' class="hidden">{$env.maxAttachmentSize}</div>
+                </div>
+            {/if}
+            <div class="hidden">
+                <input type="hidden" value="{$reqDetails.issue.id}" name="id" />
+                <input type="hidden" value="{$env.xsrfToken}" name="atl_token" />
+            </div>
+        </div>
+        <span class="answer-form__status cv-sd-status js-status"></span>
+    </form>
+{/template}
+
+/**
+* @param approvalAction object containing attributes pertaining to approval action
+* @param portal object containing attributes pertaining to the portal
+* @param reqDetails object containing attributes pertaining to the request
+*/
+{template .errorMessage}
+    {call .header}
+        {param portalBaseUrl: $portal.portalBaseUrl /}
+        {param portalName: $portal.name /}
+        {param requestDetailsBaseUrl: $reqDetails.requestDetailsBaseUrl /}
+        {param requestKey: $reqDetails.key /}
+        {param issueSummary: $reqDetails.issue.summary /}
+    {/call}
+    <div class="aui-message aui-message-error">
+        {foreach $error in $approvalAction.errors}
+            <p>{$error.errorMessage}</p>
+        {/foreach}
+    </div>
+{/template}
+
+
+/**
+* @param approvalAction object containing attributes pertaining to approval action
+* @param portal object containing attributes pertaining to the portal
+* @param reqDetails object containing attributes pertaining to the request
+*/
+{template .successMessage}
+    {call .header}
+        {param portalBaseUrl: $portal.portalBaseUrl /}
+        {param portalName: $portal.name /}
+        {param requestDetailsBaseUrl: $reqDetails.requestDetailsBaseUrl /}
+        {param requestKey: $reqDetails.key /}
+        {param issueSummary: $reqDetails.issue.summary /}
+    {/call}
+
+    <div class="aui-message aui-message-confirmation">
+        {let $actionMessage}
+            {call .actionMessage}
+                {param action: $approvalAction.action /}
+            {/call}
+        {/let}
+
+        <p>{$actionMessage}</p>
+    </div>
+{/template}
+
+/**
+ * @param action
+ */
+{template .actionIconName}
+    {switch $action}
+        {case 'approve'}
+            success
+        {case 'reject'}
+            close-dialog
+        {default}
+            {nil}
+    {/switch}
+{/template}
+
+/**
+ * @param action
+ */
+{template .actionMessage}
+    {switch $action}
+        {case 'approve'}
+            {getText('cv.approvals.actions.approved')}
+        {case 'reject'}
+            {getText('cv.approvals.actions.rejected')}
+        {default}
+            {nil}
+    {/switch}
+{/template}
+
+

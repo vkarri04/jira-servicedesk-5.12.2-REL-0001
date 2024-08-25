@@ -1,0 +1,69 @@
+{namespace ServiceDesk.Templates.Customer.Request}
+
+/**
+* Renders page header for request details
+* @param reqDetails
+* @param? headerWebPanels
+* @param? subheaderWebPanels
+*/
+{template .requestDetailsTitle}
+    {if $headerWebPanels}
+        <div class="header-web-panels">
+            {foreach $panel in $headerWebPanels}
+                {$panel.html|noAutoescape}
+            {/foreach}
+        </div>
+    {/if}
+
+    <div class="cv-global-level-title">
+        {if $reqDetails.issue.requestIcon}
+            <div class="aui-page-header-image cv-page-title-image">
+                <div class="cv-page-title-rticon">
+                {call ServiceDesk.Templates.Components.RequestTypeIcons.icon}
+                    {param iconId: $reqDetails.issue.requestIcon /}
+                    {param class: 'title-icon' /}
+                    {param useCustomerShim: true /}
+                {/call}
+                </div>
+            </div>
+        {/if}
+        <div class="aui-page-header-main cv-page-title-main">
+            <h2 class="vp-request-header">
+                <span class="cv-page-title-text">{$reqDetails.issue.summary}</span>{sp}
+                {call .requestStatusLozenge}
+                    {param reqDetails: $reqDetails /}
+                {/call}
+            </h2>
+        </div>
+    </div>
+
+    {if $subheaderWebPanels}
+        <div class="subheader-web-panels">
+            {foreach $panel in $subheaderWebPanels}
+                {$panel.html|noAutoescape}
+            {/foreach}
+        </div>
+    {/if}
+{/template}
+
+/**
+* Renders request status lozenge
+* @param reqDetails
+*/
+{template .requestStatusLozenge}
+    {let $type}
+        {if $reqDetails.issue.categoryKey == 'new'}
+            new
+        {elseif $reqDetails.issue.categoryKey == 'indeterminate'}
+            inprogress
+        {elseif $reqDetails.issue.categoryKey == 'done'}
+            success
+        {/if}
+    {/let}
+    <span class="request-status-lozenge">
+        {call SOY_REACT_BRIDGE_AUILozenge}
+            {param type: $type /}
+            {param message: $reqDetails.issue.status /}
+        {/call}
+    </span>
+{/template}

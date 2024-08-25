@@ -1,0 +1,707 @@
+/* TODO JSDS-1691 remove this now that we have custom notifications */
+
+/* CSS RESET (Eric Meyer's Reset CSS v2.0)
+ ------------------------------------------------------ */
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+    font-family: sans-serif;
+}
+
+/* AUI Lozenge
+------------------------------------------------------ */
+.aui-lozenge {
+    background-color: #cccccd;
+    border: 1px solid #cccccd;
+    border-radius: 3px;
+    color: #333;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1;
+    padding: 2px 5px 1px 5px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.aui-lozenge.aui-lozenge-subtle {
+    background-color: #fff;
+    border-color: #ccc;
+    color: #333;
+}
+
+.aui-lozenge-success {
+    background-color: #14892c;
+    border-color: #14892c;
+    color: #fff;
+}
+
+.aui-lozenge-success.aui-lozenge-subtle {
+    background-color: #fff;
+    border-color: #b2d8b9;
+    color: #14892c;
+}
+
+.aui-lozenge-error {
+    background-color: #d04437;
+    border-color: #d04437;
+    color: #fff;
+}
+
+.aui-lozenge-error.aui-lozenge-subtle {
+    background-color: #fff;
+    border-color: #f8d3d1;
+    color: #d04437;
+}
+
+.aui-lozenge-current {
+    background-color: #ffd351;
+    border-color: #ffd351;
+    color: #594300;
+}
+
+.aui-lozenge-current.aui-lozenge-subtle {
+    background-color: #fff;
+    border-color: #ffe28c;
+    color: #594300;
+}
+
+.aui-lozenge-complete {
+    background-color: #4a6785;
+    border-color: #4a6785;
+    color: #fff;
+}
+
+.aui-lozenge-complete.aui-lozenge-subtle {
+    background-color: #fff;
+    border-color: #e4e8ed;
+    color: #4a6785;
+}
+
+.aui-lozenge-moved {
+    background-color: #815b3a;
+    border-color: #815b3a;
+    color: #fff;
+}
+
+.aui-lozenge-moved.aui-lozenge-subtle {
+    background-color: #fff;
+    border-color: #ece7e2;
+    color: #815b3a;
+}
+
+/* Aui-style avatar for email only
+------------------------------------------------------ */
+.sd-email-user-avatar {
+    width: 30px;
+}
+
+.sd-email-user-avatar img {
+    margin: 6px 5px 0 0;
+    border-radius: 3px;
+    width: 24px;
+    height: 24px;
+}
+
+.sd-email-user-tagged .sd-email-user-avatar img {
+    margin-top: 2px;
+}
+
+.sd-email-user-tagged .sd-email-user-name {
+    line-height: 15px;
+}
+
+.sd-email-user-tag {
+    color: #999;
+}
+
+/* Basic layout
+------------------------------------------------------ */
+#email-wrap,
+body.sd-legacy-notifications {
+    font-size: 16px;
+    font-family: sans-serif;
+    background-color: #f5f5f5;
+}
+
+#email-wrap-cell {
+    padding: 20px 10px 10px;
+}
+
+#email-container {
+    width: 600px;
+    line-height: 1.5;
+}
+
+strong {
+    font-weight: bold;
+}
+
+/* Message header
+------------------------------------------------------ */
+.email-header {
+    padding: 10px 20px;
+    border: solid #ddd;
+    border-width: 1px 2px 1px 1px;
+    border-bottom-color: #f5f5f5;
+    background-color: #fff;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.email-header table {
+    width: 100%;
+}
+
+.email-header table td {
+    width: 50%;
+}
+
+.email-header a {
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #707070;
+}
+
+.request-key {
+    text-align: right;
+    font-size: 12px;
+    line-height: 18px;
+    text-decoration: none;
+}
+
+/* Message content
+------------------------------------------------------ */
+.email-content-important {
+    text-align: left;
+    padding: 20px;
+    border-style: solid;
+    border-width: 0 2px 0 1px;
+    border-color: #fff #ddd #ddd;
+    background-color: #fff;
+}
+
+.email-heading {
+    padding-top: 10px;
+    border-top-color: #f5f5f5;
+}
+
+.email-actions,
+.email-details,
+.email-content {
+    padding: 20px;
+}
+
+.request-status {
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.email-content-important h1 {
+    margin: 0;
+    line-height: 1.2;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.header-request-link {
+    color: #111;
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: #111;
+}
+
+h2 {
+    margin: 0 0 10px;
+    line-height: 1.2;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.email-actions {
+    padding-top: 0;
+    padding-bottom: 20px;
+    border-top-width: 0;
+    border-bottom-width: 2px;
+}
+
+.with-label .label {
+    width: 120px;
+    padding-right: 10px;
+}
+
+.approval-link {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+/* AUI BUTTON
+------------------------------------------------------ */
+.aui-button,
+a.aui-button {
+    box-sizing: border-box;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 3.01px;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-family: inherit;
+    font-size: 14px;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 1.42857143;
+    margin: 0;
+    padding: 4px 10px;
+    text-decoration: none;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.aui-button.aui-button-primary,
+.aui-button.aui-button-primary:visited {
+    background: #3572b0;
+    border-color: transparent;
+    color: #fff;
+    font-weight: 700;
+    -webkit-font-smoothing: antialiased;
+}
+
+.aui-button .aui-button-container {
+    font-family: Arial, FreeSans, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.aui-button .aui-button-content-wrapper {
+    font-family: Arial, FreeSans, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    border-spacing: 0;
+}
+
+.aui-button .aui-button-content {
+    font-family: Arial, FreeSans, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #fff;
+    font-weight: bold;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.aui-button .aui-button-link {
+    color: #3b73af;
+    text-decoration: none;
+    border: 0;
+}
+
+.aui-button .aui-button-text {
+    color: #fff;
+}
+
+/* Invitation Message content
+------------------------------------------------------ */
+.invitation-content {
+    text-align: left;
+    padding: 20px;
+    border-style: solid;
+    border-width: 0 1px 0 1px;
+    border-color: #fff #ddd #ddd;
+    background-color: #fff;
+}
+
+.invitation-head {
+    border-top: solid 1px #ddd;
+}
+
+.invitation-bottom {
+    border-bottom: solid 1px #ddd;
+}
+
+.invitation-title {
+    font-weight: lighter;
+    font-size: 26px;
+}
+
+.invitation-project {
+    font-weight: 600;
+}
+
+.invitation-footer {
+    width: 600px !important;
+}
+
+.invitation-footer .invitation-footer-content {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.invitation-list {
+    list-style-type: square;
+}
+
+/* Request details
+------------------------------------------- */
+.email-request-details .label,
+.email-request-details .value {
+    padding: 5px 0;
+}
+
+.email-request-details .label {
+    color: #707070;
+    width: 120px;
+    padding-right: 10px;
+    font-size: 14px;
+}
+
+/* Request activity
+------------------------------------------- */
+.latest-activity-container {
+    padding-top: 0;
+    border-top-width: 0;
+}
+
+.request-activity-container {
+    padding: 20px 20px 0;
+}
+
+.request-activity {
+    border-bottom: dashed 1px #ccc;
+}
+
+.request-activity .view-more {
+    padding: 20px 0;
+    border-top: solid 1px #ccc;
+}
+
+.request-activity .view-more p {
+    margin: 0;
+    padding: 0;
+}
+
+/* ---- General activity item styling---- */
+.activity-item {
+    padding: 20px 10px;
+    border-top: solid 1px #ccc;
+}
+
+.activity-item .header + .content {
+    margin-top: 5px;
+}
+
+.activity-item h4,
+.activity-item .time {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.activity-item h4 {
+    float: left;
+    margin: 0;
+    line-height: 18px;
+}
+
+.activity-item h4 + .time {
+    float: left;
+    line-height: 18px;
+}
+
+.activity-item .aui-icon + h4 {
+    margin-left: 5px;
+}
+
+.activity-item .time {
+    color: #707070;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.activity-item.status-update .content,
+.activity-item.resolution-update .content,
+.activity-item.attachment .content {
+    float: left;
+}
+
+.activity-item .content {
+    line-height: 1.6;
+    clear: both;
+}
+
+.activity-item + p {
+    margin: 15px 0 0;
+}
+
+.activity-item .attachment-size {
+    font-size: 12px;
+    font-style: italic;
+}
+
+.activity-item .attachment-thumbnail {
+    display: inline-block;
+    margin: 10px 0 0;
+}
+
+.activity-item .attachment-thumbnail img {
+    display: block;
+}
+
+/* ---- Latest activity item styling---- */
+.latest-activity {
+    display: block;
+    margin: 0;
+    padding: 10px;
+    border: solid 1px;
+    border-radius: 3px;
+}
+
+.latest-activity + .latest-activity {
+    margin-top: 20px;
+}
+
+/* ---- Requester's comment ---- */
+.latest-activity.requester-comment {
+    border-color: #ccc;
+    background-color: #f5f5f5;
+}
+
+/* ---- Worker's comment ---- */
+.latest-activity.worker-comment {
+    border-color: #9eb6d4;
+    background-color: #ebf2f9;
+}
+
+/* ---- Status update ---- */
+.latest-activity.status-update {
+    border-color: #ffd351;
+    background-color: #fffdf6;
+}
+
+/* ---- Resolution update ---- */
+.latest-activity.resolution-update {
+    border-color: #89c495;
+    background-color: #f3f9f4;
+}
+
+/* ---- Request details ---- */
+.latest-activity.request-fields {
+    clear: both;
+    overflow: hidden;
+}
+
+.request-field-unspecified {
+    font-style: italic;
+}
+
+/* Footer
+------------------------------------------- */
+#foot-note {
+    padding-bottom: 20px;
+    color: #707070;
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+#foot-note p {
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* -------------------------------------------
+    CSS for Conversational emails
+------------------------------------------- */
+body.sd-conversational {
+    background-color: transparent;
+    font-family: Arial, FreeSans, Helvetica, sans-serif;
+    font-size: inherit;
+}
+
+.sd-conversational .logo {
+    height: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.sd-conversational .footer-with-logo {
+    margin-top: 0;
+}
+
+.sd-conversational .additional-information {
+    color: #999;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.sd-conversational .blue-link {
+    color: #00f;
+    text-decoration: none;
+}
+
+.sd-conversational .blue-link-underline {
+    color: #00f;
+    text-decoration: underline;
+}
+
+.sd-conversational .email-content-table {
+    width: 100%;
+}
+
+.sd-conversational-email-header {
+    font-size: 15px;
+    margin: 0;
+}
+
+.sd-conversational .email-body {
+    line-height: 1.4;
+}
+
+.sd-conversational .gray-link {
+    color: #999;
+    text-decoration: underline;
+}
+
+.sd-conversational-foot-note {
+    padding-top: 32px;
+    color: #999;
+    font-size: 12px;
+}
+
+.sd-conversational-foot-note hr {
+    height: 1px;
+    color: #999;
+    background-color: #999;
+    border: none;
+}
+
+/* Bug fix for <p> style in Yahoo */
+.sd-conversational p {
+    margin: 0 0 1.35em;
+}
+
+/* Service request feedback
+ *
+ * see csat-fixed-styles.css for styling applied to notifications with custom
+ * styling enabled.  Section can be removed along with
+ * sd.custom.notifications.styling.
+ * ------------------------------------------------------ */
+.srf-section {
+    min-width: 280px;
+}
+
+.srf-star {
+    text-decoration: none;
+    color: #666;
+    font-size: 40px;
+    font-weight: bold;
+    border: none;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.srf-star img {
+    width: 20px;
+    border: none;
+}
+
+.srf-question {
+    font-weight: bold;
+}
+
+.srf-star-table {
+    width: 200px;
+}
+
+.srf-line-break {
+    min-height: 10px;
+    max-height: 10px;
+    font-size: 8px;
+    line-height: 10px;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+
+.srf-star-table .srf-star-row {
+    vertical-align: top;
+}
+
+.srf-star-table.srf-star-table-with-text {
+    width: 400px;
+}
+
+.srf-star-table .srf-star-row.srf-star-with-text {
+    text-align: center;
+    width: 75px;
+}
+
+.srf-star-table .srf-star-row .srf-text {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-weight: normal;
+    color: #000;
+    line-height: 20px;
+    text-align: center;
+}
+
+/* Custom email notifications
+------------------------------------------------------ */
+
+.custom-notifications-blue-link {
+    color: #3572b0;
+    text-decoration: none;
+}
+
+.jsd-notifications-separator {
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.jsd-activity-item-separator {
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.sd-email-custommarker {
+    padding-top: 10px;
+    padding-bottom: 12px;
+    text-align: center;
+    color: #707070;
+    font-size: 14px;
+}
+
+.sd-conversational .sd-email-custommarker {
+    color: #999;
+    text-align: left;
+}
+
+.sd-custom-notifications .sd-email-custommarker {
+    color: #999;
+    text-align: left;
+}
+
+.sd-custom-notifications .email-content-table {
+    font-size: 14px;
+}
+
+.sd-custom-notifications-additional-info {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.7;
+}

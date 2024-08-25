@@ -1,0 +1,265 @@
+{namespace ServiceDesk.Templates.Admin.email}
+
+/**
+ * Renders email the trimming section of the admin page.
+ *
+ * @param trimmingOptions the trimming options
+ */
+{template .emailTrimmingSection}
+    <h3>{getText('sd.admin.incoming.email.trimming.heading')}</h3>
+    <p>{getText('sd.admin.incoming.email.trimming.description')}</p>
+    <form class="aui sd-settings-form">
+        <div class="sd-radio-group">
+            {foreach $trimmingOption in $trimmingOptions}
+                {call .emailTrimmingOption}
+                    {param id: 'sd-trimming-option-' + index($trimmingOption) /}
+                    {param trimmingOption: $trimmingOption /}
+                {/call}
+            {/foreach}
+        </div>
+        {call .parseUpdateError}
+            {param errorMessage: getText('sd.admin.incoming.email.trimming.update.failed') /}
+            {param extraClass: 'js-trimming-error' /}
+        {/call}
+    </form>
+{/template}
+
+/**
+ * An email trimming radio button.
+ *
+ * @param trimmingOption the details for a trimming option.
+ * @param id the id to provide the radio button
+ */
+{template .emailTrimmingOption}
+    <div class="radio sd-radio-option">
+        <input
+            name="sd-trimming-options" id="{$id}" class="radio js-trimming-mode-option" type="radio"
+            value="{$trimmingOption.value}" {if $trimmingOption.selected}checked{/if}
+        />
+        <label for="{$id}">
+            {$trimmingOption.name}<br />
+            <small>{$trimmingOption.description}</small>
+        </label>
+    </div>
+{/template}
+
+/**
+ * @param customFilterAttachmentsEnabled
+ */
+{template .emailCustomFilterAttachment}
+    {if isFeatureFlagEnabled('sd.email.attachment.stripping')}
+        <h3>{getText('sd.admin.incoming.email.custom.filter.attachments.heading')}</h3>
+        <p>{getText('sd.admin.incoming.email.custom.filter.attachments.question')}</p>
+        <form class="aui sd-settings-form">
+            <div class="sd-radio-group">
+                <div class="radio sd-radio-option">
+                    <input type="radio" id="sd-custom-filter-attachments-enabled" class="radio js-custom-filter-attachments-option" name="sd-custom-filter-attachments-state" value="1" {if $customFilterAttachmentsEnabled}checked{/if} />
+                    <label for="sd-custom-filter-attachments-enabled">{getText('sd.admin.incoming.email.custom.filter.attachments.enabled')}</label>
+                </div>
+                <div class="radio sd-radio-option">
+                    <input type="radio" id="sd-custom-filter-attachments-disabled" class="radio js-custom-filter-attachments-option" name="sd-custom-filter-attachments-state" value="0" {if not $customFilterAttachmentsEnabled}checked{/if} />
+                    <label for="sd-custom-filter-attachments-disabled">{getText('sd.admin.incoming.email.custom.filter.attachments.disabled')}</label>
+                </div>
+            </div>
+            {call .parseUpdateError}
+                {param errorMessage: getText('sd.admin.incoming.email.custom.filter.attachments.update.failed') /}
+                {param extraClass: 'js-custom-filter-attachments-error' /}
+            {/call}
+        </form>
+    {/if}
+{/template}
+
+/**
+ * Renders the formatting section of the admin page
+ *
+ * @param formattingEnabled whether or not to check the formatting enabled radio button
+ */
+{template .emailFormattingSection}
+    <h3>{getText('sd.admin.incoming.email.formatting.heading')}</h3>
+    <p>{getText('sd.admin.incoming.email.formatting.question')}</p>
+    <form class="aui sd-settings-form">
+        <div class="sd-radio-group">
+            <div class="radio sd-radio-option">
+                <input type="radio" id="sd-formatting-enabled" class="radio js-formatting-option" name="sd-formatting-state" value="1" {if $formattingEnabled}checked{/if} />
+                <label for="sd-formatting-enabled">{getText('sd.admin.incoming.email.formatting.enabled')}</label>
+            </div>
+            <div class="radio sd-radio-option">
+                <input type="radio" id="sd-formatting-disabled" class="radio js-formatting-option" name="sd-formatting-state" value="0" {if not $formattingEnabled}checked{/if} />
+                <label for="sd-formatting-disabled">{getText('sd.admin.incoming.email.formatting.disabled')}</label>
+            </div>
+        </div>
+        {call .parseUpdateError}
+            {param errorMessage: getText('sd.admin.incoming.email.formatting.update.failed') /}
+            {param extraClass: 'js-formatting-error' /}
+        {/call}
+    </form>
+{/template}
+
+/**
+ * Renders the outsider comments section of the admin page
+ *
+ * @param outsiderCommentsEnabled whether or not to check the outsider comments enabled radio button
+ */
+{template .publicEmailSection}
+    <h3>{getText('sd.admin.incoming.email.outsider.comments.heading')}</h3>
+    <p>{getText('sd.admin.incoming.email.outsider.comments.question')}</p>
+    <form class="aui sd-settings-form">
+        <div class="sd-radio-group">
+            <div class="radio sd-radio-option">
+                <input type="radio" id="sd-outsider-comments-enabled" class="radio js-outsider-comments-option" name="sd-outsider-comments-state" value="1" {if $outsiderCommentsEnabled}checked{/if} />
+                <label for="sd-outsider-comments-enabled">{getText('sd.admin.incoming.email.outsider.comments.enabled')}</label>
+            </div>
+            <div class="radio sd-radio-option">
+                <input type="radio" id="sd-outsider-comments-disabled" class="radio js-outsider-comments-option" name="sd-outsider-comments-state" value="0" {if not $outsiderCommentsEnabled}checked{/if} />
+                <label for="sd-outsider-comments-disabled">{getText('sd.admin.incoming.email.outsider.comments.disabled')}</label>
+            </div>
+        </div>
+        {call .parseUpdateError}
+            {param errorMessage: getText('sd.admin.incoming.email.outsider.comments.update.failed') /}
+            {param extraClass: 'js-outsider-comments-error' /}
+        {/call}
+    </form>
+{/template}
+
+/**
+ *
+ * @param createCustomerModeOptions
+ */
+{template .customerCreationSection}
+    <h3>{getText('sd.admin.incoming.email.create.customer.mode.heading')}</h3>
+    <p>{getText('sd.admin.incoming.email.create.customer.mode.question')}</p>
+    <form class="aui sd-settings-form">
+        <div class="sd-radio-group">
+            {foreach $customerCreateModeOption in $createCustomerModeOptions}
+                {call .customerCreateModeOption}
+                    {param id: 'sd-customer-create-option-' + index($customerCreateModeOption) /}
+                    {param customerCreateModeOption: $customerCreateModeOption /}
+                {/call}
+            {/foreach}
+        </div>
+        {call .parseUpdateError}
+            {param errorMessage: getText('sd.admin.incoming.email.create.customer.mode.update.failed') /}
+            {param extraClass: 'js-customer-create-error' /}
+        {/call}
+    </form>
+{/template}
+
+/**
+ * Renders the Mail Filter Troubleshooting section
+ *
+ * @param bulkMailFilterEnabled
+ * @param autoReplyMailFilterEnabled
+ */
+{template .mailFilterSection}
+    {let $linkStart}
+        {call ServiceDesk.Templates.Shared.Utils.helpLinkStart}
+            {param helpLinkKey: 'global.mail.filters' /}
+            {param analyticsKey: 'global.mail.filters'/}
+        {/call}
+    {/let}
+    {let $linkEnd}
+        {call ServiceDesk.Templates.Shared.Utils.helpLinkEnd /}
+    {/let}
+
+    <h3>{getText('sd.admin.incoming.email.filter.settings.update.heading')}</h3>
+    <p>{getText('sd.admin.incoming.email.filter.settings.update.description', $linkStart, $linkEnd)|noAutoescape}</p>
+    <form class="aui sd-settings-form">
+        <label>{getText('sd.admin.incoming.email.bulk.mail.filter.update.enabled.question')}</label>
+        <div class="sd-radio-group">
+            <div class="radio sd-radio-option">
+                <input type="radio" id="sd-bulk-mail-filter-enabled" class="radio js-bulk-mail-filter-option" name="sd-bulk-mail-filter-state" value="1" {if $bulkMailFilterEnabled}checked{/if} />
+                <label for="sd-bulk-mail-filter-enabled">{getText('sd.admin.incoming.email.bulk.mail.filter.update.enabled')}</label>
+            </div>
+            <div class="radio sd-radio-option">
+                <input type="radio" id="sd-bulk-mail-filter-disabled" class="radio js-bulk-mail-filter-option" name="sd-bulk-mail-filter-state" value="0" {if not $bulkMailFilterEnabled}checked{/if} />
+                <label for="sd-bulk-mail-filter-disabled">{getText('sd.admin.incoming.email.bulk.mail.filter.update.disabled')}</label>
+            </div>
+        </div>
+        {call .parseUpdateError}
+            {param errorMessage: getText('sd.admin.incoming.email.bulk.mail.filter.update.failed') /}
+            {param extraClass: 'js-bulk-mail-filter-error' /}
+        {/call}
+    </form>
+    <form class="aui sd-settings-form sd-mail-filter-form-spacer">
+        <label>{getText('sd.admin.incoming.email.auto.reply.mail.filter.update.enabled.question')}</label>
+        <div class="sd-radio-group">
+            <div class="radio sd-radio-option">
+                <input type="radio" id="sd-auto-reply-mail-filter-enabled" class="radio js-auto-reply-mail-filter-option" name="sd-auto-reply-mail-filter-state" value="1" {if $autoReplyMailFilterEnabled}checked{/if} />
+                <label for="sd-auto-reply-mail-filter-enabled">{getText('sd.admin.incoming.email.auto.reply.mail.filter.update.enabled')}</label>
+            </div>
+            <div class="radio sd-radio-option">
+                <input type="radio" id="sd-auto-reply-mail-filter-disabled" class="radio js-auto-reply-mail-filter-option" name="sd-auto-reply-mail-filter-state" value="0" {if not $autoReplyMailFilterEnabled}checked{/if} />
+                <label for="sd-auto-reply-mail-filter-disabled">{getText('sd.admin.incoming.email.auto.reply.mail.filter.update.disabled')}</label>
+            </div>
+        </div>
+        {call .parseUpdateError}
+            {param errorMessage: getText('sd.admin.incoming.email.auto.reply.mail.filter.update.failed') /}
+            {param extraClass: 'js-auto-reply-mail-filter-error' /}
+        {/call}
+    </form>
+{/template}
+
+/**
+ * An email customer create moderadio button.
+ *
+ * @param customerCreateModeOption
+ * @param id the id to provide the radio button
+ */
+{template .customerCreateModeOption}
+    <div class="radio sd-radio-option">
+        <input
+            name="sd-customer-create-options" id="{$id}" class="radio js-customer-create-option" type="radio"
+            value="{$customerCreateModeOption.value}" {if $customerCreateModeOption.selected}checked{/if}
+        />
+        <label for="{$id}">
+            {$customerCreateModeOption.question}
+        </label>
+    </div>
+{/template}
+
+/**
+ * Parse setting update error
+ *
+ * @param errorMessage
+ * @param extraClass
+ */
+{template .parseUpdateError}
+    <div class="aui-message aui-message-error sd-email-setting-update-error {$extraClass}">
+        <p class="title">
+            <strong>{getText('sd.admin.incoming.email.failed.heading')}</strong>
+        </p>
+        <p>{$errorMessage|noAutoescape}</p>
+    </div>
+{/template}
+
+/**
+ * @param errors
+ */
+{template .error}
+    {foreach $error in $errors}
+        <div class="sd-test-result sd-test-server-error">
+            {$error.errorMessage}
+        </div>
+    {/foreach}
+{/template}
+
+/**
+ * @param successMessage
+ */
+{template .success}
+    <div class="sd-test-result sd-test-server-success">
+        {$successMessage}
+    </div>
+    <div class="sd-test-result sd-test-server-success">
+        {getText('sd.admin.email.connectivity.result.success')}
+    </div>
+{/template}
+
+/**
+ */
+{template .resultParseFailure}
+    <div class="sd-test-result sd-test-server-error">
+        <p>{getText('sd.admin.email.result.error')}</p>
+    </div>
+{/template}
+

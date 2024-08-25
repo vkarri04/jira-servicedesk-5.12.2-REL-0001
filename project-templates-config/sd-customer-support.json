@@ -1,0 +1,92 @@
+{
+    "issue-type-scheme": {
+        "name": "sd.premade.issuetype.scheme.name",
+        "description": "sd.premade.issuetype.scheme.description",
+        "issue-types": [
+            {
+                "key": "bug",
+                "name": "sd.project.template.customer.support.issuetype.bug.name",
+                "description": "sd.project.template.customer.support.issuetype.bug.description",
+                "icon": "/img/issue-type-icons/bug.png"
+            },
+            {
+                "key": "newfeature",
+                "name": "sd.project.template.customer.support.issuetype.new.feature.name",
+                "description": "sd.project.template.customer.support.issuetype.new.feature.description",
+                "icon": "/img/issue-type-icons/new_feature.png"
+            },
+            {
+                "key": "support",
+                "name": "sd.project.template.customer.support.issuetype.support.name",
+                "description": "sd.project.template.customer.support.issuetype.support.description",
+                "icon": "/img/issue-type-icons/support.png"
+            }
+        ]
+    },
+    "issue-type-screen-scheme": {
+        "name": "sd.premade.issuetype.screen.scheme.name",
+        "description": "sd.premade.issuetype.screen.scheme.description",
+        "default-screen-scheme": "defaultScreenScheme",
+        "screens": [
+            {
+                "key": "defaultScreen",
+                "name": "sd.premade.screen.name",
+                "description": "sd.premade.screen.description",
+                "tabs": [
+                    {
+                        "name": "sd.premade.screen.default.tab",
+                        "fields": [
+                            "summary",
+                            "description",
+                            "issuetype",
+                            "priority",
+                            "attachment",
+                            "components",
+                            "labels",
+                            "assignee",
+                            "reporter",
+                            "issuelinks",
+                            "duedate"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "screen-schemes": [
+            {
+                "key": "defaultScreenScheme",
+                "name": "sd.premade.screen.scheme.name",
+                "description": "sd.premade.screen.scheme.description",
+                "default-screen": "defaultScreen"
+            }
+        ]
+    },
+    "resolutions": [
+        {
+            "name": "jira.translation.resolution.done.name",
+            "description": "jira.translation.resolution.done.desc"
+        },
+        {
+            "name": "jira.translation.resolution.will.not.do.name",
+            "description": "jira.translation.resolution.will.not.do.desc"
+        },
+        {
+            "name": "jira.translation.resolution.duplicate.name",
+            "description": "jira.translation.resolution.duplicate.desc"
+        },
+        {
+            "name": "sd.premade.resolution.declined.name",
+            "description": "sd.premade.resolution.declined.description"
+        },
+        {
+            "name": "sd.premade.resolution.known.error.name",
+            "description": "sd.premade.resolution.known.error.description"
+        },
+        {
+            "name": "sd.premade.resolution.hardware.failure.name"
+        },
+        {
+            "name": "sd.premade.resolution.software.failure.name"
+        }
+    ]
+}

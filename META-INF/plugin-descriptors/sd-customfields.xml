@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-customfields description="Service Desk custom fields">
+
+    <!--================================
+    CUSTOM FIELDS
+    =================================-->
+    <!-- Request Feedback -->
+    <customfield-type
+            key="sd-request-feedback"
+            i18n-name-key="sd.request.feedback.name"
+            class="com.atlassian.servicedesk.internal.customfields.feedback.RequestFeedbackCFType"
+            managed-access-level="locked">
+        <description key="sd.request.feedback.desc"/>
+        <resource type="velocity" name="column-view" location="/servicedesk/customfields/request-feedback-root.vm"/>
+        <resource type="velocity" name="xml" location="/servicedesk/customfields/xml-request-feedback.vm"/>
+    </customfield-type>
+
+    <customfield-searcher
+            key="sd-request-feedback-searcher"
+            i18n-name-key="sd.request.feedback.searcher.name"
+            class="com.atlassian.servicedesk.internal.customfields.feedback.RequestFeedbackSearcher">
+        <description key="sd.request.feedback.searcher.desc"/>
+
+        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-basictext.vm"/>
+        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
+
+        <valid-customfield-type package="com.atlassian.servicedesk" key="sd-request-feedback"/>
+    </customfield-searcher>
+
+    <!-- Request Feedback Date -->
+    <customfield-type
+            key="sd-request-feedback-date"
+            i18n-name-key="sd.request.feedback.date.name"
+            class="com.atlassian.servicedesk.internal.customfields.feedback.RequestFeedbackDateCFType"
+            managed-access-level="locked">
+        <description key="sd.request.feedback.date.desc"/>
+        <resource type="velocity" name="xml" location="/servicedesk/customfields/xml-request-feedback-date.vm"/>
+    </customfield-type>
+
+    <customfield-searcher
+            key="sd-request-feedback-date-searcher"
+            i18n-name-key="sd.request.feedback.date.searcher.name"
+            class="com.atlassian.jira.issue.customfields.searchers.DateTimeRangeSearcher">
+        <description key="sd.request.feedback.date.searcher.desc"/>
+        <valid-customfield-type package="com.atlassian.servicedesk" key="sd-request-feedback-date"/>
+    </customfield-searcher>
+
+    <!-- VP Origin (or Customer Request Type) -->
+    <customfield-type
+            key="vp-origin"
+            i18n-name-key="sd.origin.customfield.name"
+            class="com.atlassian.servicedesk.internal.customfields.origin.VpOriginCFType"
+            managed-access-level="locked"
+            managed-description-key="sd.origin.customfield.locked.desc">
+        <description key="sd.origin.customfield.desc"/>
+        <!-- Use column view so that it can be shown in tables, but will not appear in Details section of Issue View if added to screen -->
+        <resource type="velocity" name="column-view" location="/servicedesk/customfields/column-view-customer-request-type.vm"/>
+        <resource type="velocity" name="view" location="/servicedesk/customfields/view-customer-request-type.vm"/>
+        <resource type="velocity" name="edit" location="/servicedesk/customfields/edit-customer-request-type.vm"/>
+        <resource type="velocity" name="xml" location="/servicedesk/customfields/xml-customer-request-type.vm"/>
+    </customfield-type>
+
+    <customfield-searcher
+            key="vp-origin-searcher"
+            i18n-name-key="sd.origin.searcher.name"
+            class="com.atlassian.servicedesk.internal.customfields.origin.VpOriginSearcher">
+        <description key="sd.origin.searcher.desc"/>
+        <resource type="velocity" name="view" location="/servicedesk/customfields/view-customer-request-type.vm"/>
+        <resource type="velocity" name="label" location="/servicedesk/customfields/stat-customer-request-type.vm"/>
+        <valid-customfield-type package="com.atlassian.servicedesk" key="vp-origin"/>
+    </customfield-searcher>
+
+    <!-- Service Desk Request Participants -->
+    <customfield-type
+            key="sd-request-participants"
+            i18n-name-key="sd.request.participants.config.name"
+            class="com.atlassian.servicedesk.internal.customfields.participants.ParticipantsCFType"
+            managed-access-level="locked">
+        <description key="sd.request.participants.desc"></description>
+
+        <resource type="velocity" name="view" location="/servicedesk/customfields/view-participants.vm"/>
+        <resource type="velocity" name="column-view" location="/servicedesk/customfields/column-view-participants.vm"/>
+        <resource type="velocity" name="edit" location="/servicedesk/customfields/edit-participants.vm"/>
+        <resource type="velocity" name="xml" location="/servicedesk/customfields/xml-participants.vm"/>
+    </customfield-type>
+
+    <customfield-searcher
+            key="sd-request-participants-searcher"
+            i18n-name-key="sd.request.participants.searcher.name"
+            class="com.atlassian.servicedesk.squalor.customfields.ParticipantsSearcher">
+        <description key="sd.request.participants.searcher.desc"/>
+
+        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-groupdropdown.vm" />
+        <resource type="velocity" name="label" location="templates/plugins/fields/view-searcher/label-searcher-user.vm"/>
+
+        <valid-customfield-type package="com.atlassian.servicedesk" key="sd-request-participants" />
+    </customfield-searcher>
+
+    <!-- Service Desk Customer Organisations -->
+    <customfield-type
+        key="sd-customer-organizations"
+        i18n-name-key="sd.customer.organisations.config.name"
+        class="com.atlassian.servicedesk.internal.customfields.organization.CustomerOrganizationsCFType"
+        managed-access-level="locked">
+        <description key="sd.customer.organisations.desc"></description>
+
+        <resource type="velocity" name="view" location="/servicedesk/customfields/customer-organizations/view.vm" />
+        <resource type="velocity" name="edit" location="/servicedesk/customfields/customer-organizations/edit.vm" />
+        <resource type="velocity" name="column-view" location="/servicedesk/customfields/customer-organizations/column-view.vm" />
+        <resource type="velocity" name="xml" location="servicedesk/customfields/customer-organizations/xml.vm" />
+    </customfield-type>
+
+    <customfield-searcher
+        key="sd-customer-organizations-searcher"
+        i18n-name-key="sd.customer.organisations.searcher.name"
+        class="com.atlassian.servicedesk.internal.customfields.organization.CustomerOrganizationsSearcher">
+
+        <valid-customfield-type package="com.atlassian.servicedesk" key="sd-customer-organizations" />
+    </customfield-searcher>
+
+    <!-- Service Desk Group -->
+    <customfield-type
+            key="sd-request-groups"
+            i18n-name-key="sd.common.words.groups"
+            class="com.atlassian.servicedesk.internal.customfields.groups.GroupsCFType"
+            managed-access-level="locked">
+        <description key="sd.request.groups.desc"/>
+        <param name="multiple" value="true" />
+        <resource type="velocity" name="view" location="/servicedesk/customfields/groups/view.vm"/>
+        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-multigroup.vm"/>
+        <resource type="velocity" name="edit" location="/servicedesk/customfields/groups/edit.vm"/>
+        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-multigroup.vm"/>
+    </customfield-type>
+
+    <customfield-searcher
+            key="sd-request-groups-searcher"
+            i18n-name-key="sd.request.groups.searcher.name"
+            class="com.atlassian.servicedesk.squalor.customfields.GroupsSearcher">
+        <description key="sd.request.groups.searcher.desc"/>
+        <resource type="velocity" name="label" location="templates/plugins/fields/view-searcher/label-searcher-group.vm"/>
+        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-grouppicker.vm"/>
+        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-grouppicker.vm"/>
+        <valid-customfield-type package="com.atlassian.servicedesk" key="sd-request-groups"/>
+    </customfield-searcher>
+
+    <!--================================
+    SLA
+    =================================-->
+
+    <customfield-type
+            key="sd-sla-field"
+            i18n-name-key="sd.customfield.type.sla.name"
+            class="com.atlassian.servicedesk.internal.sla.customfield.SLACFType"
+            managed-access-level="locked"
+            managed-description-key="sd.customfield.type.sla.locked.desc">
+        <description key="sd.customfield.type.sla.desc" />
+        <resource type="velocity" name="view" location="/servicedesk/internal/project/pages/sla/view-sla.vm" />
+        <resource type="velocity" name="xml" location="/servicedesk/customfields/xml-sla.vm" />
+    </customfield-type>
+
+    <customfield-searcher
+            key="sd-sla-field-searcher"
+            i18n-name-key="sd.customfield.searcher.sla.name"
+            class="com.atlassian.servicedesk.internal.sla.searcher.SLACFSearcher">
+        <description key="sd.customfield.searcher.sla.desc"/>
+        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
+        <valid-customfield-type package="com.atlassian.servicedesk" key="sd-sla-field"/>
+    </customfield-searcher>
+    
+    <!--================================
+    ISSUE PROPERTY INDEXING
+    =================================-->
+
+    <index-document-configuration entity-key="IssueProperty" key="service-request-feedback-comment.index">
+        <key property-key="service-request-feedback-comment">
+            <extract path="comment" type="text" alias="Satisfaction Comment" />
+        </key>
+    </index-document-configuration>
+
+    <index-document-configuration entity-key="IssueProperty" key="sd.kb.viewed">
+        <!-- See text at "request.channel.type.index" as to why this has a path of "value" -->
+        <key property-key="sd_kb_viewed">
+            <extract path="value" type="string" />
+        </key>
+    </index-document-configuration>
+
+    <index-document-configuration entity-key="IssueProperty" key="request.public-activity.lastupdated.index">
+        <key property-key="request.public-activity.lastupdated">
+            <extract path="" type="date" alias="request-last-activity-time" />
+        </key>
+    </index-document-configuration>
+
+    <index-document-configuration entity-key="IssueProperty" key="request.channel.type.index">
+        <!-- Due to https://ecosystem.atlassian.net/browse/ACJIRA-157 at the time this was implemented, it was
+          necessary to use a path ("value") for the indexing to work in JQL for properties of type string.
+          This has now been fixed, but we can not change this indexing, without executing an upgrade task.
+          But for any new properties of type string, you can use path="" if desired -->
+        <key property-key="request.channel.type">
+            <extract path="value" type="string" alias="request-channel-type" />
+        </key>
+    </index-document-configuration>
+
+</sd-customfields>

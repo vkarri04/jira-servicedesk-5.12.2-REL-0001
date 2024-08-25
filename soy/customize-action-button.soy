@@ -1,0 +1,28 @@
+{namespace ServiceDesk.Templates.Customer.SmartPortal.ActionButton}
+
+/**
+ * Button for opening the advanced portal theming side panel
+ * @param linkText - text for link
+ * @param extraClasses
+ */
+{template .portalCustomizeButton}
+    <div class="cv-customize-theme-actions">
+        <a href="#customize" class="js-customize {$extraClasses}">
+            <span class="customize-text">{$linkText}</span>
+            <span class="customize-icon aui-icon aui-icon-small aui-iconfont-edit-filled"></span>
+        </a>
+    </div>
+{/template}
+
+
+/**
+ * Button for opening the advanced portal theming side panel
+ * @param extraClasses
+ */
+{template .loginButton}
+    <div class="cp-header-item">
+        <a href="#login" class="js-login {$extraClasses}">
+            <span>{getText('cv.login.title')}</span>
+        </a>
+    </div>
+{/template}

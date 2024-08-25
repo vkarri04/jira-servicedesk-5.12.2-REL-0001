@@ -1,0 +1,121 @@
+{namespace ServiceDesk.Templates.Attachments}
+
+/**
+ * Attachments Dialog
+ * @param isEditComment
+ * @param isInternal
+ * @param issueKey
+ * @param modifierKey
+ * @param isRteEnabled
+ */
+{template .dialog}
+    <section role="dialog" class="aui-layer aui-dialog2 aui-dialog2-xlarge servicedesk-attachments-dialog jira-dialog dialog-can-receive-files js-cannedresponses-context" data-aui-modal="true"
+        data-aui-remove-on-hide="true" data-can-attach="true" data-insert-markup-on-browse="true" data-is-rte-enabled="{$isRteEnabled}" data-issue-key="{$issueKey}">
+        <header class="aui-dialog2-header">
+            {if $isEditComment}
+                <h2 class="aui-dialog2-header-main">{getText('sd.agent.attachmentsdialog.dialog.title.edit')}</h2>
+            {else}
+                <h2 class="aui-dialog2-header-main">{getText('sd.agent.attachmentsdialog.dialog.title.attach')}</h2>
+            {/if}
+        </header>
+        <div id="dialog-message-box" role="alert"></div>
+        <div class="aui-dialog2-content">
+            <div class="dialog2-content-container">
+                <div class="wiki-edit-content">
+                    <textarea id="sd-comment-field" autofocus name="comment" class="textarea comment-textarea wiki-textfield mentionable" data-issuekey="{$issueKey}" placeholder="{getText('sd.agent.attachmentsdialog.dialog.textarea.placeholder')}"></textarea>
+                    {if $isRteEnabled}
+                        <rich-editor></rich-editor>
+                    {/if}
+                </div>
+
+                {if $isRteEnabled}
+                    <div class="sd-rte-bar"></div>
+                {/if}
+                <div id="attachment-area"></div>
+                <div id="errors"></div>
+            </div>
+        </div>
+        <footer class="aui-dialog2-footer">
+            <div class="aui-dialog2-footer-actions sd-attach-dialog-footer-actions">
+                <div id="attachments-dialog-error-icon"><span tabindex="0" class="aui-icon aui-icon-small aui-iconfont-error"></span></div>
+                {call ServiceDesk.Templates.Shared.Form.submitButton}
+                    {param extraAttributes: ['id': 'button-public'] /}
+                    {param extraClasses}
+                        {if not $isInternal}
+                            aui-button-primary{sp}
+                        {/if}
+                        attachment-dialog-button
+                    {/param}
+                    {param label: getText('sd.agent.attachmentsdialog.dialog.button.public') /}
+                    {param modifierKey: $modifierKey /}
+                    {param accessKey: 'e' /}
+                {/call}
+                {call ServiceDesk.Templates.Shared.Form.submitButtons}
+                    {param submitExtraAttributes: ['id': 'button-private'] /}
+                    {param submitButtonLabel: getText('sd.agent.attachmentsdialog.dialog.button.private') /}
+                    {param submitExtraClasses}
+                        {if $isInternal}
+                            aui-button-primary{sp}
+                        {/if}
+                        attachment-dialog-button
+                    {/param}
+                    {param modifierKey: $modifierKey /}
+                    {param alignment: 'right' /}
+                    {param cancelText: getText('sd.agent.attachmentsdialog.dialog.button.cancel') /}
+                    {param cancelExtraClasses}
+                        js-dialog-close-button
+                    {/param}
+                    {param cancelExtraAttributes: ['id': 'button-cancel'] /}
+                {/call}
+            </div>
+        </footer>
+    </section>
+{/template}
+
+/**
+ * @param title
+ * @param errors
+ */
+{template .displayError}
+    {let $content}
+        {if length($errors) > 1}
+            {call .multipleErrors}
+                {param errors: $errors/}
+            {/call}
+        {elseif length($errors) == 1}
+            {call .singleError}
+                {param errorText: $errors[0]/}
+            {/call}
+        {/if}
+    {/let}
+    <div id="attachments-dialog-error-message" class="aui-message aui-message-error closeable">
+        <p class="title">
+            <strong>{$title}</strong>
+        </p>
+        <button class="aui-close-button js-attachments-dialog-error-message-close" tabindex="0" aria-label="{getText('sd.common.words.close')}"></button>
+        {$content|noAutoescape}
+    </div>
+{/template}
+
+/**
+ * @param errorText
+ */
+{template .singleError}
+    <p id="dialog-message-box-text">
+        {$errorText}
+    </p>
+{/template}
+
+/**
+ * Used when there are multiple errors to display
+ * @param errors
+ */
+{template .multipleErrors}
+    <ol>
+        {foreach $error in $errors}
+            <li>
+                <p>{$error}</p>
+            </li>
+        {/foreach}
+    </ol>
+{/template}

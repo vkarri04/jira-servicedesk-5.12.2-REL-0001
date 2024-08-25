@@ -1,0 +1,234 @@
+{namespace ServiceDesk.Templates.Notifications.Custom}
+
+/**
+ * Content of the <head> section for HTML body.
+ * @param instanceBaseUrl the instance base url
+ */
+{template .emailHead}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <base href="{$instanceBaseUrl}"/>
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR ISSUE CONVERSTATIONAL NOTIFICATIONS
+ * Skeleton of html email notifications
+ * FREE-525: This should be replaced completely with the ".emailLayout" template.
+ * @param content of the e-mail
+ * @param clientURI base url
+ * @param isMarkerInsertionEnabled is Marker Insertion Enabled
+ */
+{template .legacyEmailTemplate}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {call .emailHead}
+        {param instanceBaseUrl: $clientURI/}
+    {/call}
+</head>
+<body class="sd-custom-notifications sd-conversational">
+    {if $isMarkerInsertionEnabled}
+        <div class="sd-email-custommarker">
+            {getText('sd.email.custommarker')}
+        </div>
+    {/if}
+    <table class="email-content-table">
+        <tbody>
+            <tr>
+                <td>
+                    {$content |noAutoescape}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+{/template}
+
+/**
+ * Layout of custom HTML notifications.
+ * @param content of the e-mail
+ * @param instanceBaseUrl the instance base url
+ * @param shouldInsertReplyAboveMarker true if incoming email is set up, so the reply above marker should be added
+ */
+{template .emailLayout}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {call .emailHead}
+        {param instanceBaseUrl: $instanceBaseUrl/}
+    {/call}
+</head>
+<body class="jsd-email-body">
+    {if $shouldInsertReplyAboveMarker}
+        {call .jsdReplyMarker /}
+    {/if}
+    {$content |noAutoescape}
+</body>
+</html>
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR ISSUE CONVERSTATIONAL NOTIFICATIONS
+ * The skeleton of plain text email
+ * FREE-525: This should be replaced completely with the ".emailTemplateChrome_text" template.
+ * @param isMarkerInsertionEnabled
+ * @param content
+ */
+{template .legacyEmailTemplate_text}
+    {if $isMarkerInsertionEnabled}
+        {getText('sd.email.custommarker')}{\n}
+        {\n}
+    {/if}
+    {$content |noAutoescape}{\n}
+{/template}
+
+/**
+ * Layout of custom plain text notifications.
+ * @param content
+ * @param shouldInsertReplyAboveMarker true if incoming email is set up, so the reply above marker should be added
+ */
+{template .emailLayout_text}
+    {if $shouldInsertReplyAboveMarker}
+        {call .jsdReplyMarker_text /}
+    {/if}
+    {$content |noAutoescape}{\n}
+{/template}
+
+/**
+ * 'Write replies above' marker for HTML
+ */
+{template .jsdReplyMarker}
+  <div class="jsd-reply-marker">
+    {getText('sd.email.custommarker')}
+  </div>
+{/template}
+
+/**
+ * 'Write replies above' marker for text emails
+ */
+{template .jsdReplyMarker_text}
+  {getText('sd.email.custommarker')}{\n}
+  {\n}
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR ISSUE CONVERSTATIONAL NOTIFICATIONS
+ * render additional information in plain text
+ * @param portalURL
+ * @param displayIssueLink
+ * @param? participantList_text
+ * @param? unsubscribeLink
+ * @param helpCenterName
+ * @param wacLink
+ */
+{template .additionalInfoPlainText}
+    {if $displayIssueLink}
+        {\n}
+        {call .renderIssueLink_text data="all" /}{\n}
+    {/if}
+    {if $unsubscribeLink}
+        {call .renderUnsubscribeLink_text data="all" /}{\n}
+    {/if}
+    // empty string is falsey.
+    {if $participantList_text}
+        {getText('sd.email.participants.involved.label')} {$participantList_text|noAutoescape}{\n}
+    {/if}
+    {\n}
+    __________________________{\n}
+    {\n}
+    {getText('sd.email.conversational.notification.footer', $helpCenterName)}{sp}
+    {getText('sd.email.conversational.notification.footer.powered')}{sp}
+    {getText('sd.email.conversational.notification.servicedesk')}{\n}
+    {$wacLink}
+{/template}
+
+/**
+* IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR ISSUE CONVERSTATIONAL NOTIFICATIONS
+* render additional information
+* @param displayIssueLink
+* @param helpCenterName
+* @param? participantList_text
+* @param? unsubscribeLink
+* @param sharedPortalLogoId
+* @param wacLink
+*/
+{template .additionalInfo}
+    <p></p>
+    <p></p>
+    <p></p>
+    <p class="sd-custom-notifications-additional-info">
+    {if $unsubscribeLink and $displayIssueLink}
+        <br/>
+        {call .renderIssueLink data="all" /} | {call .renderUnsubscribeLink data="all" /}
+    {else}
+        {if $unsubscribeLink}
+            <br />
+            {call .renderUnsubscribeLink data="all" /}
+        {/if}
+        {if $displayIssueLink}
+            <br />
+            {call .renderIssueLink data="all" /}
+        {/if}
+    {/if}
+    // empty string is falsey.
+    {if $participantList_text}
+        <br/>
+        {getText('sd.email.participants.involved.label')} {$participantList_text}
+    {/if}
+    </p>
+    {if $sharedPortalLogoId}
+        <hr class="jsd-notifications-separator" />
+        <img class="logo" src="cid:{$sharedPortalLogoId}" height="30" alt=""/>
+        <p class="footer-with-logo sd-custom-notifications-additional-info">
+    {else}
+        <hr class="jsd-notifications-separator" />
+        <p class="sd-custom-notifications-additional-info">
+    {/if}
+    {getText('sd.email.conversational.notification.footer', $helpCenterName)}
+    {sp}<i>{getText('sd.email.conversational.notification.footer.powered')}</i>
+    {sp}<a class="gray-link" href="{$wacLink}">{getText('sd.email.conversational.notification.servicedesk')}</a>
+    </p>
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR ISSUE CONVERSTATIONAL NOTIFICATIONS
+ * @param unsubscribeLink
+ */
+{template .renderUnsubscribeLink}
+    <a class="custom-notifications-blue-link" href="{$unsubscribeLink}">{getText('sd.notifications.footer.turn.off.notifications')|noAutoescape}</a>
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR ISSUE CONVERSTATIONAL NOTIFICATIONS
+ * @param unsubscribeLink
+ */
+{template .renderUnsubscribeLink_text}
+    {getText('sd.notifications.footer.turn.off.notifications') |noAutoescape} - {$unsubscribeLink}
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR ISSUE CONVERSTATIONAL NOTIFICATIONS
+ * render reply to email sentence
+ */
+{template .renderReplyToEmail}
+    {getText('sd.email.conversational.notification.reply.to.email')}
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR ISSUE CONVERSTATIONAL NOTIFICATIONS
+ * render request link
+ * @param portalURL
+ */
+{template .renderIssueLink}
+    <a class="custom-notifications-blue-link" href="{$portalURL}">{getText('sd.notifications.footer.view.request')}</a>
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR ISSUE CONVERSTATIONAL NOTIFICATIONS
+ * render request link
+ * @param portalURL
+ */
+{template .renderIssueLink_text}
+    {getText('sd.notifications.footer.view.request')} - {$portalURL}
+{/template}

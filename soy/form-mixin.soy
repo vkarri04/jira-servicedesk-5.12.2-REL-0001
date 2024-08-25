@@ -1,0 +1,184 @@
+{namespace ServiceDesk.Templates.Shared.Form}
+
+/**
+ * @param errors
+ * @param isNotAdmin
+ */
+{template .errorMessage}
+    <div class="aui-message aui-message-error shadowed closeable">
+        <p class="title">{getText('sd.customerview.error.header')}</p>
+        {foreach $error in $errors}
+            <p>{$error.errorMessage|noAutoescape}</p>
+        {/foreach}
+        {if $isNotAdmin}
+        <p>{getText('sd.form.error.contact.admin')}</p>
+        {/if}
+        <button type="button"
+                class="aui-close-button js-close-button"
+                aria-label="{getText('sd.common.words.close')}">
+        </button>
+    </div>
+{/template}
+
+/**
+ * @param error
+ */
+{template .error}
+    <div class="aui-message aui-message-error shadowed closeable">
+        <p class="title">{getText('sd.customerview.error.header')}</p>
+        <p>{$error}</p>
+        <p>{getText('sd.form.error.contact.admin')}</p>
+        <button type="button"
+                class="aui-close-button js-close-button"
+                aria-label="{getText('sd.common.words.close')}">
+        </button>
+    </div>
+{/template}
+
+/**
+* Wraps arbitrary html with markup that invokes tooltip.js
+* @param modifierKey - special key for invoking accesskey shortcuts, different between browsers/os
+* @param key - the key that when using in combination with the modifier key invokes the access key shortcut
+* @param html - html to be wrapped
+* @param? isCancel - Use the cancel tooltip text instead of submit
+*/
+{template .withKeyboardTooltip}
+<span class="js-tooltip" data-delay-in="500"
+    {if $isCancel}
+        title="{getText('AUI.form.cancel.link.tooltip', $key, $modifierKey)}"
+    {else}
+        title="{getText('AUI.form.submit.button.tooltip', $key, $modifierKey)}"
+    {/if}
+    >
+    {$html|noAutoescape}
+</span>
+{/template}
+
+/**
+* Writes the attributes as html
+* @param extraAttributes attributes to write as html
+*/
+{template .extraAttributes}
+{foreach $attr in keys($extraAttributes)}
+    {$attr}="{$extraAttributes[$attr]}"
+{/foreach}
+{/template}
+
+/**
+* Renders a form submit button
+* @param label - The label of the button
+* @param? extraAttributes - Extra attributes to be added to submit button
+* @param? extraClasses - Extra css classes to be added to the button to be used to style or bind js to
+* @param? modifierKey - special key for invoking accesskey shortcuts, different between browsers/os
+* @param? accessKey - Optionally pass another access key instead of 's'
+*/
+{template .submitButton}
+    {let $html}
+        <button
+            type="submit"
+            accesskey="{if $accessKey}{$accessKey}{else}s{/if}"
+            {if $extraAttributes}
+                {call .extraAttributes}
+                    {param extraAttributes: $extraAttributes /}
+                {/call}
+            {/if}
+            class="aui-button {if $extraClasses}{$extraClasses}{/if}"
+            data-testid="form-submit-button"
+        >
+            {$label}
+        </button>
+    {/let}
+    {if $modifierKey}
+         {call .withKeyboardTooltip}
+            {param html: $html /}
+            {param modifierKey: $modifierKey /}
+            {param key}
+                {if $accessKey}
+                    {$accessKey}
+                {else}
+                    s
+                {/if}
+            {/param}
+        {/call}
+    {else}
+        {$html|noAutoescape}
+    {/if}
+{/template}
+
+/**
+* Renders cancel link
+* @param? buttonType - Cancel button type, defaults to link
+* @param? extraClasses - Extra css classes to be added to the link to be used to style or bind js to
+* @param? modifierKey - special key for invoking accesskey shortcuts, different between browsers/os
+* @param? text - Cancel link text. 'sd.common.words.cancel' by default.
+* @param? extraAttributes - Extra attributes to be added to the link
+*/
+{template .cancelButton}
+    {let $html}
+        <button
+            type="button"
+            accesskey="`"
+            class="aui-button {if $buttonType}aui-button-{$buttonType}{else}aui-button-link{/if} cancel {if $extraClasses}{$extraClasses}{/if}"
+            data-testid="form-cancel-button"
+            {if $extraAttributes}
+                {call .extraAttributes}
+                    {param extraAttributes: $extraAttributes /}
+                {/call}
+            {/if}>
+            {if $text}{$text}{else}{getText('sd.common.words.cancel')}{/if}
+        </button>
+    {/let}
+    {if $modifierKey}
+         {call .withKeyboardTooltip}
+            {param html: $html /}
+            {param modifierKey: $modifierKey /}
+            {param key}`{/param}
+            {param isCancel: true /}
+        {/call}
+    {else}
+        {$html|noAutoescape}
+    {/if}
+{/template}
+
+/**
+* Render standard submit and cancel buttons. Includes an extra status element that when used with form-mixin.js
+* shows loading and success statues on submit.
+* @param submitButtonLabel - The label of the button
+* @param? modifierKey - special key for invoking accesskey shortcuts, different between browsers/os
+* @param? submitExtraClasses - Extra css classes to be added to the button to be used to style or bind js to
+* @param? submitExtraAttributes - Extra attributes to be added for submit button
+* @param? cancelButtonType - Cancel button type, defaults to link
+* @param? cancelExtraClasses - Extra css classes to be added to the link to be used to style or bind js to
+* @param? cancelText - Cancel link button text.
+* @param? cancelExtraAttributes - Extra attributes to be added for cancel button
+* @param? alignment - Which side the submit status is aligned.
+* @param? hideSubmitStatus - Hide submit status. False by default.
+*/
+{template .submitButtons}
+    {if $alignment == 'left' and not $hideSubmitStatus}
+        {call .submitStatus /}
+    {/if}
+    {call .submitButton}
+        {param modifierKey: $modifierKey /}
+        {param extraClasses: $submitExtraClasses /}
+        {param extraAttributes: $submitExtraAttributes /}
+        {param label: $submitButtonLabel /}
+    {/call}
+    {call .cancelButton}
+        {param modifierKey: $modifierKey /}
+        {param buttonType: $cancelButtonType /}
+        {param extraClasses: $cancelExtraClasses /}
+        {param text: $cancelText /}
+        {param extraAttributes: $cancelExtraAttributes /}
+    {/call}
+    {if $alignment != 'left' and not $hideSubmitStatus}
+        {call .submitStatus /}
+    {/if}
+{/template}
+
+/**
+* Render submit status
+*/
+{template .submitStatus}
+    <span class="cv-sd-status js-status"></span>
+{/template}

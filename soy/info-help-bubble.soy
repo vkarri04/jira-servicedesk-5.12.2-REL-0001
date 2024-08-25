@@ -1,0 +1,31 @@
+{namespace ServiceDesk.Templates.HelpBubble}
+
+/**
+ * Creates an info help bubble using aui-inline-dialog2. Used by info-help-bubble.js - use that rather than calling this
+ * template directly, as it handles cleanup.
+ * @param id The id you would like to use for the info bubble
+ * @param bubbleContents The contents you would like to have inside the info bubble
+ * @param alignment How the dialog is positioned relative to the trigger
+ */
+{template .bubble}
+    {sp}
+    {call aui.buttons.button}
+        {param type: 'subtle' /}
+        {param extraClasses: 'aui-icon-compact sd-help-bubble-button' /}
+        {param extraAttributes: ['data-aui-trigger': '', 'aria-controls': $id, 'aria-label': getText('sd.common.words.learn.more'), 'type': 'button' ] /}
+        {param iconType: 'aui' /}
+        {param iconClass: 'aui-icon-small aui-iconfont-info' /}
+        {param text: '' /}
+    {/call}
+    <aui-inline-dialog id="{$id}" class="sd-help-bubble" alignment="bottom {$alignment}">
+        {$bubbleContents |noAutoescape}
+    </aui-inline-dialog>
+{/template}
+
+/**
+ * Creates a container to place an info help bubble inside. Use this to create a container to pass to info-help-bubble.js
+ * @param? after Is this to be positioned after the container
+ */
+{template .container}
+    <div class="sd-help-bubble-container{if $after}-after{/if}"></div>
+{/template}

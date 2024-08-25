@@ -1,0 +1,54 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* Renders customer view login form
+* @param login
+*/
+{template .loginForm}
+    <form id="login-form" action="" method="post" class="aui top-label js-login-form">
+
+        <div class="field-group">
+            <div class="field-container">
+                <input autofocus class="text full-width-field" type="text" name="os_username" id="os_username" placeholder="{getText('cv.login.username')}">
+            </div>
+        </div>
+        <div class="field-group">
+            <div class="field-container">
+                <input class="text full-width-field js-password" type="password" name="os_password" id="os_password" placeholder="{getText('cv.login.password')}">
+            </div>
+        </div>
+        <div class="field-group captcha-field js-captcha-field">
+            <label id="login-form-captcha" for="login-form-captcha" accesskey="c">{getText('cv.login.captcha.label')}</label>
+            <input type="text" name="os_captcha" id="login-form-captcha" class="text full-width-field captcha-response">
+            <div class="captcha-container">
+                <img class="js-captcha-img captcha-img" height="100px" width="200px">
+                <a href="#login-form-os-captcha" tabindex="-1" title="{getText('cv.login.captcha.refresh')}">
+                    {call aui.icons.icon}
+                        {param useIconFont: true /}
+                        {param size: 'small' /}
+                        {param icon: 'refresh' /}
+                        {param extraClasses: 'js-captcha-reload captcha-reload' /}
+                        {param accessibilityText: getText('cv.login.captcha.refresh') /}
+                    {/call}
+                </a>
+            </div>
+        </div>
+        <div class="buttons-container">
+            <div class="buttons">
+                <button class="aui-button aui-button-primary aui-style" type="submit" id="js-login-submit">{getText('cv.login.submit.label')}</button>
+                <span class="cv-sd-status js-status"></span>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox" class="checkbox remember-login" id="form-remember-login" name="os_cookie" checked="" value="true">
+                <label for="form-remember-login">{getText('cv.login.remember.me')}</label>
+            </div>
+        </div>
+
+        {if $login.canReset == true}
+            <div class="forgot-password">
+                <a class="js-forgot-password" href="#">{getText('cv.login.forgotten.password')}</a>
+            </div>
+        {/if}
+    </form>
+{/template}
+

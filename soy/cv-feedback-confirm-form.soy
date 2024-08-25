@@ -1,0 +1,65 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+ * Renders feedback confirm form
+ * @param rating
+ * @param ratingDescription
+ * @param commentFieldLabel
+ */
+{template .feedbackConfirmForm}
+<form id="feedback-confirm-form" class="aui top-label js-feedback-confirm-form">
+    <div class="js-feedback-rating">
+        {call .feedbackRating}
+            {param rating: $rating /}
+            {param ratingDescription: $ratingDescription /}
+        {/call}
+    </div>
+    {call .feedbackComment}
+        {param commentFieldLabel: $commentFieldLabel /}
+    {/call}
+</form>
+{/template}
+
+/**
+ * Renders rating area
+ * @param rating
+ * @param ratingDescription
+ */
+{template .feedbackRating}
+{let $maxRating: 5 /}
+    <div class="feedback-rating">
+        {for $i in range($rating)}<span class="aui-icon aui-icon-small aui-iconfont-star sd-feedback-star js-feedback-icon">{$i+1}</span>{/for}
+        {for $i in range($rating, $maxRating)}<span class="aui-icon aui-icon-small aui-iconfont-unstar sd-feedback-star js-feedback-icon">{$i+1}</span>{/for}
+         <span class="sd-feedback-rating-spinner js-feedback-rating-spinner"></span>
+         <span class="aui-icon aui-icon-small aui-iconfont-success sd-feedback-rating-success js-feedback-rating-success"></span>
+    </div>
+    <div class="sd-feedback-error js-feedback-rating-error hidden"></div>
+    <div class="feedback-rating-message">{$ratingDescription}</div>
+{/template}
+
+/**
+ * Renders comment area
+ * @param commentFieldLabel
+ */
+{template .feedbackComment}
+    <fieldset>
+        <legend><span>{getText('cv.feedback.confirm.page.comment.legend')}</span></legend>
+        <div class="field-group">
+            <label for="feedback-comment" class="feedback-comment-label">{$commentFieldLabel |changeNewlineToBr}</label>
+            <textarea class="textarea" name="comment" id="feedback-comment" rows="3"
+                      placeholder="{getText('cv.feedback.confirm.page.comment.placeholder')}"
+                      data-aui-validation-field=""
+                      data-aui-form-notification-position="top"
+                      data-aui-validation-when="input"
+                      data-aui-validation-maxlength="1000" autofocus></textarea>
+        </div>
+    </fieldset>
+    <div class="buttons-container">
+        <div class="buttons">
+            <button class="aui-button aui-button-primary aui-style js-submit-button" type="submit" disabled="disabled">{getText('cv.feedback.confirm.page.submit.button.text')}</button>
+            <span class="cv-sd-status js-status"></span>
+        </div>
+    </div>
+    <div class="sd-feedback-error js-feedback-comment-error hidden">
+    </div>
+{/template}

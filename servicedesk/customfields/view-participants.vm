@@ -1,0 +1,18 @@
+## We do not want to preload the script when we are in textOnly mode
+#if (!$textOnly)
+    <script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!custom_field_jsd-request-participants'));</script>
+#end
+
+#if ($isFieldEnabled)
+    #if (!$value.isEmpty())
+        #if ($textOnly)
+            #foreach($participant in $value)$textutils.htmlEncode($participant.displayName)#commaonly($value)#end
+        #else
+            <request-participants data-users="$usersJson">
+                ## I am rendered by participants-list.js
+            </request-participants>
+        #end
+    #else
+        $i18n.getText('sd.common.words.none')
+    #end
+#end

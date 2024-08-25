@@ -1,0 +1,11 @@
+{namespace ServiceDesk.Templates.Customer.SmartPortal.SinglePortal}
+
+/**
+ * Renders the no-results link
+ * @param portalId
+ */
+{template .noResultsLink}
+    <a href="{contextPath()}/servicedesk/customer/portal/{$portalId}" class="js-no-results-create-request-button">
+        {getText('sd.customerview.smart.portal.single.portal.no.results.call.to.action')}
+    </a>
+{/template}

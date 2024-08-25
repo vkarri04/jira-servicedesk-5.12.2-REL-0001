@@ -1,0 +1,405 @@
+{namespace ServiceDesk.Templates.Admin.config}
+
+/**
+ * @param isNotificationDisabled is notifications disabled?
+ * @param isOutgoingMailEnabled is outgoing mail enabled?
+ * @param isPublicSignupEnabled is customer portal signup enabled?
+ * @param isUserDirectoryWritable is the user directory writable?
+ * @param projectAdminFieldCreationEnabled can project administrators create new SLA custom fields?
+ * @param canAgentsManageGlobalAnnouncements can agents make/change announcements for the Help Center
+ * @param isSLAConfigurationEnabled is sla configuration enabled?
+ * @param unusedCustomFields array of fields not in use
+ * @param userDirectoryAnalyticsKey analytics key firing when user navigates to the user directory due to the warning
+ * @param userDirectoryUrl URL for user directory configuration
+ * @param canAgentsManageOrganisations is agent can manage organisation enabled
+ * @param shouldDismissAllPermissionWarnings should the permission warnings be dismissed automatically
+ * @param confluenceKnowledgeBaseCreationEnabled confluence knowledge base creation is enabled
+ * @param emailVerificationEnabled is email verification enabled
+ * @param defaultShareWithOrganizationEnabled is default share with organization enabled
+ * @param isAnonymousAccessEnabled is isAnonymousAccessEnabled
+ * @param isAnonymousAccessFeatureEnabled is the flag enabled for Anon access
+ * @param errors map<string, string>
+ */
+{template .content}
+    <div id="sd-plugin-config" class="sd-settings-container">
+        <h2>{getText('sd.admin.plugin.config.page.title')}</h2>
+
+        <p class="sd-page-description">
+            {getText('sd.admin.plugin.config.page.description')}
+        </p>
+
+        // Help Center branding (and Announcements)
+        {call .helpCenter}
+            {param canAgentsManageGlobalAnnouncements: $canAgentsManageGlobalAnnouncements /}
+        {/call}
+
+        // Allow public sign up on the customer portal
+        {call .publicSignUp}
+            {param isUserDirectoryWritable: $isUserDirectoryWritable /}
+            {param userDirectoryAnalyticsKey: $userDirectoryAnalyticsKey /}
+            {param userDirectoryUrl: $userDirectoryUrl /}
+            {param isPublicSignupEnabled: $isPublicSignupEnabled /}
+            {param emailVerificationEnabled: $emailVerificationEnabled /}
+            {param errors: $errors /}
+            {param isAnonymousAccessEnabled: $isAnonymousAccessEnabled /}
+            {param isAnonymousAccessFeatureEnabled: $isAnonymousAccessFeatureEnabled /}
+            {param isOutgoingMailEnabled: $isOutgoingMailEnabled /}
+        {/call}
+
+        {call .organisationManagement}
+            {param canAgentsManageOrganisations: $canAgentsManageOrganisations /}
+            {param defaultShareWithOrganizationEnabled: $defaultShareWithOrganizationEnabled /}
+        {/call}
+
+        // Allow SLA custom field creation
+        {if $isSLAConfigurationEnabled == false}
+            {call .slaFieldCreation}
+                {param projectAdminFieldCreationEnabled: $projectAdminFieldCreationEnabled /}
+                {param unusedCustomFields: $unusedCustomFields /}
+            {/call}
+        {/if}
+
+        // Notifications / notification filtering
+        {call .customNotificationsContent}
+            {param isNotificationDisabled: $isNotificationDisabled /}
+        {/call}
+
+        // Permission Options
+        {if isFeatureFlagEnabled('sd.dismiss.all.misconfiguration.warnings.setting')}
+            {call .permissionOptionsManagement}
+                {param shouldDismissAllPermissionWarnings: $shouldDismissAllPermissionWarnings /}
+            {/call}
+        {/if}
+
+        //  Create a Confluence knowledge base space
+        {call .knowledgeBaseSpaceCreation}
+            {param confluenceKnowledgeBaseCreationEnabled: $confluenceKnowledgeBaseCreationEnabled /}
+        {/call}
+    </div>
+{/template}
+
+
+/**
+ * Configure whether project administrators can create custom fields for SLAs
+ * @param projectAdminFieldCreationEnabled flag indicating whether a project admin can create fields.
+ * @param unusedCustomFields number of custom fields configured which are not used in a project.
+ */
+{template .slaFieldCreation}
+    // SLA custom fields
+    <h3>{getText('sd.admin.plugin.config.sla.creation.by.project.admin.heading')}</h3>
+    <p class="sd-feature-description">{getText('sd.admin.plugin.config.sla.creation.by.project.admin.description')}</p>
+    <p>{getText('sd.admin.plugin.config.sla.creation.by.project.admin.message')}</p>
+    <form class="aui sd-settings-form">
+        <div class="sd-radio-group">
+            <div class="radio sd-radio-option">
+                <input type="radio" id="sla-custom-fields-enabled" class="radio js-sla-custom-fields-enabled" name="sd-custom-field-state" {if $projectAdminFieldCreationEnabled}checked{/if} />
+                <label for="sla-custom-fields-enabled">{getText('sd.admin.plugin.config.sla.creation.by.project.admin.enabled')}</label>
+            </div>
+            <div class="radio sd-radio-option">
+                <input type="radio" id="sla-custom-fields-disabled" class="radio js-sla-custom-fields-disabled" name="sd-custom-field-state" {if not $projectAdminFieldCreationEnabled}checked{/if} />
+                <label for="sla-custom-fields-disabled">{getText('sd.admin.plugin.config.sla.creation.by.project.admin.disabled')}</label>
+            </div>
+        </div>
+    </form>
+    <p>
+        {getText('sd.admin.plugin.config.sla.unused.fields.message',$unusedCustomFields.length)|noAutoescape}
+        {if length($unusedCustomFields) > 0}
+            {sp}<button class="aui-button sd-sla-unused-fields js-sd-sla-unused-fields">{getText('sd.admin.plugin.config.clean.up')}</button>
+        {/if}
+    </p>
+{/template}
+
+/**
+ * Options for public signup
+ * @param isUserDirectoryWritable flag indicating whether there's a user writable directory
+ * @param isPublicSignupEnabled flag indicating whether public signup is currently enabled
+ * @param userDirectoryAnalyticsKey analytics key firing when user navigates to the user directory due to the warning
+ * @param userDirectoryUrl URL for user directory configuration
+ * @param emailVerificationEnabled whether email verification is enabled
+ * @param errors map<string, string>
+ * @param isAnonymousAccessEnabled
+ * @param isAnonymousAccessFeatureEnabled is the flag enabled for Anon access
+ * @param isOutgoingMailEnabled is outgoing mail enabled?
+ */
+{template .publicSignUp}
+    {let $linkStart}
+        {call ServiceDesk.Templates.Shared.Utils.helpLinkStart}
+            {param helpLinkKey: 'invite.customers' /}
+            {param analyticsKey: 'invite.customers' /}
+        {/call}
+    {/let}
+    {let $linkEnd}
+        {call ServiceDesk.Templates.Shared.Utils.helpLinkEnd /}
+    {/let}
+    <h3>{getText('sd.admin.plugin.config.public.signup.heading')}</h3>
+    <p>{getText('sd.admin.plugin.config.public.signup.message')}</p>
+
+    <form class="aui sd-settings-form">
+        <div class="sd-radio-group {if not $isUserDirectoryWritable}sd-feature-disabled{/if}">
+            {if not $isUserDirectoryWritable}
+                <div class="disabled-reason">
+                    <span class="aui-icon aui-icon-small aui-iconfont-warning sd-warning-icon"></span>
+                    {sp}
+                    <span class="disabled-reason-text">
+                        {getText('sd.admin.no.writable.directory')}
+                        {sp}
+                        <a href="{$userDirectoryUrl}" data-analytics-key="{$userDirectoryAnalyticsKey}">{getText('sd.admin.no.writable.directory.link')}</a>
+                    </span>
+                </div>
+            {else}
+                <div class="radio sd-radio-option">
+                    <input type="radio" id="public-signup-enabled" class="radio js-public-signup-enabled" name="sd-public-signup-state" {if $isPublicSignupEnabled}checked{/if} />
+                    <label for="public-signup-enabled">{getText('sd.admin.plugin.config.public.signup.enabled', $linkStart, $linkEnd)|noAutoescape}</label>
+
+                    {if isFeatureFlagEnabled('sd.signup.email.verification')}
+                        {call SOY_REACT_BRIDGE_AUIForm}
+                            {param className: 'sd-settings-form' /}
+                            {param children}
+                                <div class="nested-option checkbox">
+                                    <input type="checkbox" id="require-email-verification-toggle" class="checkbox js-require-email-verification-toggle" name="require-email-verification" {if $emailVerificationEnabled}checked{/if} {if not $isPublicSignupEnabled}disabled{/if} />
+                                    <label for="require-email-verification-toggle">{getText('sd.admin.plugin.config.email.verification.toggle')}</label>
+                                    {if $errors and $errors['email-verification']}
+                                        <div class="error">
+                                            // noAutoescape is fine here as we control what errors are passed in from the backend. This contains a URL that shouldn't be auto escaped
+                                            {$errors['email-verification']|noAutoescape}
+                                        </div>
+                                    {/if}
+                                </div>
+                            {/param}
+                        {/call}
+                    {/if}
+                </div>
+                <div class="radio sd-radio-option">
+                    <input type="radio" id="public-signup-disabled" class="radio js-public-signup-disabled" name="sd-public-signup-state" {if not $isPublicSignupEnabled}checked{/if} />
+                    <label for="public-signup-disabled">{getText('sd.admin.plugin.config.public.signup.disabled')}</label>
+                </div>
+                {if $errors and $errors['public-signup']}
+                    <div class="error">
+                        // noAutoescape is fine here as we control what errors are passed in from the backend. This contains a URL that shouldn't be auto escaped
+                        {$errors['public-signup']|noAutoescape}
+                    </div>
+                {/if}
+            {/if}
+        </div>
+    </form>
+
+    {if $isAnonymousAccessFeatureEnabled}
+        <h3>{getText('sd.admin.plugin.config.login.free.portal.heading')}</h3>
+        <p>{getText('sd.admin.plugin.config.customer.permissions.anonymous.access.question')}</p>
+        <form class="aui sd-settings-form">
+            <div class="sd-radio-group">
+                <div class="radio sd-radio-option">
+                    <input type="radio" id="anon-access-enabled" class="radio js-anon-access-enabled" {if $isAnonymousAccessEnabled}checked{/if} {if $isPublicSignupEnabled == false or $isOutgoingMailEnabled == false}disabled{/if} />
+                    <label for="anon-access-enabled">{getText('sd.admin.plugin.config.customer.permissions.anonymous.access.enabled')}</label>
+                </div>
+                <div class="radio sd-radio-option">
+                    <input type="radio" id="anon-access-disabled" class="radio js-anon-access-disabled" {if not $isAnonymousAccessEnabled}checked{/if} />
+                    <label for="anon-access-disabled">{getText('sd.admin.plugin.config.customer.permissions.anonymous.access.disabled')}</label>
+                </div>
+            </div>
+            {if $isPublicSignupEnabled == false or $isOutgoingMailEnabled==false}
+                <div class="error">{getText('sd.admin.plugin.config.customer.permissions.anonymous.access.changes.required')}</div>
+                <ul class="error">
+                    {if $isPublicSignupEnabled == false}
+                        <li>{getText('sd.admin.plugin.config.customer.permissions.anonymous.access.public.signup.disabled')}</li>
+                    {/if}
+                    {if $isOutgoingMailEnabled == false}
+                        <li>{getText('sd.admin.plugin.config.customer.permissions.anonymous.access.mail.disabled')}</li>
+                    {/if}
+                </ul>
+            {/if}
+        </form>
+        <div id="anonymous-portal-modal"></div>
+    {/if}
+{/template}
+
+/**
+ * Content of the global notification section when Custom Notifications is NOT enabled for an instance.
+ * @param isNotificationDisabled state of the notification disabled toggle
+ */
+{template .conversationalNotificationsContent}
+    <h3>{getText('sd.admin.plugin.config.notifications.heading')}</h3>
+    {let $linkStart}
+        {call ServiceDesk.Templates.Shared.Utils.helpLinkStart}
+            {param helpLinkKey: 'admin.notifications.config' /}
+            {param analyticsKey: 'admin.notifications.config' /}
+        {/call}
+    {/let}
+    {let $linkEnd}
+        {call ServiceDesk.Templates.Shared.Utils.helpLinkEnd /}
+    {/let}
+    <p>
+        {getText('sd.admin.plugin.config.notifications.question')}{sp}
+        {getText('sd.admin.plugin.config.notifications.description.conversational', $linkStart, $linkEnd)|noAutoescape}
+    </p>
+    <form class="aui sd-settings-form">
+        <div class="sd-radio-group">
+            <div class="radio sd-radio-option">
+                <input type="radio" id="notification-enabled" class="radio js-notification-enabled" name="sd-notification-state" {if not $isNotificationDisabled}checked{/if} />
+                <label for="notification-enabled">{getText('sd.admin.plugin.config.notifications.enabled')}</label>
+            </div>
+            <div class="radio sd-radio-option">
+                <input type="radio" id="notification-disabled" class="radio js-notification-disabled" name="sd-notification-state" {if $isNotificationDisabled}checked{/if} />
+                <label for="notification-disabled">{getText('sd.admin.plugin.config.notifications.disabled')}</label>
+            </div>
+        </div>
+    </form>
+{/template}
+
+/**
+ * Content of the global notification section when Custom Notifications is enabled on an instance.
+ * @param isNotificationDisabled state of the notification disabled toggle
+ */
+{template .customNotificationsContent}
+    <h3>{getText('sd.admin.plugin.config.notifications.heading')}</h3>
+    {let $linkStart}
+        {call ServiceDesk.Templates.Shared.Utils.helpLinkStart}
+            {param helpLinkKey: 'admin.notifications.config' /}
+            {param analyticsKey: 'admin.notifications.config' /}
+        {/call}
+    {/let}
+    {let $linkEnd}
+        {call ServiceDesk.Templates.Shared.Utils.helpLinkEnd /}
+    {/let}
+    <p>
+        {getText('sd.admin.plugin.config.notifications.filterjira.question')}{sp}
+        {getText('sd.admin.plugin.config.notifications.filterjira.description.helplink', $linkStart, $linkEnd)|noAutoescape}
+    </p>
+    <form class="aui sd-settings-form">
+        <div class="sd-radio-group">
+            <div class="radio sd-radio-option">
+                <input type="radio" id="notification-enabled" class="radio js-notification-enabled" name="sd-notification-state" {if not $isNotificationDisabled}checked{/if} />
+                <label for="notification-enabled">{getText('sd.admin.plugin.config.notifications.filterjira.enabled')}</label>
+            </div>
+            <div class="radio sd-radio-option">
+                <input type="radio" id="notification-disabled" class="radio js-notification-disabled" name="sd-notification-state" {if $isNotificationDisabled}checked{/if} />
+                <label for="notification-disabled">{getText('sd.admin.plugin.config.notifications.filterjira.disabled')}</label>
+            </div>
+        </div>
+    </form>
+{/template}
+
+/**
+ * Agent announcement options
+ * @param canAgentsManageGlobalAnnouncements
+ */
+{template .helpCenter}
+    {let $customizePortalLink: '<a class="js-customize-portal-branding" href="' + contextPath() + '/servicedesk/customer/portals?customize=true" target="_blank">' /}
+
+    <div class="sd-plugin-config-branding">
+        <h3>{getText('sd.admin.help.center.branding.title')}</h3>
+        <p>
+            {getText('sd.admin.plugin.config.help.center.and.announcement.branding.redirect', $customizePortalLink, '</a>')|noAutoescape}
+        </p>
+    </div>
+
+    <p>{getText('sd.admin.plugin.config.announcement.by.agent.message')}</p>
+    <form class="aui sd-settings-form">
+        <div class="sd-radio-group">
+            <div class="radio sd-radio-option">
+                <input type="radio" id="agent-announcements-enabled" class="radio js-agent-announcements-enabled" name="sd-agent-announcement-state" {if $canAgentsManageGlobalAnnouncements}checked{/if} />
+                <label for="agent-announcements-enabled">{getText('sd.admin.plugin.config.announcement.by.agent.allowed')}</label>
+            </div>
+            <div class="radio sd-radio-option">
+                <input type="radio" id="agent-announcements-disabled" class="radio js-agent-announcements-disabled" name="sd-agent-announcement-state" {if not $canAgentsManageGlobalAnnouncements}checked{/if} />
+                <label for="agent-announcements-disabled">{getText('sd.admin.plugin.config.announcement.by.agent.notallowed')}</label>
+            </div>
+        </div>
+    </form>
+
+    <p class="sd-settings-details">
+        {getText('sd.admin.plugin.config.announcement.by.agent.portalmessage')}
+    </p>
+{/template}
+
+/**
+ * Agent announcement options
+ * @param canAgentsManageOrganisations
+ * @param defaultShareWithOrganizationEnabled
+ */
+{template .organisationManagement}
+    <h3>{getText('sd.admin.plugin.config.organisation.management.heading')}</h3>
+    <p>{getText('sd.admin.plugin.config.organisation.management.message')}</p>
+    <p>{getText('sd.admin.plugin.config.organisation.management.question')}</p>
+    <form class="aui sd-settings-form">
+        <div class="sd-radio-group">
+            <div class="radio sd-radio-option">
+                <input type="radio" id="agent-manage-organisation-enabled" class="radio js-agent-manage-organisation-enabled" name="sd-manage-organisation-state" {if $canAgentsManageOrganisations}checked{/if} />
+                <label for="agent-manage-organisation-enabled">{getText('sd.admin.plugin.config.organisation.management.turn.on')}</label>
+            </div>
+            <div class="radio sd-radio-option">
+                <input type="radio" id="agent-manage-organisation-disabled" class="radio js-agent-manage-organisation-disabled" name="sd-manage-organisation-state" {if not $canAgentsManageOrganisations}checked{/if} />
+                <label for="agent-manage-organisation-disabled">{getText('sd.admin.plugin.config.organisation.management.turn.off')}</label>
+            </div>
+        </div>
+    </form>
+    <p>{getText('sd.admin.plugin.config.organization.share.question')}</p>
+    {call SOY_REACT_BRIDGE_AUIForm}
+        {param className: 'sd-settings-form' /}
+        {param children}
+            <div class="sd-radio-group">
+                <div class="radio sd-radio-option">
+                    <input type="radio" id="organization-default-share-enabled" class="radio js-organization-default-share-enabled" name="sd-organization-share-state" {if $defaultShareWithOrganizationEnabled}checked{/if} />
+                    <label for="organization-default-share-enabled">{getText('sd.admin.plugin.config.organization.share.turn.on')}</label>
+                </div>
+                <div class="radio sd-radio-option">
+                    <input type="radio" id="organization-default-share-disabled" class="radio js-organization-default-share-disabled" name="sd-organization-share-state" {if not $defaultShareWithOrganizationEnabled}checked{/if} />
+                    <label for="organization-default-share-disabled">{getText('sd.admin.plugin.config.organization.share.turn.off')}</label>
+                </div>
+            </div>
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * Dismiss permission warnings, globally option
+ * @param shouldDismissAllPermissionWarnings
+ */
+{template .permissionOptionsManagement}
+    {let $linkStart}
+        {call ServiceDesk.Templates.Shared.Utils.helpLinkStart}
+            {param helpLinkKey: 'resolve.permission.scheme.errors' /}
+            {param analyticsKey: 'admin.configurations.resolve.permission.error.misconfig' /}
+        {/call}
+    {/let}
+    {let $linkEnd}
+        {call ServiceDesk.Templates.Shared.Utils.helpLinkEnd /}
+    {/let}
+
+    <h3>{getText('sd.agent.alert.permission.misconfig.dismiss.all.setting.management.heading')}</h3>
+    <p>{getText('sd.agent.alert.permission.misconfig.dismiss.all.setting.management.message', $linkStart, $linkEnd)|noAutoescape}</p>
+    <p>{getText('sd.agent.alert.permission.misconfig.dismiss.all.setting.management.question')}</p>
+    <form class="aui sd-settings-form">
+        <div class="sd-radio-group">
+            <div class="radio sd-radio-option">
+                <input type="radio" id="dismiss-warnings-enabled" class="radio js-dismiss-warnings-enabled" name="sd-dismiss-warnings-state" {if $shouldDismissAllPermissionWarnings}checked{/if} />
+                <label for="dismiss-warnings-enabled">{getText('sd.agent.alert.permission.misconfig.dismiss.all.setting.management.turn.on')}</label>
+            </div>
+            <div class="radio sd-radio-option">
+                <input type="radio" id="dismiss-warnings-disabled" class="radio js-dismiss-warnings-disabled" name="sd-dismiss-warnings-state" {if not $shouldDismissAllPermissionWarnings}checked{/if} />
+                <label for="dismiss-warnings-disabled">{getText('sd.agent.alert.permission.misconfig.dismiss.all.setting.management.turn.off')}</label>
+            </div>
+        </div>
+    </form>
+{/template}
+
+/**
+ * Create a Confluence knowledge base space automatically creating a JSD project
+ * @param confluenceKnowledgeBaseCreationEnabled
+ */
+{template .knowledgeBaseSpaceCreation}
+    <h3>{getText('sd.admin.create.confluence.knowledge.base.space.heading')}</h3>
+    <p>{getText('sd.admin.create.confluence.knowledge.base.space.description')}</p>
+    <form class="aui sd-settings-form">
+        <div class="sd-radio-group">
+            <div class="radio sd-radio-option">
+                <input type="radio" id="create-confluence-knowledge-base-yes" class="radio js-create-confluence-knowledge-base-yes" name="sd-create-confluence-knowledge-base" {if $confluenceKnowledgeBaseCreationEnabled}checked{/if} />
+                <label for="create-confluence-knowledge-base-yes">{getText('sd.admin.create.confluence.knowledge.base.space.yes')}</label>
+            </div>
+            <div class="radio sd-radio-option">
+                <input type="radio" id="create-confluence-knowledge-base-no" class="radio js-create-confluence-knowledge-base-no" name="sd-create-confluence-knowledge-base" {if not $confluenceKnowledgeBaseCreationEnabled}checked{/if} />
+                <label for="create-confluence-knowledge-base-no">{getText('sd.admin.create.confluence.knowledge.base.space.no')}</label>
+            </div>
+        </div>
+    </form>
+{/template}

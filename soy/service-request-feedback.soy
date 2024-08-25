@@ -1,0 +1,85 @@
+{namespace ServiceDesk.Templates.Feedback}
+
+/**
+ * Feedback section include in email
+ * @param feedbackQuestion
+ */
+{template .ratingSection}
+<div class="srf-section">
+    <br/>
+    <div class="jsd-satisfaction-survey-question srf-question">
+        {$feedbackQuestion}
+    </div>
+    <div class="srf-line-break">{sp}</div>
+    {call .fiveStarRating data="all"/}
+    <br/>
+    <br/>
+</div>
+{/template}
+
+/**
+ * Feedback section include in email
+ * @param feedbackQuestion
+ * @param feedbackURL
+ */
+{template .ratingSection_text}
+    {\n}
+    {\n}
+    {\n}
+    {$feedbackQuestion}{\r}
+    {$feedbackURL}
+{/template}
+
+/**
+ * Render a five-star rating scale.
+ * @param ratingScale
+ * @param feedbackURL
+ */
+{template .fiveStarRating}
+<table class="srf-star-table srf-star-table-with-text">
+    <tr>
+        {for $i in range($ratingScale)}
+            <td class="srf-star-row srf-star-with-text">
+            {call .star data="all"}
+                {param url: $feedbackURL + '&rating=' + ($i+1) /}
+                {param index: $i /}
+            {/call}
+            </td>
+        {/for}
+    </tr>
+</table>
+{/template}
+
+
+/**
+ * Render a start for link for rating
+ * @param starId
+ * @param url
+ * @param index
+ */
+{template .star}
+<a href="{$url}" class="jsd-satisfaction-survey-star srf-star">
+    {if isFeatureFlagEnabled('sd.custom.email.notifications.utf8.csat.star')}
+        &#9734;
+    {else}
+        <img src="cid:{$starId}" alt="☆">
+    {/if}
+</a>
+
+<p class="srf-text">
+    {switch $index}
+          {case 0}
+              {getText('sd.customer.satisfaction.email.rating.text.verypoor')}
+          {case 1}
+              {getText('sd.customer.satisfaction.email.rating.text.poor')}
+          {case 2}
+              {getText('sd.customer.satisfaction.email.rating.text.normal')}
+          {case 3}
+              {getText('sd.customer.satisfaction.email.rating.text.good')}
+          {case 4}
+              {getText('sd.customer.satisfaction.email.rating.text.verygood')}
+          {default}
+              {getText('sd.customer.satisfaction.email.rating.text.normal')}
+    {/switch}
+</p>
+{/template}

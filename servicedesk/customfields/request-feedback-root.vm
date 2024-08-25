@@ -1,0 +1,18 @@
+<script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!custom_field_jsd-request-feedback'));</script>
+<div class="sd-request-feedback-customfield-root" data-payload="$payloadJSON">
+    <div style="white-space: nowrap;">
+        #if ($rating)
+            #if ($rating > 0 )
+                #foreach ($i in [1..$rating])
+                    <span class="aui-icon aui-icon-small aui-iconfont-star feedback-star">&#9733;</span>
+                #end
+            #end
+            #set($nostar = $scale - $rating)
+            #if ($nostar > 0)
+                #foreach ($j in [1..$nostar])
+                    <span class="aui-icon aui-icon-small aui-iconfont-unstar feedback-unstar">&#9734;</span>
+                #end
+            #end
+        #end
+    </div>
+</div>

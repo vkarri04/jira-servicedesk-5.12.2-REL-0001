@@ -1,0 +1,37 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* Renders global footer for customer view
+* @param wacLink
+*/
+{template .footer}
+<section class="jsd-footer">
+    <a class="jsd-footer-link" target="_blank" href="{$wacLink}">
+        {let $logo}
+            {call .jsd_logo /}
+        {/let}
+        {getText('sd.customerview.footer.powered.by', $logo)|noAutoescape}
+    </a>
+</section>
+{/template}
+
+/**
+* Renders the Jira Service Desk logo as SVG
+*/
+{template .jsd_logo}
+<svg class="jsd-logo-svg" width="15" height="20" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient x1="38.04%" y1="6.64%" x2="59.86%" y2="63.78%" id="a">
+            <stop class="gradient-start" stop-color="#344563" offset="0%" />
+            <stop class="gradient-end" stop-color="#5E6C84" offset="100%" />
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path d="M-9-6h32v32H-9z" />
+        <g fill-rule="nonzero">
+            <path d="M8.93 7.56l5.2.02a.81.81 0 0 1 .65 1.3L7.09 19.14A5.46 5.46 0 0 1 6 11.5l2.94-3.94z" fill="url(#a)" />
+            <path class="jsd-logo-svg-non-gradient-path" d="M5.98 11.5l-5.17-.04a.81.81 0 0 1-.65-1.3L7.77 0a5.46 5.46 0 0 1 1.11 7.64l-2.9 3.86z" fill="#5E6C84" />
+        </g>
+    </g>
+</svg>
+{/template}

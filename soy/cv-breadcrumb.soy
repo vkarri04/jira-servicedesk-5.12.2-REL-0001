@@ -1,0 +1,20 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+ * Breadcrumb view
+ * @param parts Breadcrumb parts
+ */
+{template .breadcrumb}
+    <ol class="aui-nav aui-nav-breadcrumbs">
+        {foreach $part in $parts}
+            <li class="cv-breadcrumb-item">
+                {if $part.url}
+                    <a href="{$part.url}"
+                       class="cv-breadcrumb-item-link js-breadcrumb-item-link {$part.classes}">{$part.label}</a>
+                {else}
+                    {$part.label}
+                {/if}
+            </li>
+        {/foreach}
+    </ol>
+{/template}

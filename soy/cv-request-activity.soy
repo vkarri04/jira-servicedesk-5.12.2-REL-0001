@@ -1,0 +1,539 @@
+{namespace ServiceDesk.Templates.Customer.RequestActivity}
+
+/**
+ * Renders activity
+ * @param reqDetails relevant issue for the comment
+ * @param portalWebFragments
+ */
+{template .requestActivity}
+    {if length($reqDetails.issue.activityStream) > 0 }
+        <h4 class="vp-activity-title">{getText('sd.request.details.activity')}</h4>
+    {/if}
+    <ul class="vp-activity-list">
+        {if length($reqDetails.issue.activityStream) > 0 }
+            {foreach $a in $reqDetails.issue.activityStream}
+                {call .activityItem  data="all"}
+                    {param activity: $a /}
+                    {param isLatest: isFirst($a) /}
+                    {param commentReactionsEnabled: $reqDetails.commentReactionsEnabled /}
+                    {param canReact: $reqDetails.canAddComment /}
+                {/call}
+            {/foreach}
+        {/if}
+
+        {if length($reqDetails.issue.fields) > 0}
+            <li>
+                {call .requestFields}
+                    {param issue: $reqDetails.issue /}
+                {/call}
+            </li>
+        {/if}
+
+        {call .renderFieldPanels}
+            {param fieldPanels: $portalWebFragments.pagePanels.fieldPanels /}
+        {/call}
+    </ul>
+{/template}
+
+/**
+ * Activity stream item header
+ * @param? friendlyDate
+ * @param? date
+ * @param? title
+ * @param? extraContent
+ * @param? isLatest
+ * @param? invisibleToReporter
+ * @param? isOutsiderComment
+ * @param? author
+ * @param? canAddAuthorAsParticipant - true if inline dialog with share link should be shown on outsider lozenge,
+ *                                      makes sense only isOutsiderComment is true
+ * @param? commentId
+ */
+{template .activityItemHeader}
+    <header class="clearfix">
+        {if $invisibleToReporter}
+            <span class="aui-icon aui-icon-small vp-icon-locked" title="{getText('sd.request.details.activity.invisibletoreporter')}">
+                {getText('sd.request.details.activity.invisibletoreporter')}
+            </span>
+        {/if}
+        {if $title}
+            <h4 title="{$title}">{$title}</h4>
+        {/if}
+        {if $extraContent}
+            {$extraContent|noAutoescape}
+        {/if}
+        {if $friendlyDate}
+            <time{if $date} title="{$date}" datetime="{$date}"{/if}>{$friendlyDate}</time>
+        {elseif $date}
+            <time>{$date}</time>
+        {/if}
+        {if $isLatest}
+            {call SOY_REACT_BRIDGE_AUILozenge}
+                {param subtle: true /}
+                {param type: 'new' /}
+                {param message: getText('sd.request.details.activity.latest') /}
+            {/call}
+        {/if}
+        {if $isOutsiderComment}
+            {call ServiceDesk.Templates.Components.Outsider.Comments.shareRequestLozenge}
+                {param canAddAuthorAsParticipant: $canAddAuthorAsParticipant /}
+                {param authorUsername: $author /}
+                {param commentId: $commentId /}
+            {/call}
+        {/if}
+    </header>
+{/template}
+
+/**
+ * Activity stream item content
+ * @param content
+ * @param noAutoescape
+ */
+{template .activityItemContent}
+    <div class="content">
+        {if $noAutoescape}
+            {$content |noAutoescape}
+        {else}
+            {$content}
+        {/if}
+    </div>
+{/template}
+
+/**
+ * @param commentId
+ * @param commentReactionsEnabled
+ * @param canReact
+*/
+{template .commentReactions}
+    {if $commentReactionsEnabled}
+        <div class="comment-reactions">
+            <jira-comment-reactions data-commentid="{$commentId}" data-canreact="{$canReact}"></jira-comment-reactions>
+        </div>
+    {/if}
+{/template}
+
+/**
+ * Activity stream item avatar
+ * @param avatarUrl
+ * @param? username
+ */
+{template .activityItemAvatar}
+    <div class="aui-avatar aui-avatar-medium">
+        <div class="aui-avatar-inner">
+            <img src="{$avatarUrl}"{if $username} alt="{$username}"{/if}>
+        </div>
+    </div>
+{/template}
+
+/**
+ * Activity item
+ * @param activity activity item
+ * @param? isLatest for marking activity with latest label
+ * @param cssClass extra class to add to the container
+ * @param commentReactionsEnabled
+ * @param canReact
+ */
+{template .activityItem}
+    <div class="{if $cssClass}{$cssClass} {/if}activity-item {$activity.type} {if $activity.invisibleToReporter}invisible-to-reporter{/if}">
+        {if $activity.type == 'requester-comment'}
+            {call .activityItemAvatar}
+                {param avatarUrl: $activity.avatarUrl /}
+                {param username: $activity.author /}
+            {/call}
+            {call .activityItemHeader}
+                {param title: $activity.author /}
+                {param date: $activity.date /}
+                {param friendlyDate: $activity.friendlyDate /}
+                {param isLatest: $isLatest /}
+            {/call}
+            {call .activityItemContent}
+                {param content: $activity.comment /}
+                {param noAutoescape: true /}
+            {/call}
+            {call .commentReactions}
+                {param commentId: $activity.commentId /}
+                {param canReact: $canReact /}
+                {param commentReactionsEnabled : $commentReactionsEnabled /}
+            {/call}
+        {elseif $activity.type == 'worker-comment'}
+            {call .activityItemAvatar}
+                {param avatarUrl: $activity.avatarUrl /}
+                {param username: $activity.author /}
+            {/call}
+            {call .activityItemHeader}
+                {param invisibleToReporter: $activity.invisibleToReporter /}
+                {param title: $activity.author /}
+                {param date: $activity.date /}
+                {param friendlyDate: $activity.friendlyDate /}
+                {param isOutsiderComment: $activity.outsiderComment /}
+                {param author: $activity.authorUsername /}
+                {param canAddAuthorAsParticipant: $activity.canAddAuthorAsParticipant /}
+                {param commentId: $activity.commentId /}
+                {param isLatest: $isLatest /}
+            {/call}
+            {call .activityItemContent}
+                {param content: $activity.comment /}
+                {param noAutoescape: true /}
+            {/call}
+            {call .commentReactions}
+                {param commentId: $activity.commentId /}
+                {param canReact: $canReact /}
+                {param commentReactionsEnabled : $commentReactionsEnabled /}
+            {/call}
+        {elseif $activity.type == 'status-update'}
+            {call .activityItemContent}
+                {param noAutoescape: true /}
+                {param content}
+                    {call .getUpdateStatusText}
+                        {param p1}<strong>{$activity.status |escapeHtml}</strong>{/param}
+                    {/call}
+                {/param}
+            {/call}
+            {call .activityItemHeader}
+                {param date: $activity.date /}
+                {param friendlyDate: $activity.friendlyDate /}
+                {param isLatest: $isLatest /}
+            {/call}
+        {elseif $activity.type == 'resolution-update'}
+            {call .activityItemContent}
+                {param noAutoescape: true /}
+                {param content}
+                    {if $activity.status}
+                        {call .getUpdateResolutionText}
+                            {param p1}<strong>{$activity.status |escapeHtml}</strong>{/param}
+                            {param p2}<strong>{$activity.resolution |escapeHtml}</strong>{/param}
+                        {/call}
+                    {else}
+                        {call .getUpdateResolutionOnlyText}
+                            {param p1}<strong>{$activity.resolution |escapeHtml}</strong>{/param}
+                        {/call}
+                    {/if}
+                {/param}
+            {/call}
+            {call .activityItemHeader}
+                {param date: $activity.date /}
+                {param friendlyDate: $activity.friendlyDate /}
+                {param isLatest: $isLatest /}
+            {/call}
+        {elseif $activity.type == 'approval-created'}
+            {call .getApprovalCreatedActivityItem}
+                {param activity: $activity /}
+                {param isLatest: $isLatest /}
+            {/call}
+        {elseif $activity.type == 'approver-decision'}
+            {call .getApproverDecisionActivityItem}
+                {param activity: $activity /}
+                {param isLatest: $isLatest /}
+            {/call}
+        {elseif $activity.type == 'approver-decision-with-comment'}
+            {call .getApproverDecisionActivityItemWithComment}
+                {param activity: $activity /}
+                {param isLatest: $isLatest /}
+                {param commentReactionsEnabled: $commentReactionsEnabled /}
+                {param canReact: $canReact /}
+            {/call}
+        {elseif $activity.type == 'approval-system-decision'}
+            {call .getApprovalSystemDecidedActivityItem}
+                {param activity: $activity /}
+                {param isLatest: $isLatest /}
+            {/call}
+        {/if}
+    </div>
+{/template}
+
+/**
+* @param activity
+* @param? isLatest
+*/
+{template .getApprovalCreatedActivityItem}
+    {call .activityItemContent}
+        {param noAutoescape: true /}
+        {param content}
+            {call .getApprovalCreatedText}
+                {param pendingCount: $activity.pendingCount /}
+                {param activityType: $activity.type /}
+            {/call}
+        {/param}
+    {/call}
+    {call .activityItemHeader}
+        {param date: $activity.date /}
+        {param friendlyDate: $activity.friendlyDate /}
+        {param isLatest: $isLatest /}
+    {/call}
+{/template}
+
+/**
+* @param activity
+* @param? isLatest
+*/
+{template .getApproverDecisionActivityItem}
+    {call .activityItemAvatar}
+        {param avatarUrl: $activity.avatarUrl /}
+        {param username: $activity.approverName /}
+    {/call}
+    {call .activityItemHeader}
+        {param date: $activity.date /}
+        {param friendlyDate: $activity.friendlyDate /}
+        {param isLatest: $isLatest /}
+        {param extraContent}
+            {call .getApproverDecisionText}
+                {param approverName: $activity.approverName /}
+                {param decision}
+                    {if $activity.decision == 'approved'}
+                        {getText('sd.request.approvals.details.decision.approved')}
+                    {else}
+                        {getText('sd.request.approvals.details.decision.rejected')}
+                    {/if}
+                {/param}
+                {param activityType: $activity.type /}
+                {param pendingCount: $activity.pendingCount /}
+            {/call}
+        {/param}
+    {/call}
+    {if $activity.toStatus}
+        {call .activityItemContent}
+            {param noAutoescape: true /}
+            {param content}
+                {let $toStatusContent}
+                    <strong>{$activity.toStatus}</strong>
+                {/let}
+                {let $lozenge}
+                    {call .approvalActionLozenge}
+                        {param decision: $activity.decision /}
+                    {/call}
+                {/let}
+                {getText('sd.request.approvals.activitystream.approval.transition',$lozenge, $toStatusContent)|noAutoescape}
+            {/param}
+        {/call}
+    {/if}
+{/template}
+
+/**
+ * @param activity activity item
+ * @param? isLatest for marking activity with latest label
+ * @param commentReactionsEnabled
+ * @param canReact
+*/
+{template .getApproverDecisionActivityItemWithComment}
+    {call .activityItemAvatar}
+        {param avatarUrl: $activity.approverDecisionItem.avatarUrl /}
+        {param username: $activity.approverDecisionItem.approverName /}
+    {/call}
+    {call .activityItemHeader}
+        {param date: $activity.approverDecisionItem.date /}
+        {param friendlyDate: $activity.approverDecisionItem.friendlyDate /}
+        {param isLatest: $isLatest /}
+        {param extraContent}
+            {call .getApproverDecisionText}
+                {param approverName: $activity.approverDecisionItem.approverName /}
+                {param decision}
+                    {if $activity.approverDecisionItem.decision == 'approved'}
+                        {getText('sd.request.approvals.details.decision.approved')}
+                    {else}
+                        {getText('sd.request.approvals.details.decision.rejected')}
+                    {/if}
+                {/param}
+                {param activityType: $activity.approverDecisionItem.type /}
+                {param pendingCount: $activity.approverDecisionItem.pendingCount /}
+            {/call}
+        {/param}
+    {/call}
+    {if $activity.approverDecisionItem.toStatus or $activity.commentItem}
+        {call .activityItemContent}
+            {param noAutoescape: true /}
+            {param content}
+                {if $activity.approverDecisionItem.toStatus}
+                    {let $toStatusContent}
+                        <strong>{$activity.approverDecisionItem.toStatus}</strong>
+                    {/let}
+                    {let $lozenge}
+                        {call .approvalActionLozenge}
+                            {param decision: $activity.approverDecisionItem.decision /}
+                        {/call}
+                    {/let}
+                    {getText('sd.request.approvals.activitystream.approval.transition', $lozenge, $toStatusContent)|noAutoescape}
+                {/if}
+                {if $activity.commentItem}
+                    {$activity.commentItem.comment|noAutoescape}
+                    {call .commentReactions}
+                        {param commentId: $activity.commentItem.commentId /}
+                        {param canReact: $canReact /}
+                        {param commentReactionsEnabled: $commentReactionsEnabled /}
+                    {/call}
+                {/if}
+            {/param}
+        {/call}
+    {/if}
+{/template}
+
+/**
+* @param decision
+*/
+{template .approvalActionLozenge}
+    {if $decision == 'approved'}
+       {call aui.lozenges.lozenge}
+           {param text}{getText('sd.request.approvals.details.decision.approved')}{/param}
+           {param type: 'success' /}
+           {param isSubtle: 'true' /}
+       {/call}
+    {elseif $decision == 'rejected'}
+       {call aui.lozenges.lozenge}
+           {param text}{getText('sd.request.approvals.details.decision.rejected')}{/param}
+           {param type: 'error' /}
+           {param isSubtle: 'true' /}
+       {/call}
+    {/if}
+{/template}
+
+/**
+* @param activity
+* @param? isLatest
+*/
+{template .getApprovalSystemDecidedActivityItem}
+    {call .activityItemContent}
+        {param noAutoescape: true /}
+        {param content}
+            {call .getApprovalSystemDecidedText}
+                {param activity: $activity /}
+            {/call}
+        {/param}
+    {/call}
+    {call .activityItemHeader}
+        {param date: $activity.date /}
+        {param friendlyDate: $activity.friendlyDate /}
+        {param isLatest: $isLatest /}
+    {/call}
+{/template}
+
+
+/**
+ * Request details
+ * @param issue deta
+ * @param? cssClass extra class to add to the container
+ */
+{template .requestFields}
+    <div class="{if $cssClass}{$cssClass} {/if}activity-item request-fields clearfix">
+        {call .activityItemHeader}
+            {param title}{getText('sd.request.details.header')}{/param}
+            {param date: $issue.date /}
+            {param friendlyDate: $issue.friendlyDate /}
+        {/call}
+        {foreach $f in $issue.fields}
+            <dl data-test-id="{$f.id}">
+                <dt>{$f.label}</dt>
+                <dd>
+                    {call .renderRequestFieldValue}
+                        {param field: $f /}
+                    {/call}
+                </dd>
+            </dl>
+        {/foreach}
+    </div>
+{/template}
+
+/**
+ * Renders a single field value
+ * @param field
+ */
+{template .renderRequestFieldValue}
+    {if $field.value and $field.value.text}
+        {$field.value.text}
+    {elseif $field.value and $field.value.html}
+        {$field.value.html|noAutoescape}
+    {else}
+        <em class="request-field-unspecified">{getText('sd.request.details.field.unspecified')}</em>
+    {/if}
+{/template}
+/**
+ * renders field panels that come from apps/plugins
+ * @param fieldPanels
+ */
+{template .renderFieldPanels}
+    {if $fieldPanels and $fieldPanels.length > 0}
+        <div class="field-panels">
+            {foreach $panel in $fieldPanels}
+                {$panel.html|noAutoescape}
+            {/foreach}
+        </div>
+    {/if}
+{/template}
+
+/**
+ * @param p1 first param
+ */
+{template .getUpdateResolutionOnlyText autoescape="false"}
+    {getText('sd.request.details.activity.resolution.update.text.nostatus', $p1)}
+{/template}
+
+/**
+ * @param p1 first param
+ * @param p2 second param
+ */
+{template .getUpdateResolutionText autoescape="false"}
+    {getText('sd.request.details.activity.resolution.update.text', $p1, $p2)}
+{/template}
+
+/**
+ * @param p1 first param
+ */
+{template .getUpdateStatusText autoescape="false"}
+    {getText('sd.request.details.activity.status.update.text', $p1)}
+{/template}
+
+/**
+* @param? pendingCount
+* @param activityType
+*/
+{template .getApprovalCreatedText}
+    <span>
+        {getText('sd.request.approvals.details.approval.created.text')}
+        {sp}
+        {call .getPendingCountText}
+            {param activityType: $activityType /}
+            {param pendingCount: $pendingCount /}
+        {/call}
+    </span>
+{/template}
+
+/**
+* @param decision
+* @param approverName
+* @param? pendingCount
+* @param activityType
+*/
+{template .getApproverDecisionText}
+    <span>
+        <strong>{$approverName}</strong>{sp}{getText('sd.request.approvals.details.decision.text', $decision)}
+        {call .getPendingCountText}
+            {param activityType: $activityType /}
+            {param pendingCount: $pendingCount /}
+        {/call}
+    </span>
+{/template}
+
+/**
+* @param activity
+*/
+{template .getApprovalSystemDecidedText autoescape="false"}
+    <span>
+        {if $activity.decision == 'APPROVED'}
+            {getText('sd.request.approvals.activitystream.details.system.decision.approved')}
+        {else}
+            {getText('sd.request.approvals.activitystream.details.system.decision.rejected')}
+        {/if}
+    </span>
+{/template}
+
+/**
+* @param pendingCount
+* @param activityType
+*/
+{template .getPendingCountText}
+    {if $pendingCount and $pendingCount > 0}
+        {if $activityType == 'approval-created'}
+            {sp}{getText('sd.request.approvals.details.approval.created.pending', $pendingCount)}
+        {elseif $activityType == 'approver-decision'}
+            {sp}{getText('sd.request.approvals.details.decision.pending', $pendingCount)}
+        {/if}
+    {/if}
+{/template}

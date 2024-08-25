@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-comments description="Service project comments">
+
+    <client-resource key="comment-util">
+        <resource type="download" name="servicedesk-comment-util.js" location="servicedesk/comment/servicedesk-comment-util.js"/>
+
+        <condition class="com.atlassian.servicedesk.internal.conditions.urlreading.UrlReadingSDOperationalCondition" />
+    </client-resource>
+
+    <comment-field-renderer key="service-desk-comment-field" weight="100">
+        <context-provider class="com.atlassian.servicedesk.internal.comment.CommentContextProvider" />
+        <resource type="velocity" name="field-edit" location="servicedesk/comment/comment-field-edit.vm"/>
+        <resource type="velocity" name="issue-page-edit" location="servicedesk/comment/comment-issue-page-edit.vm"/>
+        <resource type="velocity" name="issue-page-view" location="servicedesk/comment/comment-issue-page-view.vm"/>
+
+        <conditions type="AND">
+            <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+            <condition class="com.atlassian.servicedesk.internal.comment.CommentFieldRendererCondition" />
+        </conditions>
+    </comment-field-renderer>
+
+</sd-comments>

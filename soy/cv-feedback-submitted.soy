@@ -1,0 +1,12 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+ * Renders feedback submitted form
+ * @param helpCenterLink
+ */
+{template .feedbackSubmitted}
+<div class="feedback-submitted">
+    <div class="feedback-rating-message">{getText('cv.feedback.submitted.page.message')}</div>
+    <div class="redirection-message">{getText('cv.feedback.submitted.page.redirect.message', $helpCenterLink)|noAutoescape}</div>
+</div>
+{/template}

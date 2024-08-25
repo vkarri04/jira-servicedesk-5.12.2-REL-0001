@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-permission-override description="Service project permission override">
+
+    <project-permission-override key="com.atlassian.servicedesk.collaborator.access"
+                                 class="com.atlassian.servicedesk.internal.permission.ServiceDeskCollaboratorPermissionOverride" />
+
+    <project-permission-override key="com.atlassian.servicedesk.anonymous.access"
+                                 class="com.atlassian.servicedesk.internal.permission.ServiceDeskAnonymousPermissionOverride" />
+
+</sd-permission-override>

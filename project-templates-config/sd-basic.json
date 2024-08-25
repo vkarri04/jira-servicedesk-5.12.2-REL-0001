@@ -1,0 +1,91 @@
+{
+    "issue-type-scheme": {
+        "name": "sd.premade.issuetype.scheme.name",
+        "description": "sd.premade.issuetype.scheme.description",
+        "issue-types": [
+            {
+                "key": "get-it-help",
+                "name": "sd.premade.project.servicedesk.issuetype.ithelp.name",
+                "description": "sd.premade.project.servicedesk.issuetype.ithelp.description",
+                "icon": "/img/issue-type-icons/it_help.png"
+            },
+            {
+                "key": "service-request",
+                "name": "sd.project.template.itil.issuetype.service.request.name",
+                "description": "sd.project.template.itil.issuetype.service.request.description",
+                "icon": "/img/issue-type-icons/service_request.png"
+            },
+            {
+                "key": "service-request-approvals",
+                "name": "sd.premade.project.servicedesk.issuetype.service.request.approvals.name",
+                "description": "sd.premade.project.servicedesk.issuetype.service.request.approvals.description",
+                "icon": "/img/issue-type-icons/request_with_approvals.png"
+            },
+            {
+                "key": "task",
+                "name": "sd.premade.project.servicedesk.issuetype.task.name",
+                "description": "sd.premade.project.servicedesk.issuetype.task.description",
+                "icon": "/img/issue-type-icons/task.png"
+            },
+            {
+                "key": "sub-task",
+                "name": "sd.premade.project.servicedesk.issuetype.subtask.name",
+                "description": "sd.premade.project.servicedesk.issuetype.subtask.description",
+                "icon": "/img/issue-type-icons/subtask.png",
+                "sub-task": true
+            }
+        ]
+    },
+    "issue-type-screen-scheme": {
+        "name": "sd.premade.issuetype.screen.scheme.name",
+        "description": "sd.premade.issuetype.screen.scheme.description",
+        "default-screen-scheme": "defaultScreenScheme",
+        "screens": [
+            {
+                "key": "defaultScreen",
+                "name": "sd.premade.screen.name",
+                "description": "sd.premade.screen.description",
+                "tabs": [
+                    {
+                        "name": "sd.premade.screen.default.tab",
+                        "fields": [
+                            "summary",
+                            "description",
+                            "issuetype",
+                            "priority",
+                            "attachment",
+                            "components",
+                            "labels",
+                            "assignee",
+                            "reporter",
+                            "issuelinks",
+                            "duedate"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "screen-schemes": [
+            {
+                "key": "defaultScreenScheme",
+                "name": "sd.premade.screen.scheme.name",
+                "description": "sd.premade.screen.scheme.description",
+                "default-screen": "defaultScreen"
+            }
+        ]
+    },
+    "resolutions": [
+        {
+            "name": "jira.translation.resolution.done.name",
+            "description": "jira.translation.resolution.done.desc"
+        },
+        {
+            "name": "jira.translation.resolution.will.not.do.name",
+            "description": "jira.translation.resolution.will.not.do.desc"
+        },
+        {
+            "name": "jira.translation.resolution.duplicate.name",
+            "description": "jira.translation.resolution.duplicate.desc"
+        }
+    ]
+}

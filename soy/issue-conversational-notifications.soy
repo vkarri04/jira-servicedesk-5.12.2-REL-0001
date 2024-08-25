@@ -1,0 +1,501 @@
+{namespace ServiceDesk.Templates.Conversational}
+
+
+/**
+ * Notification when request has been created
+ */
+{template .onIssueCreated}
+    {call .issueEmailTemplate data="all"}
+        {param content}
+            {call .renderIssueCreatedContent data="all" /}
+        {/param}
+        {param displayIssueLink: true/}
+    {/call}
+{/template}
+
+/**
+ * Plain text notification when request has been created
+ */
+{template .onIssueCreated_text}
+    {call .issueEmailTemplate_text data="all"}
+        {param content}
+            {call .renderIssueCreatedContentPlainText data="all" /}
+        {/param}
+        {param displayIssueLink: true/}
+    {/call}
+{/template}
+
+/**
+ * Notification when a participant comments on an issue
+ */
+{template .onIssueCommented}
+    {call .issueEmailTemplate data="all"}
+        {param content}
+            {call .renderIssueCommentedContent data="all" /}
+        {/param}
+        {param displayIssueLink: true/}
+    {/call}
+{/template}
+
+/**
+ * Notification when issue has been resolved
+ * @param? feedbackURL
+ * @param commentHtml
+ */
+{template .onIssueResolved}
+    {call .issueEmailTemplate data="all"}
+        {param content}
+            {if $commentHtml}
+                {call .renderIssueResolvedWithComment data="all"/}
+            {else}
+                {call .renderIssueResolvedWithoutComment data="all"/}
+            {/if}
+            {if $feedbackURL}
+                {call ServiceDesk.Templates.Feedback.ratingSection data="all"/}
+            {/if}
+        {/param}
+        {param displayIssueLink: true/}
+    {/call}
+{/template}
+
+/**
+ * Notification when participant has been added
+ */
+{template .onParticipantAdded}
+    {call .issueEmailTemplate data="all"}
+        {param content}
+            {call .renderParticipantAddedContent data="all" /}
+        {/param}
+        {param displayIssueLink: false/}
+    {/call}
+{/template}
+
+/**
+* Plain text notification when a participant comments on an issue
+*/
+{template .onIssueCommented_text}
+    {call .issueEmailTemplate_text data="all"}
+        {param content}
+            {call .renderIssueCommentedContentPlainText data="all" /}
+        {/param}
+        {param displayIssueLink: true/}
+    {/call}
+{/template}
+
+/**
+* Plain text notification when issue has been resolved.
+* @param commentText
+* @param? feedbackURL
+*/
+{template .onIssueResolved_text}
+    {call .issueEmailTemplate_text data="all"}
+        {param content}
+            {if $commentText}
+                {call .renderIssueResolvedWithComment_text data="all"/}
+            {else}
+                {call .renderIssueResolvedWithoutComment_text data="all"/}
+            {/if}
+            {if $feedbackURL}
+                {call ServiceDesk.Templates.Feedback.ratingSection_text data="all"/}
+            {/if}
+        {/param}
+        {param displayIssueLink: true/}
+    {/call}
+{/template}
+
+/**
+* Render plain text version for issue resolved with comment
+* This template will use the agent comment as part of the email
+* @param commentText
+*/
+{template .renderIssueResolvedWithComment_text}
+    {$commentText}
+{/template}
+
+/**
+* Render plain text version for issue resolved without comment
+* This template will auto generated the resolve message
+* @param user
+* @param portal
+*/
+{template .renderIssueResolvedWithoutComment_text}
+    {if $user.emailAddress != $user.displayName}
+        {getText('sd.common.words.hi')} {$user.displayName},
+        {\n}
+    {else}
+        {getText('sd.common.words.hi')},
+        {\n}
+    {/if}
+    {\n}
+    {getText('sd.email.conversational.notification.resolve.issue.default.content')}
+    {\n}
+    {\n}
+    - {$portal.name}
+{/template}
+
+/**
+* Render HTML for issue resolved with comment
+* This template will use the agent comment as part of the email
+* @param commentHtml
+*/
+{template .renderIssueResolvedWithComment}
+    <p> {$commentHtml |noAutoescape} </p>
+{/template}
+
+/**
+* Render HTML for issue resolved without comment
+* This template will auto generated the resolve message
+* @param user
+* @param portal
+*/
+{template .renderIssueResolvedWithoutComment}
+    <p>
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user:$user /}
+    {/call}
+    </p>
+    <p>{getText('sd.email.conversational.notification.resolve.issue.default.content')}</p>
+    {call .renderSignature data="all"}
+        {param signature: $portal.name /}
+    {/call}
+{/template}
+
+/**
+ * Plain text notification when participant has been added
+ */
+{template .onParticipantAdded_text}
+    {call .issueEmailTemplate_text data="all"}
+        {param content}
+            {call .renderParticipantAddedContentPlainText data="all" /}
+        {/param}
+        {param displayIssueLink: false/}
+    {/call}
+{/template}
+
+/**
+ * Notification when request is reopened
+ * @param commentHtml
+ */
+{template .onRequestReopened}
+    {call .issueEmailTemplate data="all"}
+        {param content}
+            {if $commentHtml}
+                {call .renderRequestReopenedWithComment data="all"/}
+            {else}
+                {call .renderRequestReopenedWithoutComment data="all"/}
+            {/if}
+        {/param}
+        {param displayIssueLink: true/}
+    {/call}
+{/template}
+
+/**
+ * Plain text notification when request is reopened
+ * @param commentText
+ */
+{template .onRequestReopened_text}
+    {call .issueEmailTemplate_text data="all"}
+        {param content}
+            {if $commentText}
+                {call .renderRequestReopenedWithCommentPlainText data="all"/}
+            {else}
+                {call .renderRequestReopenedWithoutCommentPlainText data="all"/}
+            {/if}
+        {/param}
+        {param displayIssueLink: true/}
+    {/call}
+{/template}
+
+/**
+ * render for request re-opened with comment
+ * @param commentHtml
+ */
+{template .renderRequestReopenedWithComment}
+    <p> {$commentHtml |noAutoescape} </p>
+{/template}
+
+/**
+ * render for request re-opened without comment
+ * @param user
+ * @param resolver
+ */
+{template .renderRequestReopenedWithoutComment}
+    <p>
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user:$user/}
+    {/call}
+    </p>
+    <p class="email-body">{getText('sd.email.conversational.notification.issue.reopened.content')}
+    </p>
+    {call .renderSignature data="all"}
+        {param signature: $resolver/}
+    {/call}
+{/template}
+
+/**
+ * render for request re-opened with comment in plain text
+ * @param commentText
+ */
+{template .renderRequestReopenedWithCommentPlainText}
+    {$commentText}
+{/template}
+
+/**
+ * render for request re-opened without comment in plain text
+ * @param user
+ * @param resolver
+ */
+{template .renderRequestReopenedWithoutCommentPlainText}
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user:$user/}
+    {/call}
+    {\n}
+    {\n}
+    {getText('sd.email.conversational.notification.issue.reopened.content')}
+    {\n}
+    {\n}
+    - {$resolver}
+{/template}
+
+/**
+ * render participant added content
+ * @param user
+ * @param portal
+ * @param invitedBy
+ * @param portalURL
+ * @param issue
+ */
+{template .renderParticipantAddedContent}
+    <p>
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user:$user/}
+    {/call}
+    </p>
+    <p class="email-body">{getText('sd.email.conversational.notification.participant.added.content', $invitedBy)}
+        <br/>
+        <a class="blue-link-underline" href="{$portalURL}">"{$issue.summary}"</a>
+    </p>
+    {call .renderSignature data="all"}
+        {param signature: $portal.name/}
+    {/call}
+{/template}
+
+/**
+ * render participant added content in plain text
+ * @param user
+ * @param portal
+ * @param invitedBy
+ * @param issue
+ * @param portalURL
+ */
+{template .renderParticipantAddedContentPlainText}
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user:$user/}
+    {/call}
+    {\n}
+    {\n}
+    {getText('sd.email.conversational.notification.participant.added.content', $invitedBy)}
+    {\n}
+    "{$issue.summary}"
+    {\n}
+    {$portalURL}
+    {\n}
+    {\n}
+    - {$portal.name}
+{/template}
+
+/**
+ * render issue created content in plain text
+ * @param user
+ * @param portal
+ */
+{template .renderIssueCreatedContentPlainText}
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user:$user/}
+    {/call}
+    {\n}
+    {\n}
+    {getText('sd.email.conversational.notification.create.issue.content')}
+    {\n}
+    {\n}
+    - {$portal.name}
+{/template}
+
+/**
+ * render issue commented content in plain text
+ * @param commentText
+ */
+{template .renderIssueCommentedContentPlainText}
+    {$commentText}
+    {\n}
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR CUSTOM NOTIFICATIONS
+ * render additional information in plain text
+ * @param issue
+ * @param portalURL
+ * @param isEmailChannelSetup
+ * @param displayIssueLink
+ * @param? participantList_text
+ * @param? unsubscribeLink
+ */
+{template .additionalInfoPlainText}
+    {if $participantList_text}
+        {$participantList_text |noAutoescape}
+        {\n}
+    {/if}
+    {if $isEmailChannelSetup}
+        {getText('sd.email.conversational.notification.reply.to.email')}
+        {\n}
+    {/if}
+    {if $displayIssueLink}
+        {getText('sd.email.conversational.notification.see.request.detail')}{sp}{$issue.key}{sp}-{sp}"{$issue.summary}"{\r}
+        {$portalURL}
+        {\n}
+    {/if}
+    {if $unsubscribeLink}
+        {call .renderUnsubscribeLink_text data="all" /}
+    {/if}
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR CUSTOM NOTIFICATIONS
+ * render additional information
+ * @param isEmailChannelSetup
+ * @param displayIssueLink
+ * @param? participantList_text
+ * @param? unsubscribeLink
+*/
+{template .additionalInfo}
+    <p class="additional-information">
+    {if $participantList_text}
+        {$participantList_text |noAutoescape}
+        <br/>
+    {/if}
+    {if $isEmailChannelSetup}
+        {call .renderReplyToEmail data="all" /}
+        <br/>
+    {/if}
+    {if $displayIssueLink}
+        {call .renderIssueLink data="all" /}
+        <br/>
+    {/if}
+    {if $unsubscribeLink}
+        <br/>
+        {call .renderUnsubscribeLink data="all" /}
+    {/if}
+    </p>
+{/template}
+
+
+/**
+ * render issue created content
+ * @param user
+ * @param portal
+ */
+{template .renderIssueCreatedContent}
+    <p>
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user:$user/}
+    {/call}
+    </p>
+    <p>{getText('sd.email.conversational.notification.create.issue.content')}</p>
+    {call .renderSignature data="all"}
+        {param signature: $portal.name/}
+    {/call}
+{/template}
+
+/**
+ * render issue commented content
+ * @param commentHtml
+ */
+{template .renderIssueCommentedContent}
+    <p>{$commentHtml |noAutoescape}</p>
+{/template}
+
+/**
+ * render signature
+ * @param signature
+ */
+{template .renderSignature}
+    <p>– {$signature}</p>
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR CUSTOM NOTIFICATIONS
+ * render reply to email sentence
+ */
+{template .renderReplyToEmail}
+    {getText('sd.email.conversational.notification.reply.to.email')}
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR CUSTOM NOTIFICATIONS
+ * render signature
+ * @param issue
+ * @param portalURL
+ */
+{template .renderIssueLink}
+    {getText('sd.email.conversational.notification.see.request.detail')} <a class="blue-link" href="{$portalURL}">{sp}#{$issue.key}</a>{sp}-{sp}"{$issue.summary}"
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR CUSTOM NOTIFICATIONS
+ * @param unsubscribeLink
+ */
+{template .renderUnsubscribeLink}
+    {getText('sd.email.conversational.notification.footer.turn.off.notifications','unsubscribe-link', 'blue-link', $unsubscribeLink)|noAutoescape}
+{/template}
+
+/**
+ * IF YOU CHANGE THIS METHOD BE AWARE THERE IS ALSO AN IMEPLEMENTATION FOR CUSTOM NOTIFICATIONS
+ * @param unsubscribeLink
+ */
+{template .renderUnsubscribeLink_text}
+    {\n}
+    {getText('sd.email.conversational.notification.footer.turn.off.notifications.text')}{sp}
+    {\n}
+    {$unsubscribeLink}
+{/template}
+
+/**
+ * Renders custom marker for plain-text templates
+ */
+{template .renderCustomEmailMarkerForPlainTextTemplate}
+    {getText('sd.email.custommarker')}{\n}{\n}
+{/template}
+
+/**
+ * The skeleton of plain text email
+ * @param content
+ * @param displayIssueLink
+ */
+{template .issueEmailTemplate_text}
+{call ServiceDesk.Templates.Conversational.Common.emailTemplate_text data="all"}
+    {param content}
+        {$content |noAutoescape}{\n}
+        {\n}
+        {\n}
+        {call .additionalInfoPlainText data="all"}
+            {param displayIssueLink: $displayIssueLink/}
+        {/call}
+    {/param}
+{/call}
+{/template}
+
+/**
+ * Render content of issue email
+ * @param content
+ * @param displayIssueLink
+ */
+{template .issueEmailTemplate}
+{call ServiceDesk.Templates.Conversational.Common.emailTemplate data="all"}
+    {param content}
+        {$content |noAutoescape}
+        {call .additionalInfo data="all"}
+            {param displayIssueLink: $displayIssueLink/}
+        {/call}
+    {/param}
+{/call}
+{/template}

@@ -1,0 +1,7 @@
+<script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!comment_fields_jsd'));</script>
+
+## the "activity-comment" class must be here, in order for "load more comments" to work as the JiraCore logic relies on it to be available
+## just as well as the "activity-comment" class must be present here, we need the id here, as the page-objects on which we rely for webdriver tests
+## expect the id to be on the same element as the "activity-comment" element
+<div id="comment-$commentId" class="sd-comment-issue-page-view-root issue-data-block activity-comment"
+     data-payload="$payloadJSON"></div>

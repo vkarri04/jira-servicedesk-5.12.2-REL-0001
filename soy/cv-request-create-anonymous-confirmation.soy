@@ -1,0 +1,14 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+ * @param confirmation
+ */
+{template .requestCreateAnonymousConfirmation}
+    <h2>{getText('sd.request.create.anonymous.confirmation.title')}</h2>
+    <p>{getText('sd.request.create.anonymous.confirmation.body', $confirmation.issueKey, $confirmation.email)}</p>
+    <p>
+        <button class="aui-button aui-button-link js-back-to-help-center">
+            {getText('sd.request.create.anonymous.confirmation.back.link')}
+        </button>
+    <p>
+{/template}

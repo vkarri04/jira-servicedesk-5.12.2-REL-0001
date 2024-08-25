@@ -1,0 +1,58 @@
+{namespace ServiceDesk.Templates.Shared.Components.Search}
+
+/**
+ * @param placeholder placeholder text for the search input
+ * @param? showSearchHelp whether to show 'Search help' link on the bottom right of the search input
+ * Renders the search input box
+ */
+{template .searchInputView}
+<form class="aui sd-smart-search-input-form">
+    <label for="sd-customer-portal-smart-search-input" class="sd-customer-portal-smart-search-label">
+        {getText('sd.customerview.smart.portal.search.label')}
+    </label>
+    <div class="sd-smart-search-input-box-container">
+        <input
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            class="text sd-smart-search-input js-sd-smart-search-input full-width-field empty"
+            id="sd-customer-portal-smart-search-input"
+            placeholder="{$placeholder}"
+            spellcheck="false"
+            type="text" />
+
+        {call aui.icons.icon}
+            {param extraClasses: 'sd-smart-search-icon js-sd-smart-search-icon' /}
+            {param useIconFont: true /}
+            {param icon: 'search' /}
+        {/call}
+
+
+        {call aui.buttons.button}
+            {param extraClasses: 'sd-smart-search-clear js-sd-smart-search-clear' /}
+            {param extraAttributes: ['style': 'display: none;', 'type': 'button'] /}
+            {param iconType: 'aui' /}
+            {param iconClass: 'clear-icon aui-icon-small aui-iconfont-cross-circle' /}
+            {param iconText: getText('sd.common.words.remove') /}
+            {param type: 'link' /}
+            {param text: '' /}
+        {/call}
+    </div>
+
+    <div class="sd-smart-search-input-sub-container">
+        <div class="sd-smart-search-input-result-count" role="status"></div>
+
+        {if $showSearchHelp}
+            <div class="sd-smart-search-input-help-search">
+                {call aui.buttons.button}
+                    {param extraClasses: 'sd-smart-search-help' /}
+                    {param extraAttributes: ['type': 'button'] /}
+                    {param type: 'link' /}
+                    {param text: getText('sd.kb.search.help') /}
+                {/call}
+            </div>
+        {/if}
+    </div>
+
+</form>
+{/template}

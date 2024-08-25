@@ -1,0 +1,6 @@
+#disable_html_escaping()
+#if ($rating)
+    <customfieldvalue>$rating</customfieldvalue>
+#else
+    <customfieldvalue></customfieldvalue>
+#end

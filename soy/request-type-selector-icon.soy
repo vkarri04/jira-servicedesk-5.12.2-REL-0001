@@ -1,0 +1,23 @@
+{namespace ServiceDesk.Templates.CustomerFields.RequestTypeSelector}
+
+/**
+ * Request type list item icon
+ * @param icon Request type icon id
+ */
+{template .requestTypeItemIcon}
+{call ServiceDesk.Templates.Components.RequestTypeIcons.icon}
+    {param iconId: $icon /}
+    {param class: 'sd-recent-rt' /}
+{/call}
+{/template}
+
+/**
+ * Render selected request type icon
+ * @param icon Request type icon id
+ */
+{template .selectedRTIcon}
+{call ServiceDesk.Templates.Components.RequestTypeIcons.smallIcon}
+    {param iconId: $icon /}
+    {param class: 'aui-ss-entity-icon' /}
+{/call}
+{/template}

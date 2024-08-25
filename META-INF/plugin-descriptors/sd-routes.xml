@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-routes description="Pretty URL route mappings">
+    <routing key="sd-routes" path="/servicedesk">
+
+        <route from="" to="/rest/servicedesk/1/portal/redirect"/>
+        <route from="/" to="/rest/servicedesk/1/portal/redirect"/>
+
+        <route from="/welcome" to="/secure/WelcomeToJIRAServicedesk.jspa"/>
+
+        <!-- ====== Settings Area-->
+        <route from="/settings" to="/secure/AdminServiceDeskList.jspa"/>
+        <route from="/settings/agents" to="/secure/AgentAllocation.jspa"/>
+
+        <route from="issue-type-icons" to="plugins/servlet/servicedesk/issue-type-icons"/>
+
+        <!-- ====== Agent Area-->
+        <!-- TODO Make the /agent/projectkey/ url go to the last selected tab. The defaulting logic should live elsewhere -->
+        <route from="/agent/home" to="/secure/SDHome.jspa"/>
+        <route from="/agent/all" to="/secure/SDList.jspa"/>
+        <route from="/agent/create-welcome" to="/secure/CreateWelcomeProject.jspa"/>
+        <route from="/agent/{projectKey}" to="/agent/{projectKey}/queues"/>
+        <route from="/agent/{projectKey}/invite" to="/secure/AcceptInvitation.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/queues" to="/secure/ServiceDeskQueues.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/queues/{queueId}" to="/secure/ServiceDeskQueues.jspa?projectKey={projectKey}&amp;queueId={queueId}"/>
+        <route from="/agent/{projectKey}/queues/{queueId}/{issueKey}" to="/secure/ServiceDeskQueues.jspa?projectKey={projectKey}&amp;queueId={queueId}"/>
+        <route from="/agent/{projectKey}/issue/{issueKey}" to="/secure/ServiceDeskQueues.jspa?projectKey={projectKey}&amp;issueKey={issueKey}"/>
+        <route from="/agent/{projectKey}/sla" to="/secure/ServiceDeskSla.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/sla/{metricId}" to="/secure/ServiceDeskSla.jspa?projectKey={projectKey}&amp;metricId={metricId}"/>
+        <route from="/agent/{projectKey}/settings" to="/secure/ProjectServiceDesk.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/settings/email" to="/secure/EmailSettingsAction.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/settings/portal" to="/secure/PortalSettingsAction.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/settings/requesttypes" to="/secure/RequestTypeSettingsAction.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/settings/requesttypes/{itemId}" to="/secure/RequestTypeSettingsAction.jspa?projectKey={projectKey}&amp;itemId={itemId}"/>
+        <route from="/agent/{projectKey}/settings/lookandfeel" to="/secure/ThemeSettingsAction.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/settings/kb" to="/secure/KBSettingsAction.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/settings/participants" to="/secure/ParticipantSettingsAction.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/settings/automation" to="/secure/AutomationSettingsAction.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/settings/automation/ruleset/{itemId}" to="/secure/AutomationSettingsAction.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/settings/automation/blueprint/{blueprintItemId}" to="/secure/AutomationSettingsAction.jspa?projectKey={projectKey}"/>
+        <!--<route from="/agent/{projectKey}/settings/{itemId}" to="/secure/ProjectServiceDesk.jspa?projectKey={projectKey}&amp;itemId={itemId}"/>-->
+        <route from="/agent/{projectKey}/reports" to="/secure/ServiceDeskReport.jspa?projectKey={projectKey}"/>
+        <route from="/agent/{projectKey}/reports/{subResources:.*}" to="/secure/ServiceDeskReport.jspa?projectKey={projectKey}"/>
+
+        <!-- ====== Customer Area -->
+        <!-- ie root -->
+        <route from="/customer" to="/rest/servicedesk/1/customer/pages/hashroot"/>
+
+        <route from="/customer/portals" to="/rest/servicedesk/1/customer/pages/portals"/>
+        <route from="/customer/user/signup" to="/rest/servicedesk/1/customer/pages/user/signup"/>
+        <route from="/customer/user/emailsignup" to="/rest/servicedesk/1/customer/pages/user/emailsignup"/>
+        <route from="/customer/user/login" to="/rest/servicedesk/1/customer/pages/user/login"/>
+        <route from="/customer/user/logout" to="/rest/servicedesk/1/customer/pages/user/logout"/>
+        <route from="/customer/user/profile" to="/rest/servicedesk/1/customer/pages/user/profile"/>
+        <route from="/customer/user/requests" to="/rest/servicedesk/1/customer/pages/user/requests"/>
+        <route from="/customer/user/approvals" to="/rest/servicedesk/1/customer/pages/user/approvals"/>
+        <route from="/customer/user/setpassword" to="/rest/servicedesk/1/customer/pages/user/setpassword" />
+        <route from="/customer/user/forgotpassword" to="/rest/servicedesk/1/customer/pages/user/forgotpassword"/>
+        <route from="/customer/user/resetpassword" to="/rest/servicedesk/1/customer/pages/user/resetpassword"/>
+        <route from="/customer/user/visitportal" to="/rest/servicedesk/1/customer/pages/user/visitportal"/>
+        <route from="/customer/user/approval-action/{issueKey}/{approvalId}/{action}" to="/rest/servicedesk/1/customer/pages/user/approval-action/{issueKey}/{approvalId}/{action}"/>
+        <route from="/customer/user/approval-action/{issueKey}/{approvalId}/{action}/analytics" to="/rest/servicedesk/1/customer/pages/user/approval-action/{issueKey}/{approvalId}/{action}/analytics"/>
+
+        <!-- authenticated -->
+        <route from="/customer/portal/{projectKey}" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}"/>
+        <route from="/customer/portal/{projectKey}/{ticketKey}" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}/{ticketKey}"/>
+        <route from="/customer/portal/{projectKey}/group/{groupId}" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}"/>
+        <route from="/customer/portal/{projectKey}/create/{requestType}" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}/create/{requestType}"/>
+        <route from="/customer/portal/{projectKey}/user/requests" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}/requests"/>
+        <route from="/customer/portal/{projectKey}/user/profile" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}/user/profile"/>
+        <route from="/customer/portal/{projectKey}/user/logout" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}/user/logout"/>
+        <route from="/customer/portal/{projectKey}/user/setpassword" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}/user/setpassword"/>
+        <route from="/customer/kb/view/{pageId}" to="/rest/servicedesk/1/customer/pages/kb/view/{pageId}"/>
+
+        <!-- anonymous -->
+        <route from="/customer/portal/{projectKey}/user/signup" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}/user/signup"/>
+        <route from="/customer/portal/{projectKey}/user/emailsignup" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}/user/emailsignup"/>
+        <route from="/customer/portal/{projectKey}/user/login" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}/user/login"/>
+        <route from="/customer/portal/{projectKey}/user/forgotpassword" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}/user/forgotpassword"/>
+        <route from="/customer/portal/{projectKey}/user/resetpassword" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}/user/resetpassword"/>
+        <route from="/customer/portal/{projectKey}/user/visitportal" to="/rest/servicedesk/1/customer/pages/portal/{projectKey}/user/visitportal"/>
+        <route from="/customer/portal/{projectKey}/{ticketKey}/feedback" to="/rest/servicedesk/1/customer/feedback/portal/{projectKey}/{ticketKey}"/>
+        <route from="/customer/portal/{projectKey}/{ticketKey}/unsubscribe" to="/rest/servicedesk/1/customer/subscription/unsubscribe/portal/{projectKey}/{ticketKey}" />
+
+        <!--
+        * These routes are here to support the old urls for the customer portal since moving to the new scheme.
+        * https://extranet.atlassian.com/display/VPORT/Migrating+to+a+new+customer+request+type+URL+scheme
+        *
+        * These routes were examined on 15/04/2015, and were determined to still be used enough by customers to
+        * justify their existence. For details, check https://extranet.atlassian.com/pages/viewpage.action?pageId=2453668342
+        * If the current date is past 15/10/2015, read the above doc, and check if the below routes are still required.
+        *
+        * When removing please ensure the corresponding resource CustomerOldWebResource, and test TestCustomerPortalRedirect are also removed.
+        * -->
+        <route from="/customer/{projectKey}" to="/rest/servicedesk/1/customerold/pages/portal/{projectKey}"/>
+        <route from="/customer/{projectKey}/group/{groupId}" to="/rest/servicedesk/1/customerold/pages/portal/{projectKey}/group/{groupId}"/>
+        <route from="/customer/{projectKey}/create/{requestType}" to="/rest/servicedesk/1/customerold/pages/portal/{projectKey}/create/{requestType}"/>
+        <route from="/customer/{projectKey}/{ticketKey}" to="/rest/servicedesk/1/customerold/pages/portal/{projectKey}/{ticketKey}"/>
+        <route from="/customer/{projectKey}/my/requests" to="/rest/servicedesk/1/customerold/pages/portal/{projectKey}/requests"/>
+
+        <route from="/customer/{projectKey}/user/signup" to="/rest/servicedesk/1/customerold/pages/portal/{projectKey}/user/signup"/>
+        <route from="/customer/{projectKey}/user/login" to="/rest/servicedesk/1/customerold/pages/portal/{projectKey}/user/login"/>
+        <route from="/customer/{projectKey}/user/logout" to="/rest/servicedesk/1/customerold/pages/portal/{projectKey}/user/logout"/>
+        <route from="/customer/{projectKey}/user/profile" to="/rest/servicedesk/1/customerold/pages/portal/{projectKey}/user/profile"/>
+        <route from="/customer/{projectKey}/user/forgotpassword" to="/rest/servicedesk/1/customerold/pages/portal/{projectKey}/user/forgotpassword"/>
+        <route from="/customer/{projectKey}/user/resetpassword" to="/rest/servicedesk/1/customerold/pages/portal/{projectKey}/user/resetpassword"/>
+
+        <!-- ====== Cannot view any project on first login flow-->
+        <route from="/cannot-view" to="/secure/SDFirstLoginCannotViewAnyProject.jspa"/>
+    </routing>
+
+    <sitemesh key="sd-welcome" path="/servicedesk/welcome"/>
+    <sitemesh key="sd-settings" path="/servicedesk/settings"/>
+    <sitemesh key="sd-agent" path="/servicedesk/agent"/>
+    <sitemesh key="sd-cannot-view" path="/servicedesk/cannot-view"/>
+</sd-routes>

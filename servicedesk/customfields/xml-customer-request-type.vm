@@ -1,0 +1,9 @@
+#disable_html_escaping()
+#if ($isFieldEnabled && $value)
+    #set($displayValue =  $customField.customFieldType.getDisplayedValue($value))
+    <customfieldvalue data-key="$value.getValue()">
+        <![CDATA[$xmlutils.escapeForCdata($!displayValue.getName())]]>
+    </customfieldvalue>
+#else
+    <customfieldvalue></customfieldvalue>
+#end

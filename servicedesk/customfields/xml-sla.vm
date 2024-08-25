@@ -1,0 +1,14 @@
+#disable_html_escaping()
+#if($isSlaImprovedRenderingEnabled)
+<customfieldvalue data-remaining-time="$!remainingTime">
+    #if($remainingTimeHumanReadable)
+        $remainingTimeHumanReadable
+    #end
+</customfieldvalue>
+#else
+<customfieldvalue>
+    #if($remainingTime)
+        $remainingTime
+    #end
+</customfieldvalue>
+#end

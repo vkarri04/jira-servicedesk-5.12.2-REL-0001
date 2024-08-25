@@ -1,0 +1,4 @@
+<script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!custom_field_jsd-request-type'));</script>
+#if ($isFieldEnabled && $value)
+    <div class="sd-customer-request-type-customfield-root" data-payload="$customField.customFieldType.getPayloadJSON($value)" data-is-column-view="false"></div>
+#end

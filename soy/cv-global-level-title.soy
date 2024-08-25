@@ -1,0 +1,64 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* Render global styling title view
+* @param? avatar Avatar url
+* @param? isProjectAvatar whether avatar url is project avatar
+* @param? rtIcon Request type icon
+* @param title Page title text
+* @param? description description of the page
+* @param? headerWebPanels - custom web panels that come from 3rd party apps
+* @param? subheaderWebPanels - custom web panels that come from 3rd party apps
+*/
+{template .globalLevelTitle}
+    {if $headerWebPanels}
+        <div class="header-web-panels">
+            {foreach $panel in $headerWebPanels}
+                {$panel.html|noAutoescape}
+            {/foreach}
+        </div>
+    {/if}
+
+    <div class="cv-global-level-title cv-page-title-logo-wrap">
+        {if $avatar}
+                <div class="aui-page-header-image cv-page-title-image-logo">
+                    {if $isProjectAvatar}
+                        <img src="{$avatar}" class="cv-page-title-logo-rectangle" alt="{getText('sd.customerview.custom.logo.alt', $title)}">
+                    {else}
+                        <div class="aui-avatar aui-avatar-large">
+                            <span class="aui-avatar-inner">
+                                <img src="{$avatar}">
+                            </span>
+                        </div>
+                    {/if}
+                </div>
+        {elseif $rtIcon}
+            <div class="aui-page-header-image cv-page-title-image">
+                <div class="cv-page-title-rticon">
+                    {call ServiceDesk.Templates.Components.RequestTypeIcons.icon}
+                        {param iconId: $rtIcon /}
+                        {param class: 'title-icon' /}
+                        {param useCustomerShim: true /}
+                        {param alt: $title /}
+                    {/call}
+                </div>
+            </div>
+        {/if}
+
+        <div class="aui-page-header-main cv-page-title-main cv-page-title-main-rectangle">
+            <h2 class="cv-page-title-text">{$title}</h2>
+        </div>
+    </div>
+    {if $description}
+        <div class="cv-description">
+                {$description |noAutoescape}
+        </div>
+    {/if}
+    {if $subheaderWebPanels}
+        <div class="subheader-web-panels">
+            {foreach $panel in $subheaderWebPanels}
+                {$panel.html|noAutoescape}
+            {/foreach}
+        </div>
+    {/if}
+{/template}

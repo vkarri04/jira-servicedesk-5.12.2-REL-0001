@@ -1,0 +1,14 @@
+{namespace ServiceDesk.Templates.Feature.WebPanel}
+
+/**
+* Prints out collection of web panels html for a given location.
+* Note: the html is actually rendered on server.
+* @param panels
+*/
+{template .collection}
+{foreach $panel in $panels}
+    <div class="cv-web-panel" data-key="{$panel.key}">
+        {$panel.html|noAutoescape}
+    </div>
+{/foreach}
+{/template}

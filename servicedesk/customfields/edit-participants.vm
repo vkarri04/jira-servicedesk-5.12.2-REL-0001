@@ -1,0 +1,11 @@
+<script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!custom_field_jsd-request-participants'));</script>
+#if ($isFieldEnabled)
+    #customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
+    <select class="js-request-participants-field" multiple="multiple" id="$customField.id" name="$customField.id"
+        data-project-id="$projectId" >
+    #foreach ($user in $value)
+        <option selected="selected" value="$user.name" data-icon="$user.avatarUrls.get('16x16')">$user.displayName</option>
+    #end
+    </select>
+    #customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)
+#end

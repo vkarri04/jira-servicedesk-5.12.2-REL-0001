@@ -1,0 +1,68 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+ * Renders customer sign up form
+ * @param signUp
+ */
+{template .userSignUpForm}
+<h1>{getText('cv.signup.page.title')}</h1>
+<form id="user-signup-form" class="aui top-label user-signup-form js-user-signup-form" action="" method="post">
+    <div class="field-group js-field-email">
+        <label for="email" class="field-label">{getText('cv.signup.page.email')}</label>
+        <input id="email" class="password-score-words text" type="text" name="email" />
+    </div>
+    {if not $signUp.emailVerificationEnabled}
+        <div class="passwords">
+            <div class="field-group js-field-password js-field-password-container">
+                <label for="password" class="field-label">{getText('cv.signup.page.password')}</label>
+                <span id="js-password-meter-bubble-container">
+                    <input class="text full-width-field js-password-field password-pw" type="password" name="password" id="password" />
+                    /* below hidden password field does not require ID because the unique ID is maintained by `password-meter.js` */
+                    <input class="text full-width-field js-password-field password-tx hidden" type="text" name="password" disabled />
+                    {call ServiceDesk.Templates.HelpBubble.container}
+                        {param after: true /}
+                    {/call}
+                </span>
+
+                <div class="checkbox">
+                    <input id="togglePassword" class="checkbox js-toggle-password" type="checkbox" />
+                    <label class="grey" for="togglePassword">{getText('cv.signup.page.show.password')}</label>
+                </div>
+            </div>
+        </div>
+        <div class="field-group js-field-fullname">
+            <label for="fullname" class="field-label">{getText('cv.signup.page.full.name')}</label>
+            <input id="fullname" name="fullname" class="full-width-field password-score-words text" type="text" />
+        </div>
+    {/if}
+    <div class="field-group captcha-field js-captcha-field">
+        <label id="login-form-captcha" for="login-form-captcha" accesskey="c">{getText('cv.login.captcha.label')}</label>
+        <input type="text" name="captcha" id="login-form-captcha" class="text full-width-field captcha-response js-captcha-input" />
+    </div>
+    <div class="field-group captcha-field js-captcha-field captcha-container">
+        <img class="js-captcha-img captcha-img" height="100px" width="200px">
+        {call aui.icons.icon}
+            {param useIconFont: true /}
+            {param size: 'small' /}
+            {param icon: 'refresh' /}
+            {param extraClasses: 'js-captcha-reload captcha-reload' /}
+            {param accessibilityText: getText('cv.login.captcha.refresh') /}
+        {/call}
+    </div>
+
+    <div class="field-group js-field-secondary-email" id="secondaryEmail-group">
+        <label for="secondaryEmail" class="field-label">
+            {getText('cv.signup.page.email')}
+        </label>
+        <input id="secondaryEmail" class="full-width-field password-score-words text" type="text" name="secondaryEmail" value="">
+    </div>
+
+    <div class="buttons-container">
+        <div class="buttons">
+            <button class="aui-button aui-button-primary js-button-submit" type="submit">{getText('cv.signup.page.sign.up')}</button>
+            <a href="{contextPath()}/servicedesk/customer/portal/{$signUp.id}/user/login" class="aui-button aui-button-link js-button-cancel" tabindex="0">{getText('cv.signup.page.back.to.login')}</a>
+            <span class="cv-sd-status js-status"></span>
+        </div>
+    </div>
+</form>
+{/template}

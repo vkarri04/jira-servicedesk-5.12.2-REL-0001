@@ -1,0 +1,49 @@
+{namespace ServiceDesk.Templates.Customer.Feature.Onboarding}
+/**
+ * First help pin in the portal tour
+ * @param headerClass class to add to header of tour step
+ */
+{template .portalTourOne}
+    <h2 class="aui-nav-heading {$headerClass}">{getText('sd.renaissance.onboarding.portal.tour.one.title')}</h2>
+    <p>{getText('sd.renaissance.onboarding.portal.tour.one.text')}</p>
+    <p>
+        <button class='aui-button aui-button-link chaperone-skip'>{getText('sd.renaissance.onboarding.portal.tour.skip')}</button>
+    </p>
+    <div class="chaperone-numbering">1/3</div>
+{/template}
+
+/**
+ * Second help pin in the portal tour
+ * @param headerClass class to add to header of tour step
+ */
+{template .portalTourTwo}
+    <h2 class="aui-nav-heading {$headerClass}">{getText('sd.renaissance.onboarding.portal.tour.two.title')}</h2>
+    <p>{getText('sd.renaissance.onboarding.portal.tour.two.text')}</p>
+    <p>
+        <button class='aui-button aui-button-link chaperone-skip'>{getText('sd.renaissance.onboarding.portal.tour.skip')}</button>
+    </p>
+    <div class="chaperone-numbering">2/3</div>
+{/template}
+
+/**
+ * Third help pin in the portal tour
+ * @param headerClass class to add to header of tour step
+ * @param jiraProjectKey key of the JIRA project from where CP page with portal-tour is opened
+ */
+{template .portalTourThree}
+    <h2 class="aui-nav-heading {$headerClass}">{getText('sd.renaissance.onboarding.portal.tour.three.title')}</h2>
+    {let $linkStart}
+        <a class="aui-button aui-button-link js-chaperone-queues-link" href="{contextPath()}/projects/{$jiraProjectKey}/queues">
+    {/let}
+    {let $linkEnd}
+        </a>
+    {/let}
+    <p>{getText('sd.renaissance.onboarding.portal.tour.three.text', $linkStart, $linkEnd)|noAutoescape}</p>
+    <p>
+        <a class="aui-button chaperone-welcome-guide-button" href="{contextPath()}/projects/{$jiraProjectKey}/welcome-guide">
+            {getText('sd.renaissance.onboarding.portal.tour.back')}
+        </a>
+        <button class='aui-button aui-button-link chaperone-skip'>{getText('sd.renaissance.onboarding.portal.tour.close')}</button>
+    </p>
+    <div class="chaperone-numbering">3/3</div>
+{/template}

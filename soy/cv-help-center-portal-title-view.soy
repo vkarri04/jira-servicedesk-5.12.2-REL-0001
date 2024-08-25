@@ -1,0 +1,45 @@
+{namespace ServiceDesk.Templates.Customer.SmartPortal}
+
+/**
+* New shared portal header
+* @param title - name of the help center
+* @param announcementHeader - the announcement header (text) set by admin
+* @param announcementMessageHtml - the announcement message (wiki html) set by admin
+* @param? headerWebPanels - panels coming from 3rd party apps
+* @param? subheaderWebPanels - panels coming from 3rd party apps
+*/
+{template .title}
+    {call ServiceDesk.Templates.Customer.portalAnnouncement}
+        {param announcementHeader: $announcementHeader /}
+        {param announcementMessageHtml: $announcementMessageHtml /}
+    {/call}
+
+    {if $headerWebPanels}
+        <div class="header-web-panels">
+            {foreach $panel in $headerWebPanels}
+                {$panel.html|noAutoescape}
+            {/foreach}
+        </div>
+    {/if}
+
+    {call .sharedPortalTitleHeading}
+        {param title: $title /}
+    {/call}
+
+    {if $subheaderWebPanels}
+        <div class="subheader-web-panels">
+            {foreach $panel in $subheaderWebPanels}
+                {$panel.html|noAutoescape}
+            {/foreach}
+        </div>
+    {/if}
+{/template}
+
+/**
+ * @param title
+ */
+{template .sharedPortalTitleHeading}
+    <div class="cv-smart-portal-title-wrapper">
+        <h1 id="cv-help-center-page-title" class="cv-smart-portal-title">{$title}</h1>
+    </div>
+{/template}

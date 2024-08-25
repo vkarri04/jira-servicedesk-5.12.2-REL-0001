@@ -1,0 +1,17 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* Renders global footer for customer view
+* @param? footerWebPanels
+*/
+{template .contentFooter}
+<div class="content-footer">
+    {if $footerWebPanels}
+        <div class="footer-web-panels">
+            {foreach $panel in $footerWebPanels}
+                {$panel.html|noAutoescape}
+            {/foreach}
+        </div>
+    {/if}
+</div>
+{/template}

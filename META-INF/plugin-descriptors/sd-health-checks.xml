@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-health-checks description="Service Desk health checks">
+
+    <!--================================
+    HEALTH CHECKS
+    =================================-->
+
+    <!--Found on /rest/healthCheck/1.0/check -->
+
+    <health-check key="sd-general-health-check"
+                  class="com.atlassian.servicedesk.bootstrap.healthcheck.GeneralHealthcheck"/>
+
+</sd-health-checks>

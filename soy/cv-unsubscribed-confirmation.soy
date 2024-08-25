@@ -1,0 +1,22 @@
+{namespace ServiceDesk.Templates.Customer.Unsubscribe}
+
+/**
+ * Renders feedback confirm form
+ */
+{template .unsubscribedConfirmation}
+    <div class="cv-unsubscribed-confirmation">
+        <div class="cv-notifications-icon"></div>
+        <p class="cv-main">
+            {getText('cv.unsubscribed.confirmation.page.confirmation')}
+        </p>
+        <p class="cv-sub">
+            {getText('cv.unsubscribed.confirmation.page.visit.request')}
+            <br/>
+            {call aui.buttons.button}
+                {param text}{getText('cv.unsubscribed.confirmation.page.visit.request.link')}{/param}
+                {param type: 'link' /}
+                {param extraClasses: 'js-trigger-goto-request' /}
+            {/call}
+        </p>
+    </div>
+{/template}

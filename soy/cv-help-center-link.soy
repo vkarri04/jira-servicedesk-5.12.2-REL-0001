@@ -1,0 +1,19 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* Link for the header to the Help Center
+* @param url the link to the help center
+* @param name the name of the help center
+* @param? logoUrl the source of the logo to be displayed
+*/
+{template .helpCenterLink}
+    <h1 class="cp-logo">
+        {if $logoUrl}
+            <a class="cp-help-center cp-with-portal-logo" href="{$url}">
+                <img class="cp-portal-logo" src="{$logoUrl}" alt="{$name}" />
+            </a>
+        {else}
+            <a class="cp-help-center" href="{$url}">{$name}</a>
+        {/if}
+    </h1>
+{/template}

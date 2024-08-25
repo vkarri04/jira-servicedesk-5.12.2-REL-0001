@@ -1,0 +1,19 @@
+{namespace ServiceDesk.Templates.Admin.config}
+
+/**
+ * Draws the configuration page where users can turn off analytics.
+ * @param jsonPayload json data that can be used to populate models
+ */
+{template .page}
+    <html>
+        <head>
+            <title>{getText('sd.admin.plugin.config.page.title')}</title>
+            <meta name="jsonPayload" content="{$jsonPayload}" />
+        </head>
+        <body>
+            <div id="sd-plugin-config">
+            </div>
+        </body>
+    </html>
+{/template}
+

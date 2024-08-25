@@ -1,0 +1,16 @@
+{namespace ServiceDesk.Templates.Shared.Components.Search}
+
+/**
+ * Renders search results footer
+ */
+{template .searchResultsFooter}
+    <div class="cv-smart-portal-nav-bottom">
+        {call aui.buttons.button}
+            {param text}
+                {getTextAsHtml('sd.customerview.smart.portal.none.helped')}
+            {/param}
+            {param type: 'link' /}
+            {param extraClasses: 'js-cv-view-portals' /}
+        {/call}
+    </div>
+{/template}

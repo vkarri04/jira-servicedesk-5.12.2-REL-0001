@@ -1,0 +1,31 @@
+{namespace ServiceDesk.Templates.Components.MailLog}
+
+/**
+ * Popup dialog content for the log
+ * @param title title of the mail audit log
+ */
+{template .content}
+    <!-- Dialog header -->
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main js-mail-log-title">{$title}</h2>
+        <button class="aui-close-button" aria-label="{getText('sd.common.words.close')}" data-testid="mail-log-dialog-close-btn"></button>
+    </header>
+
+    <!-- Main dialog content -->
+    <nav class="aui-navgroup aui-navgroup-horizontal js-mail-log-nav">
+        <div class="aui-navgroup-inner">
+            <div class="aui-navgroup-primary">
+                <ul class="aui-nav">
+                    <li class="js-connectivity-log aui-nav-selected"><a href="#">{getText('sd.admin.email.connectivity.log')}</a></li>
+                    <li class="js-processing-log"><a href="#">{getText('sd.admin.email.processing.log')}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="aui-dialog2-content aui-page-panel">
+        <div class="aui-page-panel-inner">
+            <section class="aui-page-panel-content js-mail-log-content">
+            </section>
+        </div>
+    </div>
+{/template}

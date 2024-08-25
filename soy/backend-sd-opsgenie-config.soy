@@ -1,0 +1,18 @@
+{namespace ServiceDesk.Templates.Admin.opsgenie}
+
+/**
+ * Draws the configuration page where users can set up opsgenie for incident management.
+ * @param jsonPayload json data that can be used to populate models
+ */
+{template .page}
+    <html>
+        <head>
+            <title>{getText('sd.admin.opsgenie.config.page.title')}</title>
+            <meta name="opsgenie-config-jsonPayload" content="{$jsonPayload}" />
+        </head>
+        <body>
+            <div id="sd-opsgenie-config">
+            </div>
+        </body>
+    </html>
+{/template}

@@ -1,0 +1,190 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* The main contents of the user profile page, for both read and edit states.
+* @param user
+* @param timezones
+* @param timezoneRegions
+* @param profileWebFragments
+* @param availableLanguages
+* @param hasSelectedLanguage
+*/
+{template .profileDetails}
+<dl class="profile-field">
+    <dt class="profile-field-label">{getText('cv.profile.log.in.with')}</dt>
+    <dd class="profile-field-value">{$user.userName}</dd>
+</dl>
+
+<div class="portal-profile-view readonly">
+    <h4 class="profile-view-title">
+        {getText('sd.common.words.myprofile')}
+    </h4>
+    <dl class="profile-field">
+        <dt class="profile-field-label">{getText('sd.common.words.avatar')}</dt>
+        <dd class="profile-field-value display-avatar-value">
+            {call aui.avatar.avatar}
+                {param size: 'medium' /}
+                {param avatarImageUrl: $user.avatars.medium /}
+                {param imageClasses: 'cv-avatar' /}
+                {param accessibilityText: getText('cv.profile.avatar.accessibility.text') /}
+            {/call}
+        </dd>
+    </dl>
+    <dl class="profile-field">
+        <dt class="profile-field-label">{getText('sd.common.words.name')}</dt>
+        <dd class="profile-field-value display-name-value">
+            {$user.displayName}
+        </dd>
+    </dl>
+
+    <dl class="profile-field">
+        <dt class="profile-field-label">{getText('cv.profile.send.notifications.to')}</dt>
+        <dd class="profile-field-value email-value">{$user.email}</dd>
+    </dl>
+
+    <h4 class="profile-view-title">
+        {getText('cv.profile.preferences')}
+    </h4>
+    {if isFeatureFlagEnabled('sd.customer.profile.multi.languages')}
+    <dl class="profile-field">
+        <dt class="profile-field-label">{getText('sd.common.words.language')}</dt>
+        <dd class="profile-field-value language-value">{$user.language.displayName}</dd>
+    </dl>
+    {/if}
+
+    <dl class="profile-field">
+        <dt class="profile-field-label">{getText('cv.profile.timezone')}</dt>
+        <dd class="profile-field-value timezone-value">{$user.timezone.gmtOffset} {$user.timezone.city}</dd>
+    </dl>
+
+    {foreach $panel in $profileWebFragments.panels}
+        {$panel.html|noAutoescape}
+    {/foreach}
+</div>
+
+<div class="portal-profile-view editable">
+    <h4 class="profile-view-title">{getText('cv.profile.edit.your.profile')}</h4>
+
+    {call aui.form.form}
+        {param action: '#' /}
+        {param isTopLabels: true /}
+        {param extraAttributes: ['novalidate': 'novalidate'] /}
+        {param content}
+            {if not $user.canUpdateUser}
+                <div class="cv-note">{getText('cv.profile.readonly')}</div>
+            {/if}
+
+            {call aui.form.fieldGroup}
+                {param content}
+                    {call aui.form.label}
+                        {param isRequired: false /}
+                        {param content: getText('sd.common.words.avatar') /}
+                    {/call}
+                    <input type="hidden" name="avatar" />
+                    <div class="profile-field-value">
+                        {call aui.avatar.avatar}
+                            {param size: 'medium' /}
+                            {param avatarImageUrl: $user.avatars.medium /}
+                            {param extraClasses: 'cp-edit-avatar' /}
+                            {param imageClasses: 'cv-avatar' /}
+                            {param accessibilityText: getText('cv.profile.avatar.accessibility.text') /}
+                        {/call}
+
+
+                        {sp}<a class="js-edit-avatar" href="#">{getText('cv.profile.change.avatar')}</a>
+
+                    </div>
+                {/param}
+            {/call}
+
+            {if $user.canUpdateUser}
+                {call aui.form.fieldGroup}
+                    {param content}
+                        {call aui.form.label}
+                            {param content: getText('sd.common.words.name') /}
+                            {param forField: 'displayName' /}
+                            {param isRequired: false /}
+                        {/call}
+                        <input type="text" class="text full-width-field" id="displayName" name="displayName" value="{$user.displayName}">
+                    {/param}
+                {/call}
+
+                {call aui.form.fieldGroup}
+                    {param content}
+                        {if $user.userName != $user.email}
+                            {call aui.form.label}
+                                {param content: getText('cv.profile.send.notifications.to') /}
+                                {param forField: 'email' /}
+                                {param isRequired: false /}
+                            {/call}
+                            // no AUI soy support for email type inputs so hard coding this one for now
+                            <input type="email" class="text full-width-field" id="email" name="email" value="{$user.email}">
+                        {else}
+                            <p class="profile-field-label">{getText('cv.profile.send.notifications.to')}</p>
+                            <p id="email-ro" class="profile-field-value">{$user.email}</p>
+                        {/if}
+                    {/param}
+                {/call}
+            {/if}
+
+            <h4 class="profile-view-title">
+                {getText('cv.profile.preferences')}
+            </h4>
+            {if isFeatureFlagEnabled('sd.customer.profile.multi.languages')}
+                {call aui.form.fieldGroup}
+                    {param content}
+                        {call aui.form.label}
+                            {param content: getText('sd.common.words.language') /}
+                            {param forField: 'language-selection' /}
+                            {param isRequired: false /}
+                        {/call}
+                        <select id="language-selection" class="trigger-select2 language-select" name="languageKey">
+                            {if not $hasSelectedLanguage}
+                                <option value="">{getText('cv.profile.edit.language.select.default')}</option>
+                            {/if}
+                            {foreach $language in $availableLanguages}
+                                <option class="option-group-{$language.key}" value="{$language.key}" {if $user.language.key == $language.key}selected="selected"{/if}>{$language.displayName}</option>
+                            {/foreach}
+                        </select>
+                    {/param}
+                {/call}
+            {/if}
+
+            {call aui.form.fieldGroup}
+                {param content}
+                    <label for="timezone-region">{getText('cv.profile.timezone')}</label>
+                    <div class="cp-cascading-select aui-field-cascadingselect trigger-cascading-select">
+                        <select class="cascadingselect-parent timezone-region-select" data-select2-class="timezone-region-select" id="timezone-region">
+                            {foreach $region in $timezoneRegions}
+                                <option class="option-group-{$region.key}" value="{$region.key}" {if $user.timezone.regionKey == $region.key}selected="selected"{/if}>{$region.displayName}</option>
+                            {/foreach}
+                        </select>
+                        <select name="timezone" class="cascadingselect-child timezone-select" data-select2-class="timezone-select">                                      `
+                            {foreach $timezone in $timezones}
+                                <option class="option-group-{$timezone.regionKey}" value="{$timezone.id}" {if $user.timezone.id == $timezone.id}selected="selected"{/if}>{$timezone.gmtOffset} {$timezone.city}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                {/param}
+            {/call}
+            <div class="buttons-container">
+                <div class="buttons">
+                    {call aui.buttons.button}
+                        {param text: getText('sd.common.words.save') /}
+                        {param type: 'primary' /}
+                        {param id: 'profile-save' /}
+                        {param extraAttributes: ['type': 'submit'] /}
+                    {/call}
+                    {call aui.buttons.button}
+                        {param text: getText('sd.common.words.cancel') /}
+                        {param type: 'link' /}
+                        {param extraClasses: 'js-trigger-cancel' /}
+                        {param extraAttributes: ['type': 'button'] /}
+                    {/call}
+                    <span class="cv-sd-status js-status"></span>
+                </div>
+            </div>
+        {/param}
+    {/call}
+</div>
+{/template}

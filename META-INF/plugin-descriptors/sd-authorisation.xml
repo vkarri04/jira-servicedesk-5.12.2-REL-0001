@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-authorisation description="Service project authorisation">
+
+    <!--================================
+        External Customer Authorisation
+    =================================-->
+    <authorisation key="sd-abp-auth"
+                   class="com.atlassian.servicedesk.internal.user.external.ServiceDeskAuthorisation" />
+
+</sd-authorisation>

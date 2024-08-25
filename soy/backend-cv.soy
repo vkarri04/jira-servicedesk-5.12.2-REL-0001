@@ -1,0 +1,150 @@
+{namespace ServiceDesk.Templates.Customer.Backend}
+
+/**
+ * Renders the head part of the customer portal including the downloadable assets (js/css)
+ * @param cvResources data tags
+ * @param cssResources CSS tags
+ * @param jsResources Javascript tags
+ * @param title page title
+ * @param faviconUrl Url for icon that appears in address bar
+ * @param contextPath relative root url for jira
+ * @param user logged in user
+ * @param pluginVersion service desk plugin version
+*/
+{template .head}
+<!DOCTYPE html>
+<html lang="{$user ? $user.language : 'en'}" class="aui-responsive">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+        <title>{if $title}{$title} - {/if}{getText('sd.customerview.head.title')}</title>
+        <meta name="viewport" content="initial-scale=1"/>
+
+        <meta name="ajs-context-path" content="{$contextPath}"/>
+        <meta name="ajs-sdPluginVersion" content="{$pluginVersion}"/>
+        <meta name="ajs-kb-article-viewed" content="false"/>
+
+        {if $user}
+            <meta name="loggedInUser" content="{$user.username}"/>
+        {/if}
+
+        {$cvResources|noAutoescape}
+
+        {foreach $jsResource in $jsResources}
+            <script data-wrm-key="{$jsResource.key}" data-wrm-batch-type="context">
+                // This is needed to tell WRM that these contexts have already been loaded
+                // While we can set the data-wrm-key on the link (see below) we would have to monkey patch
+                // the load JS which we dont want to. so we add an empty script that contains the data attribute
+                // to make WRM happy
+            </script>
+        {/foreach}
+        <script>
+            {literal}
+            /*! loadJS: load a JS file asynchronously. [c]2014 @scottjehl, Filament Group, Inc. (Based on http://goo.gl/REQGQ by Paul Irish). Licensed MIT */
+            (function(w) {
+                var loadJS=function(e,t,n){"use strict";var o,r=w.document.getElementsByTagName("script")[0],c=w.document.createElement("script");return"boolean"==typeof t&&(o=n,n=t,t=o),c.src=e,c.async=!n,r.parentNode.insertBefore(c,r),t&&"function"==typeof t&&(c.onload=t),c}
+            {/literal}
+            {foreach $jsResource in $jsResources}
+                {let $jsResourceUrlContent: $jsResource.url /}
+                // loads all js files in order and ensures that they get executed in order (the second param "true" is tha flag indicating to maintain execution order)
+                loadJS("{$jsResourceUrlContent|noAutoescape}", true);
+            {/foreach}
+            {literal}
+            }(window));
+            {/literal}
+        </script>
+        {foreach $cssResource in $cssResources}
+            {let $cssResourceUrlContent: $cssResource.url /}
+            <link rel="preload" href="{$cssResourceUrlContent|noAutoescape}" data-wrm-key="{$cssResource.key}" data-wrm-batch-type="context" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        {/foreach}
+        <script>
+            // loadCSS is needed to enable async loading on legacy browsers like IE11 that cant handle the link rel=preload out of the box
+            {literal}
+            /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+            !function(n){"use strict";n.loadCSS||(n.loadCSS=function(){});var o=loadCSS.relpreload={};if(o.support=function(){var e;try{e=n.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),o.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},o.poly=function(){if(!o.support())for(var t=n.document.getElementsByTagName("link"),e=0;e<t.length;e++){var a=t[e];"preload"!==a.rel||"style"!==a.getAttribute("as")||a.getAttribute("data-loadcss")||(a.setAttribute("data-loadcss",!0),o.bindMediaToggle(a))}},!o.support()){o.poly();var t=n.setInterval(o.poly,500);n.addEventListener?n.addEventListener("load",function(){o.poly(),n.clearInterval(t)}):n.attachEvent&&n.attachEvent("onload",function(){o.poly(),n.clearInterval(t)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:n.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+            {/literal}
+        </script>
+
+        <link rel="shortcut icon" href="{$faviconUrl}">
+    </head>
+{/template}
+
+/**
+ * Renders the body with a json fragment as payload for the client side rendering
+ * @param jsonPayload page title
+ * @param envJson environment meta data
+ * @param coverColor customer selected color for the background
+*/
+{template .body}
+<body class="aui-layout aui-theme-default aui-page-fixed cv-custom-help-center-branding">
+    {if $coverColor}
+        // KEEP IN SYNC WITH
+        // - aui styles for body background
+        // - branding-theme-template.js and cv.less for ".cv-bg-image"
+        <style>
+            {literal}
+            body {
+                background: #f4f5f7;
+                color: #172b4d;
+            }
+
+            .cv-bg-image {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 350px;
+                background-color: {/literal}{$coverColor}{literal}
+            }
+
+            {/literal}
+        </style>
+    {/if}
+    {if $jsonPayload}
+        <div style="display: none" id="jsonPayload">{$jsonPayload}</div>
+    {/if}
+    {if $envJson}
+        <div style="display: none" id="envJson">{$envJson}</div>
+    {/if}
+    <span class="cv-alerts-container"></span>
+
+    <div id="page" class="cv-sidebar-page" >
+        // Contents of page is rendered client side
+        <div class="cv-page-contents-container">
+            {call .mainFragments /}
+        </div>
+        <div class="cv-help-center-branding-sidepanel js-help-center-branding-sidepanel"></div>
+    </div>
+</body>
+<html>
+{/template}
+
+/**
+* main content for cv page
+*/
+{template .mainFragments}
+    <div class="cv-bg-image"></div>
+    <header id="header" role="banner"></header>
+    <section id="content-wrapper">
+        <main id="content" role="main"></main>
+        <footer id="footer" role="contentinfo"></footer>
+    </section>
+{/template}
+
+/**
+* Used to redirect the user to pushstate url, in the case of an ie user having an expired session
+* https://extranet.atlassian.com/display/~sharwood/Non+pushstate+support+redirect
+* @param baseUrl
+*/
+{template .redirectPage}
+<html lang="en">
+<head>
+    <script>
+        window.location.replace("{$baseUrl}" + window.location.hash.replace("#", "/"));
+    </script>
+</head>
+<body>
+</body>
+</html>
+{/template}

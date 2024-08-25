@@ -1,0 +1,151 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* Side bar on user request
+* @param isParticipantsEnabled
+* @param isOrganisationsEnabled
+* @param showNewShareComponent
+* @param reqDetails
+*/
+{template .requestOptions}
+    {call ServiceDesk.Templates.Customer.Request.requestStatusLozenge}
+        {param reqDetails: $reqDetails /}
+    {/call}
+    {foreach $section in $reqDetails.actionSections}
+        {if $section.items and length($section.items) > 0}
+            {if $section.label}
+                <h5 class="cv-request-option-title">{$section.label}</h5>
+            {/if}
+            <ul class="cv-request-actions {if $section.params}{if $section.params.styleClass}{$section.params.styleClass}{/if}{/if}">
+                {foreach $item in $section.items}
+                    <li>
+                        {call .requestActionItem}
+                            {param item: $item /}
+                        {/call}
+                    </li>
+                {/foreach}
+            </ul>
+        {/if}
+    {/foreach}
+
+    {if $isParticipantsEnabled and not $showNewShareComponent}
+        {call .peopleInvolvedSection}
+            {param reqDetails: $reqDetails /}
+            {param isOrganisationsEnabled: $isOrganisationsEnabled /}
+        {/call}
+    {/if}
+
+    {if $reqDetails.optionPanels and length($reqDetails.optionPanels) > 0}
+        {foreach $optionPanel in $reqDetails.optionPanels}
+            {$optionPanel.html|noAutoescape}
+        {/foreach}
+    {/if}
+{/template}
+
+/**
+ * Renders the "People involved" section, with optional button to add more if the user has permission
+ * @param reqDetails
+ * @param isOrganisationsEnabled
+ */
+{template .peopleInvolvedSection}
+    <h5 class="cv-request-option-title">{getText('sd.request.details.participants.shared.with')}</h5>
+
+    <ul class="cv-user-list">
+    {if $reqDetails.reporter}
+        <li>
+            {call .participant}
+                {param isReporter: true /}
+                {param participant: $reqDetails.reporter /}
+            {/call}
+        </li>
+    {/if}
+    {if length($reqDetails.participants) > 0}
+        {foreach $participant in $reqDetails.participants}
+            <li>
+                {call .participant}
+                    {param participant: $participant /}
+                {/call}
+                {if $reqDetails.canRemoveParticipants}
+                    {call .removeParticipantLink}
+                        {param userKey: $participant.key /}
+                    {/call}
+                {/if}
+            </li>
+        {/foreach}
+    {/if}
+    </ul>
+    {if $isOrganisationsEnabled}
+        <div>
+            <sd-customer-organizations
+                class="cv-organisations-list"
+                data-organisations="{toJson($reqDetails.organisations)}"
+                data-max-displayed="{$reqDetails.organisations.length}"
+                data-display-remove-link="{$reqDetails.canRemoveParticipants}"
+                data-remove-link-class="cv-remove-participant-link"
+                data-remove-link-trigger="js-trigger-remove-organisation"
+                data-remove-link-status-class="cv-sd-status js-status"></sd-customer-organizations>
+        </div>
+    {/if}
+{/template}
+
+/**
+* Renders a participant in format {Small Avatar} {Full Name} - {Email||Me}
+* @param participant - The user
+* @param? isReporter - Is the participant the reporter, if so will add a subtle badge below their name.
+*/
+{template .participant}
+{call ServiceDesk.Templates.Shared.Utils.user}
+    {param tag}{if $isReporter}{getText('sd.common.words.creator')}{/if}{/param}
+    {param displayName: $participant.displayName /}
+    {param avatarUrl: $participant.avatarUrl /}
+    {param avatarSize: 'small' /}
+{/call}
+{/template}
+
+/**
+* Renders remove participant link
+* @param userKey
+*/
+{template .removeParticipantLink}
+    <div class="cv-remove-participant-link">
+        {call aui.buttons.button}
+            {param text: getText('sd.request.details.participants.remove.participant') /}
+            {param type: 'link' /}
+            {param extraAttributes: ['data-user-key': $userKey] /}
+            {param extraClasses: 'js-trigger-remove-participant' /}
+        {/call}
+        <span class="cv-sd-status js-status"></span>
+    </div>
+{/template}
+
+/**
+* Render a request action item
+* @param item
+*/
+{template .requestActionItem}
+    <a href="{$item.href}" id="{$item.key}"
+    {if $item.params}
+        data-params="{toJson($item.params)}"
+    {/if}
+    {if $item.styleClass}
+        class="{$item.styleClass}"
+    {/if}>
+        {if $item.params}
+            {if $item.params.iconUrl}
+                <span class="aui-icon cv-request-action-icon" style="background-image:url({$item.params.iconUrl});"></span>
+            {elseif $item.params.iconClass}
+                {call aui.icons.icon}
+                    {param icon: $item.params.iconClass /}
+                    {param useIconFont: true /}
+                    {param size: 'small' /}
+                    {param extraClasses}
+                        cv-request-action-icon
+                    {/param}
+                {/call}
+            {/if}
+        {/if}
+        {$item.label}
+    </a>
+{/template}
+
+

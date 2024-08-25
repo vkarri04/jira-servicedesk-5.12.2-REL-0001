@@ -1,0 +1,53 @@
+{namespace ServiceDesk.Templates.Shared.Components.SearchProviders}
+
+/**
+ * @param kbArticles
+ * @param isCloud
+ * @param? openInConfluence
+ * @param? hidePortalName
+ */
+{template .kbSearchProviderResults}
+    {if $kbArticles and length($kbArticles) > 0}
+        <div class="cv-smart-portal-sub-header">
+            {getText('sd.customerview.smart.portal.kb.results.intro')}
+        </div>
+        <ul class="cv-smart-portal-results">
+            {foreach $kbArticle in $kbArticles}
+                {let $titleHtml: $kbArticle.title /}
+                <li class="cv-smart-portal-kb-result js-cv-smart-portal-kb-result">
+                    <div class="cv-smart-portal-kb-header">
+                        <a
+                            title="{$titleHtml |noAutoescape}"
+                            aria-label="{$titleHtml |noAutoescape}"
+                            href="{if $openInConfluence}{$kbArticle.url}{else}{$kbArticle.kbPageUrl}{/if}"
+                            class="js-cv-smart-portal-kb-article cv-smart-portal-kb-article"
+                            {if $openInConfluence}target="_blank"{/if}
+                        >
+                            <span class="cv-smart-portal-kb-article-name">
+                                {$kbArticle.titleHighlightedHtml |noAutoescape}
+                            </span>
+                            {if $openInConfluence}
+                                {sp}
+                                {call aui.icons.icon}
+                                    {param useIconFont: true /}
+                                    {param icon: 'shortcut' /}
+                                    {param extraClasses: 'cv-shortcut-icon' /}
+                                {/call}
+                            {/if}
+                        </a>
+                        {if not $hidePortalName}
+                            <span title="{$kbArticle.portalName}" class="cv-smart-portal-kb-portal-name">
+                                {$kbArticle.portalName}
+                            </span>
+                        {/if}
+                    </div>
+                    <div class="cv-smart-portal-kb-description">{$kbArticle.bodyHighlightedHtml |noAutoescape}</div>
+                </li>
+            {/foreach}
+        </ul>
+        {if not $isCloud}<div class="cv-pagination-container"></div>{/if}
+        {call ServiceDesk.Templates.Shared.Components.spinnerWithCover}
+            {param size: 'large' /}
+        {/call}
+    {/if}
+{/template}

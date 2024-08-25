@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<atlassian-plugin key="com.atlassian.servicedesk" name="${project.name}" plugins-version="2">
+
+    <rest key="servicedesk-rest-resource" path="/servicedesk" version="1">
+        <description>The Rest Resource Plugin for Service Desk</description>
+        <package>com.atlassian.servicedesk.rest</package>
+        <package>com.atlassian.servicedesk.internal.rest</package>
+
+        <!--In order to allow REST calls to be intercepted your MUST include a FORWARD call here-->
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </rest>
+
+    <rest key="servicedesk-rest-resource-noeyeball" path="/servicedesk/noeyeball" version="1">
+        <description>The rest resources that don't trigger Eyeball events (MAU).</description>
+
+        <package>com.atlassian.servicedesk.internal.rest.noeyeball</package>
+        <!--In order to allow REST calls to be intercepted your MUST include a FORWARD call here-->
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </rest>
+
+    <rest key="servicedesk-rest-resource-always" path="/servicedesk/always" version="1">
+        <description>The Always Rest Resource Plugin for Service Desk</description>
+
+        <package>com.atlassian.servicedesk.internal.rest.always</package>
+        <!--In order to allow REST calls to be intercepted your MUST include a FORWARD call here-->
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </rest>
+
+    <rest key="servicedesk-rest-resource-admin" path="/servicedesk/admin" version="1">
+        <description>The rest resource for the global administration page.</description>
+
+        <package>com.atlassian.servicedesk.internal.rest.admin</package>
+        <!--In order to allow REST calls to be intercepted your MUST include a FORWARD call here-->
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </rest>
+
+</atlassian-plugin>

@@ -1,0 +1,70 @@
+{namespace ServiceDesk.Templates.Customer.Common.Request}
+
+/**
+ * Request type list in the customer portal
+ * @param requestTypes
+ * @param contextPath
+ * @param? hidePortalName
+ * @param? additionalClasses a list of additional classes as a string to add to the ul element
+ * @param? includeGroupTagTargets Includes a target element on list items that group tags will be rendered into
+ */
+{template .requestTypeList}
+    <ul class="cv-smart-portal-request-type-list{if $additionalClasses}{sp}{$additionalClasses}{/if}"
+        data-hasGroupTags="{if $includeGroupTagTargets}true{else}false{/if}">
+        {foreach $requestType in $requestTypes}
+            {call .requestTypeItem}
+                {param hidePortalName: $hidePortalName /}
+                {param requestType: $requestType /}
+                {param contextPath: $contextPath /}
+                {param includeGroupTagTargets: $includeGroupTagTargets /}
+            {/call}
+        {/foreach}
+    </ul>
+{/template}
+
+/**
+ * An individual request type item that form part of the request type list.
+ * @param contextPath the context path
+ * @param requestType the request type that is to be rendered
+ * @param? hidePortalName whether to hide the portal name
+ * @param? includeGroupTagTargets Includes a target element on list item that group tags will be rendered into
+ */
+{template .requestTypeItem}
+    {let $portalUrl}
+        {$contextPath}/servicedesk/customer/portal/{$requestType.cvId}
+    {/let}
+
+    <li class="cv-smart-portal-request-type-list-item js-smart-portal-request-type-list-item">
+        {call ServiceDesk.Templates.Components.RequestTypeIcons.icon}
+            {param iconId: $requestType.icon ?: 0 /}
+            {param useCustomerShim: true /}
+            {param alt: $requestType.name /}
+        {/call}
+        <div class="cv-smart-portal-request-type-list-content">
+            <div class="cv-smart-portal-request-type-list-header">
+                <a class="cv-smart-portal-request-type-name js-cv-smart-portal-request-type-name"
+                   href="{$requestType.createUrl}" data-id="{$requestType.id}" data-portal-id="{$requestType.cvId}">
+                    {$requestType.name}
+                </a>
+                {if not $hidePortalName}
+                    <span class="cv-smart-portal-request-type-separator"></span>
+                    <a class="cv-smart-portal-request-type-portal-name js-cv-smart-portal-request-type-portal-name"
+                       data-id="{$requestType.id}" data-portal-id="{$requestType.cvId}" href="{$portalUrl}">
+                        {$requestType.portalName}
+                    </a>
+                {/if}
+            </div>
+
+            <div class="cv-smart-portal-request-type-description{if $requestType.descriptionContent == ''} empty{/if}">
+                {if $requestType.descriptionContent == ''}
+                    {getText('sd.customerview.smart.portal.request.types.result.empty.description')}
+                {else}
+                    {$requestType.descriptionContent|noAutoescape}
+                {/if}
+            </div>
+            {if $includeGroupTagTargets}
+                <div class="cv-smart-portal-request-type-groups-container" id="cv-smart-portal-request-groups-target-{$requestType.id}"></div>
+            {/if}
+        </div>
+    </li>
+{/template}

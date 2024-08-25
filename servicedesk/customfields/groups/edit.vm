@@ -1,0 +1,27 @@
+#disable_html_escaping()
+<script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!custom_field_jsd-groups-field'));</script>
+
+#if($action.actionName == "BulkEdit")
+    #if ($isFieldEnabled)
+        #customControlHeader ($action $customField.id $i18n.getText($field.nameKey) $fieldLayoutItem.required $displayParameters $auiparams)
+            <select class="long-field hidden js-request-groups-field"
+                    id="${customField.id}"
+                    name="${customField.id}"
+                    data-project-id="$issue.projectObject.id"
+                    data-container-class="long-field"
+                    multiple="multiple"
+            >
+            </select>
+        #customControlFooter ($action $customField.id $fieldLayoutItem.getFieldDescription() $displayParameters $auiparams)
+    #end
+#else
+    #if ($isFieldEnabled)
+        #customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
+            <select class="js-request-groups-field" multiple="multiple" id="$customField.id" name="$customField.id" data-project-id="$projectId">
+                #foreach ($group in $value)
+                    <option selected="selected" value="$textutils.htmlEncode($group)">$textutils.htmlEncode($group)</option>
+                #end
+            </select>
+        #customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)
+    #end
+#end

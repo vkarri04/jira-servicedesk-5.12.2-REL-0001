@@ -1,0 +1,25 @@
+{namespace ServiceDesk.Templates.Customer}
+/**
+ * The sections which shows next and previous articles.
+ * @param previousArticle
+ * @param nextArticle
+ */
+{template .nextPreviousResult}
+    <a href="{$previousArticle.url}" class="kb-previous-article {if not $previousArticle.url} hidden-but-occupy-space {/if}">
+        {call SOY_REACT_BRIDGE_AUIIcon}
+            {param size: 'large' /}
+            {param type:  'chevron-left' /}
+            {param accessibilityText: getText('sd.customerview.kb.portal.previous.article') /}
+        {/call}
+        <div class="title">{$previousArticle.titleHtml|noAutoescape}</div>
+    </a>
+
+    <a href="{$nextArticle.url}" class="kb-next-article {if not $nextArticle.url} hidden-but-occupy-space {/if}">
+        <div class="title">{$nextArticle.titleHtml|noAutoescape}</div>
+        {call SOY_REACT_BRIDGE_AUIIcon}
+            {param size: 'large' /}
+            {param type:  'chevron-right' /}
+            {param accessibilityText: getText('sd.customerview.kb.portal.next.article') /}
+        {/call}
+    </a>
+{/template}

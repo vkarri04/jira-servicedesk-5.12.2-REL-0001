@@ -1,0 +1,10 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* @param sdUserSignupUrl
+*/
+{template .signupHint}
+    <div class="create-account js-user-signup">
+        <a href="{$sdUserSignupUrl}" id="customer-signup-link">{getText('cv.login.pub.create.account')}</a>
+    </div>
+{/template}

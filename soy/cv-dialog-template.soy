@@ -1,0 +1,66 @@
+{namespace ServiceDesk.CP.CommentForApproval}
+
+/**
+ * Body for comment-for-approval dialog (on request view) on customer portal
+ *
+ * @param issueId
+ * @param action
+ * @param isApprovalAttachmentsFeatureEnabled
+ * @param canCreateAttachments
+ * @param maxAttachmentSize
+ * @param xsrfToken
+ */
+{template .dialogBody}
+    <div class="comment-for-approval-cv-dialog-content">
+    <header class="aui-dialog2-header">
+        <h1 class="aui-dialog2-header-main" id="comment-for-approval-cv-dialog--heading">
+            {if $action == 'approve'}
+                {getText('sd.comments.for.approval.dialog.title.approve')}
+            {else}
+                {getText('sd.comments.for.approval.dialog.title.decline')}
+            {/if}
+        </h1>
+    </header>
+    <div class="aui-dialog2-content">
+        <form id="comment-for-approval-form" action="#" method="post" class="aui top-label">
+            <div class="field-group">
+                <label for="comment-for-approval">
+                    {getText('sd.comments.for.approval.cp.dialog.comment.label')}
+                    <span class="aui-icon icon-required">{sp}{getText('sd.common.words.required')}</span>
+                </label>
+
+                <div class="cp-textarea-control">
+                    {call ServiceDesk.Templates.AtlaskitEditorSkeleton.loadingPanel /}
+                    <textarea class="textarea full-width-field" name="comment" id="comment-for-approval" placeholder="{getText('sd.approval.comment.required')}"></textarea>
+                </div>
+                {if $isApprovalAttachmentsFeatureEnabled and $canCreateAttachments}
+                    <div id="error-message-wrapper"></div>
+                    <div id="cv-approval-thumbnail-container" class="sd-thumbnail-container"></div>
+                    <div id="cv-approval-attachment-browse" class="comment-attachment">
+                        {call ServiceDesk.Util.Files.DragDrop.browseFiles}
+                            {param ariaLabelledBy: '' /}
+                        {/call}
+                    </div>
+                    <div class="hidden">
+                        <div id='attach-max-size' class="attach-max-size">{$maxAttachmentSize}</div>
+                        <input type="hidden" value="{$issueId}" name="id" />
+                        <input type="hidden" value="{$xsrfToken}" name="atl_token" />
+                    </div>
+                {/if}
+            </div>
+        </form>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary js-submit-button" disabled type="button">
+                {if $action == 'approve'}
+                    {getText('sd.workflow.approve')}
+                {else}
+                    {getText('sd.workflow.decline')}
+                {/if}
+            </button>
+            <button class="aui-button aui-button-link js-cancel-button" type="button">{getText('sd.form.cancel.text')}</button>
+        </div>
+    </footer>
+    </div>
+{/template}

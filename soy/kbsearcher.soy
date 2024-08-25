@@ -1,0 +1,70 @@
+{namespace ServiceDesk.Templates.KbSearcher}
+
+/**
+* @param results
+* @param isCloud
+* @param extendedFormat whether or not to show extra information with the results
+* @param? openInConfluence
+*/
+{template .connieSearchResults}
+    <h4 class="sd-kb-helper-title">
+        {getText('sd.customerview.kb.autocomplete.title')}
+        <button class="aui-close-button dialog-close-button sd-kb-suggestions-close" aria-label="{getText('sd.common.words.close')}"></button>
+    </h4>
+    <ol class="sd-kb-results-container">
+        {foreach $result in $results}
+            {call .connieSearchResult}
+                {param id: $result.id /}
+                {param title: $result.title /}
+                {param titleHighlightedHtml: $result.titleHighlightedHtml /}
+                {param bodyHighlightedHtml: $result.bodyHighlightedHtml /}
+                {param url: $openInConfluence ? $result.url : $result.kbPageUrl /}
+                {param extendedFormat: $extendedFormat /}
+                {param openInConfluence: $openInConfluence /}
+            {/call}
+        {/foreach}
+    </ol>
+    {if not $isCloud}<div class="cv-pagination-container"></div>{/if}
+    {call ServiceDesk.Templates.Shared.Components.spinnerWithCover}
+        {param size: 'large' /}
+    {/call}
+{/template}
+
+/**
+* @param id
+* @param title
+* @param titleHighlightedHtml
+* @param bodyHighlightedHtml
+* @param url
+* @param extendedFormat whether or not to show extra information with the results
+* @param openInConfluence
+*/
+{template .connieSearchResult}
+    {let $titleHtml: $title /}
+    <li class="sd-kb-search-results">
+        <a
+            title="{$titleHtml |noAutoescape}"
+            aria-label="{$titleHtml |noAutoescape}"
+            href="{$url}"
+            class="sd-kb-title"
+            data-page-id="{$id}"
+            target="_blank"
+        >
+            <span class="aui-icon aui-icon-small aui-iconfont-page-default sd-kb-icon"></span>
+            <span class="sd-kb-title-text">
+                {$titleHighlightedHtml |noAutoescape}
+            </span>
+            {if $openInConfluence}
+                {sp}
+                {call aui.icons.icon}
+                    {param useIconFont: true /}
+                    {param icon: 'shortcut' /}
+                    {param extraClasses: 'cv-shortcut-icon' /}
+                {/call}
+            {/if}
+        </a>
+        {if $extendedFormat}
+            <p class="sd-kb-snippet">{$bodyHighlightedHtml |noAutoescape}</p>
+        {/if}
+    </li>
+{/template}

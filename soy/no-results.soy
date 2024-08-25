@@ -1,0 +1,16 @@
+{namespace ServiceDesk.Templates.Shared.Components.Search}
+
+/**
+ * @param subtitle
+ */
+{template .noResults}
+    <div class="no-result-container">
+        <div class="no-result-icon"></div>
+        <h4 class="no-result-title" role="status" aria-live="polite">
+            {getText('sd.customerview.smart.portal.no.results.title')}
+        </h4>
+        <div class="no-result-subtitle">
+            {$subtitle}
+        </div>
+    </div>
+{/template}

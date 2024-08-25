@@ -1,0 +1,14 @@
+<script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!custom_field_jsd-request-type'));</script>
+#if ($isFieldEnabled && $value)
+    <div class="sd-customer-request-type-customfield-root" data-payload="$customField.customFieldType.getPayloadJSON($value)" data-is-column-view="true">
+        #set($displayValue =  $customField.customFieldType.getDisplayedValue($value))
+        <span style="white-space: nowrap;">
+                    #if ($displayValue.getIconId() && $req.contextPath)
+                        <img aria-hidden="true"
+                             style="width: 24px;height: 24px;vertical-align: middle;padding: 5px;box-sizing: border-box;"
+                             src="$req.contextPath/secure/viewavatar?avatarType=SD_REQTYPE&amp;avatarId=$displayValue.getIconId()" />
+                    #end
+                    $displayValue.getName()
+        </span>
+    </div>
+#end

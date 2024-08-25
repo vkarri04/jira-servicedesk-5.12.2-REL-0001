@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-project-permission description="Service project permission">
+
+    <project-permission key="SERVICEDESK_AGENT"
+                        i18n-name-key="sd.project.permission.agent.key"
+                        i18n-description-key="sd.project.permission.agent.description"
+                        category="PROJECTS"
+                        available-for-archived-entities="true">
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition"/>
+    </project-permission>
+
+</sd-project-permission>

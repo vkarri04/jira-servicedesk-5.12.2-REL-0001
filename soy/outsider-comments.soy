@@ -1,0 +1,55 @@
+{namespace ServiceDesk.Templates.Components.Outsider.Comments}
+
+/**
+ * @param canAddAuthorAsParticipant
+ * @param authorUsername
+ * @param? commentId
+ * @param? extraLozengeClasses
+ * @param? extraDialogClasses
+ * @param? hideStatus
+ */
+{template .shareRequestLozenge}
+    {let $inlineDialogId}
+        {if $commentId}
+            js-share-request-popup-{$commentId}-{randomInt(100000)}
+        {else}
+            js-share-request-popup-{randomInt(100000)}-{randomInt(100000)}
+        {/if}
+    {/let}
+
+    {let $renderedExtraLozengeClasses}
+        {call aui.renderExtraClasses}
+            {param extraClasses: $extraLozengeClasses /}
+        {/call}
+    {/let}
+
+    <span class="js-sd-no-access-lozenge {$renderedExtraLozengeClasses}" data-aui-trigger aria-controls="{$inlineDialogId}">
+        {call SOY_REACT_BRIDGE_AUILozenge}
+            {param subtle: true /}
+            {param type: 'inprogress' /}
+            {param message: getText('sd.request.details.activity.no.access') /}
+        {/call}
+    </span>
+
+    {if $canAddAuthorAsParticipant and $authorUsername}
+        {let $renderedExtraDialogClasses}
+            {call aui.renderExtraClasses}
+                {param extraClasses: $extraDialogClasses /}
+            {/call}
+        {/let}
+
+        <aui-inline-dialog id="{$inlineDialogId}" class="sd-share-request-to-outsider-inline-dialog {$renderedExtraDialogClasses}" responds-to="hover">
+            <div>
+                {call aui.buttons.button}
+                    {param text: getText('sd.request.details.activity.no.access.share') /}
+                    {param type: 'link' /}
+                    {param extraAttributes: $commentId ? ['data-username': $authorUsername, 'data-comment-id': $commentId] : ['data-username': $authorUsername] /}
+                    {param extraClasses: 'js-share-request-to-outsider-link' /}
+                {/call}
+                {if $hideStatus}
+                    <span class="cv-sd-status js-status"></span>
+                {/if}
+            </div>
+        </aui-inline-dialog>
+    {/if}
+{/template}

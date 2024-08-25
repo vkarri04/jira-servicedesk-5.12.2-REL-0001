@@ -1,0 +1,9 @@
+<sd-calendar-access description="Service project calendar access">
+
+    <!--================================
+        Working Hours Plugin SPI
+    =================================-->
+    <calendar-access key="servicedesk-calendar-access"
+                     class="com.atlassian.servicedesk.internal.sla.configuration.calendar.ServiceDeskCalendarAccess" />
+
+</sd-calendar-access>

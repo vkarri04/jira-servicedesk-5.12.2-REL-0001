@@ -1,0 +1,396 @@
+{namespace ServiceDesk.Templates.Customer.HelpCenterBranding}
+
+/**
+ * Help center branding page content
+ * @param announcement
+ * @param user
+ */
+{template .content}
+    {call aui.form.form}
+        {param action: '' /}
+        {param id: 'js-help-center-branding-submit' /}
+        {param extraClasses: 'cv-help-center-branding-form' /}
+        {param isTopLabels: true /}
+        {param isLongLabels: true /}
+        {param content}
+            {if $user.canAdministerJIRA and not $announcement.portalId}
+                <div class="js-header-option-container cv-header-option-container"></div>
+                {call aui.form.fieldset}
+                    {param legendContent: '' /}
+                    {param content}
+                        <div class="cv-front-page-title-container js-front-page-title-container"></div>
+                    {/param}
+                {/call}
+                {call aui.form.fieldset}
+                    {param legendContent: '' /}
+                    {param content}
+                        <div class="js-header-bar-color-container cv-header-color-container"></div>
+                    {/param}
+                {/call}
+            {elseif $announcement.canEditAnnouncement}
+                <div class="js-header-option-container cv-header-option-container"></div>
+            {/if}
+            <div class="cv-help-center-branding-buttons">
+                {call ServiceDesk.Templates.Shared.Form.submitButtons}
+                    {param submitButtonLabel: getText('sd.common.words.save.changes') /}
+                    {param submitExtraClasses: 'js-help-center-branding-submit-button' /}
+                    {param cancelButtonType: 'subtle' /}
+                    {param cancelExtraClasses: 'js-help-center-branding-cancel-button' /}
+                    {param cancelText: getText('sd.common.words.cancel') /}
+                {/call}
+            </div>
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * Help center branding header options
+ * @param? currentAnnouncementHeader the current announcement header, defaults to blank
+ * @param? currentAnnouncementMessage the current announcement message, defaults to blank
+ * @param? currentLoginAnnouncementHeader the current login announcement header, defaults to blank
+ * @param? currentLoginAnnouncementMessage the current login announcement message, defaults to blank
+ * @param? isHelpCenter the current login announcement header, defaults to blank
+ * @param? hasTranslationInUserLocale check if there is any translation available in current user locale
+ * @param? isAnnouncementPresent check if current announcement is present
+ * @param? isHelpCenterAnnouncementsImprovementsEnabled if data center feature flag enabled
+ */
+{template .headerOptions}
+    {if $isHelpCenterAnnouncementsImprovementsEnabled}
+        <div class="help-center-branding-modal"></div>
+        {call aui.form.fieldset}
+            {param legendContent: '' /}
+            {param content}
+                <h1 class="cv-help-center-branding-section-header"
+                    data-testid="header-title">{getText('sd.customerview.helpcenterbranding.title')}</h1>
+                <p data-testid="header-message">{getText('sd.customerview.helpcenterbranding.message')}&nbsp;
+                    <a href="{sdHelpUrl('help.center.branding.customization.learn')}"
+                       target="_blank"
+                       data-testid="help-center-link"
+                    >
+                        {getText('sd.customerview.helpcenterbranding.learn')}
+                    </a>
+                </p>
+                {if $hasTranslationInUserLocale}
+                    {call aui.message.warning}
+                        {param titleContent}
+                            <span data-testid="has-translation-in-user-locale-warning-title">{getText('sd.customerview.helpcenterbranding.warning.hasTranslationInUserLocale.title')}</span>
+                        {/param}
+                        {param content}
+                            <span data-testid="has-translation-in-user-locale-warning-message">
+                                {getText('sd.customerview.helpcenterbranding.warning.hasTranslationInUserLocale.message')}
+                            </span>
+                            <p>
+                                <a href="{sdHelpUrl('help.center.branding.customization.learn')}"
+                                   target="_blank"
+                                   data-testid="help-center-link"
+                                >
+                                    {getText('sd.customerview.helpcenterbranding.learn')}
+                                </a>
+                            </p>
+                        {/param}
+                    {/call}
+                {elseif $isAnnouncementPresent}
+                    {call aui.message.warning}
+                        {param titleContent}
+                            <span data-testid="non-empty-announcement-warning-title">{getText('sd.customerview.helpcenterbranding.warning.editNonEmptyAnnouncement.title')}</span>
+                        {/param}
+                        {param content}
+                            <span data-testid="non-empty-announcement-warning-message">
+                                {getText('sd.customerview.helpcenterbranding.warning.editNonEmptyAnnouncement.message')}
+                            </span>
+                            <p>
+                                <a href="{sdHelpUrl('help.center.branding.customization.learn')}"
+                                   target="_blank"
+                                   data-testid="help-center-link"
+                                >
+                                    {getText('sd.customerview.helpcenterbranding.learn')}
+                                </a>
+                            </p>
+                        {/param}
+                    {/call}
+                {/if}
+            {/param}
+        {/call}
+    {/if}
+    {if $hasTranslationInUserLocale and $isHelpCenterAnnouncementsImprovementsEnabled}
+        <div class="field-display-set">
+            <h3 class="cv-help-center-branding-section-header">{getText('sd.customerview.helpcenterbranding.portalcontentareaoptions.headeroptions.announcement.title')}</h3>
+            <div class="field-group">
+                <div class="field-display-label">
+                    {getText('sd.customerview.helpcenterbranding.portalcontentareaoptions.headeroptions.announcement.header.label')}
+                </div>
+                <div data-testid="announcement-header-display">{$currentAnnouncementHeader}</div>
+            </div>
+            <div class="field-group">
+                <div class="field-display-label">
+                    {getText('sd.customerview.helpcenterbranding.portalcontentareaoptions.headeroptions.announcement.message.label')}
+                </div>
+                <div data-testid="announcement-message-display">{$currentAnnouncementMessage}</div>
+            </div>
+        </div>
+    {else}
+        {call aui.form.fieldset}
+            {param legendContent: '' /}
+            {param content}
+                <h3 class="cv-help-center-branding-section-header">{getText('sd.customerview.helpcenterbranding.portalcontentareaoptions.headeroptions.announcement.title')}</h3>
+                <div class="field-group">
+                    <label for="help-center-header-option-announcement-header">{getText('sd.customerview.helpcenterbranding.portalcontentareaoptions.headeroptions.announcement.header.label')}</label>
+                    <input id="help-center-header-option-announcement-header" class="text full-width-field" type="text"
+                           data-testid="announcement-header-input"
+                           name="announcementHeader"
+                           value="{$currentAnnouncementHeader}"
+                           placeholder="{getText('sd.customerview.helpcenterbranding.portalcontentareaoptions.headeroptions.announcement.placeholder')}">
+                </div>
+                <div class="field-group">
+                    <label
+                            for="help-center-header-option-announcement-message"
+                            id="help-center-header-option-announcement-message-label">
+                        {getText('sd.customerview.helpcenterbranding.portalcontentareaoptions.headeroptions.announcement.message.label')}
+                    </label>
+                    <textarea
+                            data-testid="announcement-message-input"
+                            class="textarea full-width-field"
+                            name="announcementMessage"
+                            id="help-center-header-option-announcement-message"
+                            aria-labelledby="help-center-header-option-announcement-message-label help-center-header-option-announcement-message-helper">
+                        {$currentAnnouncementMessage}
+                    </textarea>
+                    <div class="description" id="help-center-header-option-announcement-message-helper">
+                        {getText('sd.admin.standard.linkshelp.text.intro')}{sp}{getText('sd.admin.standard.linkshelp.text.example.helpcenter')}
+                    </div>
+                </div>
+            {/param}
+        {/call}
+    {/if}
+    {if $isHelpCenter}
+        {if $hasTranslationInUserLocale and $isHelpCenterAnnouncementsImprovementsEnabled}
+            <div class="field-display-set">
+                <h3 class="cv-help-center-branding-section-header">{getText('sd.customerview.helpcenterbranding.loginannouncement.title')}</h3>
+                <div class="field-group">
+                    <div class="field-display-label">
+                        {getText('sd.customerview.helpcenterbranding.loginannouncement.header.label')}
+                    </div>
+                    <div data-testid="login-header-display">{$currentLoginAnnouncementHeader}</div>
+                </div>
+                <div class="field-group">
+                    <div class="field-display-label">
+                        {getText('sd.customerview.helpcenterbranding.loginannouncement.message.label')}
+                    </div>
+                    <div data-testid="login-message-display">{$currentLoginAnnouncementMessage}</div>
+                </div>
+            </div>
+        {else}
+            {call aui.form.fieldset}
+                {param legendContent: '' /}
+                {param extraClasses: 'login-announcement' /}
+                {param content}
+                    <h3 class="cv-help-center-branding-section-header">{getText('sd.customerview.helpcenterbranding.loginannouncement.title')}</h3>
+                    <div class="field-group">
+                        <label for="help-center-login-announcement-header">{getText('sd.customerview.helpcenterbranding.loginannouncement.header.label')}</label>
+                        <input data-testid="login-header-input" id="help-center-login-announcement-header"
+                               class="text full-width-field" type="text"
+                               name="loginAnnouncementHeader"
+                               value="{$currentLoginAnnouncementHeader}"
+                               placeholder="{getText('sd.customerview.helpcenterbranding.loginannouncement.header.placeholder')}">
+                    </div>
+                    <div class="field-group">
+                        <label
+                                for="help-center-login-announcement-message"
+                                id="help-center-login-announcement-message-label">
+                            {getText('sd.customerview.helpcenterbranding.loginannouncement.message.label')}
+                        </label>
+                        <textarea
+                                data-testid="login-message-input"
+                                class="textarea full-width-field"
+                                name="loginAnnouncementMessage"
+                                id="help-center-login-announcement-message"
+                                aria-labelledby="help-center-login-announcement-message-label help-center-login-announcement-message-helper">
+                            {$currentLoginAnnouncementMessage}
+                        </textarea>
+                        <div class="description" id="help-center-login-announcement-message-helper">
+                            {getText('sd.admin.standard.linkshelp.text.intro')}{sp}{getText('sd.admin.standard.linkshelp.text.example.helpcenter')}
+                        </div>
+                    </div>
+                {/param}
+            {/call}
+        {/if}
+    {/if}
+{/template}
+
+/**
+ * Help center page title editing view in sidepanel.
+ * @param helpCenterTitle
+ * @param helpCenterName the current name of the help center, defaults to 'Help Center'
+ */
+{template .frontPageTitle}
+    <h3 class="cv-help-center-branding-section-header">{getText('sd.customerview.helpcenterbranding.customizing.title')}</h3>
+    {call aui.form.fieldGroup}
+        {param content}
+            {call aui.form.label}
+                {param content: getText('sd.customerview.helpcenterbranding.portalcontentareaoptions.headeroptions.display.text.only.label') /}
+                {param forField: 'help-center-header-option-text-only-text' /}
+                {param isRequired: false /}
+                {param id: 'help-center-header-option-text-only-text-label' /}
+            {/call}
+            {call aui.form.input}
+                {param type: 'text' /}
+                {param id: 'help-center-header-option-text-only-text' /}
+                {param name: 'sharedPortalName' /}
+                {param extraAttributes: [
+                    'data-aui-form-notification-position': 'bottom',
+                    'data-aui-validation-field': '',
+                    'data-aui-validation-when': 'input',
+                    'data-aui-validation-trimminlength': 1,
+                    'data-aui-validation-trimmaxlength': 30,
+                    'aria-labelledby': 'help-center-header-option-text-only-text-label help-center-header-option-text-only-text-helper',
+                ] /}
+                {param value: $helpCenterName /}
+                {param extraClasses: ['js-help-center-name-input', 'full-width-field'] /}
+            {/call}
+            <div class="description" id="help-center-header-option-text-only-text-helper">
+                ({getText('sd.customerview.helpcenterbranding.portalcontentareaoptions.headeroptions.display.text.only.desc')})
+            </div>
+        {/param}
+    {/call}
+    {call aui.form.fieldGroup}
+        {param content}
+            {call aui.form.label}
+                {param content: getText('sd.customerview.helpcenterbranding.frontpagetitle.title') /}
+                {param forField: 'cv-front-page-title' /}
+                {param isRequired: false /}
+            {/call}
+            {call aui.form.input}
+                {param type: 'text' /}
+                {param id: 'cv-front-page-title' /}
+                {param name: 'helpCenterTitle' /}
+                {param extraAttributes: [
+                    'data-aui-form-notification-position': 'bottom',
+                    'data-aui-validation-field': '',
+                    'data-aui-validation-when': 'input',
+                    'data-aui-validation-trimminlength': 1,
+                    'data-aui-validation-trimmaxlength': 100
+                ] /}
+                {param value: $helpCenterTitle /}
+                {param extraClasses: ['cv-front-page-title-input', 'js-front-page-title-input', 'full-width-field'] /}
+            {/call}
+        {/param}
+    {/call}
+{/template}
+
+/**
+* Help Center Branding Header Bar Color Picker Area
+* @param? headerBGColor
+* @param? headerLinkColor
+* @param? headerLinkHoverColor
+* @param? headerLinkHoverBGColor
+* @param? bannerUrl
+* @param? logoUrl
+*/
+{template .headerBarColor}
+    <h3 class="cv-help-center-branding-section-header">{getText('sd.customerview.helpcenterbranding.customizeappearance.title')}</h3>
+    <div class="field-group help-center-header-option-logo-container">
+        <label>{getText('sd.customerview.helpcenterbranding.portalcontentareaoptions.headeroptions.upload.logo.label')}</label>
+        {if $logoUrl}
+            <img class="cv-logo-preview" src="{$logoUrl}"/>
+        {/if}
+        <div class="js-help-center-header-option-logo cv-help-center-header-option-logo">
+            {call aui.buttons.button}
+                {param extraAttributes: ['type': 'button'] /}
+                {param extraClasses: $logoUrl ? ['js-choose-logo', 'aui-button-link'] : 'js-choose-logo' /}
+                {param text}
+                    {$logoUrl ? getText('sd.admin.details.logo.change') : '+'}
+                {/param}
+            {/call}
+            {if $logoUrl}
+                {call aui.buttons.button}
+                    {param extraAttributes: ['type': 'button'] /}
+                    {param extraClasses: ['js-remove-logo', 'aui-button-link'] /}
+                    {param text}
+                        {getText('sd.admin.details.logo.remove')}
+                    {/param}
+                {/call}
+            {/if}
+            <input type="hidden" name="logoDataURI" class="js-logo-data-uri">
+        </div>
+        {if $logoUrl}
+            <div class="cv-hc-branding-generate-color-container">
+                <button id="help-center-header-option-generate-color" type="button"
+                        class="aui-button">{getText('sd.customerview.helpcenterbranding.logo.generate.color')}</button>
+            </div>
+        {/if}
+    </div>
+
+    <div class="field-group help-center-header-option-banner-container">
+        <label>{getText('sd.customerview.helpcenterbranding.portalcontentareaoptions.headeroptions.upload.banner.label')}</label>
+        {if $bannerUrl}
+            <img class="cv-banner-preview" src="{$bannerUrl}"/>
+        {/if}
+        <div class="js-help-center-header-option-banner cv-help-center-header-option-banner">
+            <input type="file" class="banner-upload-field" accept="image/{'*'}"/>
+            {call aui.buttons.button}
+                {param extraAttributes: ['type': 'button'] /}
+                {param extraClasses: 'banner-upload-field-replacement js-choose-banner' + ($bannerUrl ? ' aui-button-link' : '') /}
+                {param text}
+                    {$bannerUrl ? getText('sd.admin.details.banner.change') : '+'}
+                {/param}
+            {/call}
+            {if $bannerUrl}
+                {call aui.buttons.button}
+                    {param extraAttributes: ['type': 'button'] /}
+                    {param extraClasses: ['js-remove-banner', 'aui-button-link'] /}
+                    {param text}
+                        {getText('sd.admin.details.banner.remove')}
+                    {/param}
+                {/call}
+            {/if}
+        </div>
+    </div>
+
+    <div class="cv-help-center-color-picker field-group">
+        <label for="help-center-header-bg-color-picker">
+            {getText('sd.customerview.helpcenterbranding.color.banner.bg')}
+        </label>
+        <sd-color-picker id="help-center-header-bg-color-picker" class="help-center-header-color-picker sd-color-picker"
+                         name="headerBGColor" value="{$headerBGColor}"></sd-color-picker>
+    </div>
+
+    <div class="cv-help-center-color-picker field-group">
+        <label for="help-center-header-link-color-picker">
+            {getText('sd.customerview.helpcenterbranding.color.banner.text')}
+        </label>
+        <sd-color-picker id="help-center-header-link-color-picker"
+                         class="help-center-header-color-picker sd-color-picker" name="headerLinkColor"
+                         value="{$headerLinkColor}"></sd-color-picker>
+    </div>
+
+    <div class="cv-help-center-color-picker field-group">
+        <label for="help-center-link-hover-bg-color-picker">
+            {getText('sd.customerview.helpcenterbranding.color.button.bg')}
+        </label>
+        <sd-color-picker id="help-center-link-hover-bg-color-picker"
+                         class="help-center-header-color-picker sd-color-picker" name="headerLinkHoverBGColor"
+                         value="{$headerLinkHoverBGColor}"></sd-color-picker>
+    </div>
+
+    <div class="cv-help-center-color-picker field-group">
+        <label for="help-center-link-hover-color-picker">
+            {getText('sd.customerview.helpcenterbranding.color.button.text')}
+        </label>
+        <sd-color-picker id="help-center-link-hover-color-picker"
+                         class="help-center-header-color-picker sd-color-picker" name="headerLinkHoverColor"
+                         value="{$headerLinkHoverColor}"></sd-color-picker>
+    </div>
+{/template}
+
+/**
+ * Render flag message when field is cleared
+ * @param body
+ */
+{template .flagMessageClearField}
+    <p>
+        {$body}
+    </p>
+    <button type="button" class="aui-button aui-button-link help-center-branding-flag-dismiss-link">
+        {getText('sd.common.words.got.it')}
+    </button>
+{/template}

@@ -1,0 +1,19 @@
+## We do not want to preload the script when we are in textOnly mode
+#if (!$textOnly)
+    <script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!custom_field_jsd-groups-field'));</script>
+    <div id="groups-cf-chaperone-val-target"></div>
+#end
+
+#if (!$value.isEmpty())
+    #if ($textOnly)
+        #foreach($group in $value)$textutils.htmlEncode($group.name)#commaonly($value)#end
+    #else
+        <div class="shorten" id="${customField.id}-field">
+            <sd-groups-list data-groups="$groupsJson">
+                ## I am rendered by sd-groups-list.js
+            </sd-groups-list>
+        </div>
+    #end
+#else
+    $i18n.getText('sd.common.words.none')
+#end

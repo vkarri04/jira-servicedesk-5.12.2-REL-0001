@@ -1,0 +1,23 @@
+{namespace ServiceDesk.Templates.Customer.SmartPortal}
+
+/**
+ * Smart portal browse container
+ * @param hasRecentRequestTypes
+ */
+{template .browse}
+    <div class="cv-browse-container js-cv-browse-container">
+        {if isFeatureFlagEnabled('sd.customerportal.card.view')}
+            <div class="cv-help-center-main-content">
+                <div class="cv-portal-cards-container"></div>
+                <div class="cv-recent-request-type-list-container"></div>
+            </div>
+        {else}
+            <div class="aui-group">
+                <div class="aui-item cv-popular-portals-list-container"></div>
+                {if $hasRecentRequestTypes}
+                    <div class="aui-item cv-recent-request-type-list-container"></div>
+                {/if}
+            </div>
+        {/if}
+    </div>
+{/template}

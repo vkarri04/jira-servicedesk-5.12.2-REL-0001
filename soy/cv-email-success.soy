@@ -1,0 +1,17 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+ * @param pageTitle
+ * @param messageTitle
+ * @param messageDescription
+ */
+{template .emailSentSuccess}
+    <h1>{$pageTitle}</h1>
+    {call aui.message.success}
+        {param titleContent: $messageTitle /}
+        {param content}
+            <p>{$messageDescription}</p>
+        {/param}
+    {/call}
+{/template}
+

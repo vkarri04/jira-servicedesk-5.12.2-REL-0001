@@ -1,0 +1,43 @@
+{namespace ServiceDesk.Templates.Shared.Precondition}
+
+/**
+ * Displays an alert summary banner
+ * @param isMajor
+ */
+{template .alertSummary}
+{if $isMajor}
+    <div class="aui-message aui-message-error">
+        <p>{getText('sd.agent.alert.notifier.error.title')}</p>
+        <p><a href="#">{getText('sd.agent.alert.notifier.error.link.text')}</a></p>
+    </div>
+{else}
+    <div class="aui-message aui-message-warning">
+        <p>{getText('sd.agent.alert.notifier.warning.title')}</p>
+        <p><a href="#">{getText('sd.agent.alert.notifier.warning.link.text')}</a></p>
+    </div>
+{/if}
+{/template}
+
+/**
+ * Renders an alert with a ribbon (red or yellow) on the left
+ * @param isMajor
+ * @param summary
+ * @param alertId
+ */
+{template .alertBox}
+<div class="sd-alert">
+    {if $isMajor}
+        <div class="sd-alert-ribbon-error">
+            <div class="aui-icon aui-icon-small aui-iconfont-error sd-alert-icon-error"></div>
+        </div>
+    {else}
+        <div class="sd-alert-ribbon-warning">
+            <div class="aui-icon aui-icon-small aui-iconfont-warning sd-alert-icon-warning"></div>
+        </div>
+    {/if}
+    <div class="sd-alert-content">
+        <p><strong>{$summary}</strong></p>
+        <div id="{$alertId}"></div>
+    </div>
+</div>
+{/template}

@@ -1,0 +1,59 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+ * Create comment form
+ *
+ * !!!IMPORTANT: Ensure to have dependency on auiplugin-soy as long as ServiceDesk.Util.Files.DragDrop.browseFiles is used and has a aui dependency!!!
+ *
+ * @param reqDetails
+ * @param user
+ * @param env
+ */
+{template .requestComment}
+    <div class="aui-avatar aui-avatar-medium">
+        <div class="aui-avatar-inner">
+            <img src="{$user.avatars.large}"{if $user.userName} alt="{$user.userName}"{/if} />
+        </div>
+    </div>
+    <form action="#" method="post" class="vp-form aui js-request-comment-form">
+        <div class="form-body">
+            <label for="comment-on-request" class="assistive">{getText('sd.request.details.add.comment.placeholder')}</label>
+
+
+            <div class="cp-textarea-control" id="comment-textarea-control">
+                {call ServiceDesk.Templates.AtlaskitEditorSkeleton.loadingPanel}
+                {/call}
+                <textarea aria-description="{getText('sd.request.details.add.comment.editor.activation')}" rows="1" cols="20" class="textarea full-width-field" id="comment-on-request" name="comment" placeholder="{getText('sd.request.details.add.comment.placeholder')}"></textarea>
+            </div>
+
+
+            {if $reqDetails.canCreateAttachments}
+                {call aui.icons.icon}
+                    {param icon: 'attachment' /}
+                    {param useIconFont: true /}
+                    {param size: 'small' /}
+                    {param extraClasses}
+                        js-comment-attachment-hint comment-attachment-browse
+                    {/param}
+                {/call}
+            {/if}
+        </div>
+        <div class="sd-thumbnail-container"></div>
+        <div class="buttons">
+            <button class="aui-button aui-button-primary" type="submit">{getText('sd.request.details.add.comment.button')}</button>
+            <button class="aui-button aui-button-link js-trigger-cancel">{getText('sd.form.cancel.text')}</button>
+            {if $reqDetails.canCreateAttachments}
+                <div class="comment-attachment">
+                    {call ServiceDesk.Util.Files.DragDrop.browseFiles}
+                        {param ariaLabelledBy: '' /}
+                    {/call}
+                    <div id='attach-max-size' class="hidden">{$env.maxAttachmentSize}</div>
+                </div>
+            {/if}
+            <div class="hidden">
+                <input type="hidden" value="{$reqDetails.issue.id}" name="id" />
+                <input type="hidden" value="{$env.xsrfToken}" name="atl_token" />
+            </div>
+        </div>
+    </form>
+{/template}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-project-admin description="Service project admin section">
+
+    <!--================================
+        PROJECT ADMIN SECTIONs + LINKs
+    =================================-->
+
+    <web-section
+            key="ws-servicedesk-setting-section"
+            location="atl.jira.proj.config"
+            weight="15">
+        <condition class="com.atlassian.servicedesk.internal.conditions.CanEnableAndDisableServiceDeskCondition" />
+    </web-section>
+
+    <sitemesh key="project-admin-sitemesh" path="/servicedesk/admin"/>
+
+</sd-project-admin>

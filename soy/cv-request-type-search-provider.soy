@@ -1,0 +1,26 @@
+{namespace ServiceDesk.Templates.Shared.Components.SearchProviders}
+
+/**
+ * @param requestTypes
+ * @param contextPath
+ * @param isFirstResultSet
+ * @param? hidePortalName
+ * @param? includeGroupTagTargets Includes a target element on list items that group tags will be rendered into
+ */
+{template .requestTypeSearchProviderResults}
+    {if $requestTypes and length($requestTypes) > 0}
+        {if $isFirstResultSet == false}
+            <div class="cv-smart-portal-sub-header">
+                {getText('sd.customerview.smart.portal.request.types.suggestion')}
+            </div>
+        {/if}
+
+        {call ServiceDesk.Templates.Customer.Common.Request.requestTypeList}
+            {param hidePortalName: $hidePortalName /}
+            {param requestTypes: $requestTypes /}
+            {param contextPath: $contextPath /}
+            {param additionalClasses: 'cv-smart-portal-results' /}
+            {param includeGroupTagTargets: $includeGroupTagTargets /}
+        {/call}
+    {/if}
+{/template}

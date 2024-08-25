@@ -1,0 +1,396 @@
+{namespace ServiceDesk.Templates.Conversational.Customer}
+
+/* TEMPLATES FOR AGENT INVITE CUSTOMER EMAIL */
+
+/**
+ * render Agent Invite Customer template
+ */
+{template .agentInviteCustomer}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate data="all"}
+        {param content}
+            {call .renderAgentInviteCustomer data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * render Agent Invite Customer plain text version
+ */
+{template .agentInviteCustomer_text}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate_text data="all"}
+        {param content}
+            {call .renderAgentInviteCustomer_text data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * render HTML for password reset
+ */
+{template .resetPassword}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate data="all"}
+        {param content}
+            {call .resetPasswordContent data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * render plain text for password reset
+ */
+{template .resetPassword_text}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate_text data="all"}
+        {param content}
+            {call .resetPasswordContent_text data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * render HTML version of Reset Password
+ * @param user
+ * @param link
+ */
+{template .resetPasswordContent}
+    <p>
+        {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+            {param user:$user/}
+        {/call}
+    </p>
+        <p class="email-body">
+        {getText('sd.email.conversational.notification.reset.password.content')|changeNewlineToBr}
+        <br/><br/>
+        <span class="jsd-notification-buttons">
+            <span class="jsd-stretcher-glue">
+                <span class="jsd-stretcher-proper"></span>
+                <a href="{$link}" class="jsd-notification-button jsd-primary-button" target="_blank">
+                    {getText('sd.email.conversational.notification.reset.password.button.text')}
+                </a>
+                <span class="jsd-stretcher-proper"></span>
+            </span>
+        </span>
+    </p>
+{/template}
+
+/**
+ * render plain text version of Reset Password
+ * @param user
+ * @param link
+ */
+{template .resetPasswordContent_text}
+        {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+            {param user:$user/}
+        {/call}{\n}
+        {\n}
+        {getText('sd.email.conversational.notification.reset.password.content')}{\n}
+        {\n}
+        {$link}
+{/template}
+
+/**
+ * render Agent Invite Customer content
+ * @param agent
+ * @param user
+ * @param portalName
+ * @param invitationLink
+ * @param clientURI
+ */
+{template .renderAgentInviteCustomer}
+    <p>
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user: $user/}
+    {/call}
+    </p>
+    <p class="email-body">
+        {getText('sd.email.conversational.notification.agent.invite.customer.description', $agent.displayName, $portalName)}<br/>
+        <a class="blue-link-underline" href="{$clientURI}{$invitationLink}">{getText('sd.email.conversational.notification.agent.invite.customer.visit')}</a>{sp}
+        {getText('sd.email.conversational.notification.agent.invite.customer.raise.request')}
+    </p>
+{/template}
+
+/**
+ * render plain text version of Agent Invite Customer content
+ * @param agent
+ * @param user
+ * @param portalName
+ * @param invitationLink
+ * @param clientURI
+ */
+{template .renderAgentInviteCustomer_text}
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user:$user/}
+    {/call}{\n}
+    {\n}
+    {getText('sd.email.conversational.notification.agent.invite.customer.description', $agent.displayName, $portalName)}
+    {\n}
+    {getText('sd.email.conversational.notification.agent.invite.customer.visit')}{sp}
+    {getText('sd.email.conversational.notification.agent.invite.customer.raise.request')}{\n}
+    {\n}
+    {$clientURI}{$invitationLink}{\n}
+{/template}
+
+/**
+ * CUSTOMER INVITATION WHEN NEW USER CREATE A REQUEST VIA EMAIL CHANNEL
+ */
+/**
+ * HTML template for Invitation via Email Channel
+ */
+{template .invitationViaEmailChannel}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate data="all"}
+        {param content}
+            {call .renderInvitationViaEmailChannel data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * Text template for Invitation via Email Channel
+ */
+{template .invitationViaEmailChannel_text}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate_text data="all"}
+        {param content}
+            {call .renderInvitationViaEmailChannel_text data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * @param portalName
+ * @param invitationLink
+ * @param clientURI
+ */
+{template .renderInvitationViaEmailChannel}
+    <p class="email-body">
+        {getText('sd.email.conversational.notification.invite.via.email.channel', $portalName)}<br/>
+        {getText('sd.email.conversational.notification.invite.via.email.channel.activate')}
+    </p>
+    <span class="jsd-notification-buttons">
+        <span class="jsd-stretcher-glue">
+            <span class="jsd-stretcher-proper"></span>
+            <a class="jsd-notification-button jsd-primary-button" href="{$clientURI}{$invitationLink}">
+                {getText('sd.email.conversational.notification.activate.my.account')}
+            </a>
+            <span class="jsd-stretcher-proper"></span>
+        </span>
+    </span>
+{/template}
+
+/**
+ * @param portalName
+ * @param invitationLink
+ * @param clientURI
+ */
+{template .renderInvitationViaEmailChannel_text}
+    {getText('sd.email.conversational.notification.invite.via.email.channel', $portalName)}{\n}
+    {getText('sd.email.conversational.notification.invite.via.email.channel.activate')}{\n}
+    {\n}
+    {$clientURI}{$invitationLink}{\n}
+{/template}
+/**
+ * CUSTOMER INVITATION WHEN NEW USER CREATE A REQUEST VIA ANONYMOUS PORTAL
+ */
+/**
+ * HTML template for Invitation via Anonymous Portal Channel
+ */
+{template .invitationViaAnonymousPortalChannel}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate data="all"}
+        {param content}
+            {call .renderInvitationViaAnonymousPortalChannel data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * Text template for Invitation via Anonymous Portal Channel
+ */
+{template .invitationViaAnonymousPortalChannel_text}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate_text data="all"}
+        {param content}
+            {call .renderInvitationViaAnonymousPortalChannel_text data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * @param invitationLink
+ * @param clientURI
+ */
+{template .renderInvitationViaAnonymousPortalChannel}
+    <p class="sd-conversational-email-header">{getText('sd.email.conversational.notification.invite.via.anonymous.portal.channel.headline')}</p>
+    <p class="email-body">
+        {getText('sd.email.conversational.notification.invite.via.anonymous.portal.channel')}
+    </p>
+    <span class="jsd-notification-buttons">
+        <span class="jsd-stretcher-glue">
+            <span class="jsd-stretcher-proper"></span>
+            <a class="jsd-notification-button jsd-primary-button" href="{$clientURI}{$invitationLink}">
+                {getText('sd.email.conversational.notification.invite.via.anonymous.portal.channel.signup.button')}
+            </a>
+            <span class="jsd-stretcher-proper"></span>
+        </span>
+    </span>
+
+    <p class="sd-conversational-foot-note">{getText('sd.email.conversational.notification.invite.via.anonymous.portal.channel.warning')}</p>
+{/template}
+
+/**
+ * @param invitationLink
+ * @param clientURI
+ */
+{template .renderInvitationViaAnonymousPortalChannel_text}
+    {getText('sd.email.conversational.notification.invite.via.anonymous.portal.channel.headline')}{\n}
+    {\n}
+    {getText('sd.email.conversational.notification.invite.via.anonymous.portal.channel')}{\n}
+    {\n}
+    {$clientURI}{$invitationLink}{\n}
+    {getText('sd.email.conversational.notification.invite.via.anonymous.portal.channel.warning')}{\n}
+{/template}
+
+
+/* TEMPLATES FOR SIGNUP SUCCESS EMAIL */
+
+/**
+ * render Signup Success template
+ */
+{template .signupSuccess}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate data="all"}
+        {param content}
+            {call .renderSignupSuccessCustomer data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * render Signup Success plain text version
+ */
+{template .signupSuccess_text}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate_text data="all"}
+        {param content}
+            {call .renderSignupSuccessCustomer_text data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * render Signup Success content
+ * @param customer
+ * @param portalName
+ * @param portalUrl
+ * @param emailVerificationEnabled
+ */
+{template .renderSignupSuccessCustomer}
+    <p>
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user:$customer/}
+    {/call}
+    </p>
+    <p class="email-body">
+        {if $emailVerificationEnabled}
+            {getText('sd.email.conversational.notification.email.signup.success.content', $portalName, $customer.emailAddress) |changeNewlineToBr}
+        {else}
+            {getText('sd.email.conversational.notification.signup.success.content', $portalName, $customer.emailAddress) |changeNewlineToBr}
+        {/if}
+    </p>
+    <span class="jsd-notification-buttons">
+        <span class="jsd-stretcher-glue">
+            <span class="jsd-stretcher-proper"></span>
+            <a class="jsd-notification-button jsd-primary-button" href="{$portalUrl}">
+                {if $emailVerificationEnabled}
+                    {getText('cv.signup.page.sign.up')}
+                {else}
+                    {getText('sd.common.words.raise.request')}
+                {/if}
+            </a>
+            <span class="jsd-stretcher-proper"></span>
+        </span>
+    </span>
+{/template}
+
+/**
+ * render plain text version of Signup Success content
+ * @param customer
+ * @param portalName
+ * @param portalUrl
+ * @param emailVerificationEnabled
+ */
+{template .renderSignupSuccessCustomer_text}
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user:$customer/}
+    {/call}
+    {\n}
+    {\n}
+    {if $emailVerificationEnabled}
+        {getText('sd.email.conversational.notification.email.signup.success.content', $portalName, $customer.emailAddress)}
+    {else}
+        {getText('sd.email.conversational.notification.signup.success.content', $portalName, $customer.emailAddress)}
+    {/if}
+    {\n}
+    {\n}
+    {if $emailVerificationEnabled}
+        {getText('cv.signup.page.sign.up')}
+    {else}
+        {getText('sd.common.words.raise.request')}
+    {/if}
+    {\n}
+    {$portalUrl}
+{/template}
+
+/* COMMON TEMPLATES FOR EMAIL NOTIFICATION */
+
+/**
+ * render HTML for can not reset password
+ */
+{template .cannotResetPassword}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate data="all"}
+        {param content}
+            {call .cannotResetPasswordContent data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * render plain text for can not reset password
+ */
+{template .cannotResetPassword_text}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate_text data="all"}
+        {param content}
+            {call .cannotResetPasswordContent_text data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * The content for HTML version of can not reset password
+ * @param user
+ */
+{template .cannotResetPasswordContent}
+    <p>
+        {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+            {param user:$user/}
+        {/call}
+    </p>
+    <p class="email-body">
+        {getText('sd.email.conversational.notification.cannot.reset.password.content.disabled')}
+        <br/>
+        {getText('sd.email.conversational.notification.cannot.reset.password.content.contact')}
+    </p>
+{/template}
+
+/**
+ * The content for plain text version of can not reset password
+ * @param user
+ */
+{template .cannotResetPasswordContent_text}
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user:$user/}
+    {/call}
+    {\n}
+    {\n}
+    {getText('sd.email.conversational.notification.cannot.reset.password.content.disabled')}
+    {\n}
+    {getText('sd.email.conversational.notification.cannot.reset.password.content.contact')}
+    {\n}
+    {\n}
+{/template}
+
+

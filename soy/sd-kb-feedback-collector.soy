@@ -1,0 +1,50 @@
+{namespace ServiceDesk.Templates.KBFeedbackCollector}
+
+/**
+ * Footer below the iframe prompting the user to click whether the article was helpful or not
+ */
+{template .feedbackCollector}
+    <span class="sd-kb-feedback-collector-prompt">{getText('sd.kb.feedback.collector.prompt')}</span>
+    <span class="sd-kb-feedback-collector-container">
+        {call aui.buttons.button}
+            {param iconType: 'aui' /}
+            {param iconClass: 'aui-icon-small aui-iconfont-like' /}
+            {param extraClasses: 'js-sd-kb-feedback-helpful' /}
+            {param type: 'link' /}
+            {param text: getText('sd.common.words.yes') /}
+        {/call}
+        {call aui.buttons.button}
+            {param iconType: 'aui' /}
+            {param iconClass: 'aui-icon-small aui-iconfont-like sd-kb-feedback-collector-unhelpful' /}
+            {param extraClasses: 'js-sd-kb-feedback-unhelpful' /}
+            {param type: 'link' /}
+            {param text: getText('sd.common.words.no') /}
+        {/call}
+    </span>
+{/template}
+
+/**
+ * Footer below the iframe after the user clicks helpful
+ */
+{template .helpfulResponse}
+    <span class="sd-kb-feedback-collector-post-operation-text">{getText('sd.kb.feedback.collector.helpful.response')}</span>
+{/template}
+
+/**
+ * Footer below the iframe after the user clicks not helpful
+ * @param? href link to display
+ * @param? text link text to display
+ */
+{template .unHelpfulResponse}
+    <span class="sd-kb-feedback-collector-post-operation-text">{getText('sd.kb.feedback.collector.not.helpful.response')}
+    {if $href}
+       {sp}
+       {if $text}
+        <a class="js-sd-kb-feedback-unhelpful-post-operation" href="{$href}">{$text}</a>
+       {else}
+        <a class="js-sd-kb-feedback-unhelpful-post-operation" href="{$href}">{$href}</a>
+       {/if}
+    {/if}
+    </span>
+{/template}
+

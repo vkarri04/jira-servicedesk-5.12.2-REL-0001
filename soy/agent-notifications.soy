@@ -1,0 +1,164 @@
+{namespace Viewport.Templates.AgentNotifications}
+
+/**
+ * Agent Invitation Notification
+ */
+{template .invitation}
+    {call .notificationBase data="all"}
+        {param content}
+            {call .invitationTitle data="all" /}
+            {call .invitationContent data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * Plain text Agent Invitation Notification
+ * @param clientURI
+ * @param invitationLink
+ * @param user
+ * @param projects list of associated service desks
+ */
+{template .invitation_text}
+{let $link}{$clientURI}{$invitationLink}{/let}
+{let $inviterDisplayName}{$user.displayName}{/let}
+{let $projectNames}
+    {if length($projects) > 1}
+        {\n}{\n}
+        {foreach $project in $projects}
+            {\t}{$project.name}{if not isLast($project)}{\n}{/if}
+        {/foreach}
+    {else}
+        {$projects[0].name}.
+    {/if}
+{/let}
+{getText('sd.email.agent.invitation.description.plain.text', $inviterDisplayName, $projectNames, $link) |noAutoescape}{\n}
+{\n}
+{\n}
+{\n}
+{call Viewport.Templates.CommonNotifications.sdFootnote_text data="all" /}
+{/template}
+
+/**
+ * Invitation Title
+ */
+{template .invitationTitle}
+<tr>
+    <td class="email-content-important email-heading invitation-content invitation-head">
+        <h1 class="invitation-title">
+            {getText('sd.email.agent.invitation.title')}
+        </h1>
+    </td>
+</tr>
+{/template}
+
+/**
+ * Invitation Content
+ * @param clientURI
+ * @param invitationLink
+ */
+{template .invitationContent}
+<tr>
+    <td class="latest-activity-container email-content-important email-heading invitation-content invitation-bottom">
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                {call .serviceDesks data="all" /}
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td align="center">
+                            <table cellpadding="0" cellspacing="0" border="0" class="aui-button-content-wrapper">
+                            <tbody>
+                                <tr>
+                                    <td height="28">
+                                    {let $link}{$clientURI}{$invitationLink}{/let}
+                                    <a href="{$link |noAutoescape}" class="aui-button aui-button-primary js-invitation-link" target="_blank">
+                                        <span class="aui-button-text">{getText('sd.email.agent.invitation.accept')}</span>
+                                    </a></td>
+                                </tr>
+                            </tbody>
+                            </table></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </tbody>
+        </table>
+    </td>
+</tr>
+{/template}
+
+/**
+ * Invitation Content With Tokens for new Agent
+ * @param user
+ * @param projects list of associated service desks
+ */
+{template .serviceDesks}
+{if length($projects) > 1}
+    <div>
+        {getText('sd.email.agent.invitation.description', $user.displayName)}
+        <ul class="invitation-list">
+            {foreach $project in $projects}
+                <li>
+                    <span class="invitation-project">{$project.name}</span>
+                </li>
+            {/foreach}
+        </ul>
+    </div>
+{else}
+    <div>
+        {getText('sd.email.agent.invitation.description', $user.displayName)}{sp}
+        <span class="invitation-project">{$projects[0].name}</span>
+        <br/>
+    </div>
+    <br />
+{/if}
+{/template}
+
+/**
+ * The setup of the table based email content
+ * @param content of the e-mail
+ * @param version
+ */
+{template .notificationBase}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    <center>
+        <table id="email-wrap" valign="top" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td align="center" id="email-wrap-cell" colspan="2">
+                        <table id="email-container" border="0" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td align="left">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            <tbody>
+                                                {$content |noAutoescape}
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="invitation-footer">
+            <tr>
+                <td id="foot-note">
+                    <div class="invitation-footer-content">
+                        {getText('sd.email.common.invitation.footnote')} ({$version})
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>
+{/template}

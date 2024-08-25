@@ -1,0 +1,12 @@
+{namespace ServiceDesk.Templates.Shared.Components}
+
+/**
+ * A spinner with transparent cover
+ * @param size the size of the spinner, available options are "small", "medium", "large".
+ */
+{template .spinnerWithCover}
+    <div class="sd-spinner-with-cover">
+        <aui-spinner size="{$size}"></aui-spinner>
+        <div class="sd-spinner-cover"></div>
+    </div>
+{/template}

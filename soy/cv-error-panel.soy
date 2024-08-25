@@ -1,0 +1,28 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* Renders error panel
+* @param errorText
+* @param errorLogoClass
+* @param nextActionUrl
+* @param nextActionDisplayText
+*/
+{template .error}
+<div class="cp-error-panel">
+    <div class="cp-error-panel-content">
+        <div class="error-message-panel">
+       {if $errorLogoClass}
+           <div class="cp-error-panel-icon {$errorLogoClass}"></div>
+       {/if}
+       <p class="cp-error-panel-message">{$errorText}</p>
+       {if $nextActionUrl and $nextActionDisplayText}
+            {call aui.buttons.button}
+                {param type: 'primary' /}
+                {param href: $nextActionUrl /}
+                {param text: $nextActionDisplayText /}
+            {/call}
+       {/if}
+       </div>
+    </div>
+</div>
+{/template}

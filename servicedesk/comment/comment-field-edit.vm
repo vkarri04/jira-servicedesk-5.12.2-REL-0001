@@ -1,0 +1,4 @@
+<script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!comment_fields_jsd'));</script>
+
+##Used for Bulk Edit
+<div class="sd-comment-field-edit-root" data-payload="$payloadJSON"></div>

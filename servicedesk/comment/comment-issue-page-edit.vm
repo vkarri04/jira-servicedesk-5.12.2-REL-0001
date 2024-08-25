@@ -1,0 +1,4 @@
+<script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!comment_fields_jsd'));</script>
+
+##Actual comment box to add a comment on issue view
+<div class="sd-comment-issue-page-edit-root" data-payload="$payloadJSON"></div>

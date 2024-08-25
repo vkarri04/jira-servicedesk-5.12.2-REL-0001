@@ -1,0 +1,56 @@
+{namespace ServiceDesk.Templates.Customer.SmartPortal}
+
+/**
+ * @param portals
+ * @param hasBack whether there's a page to go back to
+ * @param? intro a short introduction to give context to the portal list
+ * @param? hasNoResult whether to show "No matching search results" icon & text
+ * @param? origin a origin to be added to each portal url indicating how the user reached this list
+ */
+{template .allPortals}
+    {if $intro}
+        <div class="cv-smart-portal-sub-header">
+            {$intro}
+        </div>
+    {/if}
+
+    {if $hasNoResult}
+        {call ServiceDesk.Templates.Shared.Components.Search.noResults}
+            {param subtitle: getText('sd.customerview.smart.portal.no.results.subtitle') /}
+        {/call}
+    {/if}
+
+    {if length($portals) > 0}
+        <ul class="cv-smart-portal-all-portals-list">
+            {foreach $portal in $portals}
+                <li>
+                    <a href="{$portal.portalBaseUrl}{if $origin}origin={$origin}{/if}"
+                       class="cv-smart-portal-all-portal-list-item js-cv-smart-portal-all-portal-list-item"
+                       data-id="{$portal.id}"
+                    >
+                       <span title="{$portal.name}" class="cv-portal-name cv-portal-link">{$portal.name}</span>
+                    </a>
+                </li>
+            {/foreach}
+        </ul>
+    {/if}
+
+    {if $hasBack}
+        <div class="cv-smart-portal-nav-bottom">
+            {call aui.buttons.button}
+                {param text: getText('sd.common.words.back') /}
+                {param type: 'link' /}
+                {param extraClasses: 'js-cv-smart-all-portal-list-back' /}
+            {/call}
+        </div>
+    {/if}
+{/template}
+
+/**
+ *
+ */
+{template .noPortals}
+    <div class="cv-smart-portal-sub-header">
+        {getText('sd.customerview.smart.portal.list.none')}
+    </div>
+{/template}

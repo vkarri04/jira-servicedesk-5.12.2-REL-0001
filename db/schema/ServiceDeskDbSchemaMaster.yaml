@@ -1,0 +1,414 @@
+# Main Service Desk Schema Definition
+# See https://bitbucket.org/atlassian/db-schema-translator/overview for more information on how to use this file.
+schema:
+  tables:
+    - tableName: ASYNCUPGRADERECORD
+      logicalName: AsyncUpgradeRecord
+      primaryKey: {type: Integer}
+      relationships:
+      columns:
+        - {name: ACTION, type: String/255, nullable: false}
+        - {name: CREATED_DATE, type: Timestamp, nullable: false, validationOverrides: [aoPreferLongOverTimestamp]}
+        - {name: EXCEPTION, type: String/Unlimited}
+        - {name: MESSAGE, type: String/Unlimited}
+        - {name: SERVICE_DESK_VERSION, type: String/255, nullable: false}
+        - {name: UPGRADE_TASK_NAME, type: String/255, nullable: false}
+
+    - tableName: CAPABILITY
+      logicalName: Capability
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: SERVICEDESK, fkname: SERVICE_DESK_ID, type: 1-M, nullable: false, indexed: true}
+      columns:
+        - {name: CAPABILITY_NAME, type: String/255, nullable: false}
+        - {name: CAPABILITY_VALUE, type: String/255, nullable: false}
+        - {name: USER_KEY, type: String/255}
+
+    - tableName: CONFLUENCEKB
+      logicalName: ConfluenceKb
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: SERVICEDESK, fkname: SERVICE_DESK_ID, type: 1-1, nullable: false, indexed: true}
+      columns:
+        - {name: APPLINKS_APPLICATION_ID, type: String/63}
+        - {name: APPLINK_NAME, type: String/255}
+        - {name: APPLINK_URL, type: String/Unlimited}
+        - {name: SPACE_KEY, type: String/255}
+        - {name: SPACE_NAME, type: String/255}
+        - {name: SPACE_URL, type: String/Unlimited}
+
+    - tableName: CONFLUENCEKBENABLED
+      logicalName: ConfluenceKbEnabled
+      primaryKey: {type: Integer}
+      relationships:
+        # CONFLUENCE_KBID is not a typo - this is how AO creates ID names if the method name ends in a capital letter
+        - {tableName: CONFLUENCEKB, fkname: CONFLUENCE_KBID, type: 1-M, nullable: false, indexed: true}
+        - {tableName: SERVICEDESK, fkname: SERVICE_DESK_ID, type: 1-1, nullable: false, indexed: true}
+        - {tableName: VIEWPORTFORM, fkname: FORM_ID, type: 1-M, nullable: false, indexed: true}
+      columns:
+        - {name: ENABLED, type: Boolean}
+
+    - tableName: CONFLUENCEKBLABELS
+      logicalName: ConfluenceKbLabel
+      primaryKey: {type: Integer}
+      relationships:
+        # CONFLUENCE_KBID is not a typo - this is how AO creates ID names if the method name ends in a capital letter
+        - {tableName: CONFLUENCEKB, fkname: CONFLUENCE_KBID, type: 1-M, nullable: false, indexed: true}
+        - {tableName: SERVICEDESK, fkname: SERVICE_DESK_ID, type: 1-M, nullable: false, indexed: true}
+        - {tableName: VIEWPORTFORM, fkname: FORM_ID, type: 1-M, nullable: false, indexed: true}
+      columns:
+        - {name: LABEL, type: String/255}
+
+    - tableName: EMAILCHANNELSETTING
+      logicalName: EmailChannelSetting
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: SERVICEDESK, fkname: SERVICE_DESK_ID, type: 1-M, nullable: false, indexed: true}
+        - {tableName: VIEWPORTFORM, fkname: REQUEST_TYPE_ID, type: 1-M, nullable: false, indexed: true}
+      columns:
+        - {name: EMAIL_ADDRESS, type: String/255}
+        - {name: LAST_PROCEEDED_TIME, type: Long}
+        - {name: MAIL_CHANNEL_KEY, type: String/255, nullable: false}
+        - {name: ON_DEMAND, type: Boolean}
+
+    - tableName: EMAILSETTINGS
+      logicalName: EmailSettings
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: SERVICEDESK, fkname: SERVICE_DESK_ID, type: 1-M, nullable: false, indexed: true}
+        - {tableName: VIEWPORTFORM, fkname: REQUEST_TYPE_ID, type: 1-M, nullable: false, indexed: true}
+      columns:
+        - {name: EMAIL_ADDRESS, type: String/255}
+        - {name: ENABLED, type: Boolean}
+        - {name: JIRA_MAIL_SERVER_ID, type: Long, nullable: false}
+        - {name: LAST_PROCEEDED_TIME, type: Long}
+        - {name: ON_DEMAND, type: Boolean}
+
+    - tableName: GOAL
+      logicalName: Goal
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: TIMEMETRIC, fkname: TIME_METRIC_ID, type: 1-M, nullable: false, indexed: true}
+      columns:
+        - {name: CALENDAR_ID, type: Integer}
+        - {name: DEFAULT_GOAL, type: Boolean}
+        - {name: JQL_QUERY, type: String/Unlimited}
+        - {name: POS, type: Integer, defaultValue: 0, nullable: false}
+        - {name: TARGET_DURATION, type: Long}
+        - {name: TIME_UPDATED_MS_EPOCH, type: Long}
+        - {name: TIME_UPDATED_DATE, type: Timestamp, deprecated: true,
+           comment: "The following Timestamp column is deprecated, and has been replaced by the corresponding
+                     MS_EPOCH column. Use of Timestamp type is discouraged in AO, as there are no guarantees as to
+                     how it is stored (particularly in the null case). See https://jdog.jira-dev.com/browse/DESK-4484
+                     for more details.",
+           validationOverrides: [aoPreferLongOverTimestamp]}
+
+    - tableName: GROUPTOREQUESTTYPE
+      logicalName: GroupToRequestType
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: GROUP, fkname: GROUP_ID, type: M-M, reverseTable: VIEWPORTFORM, indexed: true}
+        - {tableName: VIEWPORTFORM, fkname: REQUEST_TYPE_ID, type: M-M, reverseTable: GROUP, indexed: true}
+      columns:
+        - {name: ORDER, type: Integer}
+
+    - tableName: CUSTOMGLOBALTHEME
+      logicalName: HelpCenterBranding
+      primaryKey: {type: Integer}
+      relationships:
+      columns:
+        - {name: CONTENT_LINK_COLOR, type: String/255}
+        - {name: CONTENT_TEXT_COLOR, type: String/255}
+        - {name: CUSTOM_CSS, type: String/Unlimited}
+        - {name: HEADER_BADGE_BGCOLOR, type: String/255}
+        - {name: HEADER_BGCOLOR, type: String/255}
+        - {name: HEADER_LINK_COLOR, type: String/255}
+        - {name: HEADER_LINK_HOVER_BGCOLOR, type: String/255}
+        - {name: HEADER_LINK_HOVER_COLOR, type: String/255}
+        - {name: HELP_CENTER_TITLE, type: String/255}
+        - {name: LOGO_ID, type: Integer, indexed: true}
+
+    - tableName: IMAGES
+      logicalName: Image
+      primaryKey: {type: Integer}
+      relationships:
+      columns:
+        - {name: CONTENTS, type: String/Unlimited}
+
+    - tableName: METRICCONDITION
+      logicalName: MetricConditionRef
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: TIMEMETRIC, fkname: TIME_METRIC_ID, type: 1-M, nullable: false, indexed: true}
+      columns:
+        - {name: CONDITION_ID, type: String/255, nullable: false}
+        - {name: FACTORY_KEY, type: String/255, nullable: false}
+        - {name: PLUGIN_KEY, type: String/255, nullable: false}
+        - {name: TYPE_NAME, type: String/255, nullable: false}
+
+    - tableName: ORGANIZATION
+      logicalName: Organization
+      primaryKey: {type: Integer}
+      relationships:
+      columns:
+        - {name: SEARCH_NAME, type: String/255, nullable: false, unique: true}
+        - {name: LOWER_NAME, type: String/255, nullable: false, indexed: true}
+        - {name: NAME, type: String/255, nullable: false, unique: true}
+
+    - tableName: ORGANIZATION_MEMBER
+      logicalName: OrganizationMember
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: ORGANIZATION, fkname: ORGANIZATION_ID, type: 1-M, indexed: true}
+      columns:
+        - {name: USER_KEY, type: String/255, nullable: false, indexed: true}
+        - {name: DEFAULT_ORGANIZATION, type: Boolean, nullable: false, defaultValue: false}
+
+    - tableName: ORGANIZATION_PROJECT
+      logicalName: OrganizationProject
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: ORGANIZATION, fkname: ORGANIZATION_ID, type: 1-M, indexed: true}
+      columns:
+        - {name: PROJECT_ID, type: Long, nullable: false, indexed: true}
+
+    - tableName: OUT_EMAIL_SETTINGS
+      logicalName: OutgoingEmailSettings
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: SERVICEDESK, fkname: SERVICE_DESK_ID, type: 1-1, nullable: false, indexed: true}
+      columns:
+        - {name: EMAIL_SUBJECT_PREFIX_ENABLED, type: Boolean, nullable: false}
+      comment: "This table has been moved to the Notifications plugin - this instance of the table in this plugin is no longer used."
+
+    - tableName: PARTICIPANTSETTINGS
+      logicalName: ParticipantSettings
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: SERVICEDESK, fkname: SERVICE_DESK_ID, type: 1-1, nullable: false, indexed: true}
+      columns:
+        - {name: AUTOCOMPLETE_ENABLED, type: Boolean}
+        - {name: MANAGE_ENABLED, type: Boolean}
+
+    - tableName: VIEWPORT
+      logicalName: Portal
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: CUSTOMTHEME, fkname: THEME_ID, type: 1-1, indexed: true}
+      columns:
+        - {name: DESCRIPTION, type: String/Unlimited}
+        - {name: KEY, type: String/255, nullable: false, unique: true}
+        - {name: LOGO_ID, type: Integer, indexed: true}
+        - {name: NAME, type: String/255, nullable: false}
+        - {name: PROJECT_ID, type: Long, nullable: false, indexed: true}
+        - {name: SEND_EMAIL_NOTIFICATIONS, type: Boolean}
+
+    - tableName: QUEUE
+      logicalName: Queue
+      primaryKey: {type: Integer}
+      relationships:
+      columns:
+        - {name: JQL, type: String/Unlimited}
+        - {name: NAME, type: String/255, nullable: false}
+        - {name: PROJECT_ID, type: Long, nullable: false, indexed: true}
+        - {name: PROJECT_KEY, type: String/255, nullable: false, deprecated: true, indexed: true}
+        - {name: QUEUE_ORDER, type: Integer}
+
+    - tableName: QUEUECOLUMN
+      logicalName: QueueColumn
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: QUEUE, fkname: QUEUE_ID, type: 1-M, indexed: true}
+      columns:
+        - {name: COLUMN_ID, type: String/255}
+        - {name: COLUMN_ORDER, type: Integer}
+
+    - tableName: REPORT
+      logicalName: Report
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: SERVICEDESK, fkname: SERVICE_DESK_ID, type: 1-M, indexed: true}
+      columns:
+        - {name: CREATED_DATE, type: Timestamp, validationOverrides: [aoPreferLongOverTimestamp]}
+        - {name: NAME, type: String/255}
+        - {name: REPORT_ORDER, type: Integer}
+        - {name: REPORT_TYPE, type: String/63}
+        - {name: UPDATED_DATE, type: Timestamp, validationOverrides: [aoPreferLongOverTimestamp]}
+        - {name: TARGET, type: Long}
+
+    - tableName: VIEWPORTFORM
+      logicalName: RequestType
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: VIEWPORT, fkname: VIEWPORT_ID, type: 1-M, indexed: true}
+      columns:
+        - {name: CALL_TO_ACTION, type: String/Unlimited, deprecated: true, comment: "No longer used (replaced by name)."}
+        - {name: DESCRIPTION, type: String/Unlimited, comment: "Text that appears at the top of the Create Request page in the Customer View"}
+        - {name: FORM_ORDER, type: Integer}
+        - {name: ICON, type: Integer, comment: "No longer used (replaced by ICON_ID)."}
+        - {name: ICON_ID, type: Long}
+        - {name: INTRO, type: String/Unlimited, comment: "Text that appears under the Request Type name in the Customer View request list."}
+        - {name: ISSUE_TYPE_ID, type: Long, nullable: false}
+        - {name: KEY, type: String/255, nullable: false, indexed: true}
+        - {name: NAME, type: String/255, nullable: false}
+
+    - tableName: VIEWPORTFIELD
+      logicalName: RequestTypeField
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: VIEWPORTFORM, fkname: FORM_ID, type: 1-M, indexed: true}
+      columns:
+        - {name: DESCRIPTION, type: String/Unlimited}
+        - {name: DISPLAYED, type: Boolean}
+        - {name: FIELD_ID, type: String/255, nullable: false}
+        - {name: FIELD_ORDER, type: Integer}
+        - {name: FIELD_TYPE, type: String/255, nullable: false}
+        - {name: LABEL, type: String/255}
+        - {name: REQUIRED, type: Boolean}
+
+    - tableName: VIEWPORTFIELDVALUE
+      logicalName: RequestTypeFieldValue
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: VIEWPORTFIELD, fkname: FIELD_ID, type: 1-M, indexed: true}
+      columns:
+        - {name: FIELD_NAME, type: String/255, deprecated: true}
+        - {name: VALUE, type: String/Unlimited}
+        - {name: VALUE_ORDER, type: Integer}
+
+    - tableName: GROUP
+      logicalName: RequestTypeGroup
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: VIEWPORT, fkname: VIEWPORT_ID, type: 1-M, indexed: true}
+      columns:
+        - {name: DELETED_TIME, type: Long}
+        - {name: GROUP_NAME, type: String/127}
+        - {name: ORDER, type: Integer}
+
+    - tableName: SERIES
+      logicalName: Series
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: REPORT, fkname: REPORT_ID, type: 1-M, indexed: true}
+      columns:
+        - {name: COLOR, type: String/63}
+        - {name: CREATED_DATE, type: Timestamp, validationOverrides: [aoPreferLongOverTimestamp]}
+        - {name: JQL, type: String/Unlimited}
+        - {name: SERIES_DATA_TYPE, type: String/255}
+        - {name: SERIES_LABEL, type: String/63}
+        - {name: TIME_METRIC_ID, type: Long}
+        - {name: UPDATED_DATE, type: Timestamp, validationOverrides: [aoPreferLongOverTimestamp]}
+        - {name: GOAL_ID, type: Integer}
+
+    - tableName: SERVICEDESK
+      logicalName: ServiceDesk
+      primaryKey: {type: Integer}
+      relationships:
+      columns:
+        - {name: CREATED_BY_USER_KEY, type: String/255}
+        - {name: CREATED_DATE, type: Timestamp, validationOverrides: [aoPreferLongOverTimestamp]}
+        - {name: CREATED_WITH_EMPTY_PROJECT, type: Boolean}
+        - {name: LEGACY_TRANSITION_DISABLED, type: Boolean}
+        - {name: OPEN_CUSTOMER_ACCESS, type: Integer}
+        - {name: PROJECT_ID, type: Long, indexed: true}
+        - {name: PROJECT_KEY, type: String/255, nullable: false, deprecated: true, defaultValue: N/A, comment: "Do NOT call get/set PROJECT_KEY or risk breaking ServiceDesk when project keys are edited."}
+        - {name: PUBLIC_SIGNUP, type: Integer}
+        - {name: VERSION_CREATED_AT, type: String/255}
+        - {name: DISABLED, type: Boolean, deprecated: true, comment: "Returns a boolean indicating whether this service desk has been disabled. Disabled service desks can't be used and are mostly hidden from the UI, but they can be re-enabled. Previous versions of the schema did not include this column. Therefore, a NULL value in this column is taken to mean that the service desk is enabled."}
+
+    - tableName: THRESHOLD
+      logicalName: SlaThreshold
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: TIMEMETRIC, fkname: TIME_METRIC_ID, type: 1-M, nullable: false, indexed: true}
+      columns:
+        - {name: REMAINING_TIME, type: Long, nullable: false}
+
+    - tableName: STATUSMAPPING
+      logicalName: StatusMapping
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: VIEWPORTFORM, fkname: FORM_ID, type: 1-M, indexed: true}
+      columns:
+        - {name: STATUS_ID, type: String/255}
+        - {name: STATUS_NAME, type: String/255}
+
+    - tableName: SUBSCRIPTION
+      logicalName: Subscription
+      primaryKey: {type: Integer}
+      relationships:
+      columns:
+        - {name: ISSUE_ID, type: Long, nullable: false, indexed: true}
+        - {name: SUBSCRIBED, type: Boolean, nullable: false}
+        - {name: USER_KEY, type: String/255, nullable: false}
+
+    - tableName: SYNCUPGRADERECORD
+      logicalName: SyncUpgradeRecord
+      primaryKey: {type: Integer}
+      relationships:
+      columns:
+        - {name: ACTION, type: String/255, nullable: false}
+        - {name: CREATED_DATE, type: Timestamp, nullable: false, validationOverrides: [aoPreferLongOverTimestamp]}
+        - {name: EXCEPTION, type: String/Unlimited}
+        - {name: MESSAGE, type: String/Unlimited}
+        - {name: SERVICE_DESK_VERSION, type: String/255, nullable: false}
+        - {name: UPGRADE_TASK_NAME, type: String/255, nullable: false}
+
+    - tableName: CUSTOMTHEME
+      logicalName: Theme
+      primaryKey: {type: Integer}
+      relationships:
+      columns:
+        - {name: HEADER_BGCOLOR, type: String/255}
+        - {name: HEADER_LINK_COLOR, type: String/255}
+        - {name: HEADER_LINK_HOVER_BGCOLOR, type: String/255}
+        - {name: HEADER_LINK_HOVER_COLOR, type: String/255}
+
+    - tableName: TIMEMETRIC
+      logicalName: TimeMetric
+      primaryKey: {type: Integer}
+      relationships:
+        - {tableName: SERVICEDESK, fkname: SERVICE_DESK_ID, type: 1-M, nullable: false, indexed: true}
+      columns:
+        - {name: CREATED_DATE, type: Long}
+        - {name: CUSTOM_FIELD_ID, type: Long}
+        - {name: NAME, type: String/255, nullable: false}
+        - {name: THRESHOLDS_CHANGE_MS_EPOCH, type: Long}
+        - {name: DEFINITION_CHANGE_MS_EPOCH, type: Long}
+        - {name: GOALS_CHANGE_MS_EPOCH, type: Long}
+        - {name: THRESHOLDS_CONFIG_CHANGE_DATE, type: Timestamp, deprecated: true,
+           comment: "Has been replaced by the corresponding MS_EPOCH column. Use of Timestamp type is discouraged in
+                     AO, as there are no guarantees as to how it is stored (particularly in the null case).
+                     See https://jdog.jira-dev.com/browse/DESK-4484 for more details.",
+           validationOverrides: [aoPreferLongOverTimestamp]}
+        - {name: DEFINITION_CHANGE_DATE, type: Timestamp, deprecated: true,
+           comment: "Has been replaced by the corresponding MS_EPOCH column. Use of Timestamp type is discouraged in
+                     AO, as there are no guarantees as to how it is stored (particularly in the null case).
+                     See https://jdog.jira-dev.com/browse/DESK-4484 for more details.",
+           validationOverrides: [aoPreferLongOverTimestamp]}
+        - {name: GOALS_CHANGE_DATE, type: Timestamp, deprecated: true,
+           comment: "Has been replaced by the corresponding MS_EPOCH column. Use of Timestamp type is discouraged
+                     in AO, as there are no guarantees as to how it is stored (particularly in the null case).
+                     See https://jdog.jira-dev.com/browse/DESK-4484 for more details.",
+           validationOverrides: [aoPreferLongOverTimestamp]}
+        - {name: CUSTOMER_VISIBLE, type: Boolean, nullable: true,
+           comment: "Indicates whether this SLA is visible to customers on the Customer Portal" }
+
+    - tableName: SLAAUDITLOG
+      logicalName: SlaAuditLog
+      primaryKey: {type: Long}
+      columns:
+        - {name: EVENT_TIME, type: Long}
+        - {name: ISSUE_ID, type: Long, indexed: true}
+        - {name: SLA_ID, type: Long, indexed: true}
+        - {name: REASON, type: String/255}
+
+    - tableName: SLAAUDITLOGDATA
+      logicalName: SlaAuditLogData
+      primaryKey: {type: Long}
+      relationships:
+        - {tableName: SLAAUDITLOG, fkname: SLA_AUDIT_LOG_ID, type: 1-M, nullable: false, indexed: true}
+      columns:
+        - {name: KEY, type: String/255}
+        - {name: VALUE, type: String/255}

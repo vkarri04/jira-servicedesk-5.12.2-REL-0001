@@ -1,0 +1,76 @@
+#disable_html_escaping()
+<script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!custom_field_jsd-request-type'));</script>
+#if ($isFieldEnabled)
+
+    #customControlHeader ($action $customField.id $i18n.getText($customField.nameKey) $fieldLayoutItem.required $displayParameters $auiparams)
+
+        <div id="js-${customField.id}-ss-container" class="sd-customer-request-type-field-edit">
+            <select class="single-select long-field hidden js-request-type-selector"
+                    id="${customField.id}"
+                    name="${customField.id}"
+                    data-container-class="long-field"
+                    #if ($issue && $issue.id)
+                        title="${textutils.htmlEncode($issue.key)}"
+                        data-issue-id="$issue.id"
+                        data-project-key="${textutils.htmlEncode($issue.projectObject.key)}"
+                    #end
+
+                    #set($projectId = $fieldValuesHolder.get('project'))
+                    #if ($projectId)
+                        data-project-id="$projectId"
+                    #elseif ($issue)
+                        data-project-id="$issue.projectId"
+                    #end
+
+                    #set($issuetype = $fieldValuesHolder.get('issuetype'))
+                    #if ($issuetype)
+                        data-issuetype-id="$issuetype"
+                    #elseif ($issue)
+                        data-issuetype-id="$issue.issueTypeId"
+                    #end
+
+    ##              If the issue has been created, then it is being edited (ie. not new or in creation phase)
+    ##              This check also works when moving an issue, as in that case, checking id is not enough as it has no id, but it is technically an edit, not a create for our purpose
+                    #set($issueEditMode = $issue && $issue.created)
+                    #if ($issueEditMode)
+                        data-sd-customer-request-type-new="false"
+                    #else
+                        data-sd-customer-request-type-new="true"
+                    #end
+                    >
+                #if ($value)
+                    #set($displayedValue = $customField.customFieldType.getDisplayedValue($value))
+                    #if ($displayedValue)
+                        #set($displayedName = $textutils.htmlEncode($displayedValue.getName()))
+                        #set($projectId = $customField.customFieldType.getProjectIdForDisplayedValue($displayedValue))
+                        <option selected="selected" value="$textutils.htmlEncode($value.toString())" data-icon="$displayedValue.getIconId()" title="$displayedName" data-meta='{"issueTypeId":$displayedValue.getIssueTypeId(),"projectId":$projectId}'>
+                            $displayedName
+                        </option>
+                    #else
+                        <option selected="selected" value="-1" data-icon="none" title="$textutils.htmlEncode($i18n.getText('sd.portal.viewissue.requesttype.invalid.tooltip'))" data-meta='{}'>
+                            $noMatchValue
+                        </option>
+                    #end
+                #elseif ($requestType)
+                    #set($requestTypeName = $textutils.htmlEncode($requestType.getName()))
+                    #set($projectId = $customField.customFieldType.getProjectIdForDisplayedValue($requestType))
+                    <option selected="selected" value="$textutils.htmlEncode($origin.toString())" data-icon="$requestType.getIconId()" title="$requestTypeName" data-meta='{"issueTypeId":$requestType.getIssueTypeId(),"projectId":$projectId}'>
+                        $requestTypeName
+                    </option>
+                #elseif ($issueEditMode)
+                    <option selected="selected" value="-1" data-icon="none" title="$textutils.htmlEncode($i18n.getText('sd.portal.viewissue.requesttype.invalid.tooltip'))" data-meta='{}'>
+                        $noMatchValue
+                    </option>
+                #end
+            </select>
+        </div>
+
+    #customControlFooter ($action $customField.id $fieldLayoutItem.getFieldDescription() $displayParameters $auiparams)
+
+#else
+
+    #if ($origin)
+        <input id="$customField.id" name="$customField.id" type="hidden" value="$textutils.htmlEncode($origin.toString())"/>
+    #end
+
+#end

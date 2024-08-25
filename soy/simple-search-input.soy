@@ -1,0 +1,30 @@
+{namespace ServiceDesk.Templates.SearchInput}
+
+/**
+ * Renders the search box
+ * @param searchPlaceholder - message for placeholder.
+ * @param searchIntro - message for help screen.
+ */
+{template .content}
+<form class="aui">
+    <div class="sd-search-input">
+        <span class="aui-icon aui-icon-small aui-iconfont-search js-copy-clipboard sd-search-icon"></span>
+        <input
+            type="text"
+            class="js-search-field sd-search-field ajs-dirty-warning-exempt full-width-field text"
+            placeholder="{$searchPlaceholder}"
+            data-intro="{$searchIntro}"
+            data-position="bottom">
+        <aui-spinner class="js-spinner sd-search-spin" size="small"></aui-spinner>
+        {call aui.buttons.button}
+            {param extraClasses: 'aui-button-compact sd-clear-query js-clear-query' /}
+            {param extraAttributes: ['type': 'button'] /}
+            {param iconType: 'aui' /}
+            {param iconClass: 'clear-icon aui-icon-small aui-iconfont-cross-circle' /}
+            {param iconText: getText('sd.common.words.remove') /}
+            {param type: 'subtle' /}
+            {param text: '' /}
+        {/call}
+    </div>
+</form>
+{/template}

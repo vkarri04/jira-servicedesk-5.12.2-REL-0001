@@ -1,0 +1,97 @@
+{namespace ServiceDesk.Customer.Feature.RequestsList.Templates}
+
+/**
+* @param? requests requests to display
+* @param? start  index of start of page
+* @param? totalResults  index of start of page
+* @param? noResultsTitle title for empty result set
+* @param? noResultsContent content of empty result set
+*/
+{template .body}
+<div class="cv-requests-list-container" data-testid="cv-table-container">
+    {if $totalResults > 0}
+        {call aui.table}
+            {param extraClasses: 'cv-requests-list' /}
+            {param theadContent}
+                <tr>
+                    <th id="type">{getText('cv.requests.header.type')}</th>
+                    <th id="reference">{getText('cv.requests.header.reference')}</th>
+                    <th id="summary">{getText('cv.requests.header.summary')}</th>
+                    <th id="portal">{getText('cv.requests.header.portal')}</th>
+                    <th id="status">{getText('cv.requests.header.status')}</th>
+                    <th id="requester">{getText('cv.requests.header.requester')}</th>
+                </tr>
+            {/param}
+            {param content}
+                {foreach $request in $requests}
+                    <tr>
+                        <td headers="type">
+                            {call ServiceDesk.Templates.Components.RequestTypeIcons.mediumIcon}
+                                {param iconId: $request.requestIcon /}
+                                {param title: $request.requestTypeName /}
+                                {param useCustomerShim: true /}
+                            {/call}
+                        </td>
+                        <td class="cv-reference-cell" headers="reference">
+                            <a href="{$request.portalBaseUrl}/{$request.key}" class="cv-cell-content" title="{$request.key}">
+                                {$request.key}
+                            </a>
+                        </td>
+                        <td class="cv-summary-cell" headers="summary" data-testid="cv-summary-cell">
+                            <a href="{$request.portalBaseUrl}/{$request.key}" class="cv-cell-content" title="{$request.summary}">
+                                {$request.summary}
+                            </a>
+                        </td>
+                        <td class="cv-portal-cell" headers="portal">
+                            <span class="cv-cell-content" title="{$request.portalName}">{$request.portalName}</span>
+                        </td>
+                        <td class="cv-status-cell" headers="status">
+                            {call .requestStatusLozenge}
+                                {param request: $request/}
+                            {/call}
+                        </td>
+                        <td class="cv-requester-cell" headers="requester">
+                            {if $request.reporterDisplayName}
+                                {$request.reporterDisplayName}
+                            {/if}
+                        </td>
+                    </tr>
+                {/foreach}
+            {/param}
+        {/call}
+        <div class="cp-request-table-footer">
+            <div class="cv-pagination-position">
+                {getText('sd.project.reports.feedback.pagination.total.text', $start + '-' + (($start - 1) + length($requests)), $totalResults)}
+            </div>
+            <div class="js-requests-pagination-container cv-request-pagination"></div>
+        </div>
+    {else}
+        <div class="cv-no-results">
+            <h3>{$noResultsTitle}</h3>
+            <p>{$noResultsContent|noAutoescape}</p>
+        </div>
+    {/if}
+</div>
+{/template}
+
+/**
+* @param request
+*/
+{template .requestStatusLozenge}
+    <span title="{$request.status}" class="cv-status-lozenge">
+        {let $type}
+            {if $request.isNew}
+                new
+            {elseif not $request.resolution}
+                inprogress
+            {else}
+                success
+            {/if}
+        {/let}
+        {call SOY_REACT_BRIDGE_AUILozenge}
+            {param subtle: true /}
+            {param type: $type /}
+            {param message: $request.status /}
+        {/call}
+    </span>
+{/template}

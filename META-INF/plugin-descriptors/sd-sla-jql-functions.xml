@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-sla-jql-functions description="Service project SLA JQL functions">
+
+    <!--================================
+            SLA JQL functions
+    =================================-->
+    <jql-function name="Remaining Time" i18n-name-key="sd.sla.jql.function.remaining.time.name" key="sla-remaining-time-function"
+                  class="com.atlassian.servicedesk.internal.sla.searcher.function.RemainingTimeSlaFunction">
+        <description key="sd.sla.jql.function.remaining.time.description">Remaining Time</description>
+    </jql-function>
+
+    <jql-function name="Elapsed Time" i18n-name-key="sd.sla.jql.function.elapsed.time.name" key="sla-elapsed-time-function"
+                  class="com.atlassian.servicedesk.internal.sla.searcher.function.ElapsedTimeSlaFunction">
+        <description key="sd.sla.jql.function.elapsed.time.description">Elapsed Time</description>
+    </jql-function>
+
+    <jql-function name="EverBreached" i18n-name-key="sd.sla.jql.function.everBreached.name" key="sla-everbreached-function"
+                  class="com.atlassian.servicedesk.internal.sla.searcher.function.EverBreachedSlaFunction">
+        <description key="sd.sla.jql.function.breached.description">Ever Breached</description>
+    </jql-function>
+
+    <jql-function name="Breached" i18n-name-key="sd.sla.jql.function.breached.name" key="sla-breached-function"
+                  class="com.atlassian.servicedesk.internal.sla.searcher.function.BreachedSlaFunction">
+        <description key="sd.sla.jql.function.breached.description">Breached</description>
+    </jql-function>
+
+    <jql-function name="Completed" i18n-name-key="sd.sla.jql.function.completed.name" key="sla-completed-function"
+                  class="com.atlassian.servicedesk.internal.sla.searcher.function.CompletedSlaFunction">
+        <description key="sd.sla.jql.function.completed.description">Completed</description>
+    </jql-function>
+
+    <jql-function name="Paused" i18n-name-key="sd.sla.jql.function.paused.name" key="sla-paused-function"
+                  class="com.atlassian.servicedesk.internal.sla.searcher.function.PausedSlaFunction">
+        <description key="sd.sla.jql.function.paused.description">Paused</description>
+    </jql-function>
+
+    <jql-function name="Running" i18n-name-key="sd.sla.jql.function.running.name" key="sla-running-function"
+                  class="com.atlassian.servicedesk.internal.sla.searcher.function.RunningSlaFunction">
+        <description key="sd.sla.jql.function.running.description">Running</description>
+    </jql-function>
+
+    <jql-function name="WithinCalendarHours" i18n-name-key="sd.sla.jql.function.withinCalendarHours.name" key="sla-withincalendarhours-function"
+                  class="com.atlassian.servicedesk.internal.sla.searcher.function.WithinCalendarHoursSlaFunction">
+        <description key="sd.sla.jql.function.withinCalendarHours.description">Within Calendar Hours</description>
+    </jql-function>
+
+    <jql-function name="Outdated" i18n-name-key="sd.sla.jql.function.outdated.name" key="sla-outdated-function"
+                  class="com.atlassian.servicedesk.internal.sla.searcher.function.OutdatedSlaFunction">
+        <description key="sd.sla.jql.function.outdated.description">Outdated</description>
+    </jql-function>
+
+</sd-sla-jql-functions>

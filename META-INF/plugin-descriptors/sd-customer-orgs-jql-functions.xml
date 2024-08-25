@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-customer-orgs-jql-functions description="Service project Customer Organisations JQL Functions">
+
+    <jql-function key="members-of-organisation-function" i18n-name-key="sd.customer.organisation.function.jql.name" name="Members Of Customer Organisation Function"
+                  class="com.atlassian.servicedesk.internal.feature.organization.jql.InOrganisationFunction">
+        <description key="sd.customer.organisation.function.jql.desc">Returns the usernames of Users in a specific organisation</description>
+        <list>true</list>
+    </jql-function>
+
+</sd-customer-orgs-jql-functions>

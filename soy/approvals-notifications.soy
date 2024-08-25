@@ -1,0 +1,106 @@
+{namespace ServiceDesk.Templates.Notifications.Approvals}
+
+/**
+* Template for requestToApprove html notifications
+*/
+{template .requestToApprove}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate data="all"}
+        {param content}
+            {call .renderRequestToApproveContent data="all" /}
+            {call .renderIssueLink data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+* Template for requestToApprove plain text notifications
+*/
+{template .requestToApprove_text}
+    {call ServiceDesk.Templates.Conversational.Common.emailTemplate_text data="all"}
+        {param content}
+            {call .renderRequestToApproveContent_text data="all" /}
+            {call .renderIssueLink_text data="all" /}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * render HTML content for Request To Approve email
+ * @param user
+ */
+{template .renderRequestToApproveContent}
+    <p>
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user: $user/}
+    {/call}
+    </p>
+    <p class="email-body">
+        {getText('sd.email.approvals.notification.request.wait.for.approval')}
+        {call .renderIssueDetail data="all" /}
+    </p>
+{/template}
+
+/**
+ * render plain text content for Request To Approve email
+ * @param user
+ */
+{template .renderRequestToApproveContent_text}
+    {call ServiceDesk.Templates.Conversational.Common.renderGreeting data="all"}
+        {param user:$user/}
+    {/call}{\n}
+    {\n}
+        {getText('sd.email.approvals.notification.request.wait.for.approval')}
+        {\n}
+        {\n}
+        {call .renderIssueDetail_text data="all" /}
+    {\n}
+{/template}
+
+/**
+ * render Issue Link
+ * @param issueKey
+ * @param portalId
+ * @param issueUrl
+ */
+{template .renderIssueLink}
+    <p>
+        <a class="approval-link" data-portal-id="{$portalId}" data-issue-key="{$issueKey}" href="{$issueUrl}">{getText('sd.email.approvals.notification.request.to.issue.link')}</a>{sp}{getText('sd.email.approvals.notification.request.to.issue.to.approve.decline')}
+    </p>
+{/template}
+
+/**
+ * render Issue Link in plain text
+ * @param issueUrl
+ */
+{template .renderIssueLink_text}
+    {getText('sd.email.approvals.notification.request.to.issue.link')} {getText('sd.email.approvals.notification.request.to.issue.to.approve.decline')}
+    {\n}
+    {$issueUrl}
+{/template}
+
+/**
+ * Request details HTML
+ * @param issue
+ */
+{template .renderIssueDetail}
+    <p><b>{getText('sd.email.approvals.notification.issue.summary')}:</b></p>
+    <p>#{$issue.key}: {$issue.summary}</p>
+    <p><b>{getText('sd.email.approvals.notification.issue.created.by')}:</b></p>
+    <p>{$issue.reporterUser.displayName}</p>
+{/template}
+
+/**
+ * Request details plain text
+ * @param issue
+ */
+{template .renderIssueDetail_text}
+    {getText('sd.email.approvals.notification.issue.summary')}:
+    {\n}
+    #{$issue.key}: {$issue.summary}
+    {\n}
+    {\n}
+    {getText('sd.email.approvals.notification.issue.created.by')}:
+    {\n}
+    {$issue.reporterUser.displayName}
+    {\n}
+{/template}

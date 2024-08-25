@@ -1,0 +1,58 @@
+{namespace ServiceDesk.Templates.Admin}
+
+/**
+ * Draws the generic page with container where you can initate your application
+ * @param pageTitle
+ * @param containerId containerId which can be used to render app
+ * @param jsonPayload json data that can be used to populate models
+ */
+{template .defaultPage}
+    <html>
+        <head>
+            <title>{$pageTitle}</title>
+            <meta name="{$containerId}-jsonPayload" content="{$jsonPayload}" />
+        </head>
+        <body>
+            <div id="{$containerId}">
+            </div>
+        </body>
+    </html>
+{/template}
+
+/**
+ * Draws the generic page with container where you can initate your application
+ * @param pageTitle
+ * @param containerId containerId which can be used to render app
+ */
+{template .defaultPageWithNoPayload}
+    <html>
+        <head>
+            <title>{$pageTitle}</title>
+        </head>
+        <body>
+            <div id="{$containerId}">
+            </div>
+        </body>
+    </html>
+{/template}
+
+/**
+ * Draws the generic page with container where you can initate your application
+ * @param pageTitle
+ * @param containerId containerId which can be used to render app
+ * @param jsonPayload json data that can be used to populate models
+ * @param sdVersion sdVersion which can be used for analytics event
+ */
+{template .defaultPageWithSdVersionMeta}
+    <html>
+        <head>
+            <title>{$pageTitle}</title>
+            <meta name="{$containerId}-jsonPayload" content="{$jsonPayload}" />
+            <meta name="ajs-sdPluginVersion" content="{$sdVersion}">
+        </head>
+        <body>
+            <div id="{$containerId}">
+            </div>
+        </body>
+    </html>
+{/template}

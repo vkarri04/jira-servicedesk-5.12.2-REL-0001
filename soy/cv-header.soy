@@ -1,0 +1,175 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* Renders global header for customer view
+* @param env
+* @param? hasApprovals - A flag to avoid showing approvals link
+* @param? approvalsQueryType - approvals query type
+* @param? user
+* @param? organisations
+* @param? groups
+* @param shouldRenderCustomizeButton - whether user is on the portal page
+* @param linkText - text for link
+* @param shouldRenderLoginButton
+*/
+{template .header}
+
+// aui-theme-default and aui-page-fixed are required so that nav elements are always positioned in the same way
+<nav class="cp-header" role="navigation">
+    <div class="cp-header-primary js-breadcrumb-container"></div>
+    <div class="cp-header-secondary">
+            {if $user and not $user.isAnonymous}
+                {if $shouldRenderCustomizeButton}
+                    <div class="cp-header-item">
+                        {call ServiceDesk.Templates.Customer.SmartPortal.ActionButton.portalCustomizeButton}
+                            {param linkText: $linkText /}
+                            {param extraClasses: 'cv-header-nav-button'  /}
+                        {/call}
+                    </div>
+                {/if}
+                {call .allRequestsNavDropdown}
+                    {param env: $env /}
+                    {param user: $user /}
+                    {param hasApprovals: $hasApprovals /}
+                    {param approvalsQueryType: $approvalsQueryType /}
+                    {param organisations: $organisations /}
+                    {param groups: $groups /}
+                {/call}
+                <div class="cp-header-item">
+                    <a href="#dropdown2-header" aria-haspopup="true" class="aui-dropdown2-trigger cp-user-profile aui-dropdown2-trigger-arrowless" aria-controls="dropdown2-header">
+                        <div class="cp-avatar">
+                            <img class="cp-avatar-image" src="{$user.avatars.large}" alt="{$user.userName}">
+                        </div>
+                    </a>
+                    <div class="aui-dropdown2 aui-style-default aui-dropdown2-in-header" id="dropdown2-header">
+                        <div class="aui-dropdown2-section">
+                            <ul role="menu">
+                                <li role="none"><a role="menuitem" class="js-profile" href="{$env.baseUrl}/user/profile" class="active">{getText('sd.customerview.profile')}</a></li>
+
+                                {if $user.customMenuLinks}
+                                    {foreach $link in $user.customMenuLinks}
+                                        <li role="none"><a role="menuitem" href="{$link.href}" id="{$link.key}" class="{$link.styleClass}">{$link.label}</a></li>
+                                    {/foreach}
+                                {/if}
+
+                                <li role="none"><a role="menuitem" class="js-logout" href="#">{getText('sd.customerview.logout')}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {else}
+                {if $shouldRenderLoginButton}
+                    {call ServiceDesk.Templates.Customer.SmartPortal.ActionButton.loginButton}
+                        {param extraClasses: 'cv-header-nav-button'  /}
+                    {/call}
+                {/if}
+            {/if}
+    </div>
+</nav>
+{/template}
+
+/**
+* renders request dropdown button with extra classes
+* @param extraClasses - extra classes
+* @param user
+*/
+{template .allRequestsNavDropdownLink}
+    <a href="#requests-nav-dropdown" aria-owns="requests-nav-dropdown" aria-haspopup="true" class="aui-dropdown2-trigger aui-dropdown2-trigger-arrowless cv-requests-nav {$extraClasses}">
+        <span class="cv-requests-nav__text">{getText('sd.requestslist.header.new')}</span>
+        {let $totalOpenRequests}{$user.pendingApprovalsCount + $user.allOpenRequestsCount}{/let}
+        {if $totalOpenRequests > 0}
+            <aui-badge class="cp-badge">{$totalOpenRequests}</aui-badge>
+        {/if}
+    </a>
+{/template}
+
+/**
+* Renders requests dropdown with user orgs
+* @param user
+* @param env
+* @param hasApprovals
+* @param approvalsQueryType
+* @param organisations
+* @param groups
+*/
+{template .allRequestsNavDropdown}
+    <div class="cp-header-item">
+        {call .allRequestsNavDropdownLink}
+            {param user: $user /}
+            {param extraClasses: 'cv-header-nav-button' /}
+        {/call}
+        <div id="requests-nav-dropdown" class="aui-dropdown2 aui-style-default aui-dropdown2-in-header cv-requests-nav">
+            <div class="aui-dropdown2-section">
+                <ul role="menu">
+                    {if $hasApprovals}
+                        {call .requestNavItem}
+                            {param pageLink: 'approvals?approvalQueryType=' + $approvalsQueryType /}
+                            {param linkText: getText('sd.customerview.approvals.header') /}
+                            {param count: $user.pendingApprovalsCount /}
+                            {param env: $env /}
+                            {param navId: 'pendingApprovals' /}
+                        {/call}
+                    {/if}
+                    {call .requestNavItem}
+                        {param env: $env /}
+                        {param pageLink: 'requests?status=open' /}
+                        {param linkText: getText('sd.requestslist.header') /}
+                        {param count: $user.allOpenRequestsCount /}
+                        {param navId: 'openRequests' /}
+                    {/call}
+                    {call .requestNavItem}
+                        {param env: $env /}
+                        {param pageLink: 'requests?status=open&reporter=all' /}
+                        {param linkText: getText('sd.requestslist.title') /}
+                    {/call}
+                </ul>
+                {if $organisations and length($organisations.organisations) > 0 or $groups and length($groups.groups) > 0}
+                    <div class="cv-request-header-orgs-groups-divider"></div>
+                    <ul role="menu" class="cv-request-header-orgs-groups-container">
+                        {if $organisations and $organisations.organisations}
+                            {foreach $organisation in $organisations.organisations}
+                                {call .requestNavItem}
+                                    {param env: $env /}
+                                    {param pageLink: 'requests?status=open&reporter=org-' + $organisation.id /}
+                                    {param linkText: $organisation.name /}
+                                {/call}
+                            {/foreach}
+                        {/if}
+                        {if $groups and $groups.groups}
+                            {foreach $group in $groups.groups}
+                                {call .requestNavItem}
+                                    {param env: $env /}
+                                    {param pageLink: 'requests?status=open&reporter=group-' + $group.groupName /}
+                                    {param linkText: $group.groupName /}
+                                {/call}
+                            {/foreach}
+                        {/if}
+                    </ul>
+                {/if}
+            </div>
+        </div>
+    </div>
+{/template}
+
+/**
+* Renders requests nav item
+* @param env
+* @param linkText
+* @param pageLink
+* @param? count
+* @param? navId
+*/
+{template .requestNavItem}
+    {let $href: $env.baseUrl + '/user/' +$pageLink /}
+    {let $linkIdAttr: $navId ? $navId + 'Link' : '' /}
+    {let $badgeIdAttr: $navId ? $navId + 'Count' : '' /}
+
+    <li role="none">
+        <a role="menuitem" id="{$linkIdAttr}" href="{$href}">
+            <span class="cv-request-nav-text">{$linkText}</span>
+            {if $count > 0}
+                <aui-badge id="{$badgeIdAttr}" class="cp-badge">{$count}</aui-badge>
+            {/if}
+        </a>
+    </li>
+{/template}

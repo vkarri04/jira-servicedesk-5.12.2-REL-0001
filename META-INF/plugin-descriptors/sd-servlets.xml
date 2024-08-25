@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-servlets description="Service project servlets and servlet filters">
+
+    <!--================================
+        SERVLET FILTERS
+    =================================-->
+    <!--
+        This filter is REALLY important.  It controls which URLs are inside customer context.  It therefore allows
+        free customers access to services that JIRA plat would normally not allow.
+
+        Be very deliberate when changing this configuration here!
+    -->
+    <servlet-filter key="customer-portal-only-context-setter"
+                    class="com.atlassian.servicedesk.internal.web.CustomerContextSettingFilter"
+                    location="after-encoding">
+
+        <!--
+        The actual patterns that customer context are now managed in the CustomerContextSettingFilter itself. We listen to * and act on some of it dynamically.
+        -->
+        <url-pattern>*</url-pattern>
+
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </servlet-filter>
+
+    <servlet-filter key="sd-customer-portal-shim"
+                    class="com.atlassian.servicedesk.internal.web.shim.CustomerPortalShim"
+                    location="before-dispatch">
+        <url-pattern>/servicedesk/customershim/*</url-pattern>
+
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </servlet-filter>
+
+    <servlet-filter key="external-customer-lockout-filter"
+                    class="com.atlassian.servicedesk.internal.web.ExternalCustomerLockoutFilter"
+                    location="before-dispatch">
+        <url-pattern>*</url-pattern>
+
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </servlet-filter>
+
+    <servlet-filter key="populate-eyeball-for-rest-filter"
+                    class="com.atlassian.servicedesk.internal.web.PopulateEyeballForRestFilter"
+                    location="before-dispatch">
+        <!-- Ignore these paths, as they are not used for production:
+            /backdoor
+            -->
+        <url-pattern>/rest/servicedesk/*</url-pattern>
+        <url-pattern>/rest/servicedeskapi/*</url-pattern>
+
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </servlet-filter>
+
+    <servlet-filter key="sd-url-license-checker"
+                    class="com.atlassian.servicedesk.internal.web.UrlOperationalStatusCheckFilter"
+                    location="before-dispatch">
+        <url-pattern>/rest/servicedesk/*</url-pattern>
+        <url-pattern>/rest/servicedeskapi/*</url-pattern>
+
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </servlet-filter>
+
+    <!--================================
+        SERVLET
+    =================================-->
+
+    <servlet key="sd-issue-type-icon-servlet"
+             class="com.atlassian.servicedesk.internal.web.IssueTypeIconServlet">
+        <url-pattern>/servicedesk/issue-type-icons</url-pattern>
+    </servlet>
+
+</sd-servlets>

@@ -1,0 +1,13 @@
+{namespace ServiceDesk.Templates.Customer.SmartPortal}
+
+/**
+ * @param? hasNoResult whether to show "No matching search results" icon & text
+ */
+{template .portalCards}
+    {if $hasNoResult}
+        {call ServiceDesk.Templates.Shared.Components.Search.noResults}
+            {param subtitle: getText('sd.customerview.smart.portal.no.results.subtitle') /}
+        {/call}
+    {/if}
+    <div class="cv-portal-cards-react-container"></div>
+{/template}

@@ -1,0 +1,158 @@
+{namespace ServiceDesk.Util.Files.DragDrop}
+
+/**
+ * The dropzone for the customer portal. Covers the whole screen when drag+dropping.
+ */
+{template .portalDropzone}
+    <div class="cp-portal-dropzone">
+        <div class="cp-portal-dropzone-infobox-parent">
+            <div class="cp-portal-dropzone-infobox">
+                {getText('sd.request.create.attachment.drop.infobox')}
+            </div>
+        </div>
+    </div>
+{/template}
+
+/**
+ * "Drop files here, or browse" text + browse input button
+ * @param ariaLabelledBy
+ */
+{template .browseFiles}
+    <div class="controls">
+        {call aui.icons.icon}
+            {param icon: 'attachment' /}
+            {param useIconFont: true /}
+            {param size: 'small' /}
+        {/call}
+        <span class="sd-drag-info">{getText('sd.request.create.attachment.drop.ctrlv.hint')}</span>
+        <span class="hidden" id="attachment-browse-description">
+            {getText('sd.request.create.attachment.browse.files.upload.description')}
+        </span>
+        </br>
+        <label id="attachment-label-button" class="js-attach cv-attachment-label">
+            {getText('sd.common.words.browse')}
+            <input tabindex="0" type="file" multiple name="attachment" class="attachment-control request-attachment" id="attachment" {if $ariaLabelledBy}aria-labelledby="{$ariaLabelledBy} attachment-browse-description" {else} aria-labelledby="attachment-browse-description"{/if} />
+        </label>
+    </div>
+{/template}
+
+/**
+ * Container element for the attachment
+ */
+{template .attachmentContainer}
+    <div class="sd-attachment-parent">
+        <div class="sd-attachment sd-thumbnail"></div>
+        <span class="sd-attachment-file-name"></span>
+    </div>
+{/template}
+
+
+/**
+ * Container element for non-image thumbnail icons
+ * @param mimetype
+ */
+{template .thumbnailIconContainer}
+    <div class="sd-thumbnail-image sd-thumbnail-image-icon">
+        {call .renderThumbnailIcon}
+            {param mimetype: $mimetype /}
+        {/call}
+    </div>
+{/template}
+
+
+/*********************************************************
+ * Below here is copied from JIRA's attachmentsblock.soy
+ * file, so that we can access the correct file icons
+ * for each attachment type.
+ *********************************************************/
+
+/**
+ * @param mimetype
+ */
+{template .renderThumbnailIcon}
+    {let $fileClass}
+        {call .matchFileClass data="all" /}
+    {/let}
+
+    <span class="aui-icon aui-icon-large attachment-thumbnail-icon {$fileClass}"></span>
+{/template}
+
+/**
+ * @param mimetype
+ */
+{template .matchFileClass}
+    {switch $mimetype}
+        {case 'application/pdf'}
+        aui-iconfont-file-pdf
+        {case 'image/gif'}
+        aui-iconfont-image
+        {case 'image/png'}
+        aui-iconfont-image
+        {case 'image/jpeg'}
+        aui-iconfont-image
+        {case 'text/xml'}
+        aui-iconfont-file-code
+        {case 'text/html'}
+        aui-iconfont-file-code
+        {case 'text/plain'}
+        aui-iconfont-file-txt
+        {case 'application/zip'}
+        aui-iconfont-file-zip
+        {case 'application/x-gzip-compressed'}
+        aui-iconfont-file-zip
+
+        {case 'application/msword'}
+        aui-iconfont-file-doc
+        {case 'application/msword-template'}
+        aui-iconfont-file-doc
+        {case 'application/vnd.ms-word.document.macroEnabled.12'}
+        aui-iconfont-file-doc
+        {case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'}
+        aui-iconfont-file-doc
+        {case 'application/vnd.ms-word.template.macroEnabled.12'}
+        aui-iconfont-file-doc
+        {case 'application/vnd.openxmlformats-officedocument.wordprocessingml.template'}
+        aui-iconfont-file-doc
+
+        {case 'application/vnd.ms-excel'}
+        aui-iconfont-file-xls
+        {case 'application/vnd.ms-excel.addin.macroEnabled.12'}
+        aui-iconfont-file-xls
+        {case 'application/vnd.ms-excel.sheet.binary.macroEnabled.12'}
+        aui-iconfont-file-xls
+        {case 'application/vnd.ms-excel.sheet.macroEnabled.12'}
+        aui-iconfont-file-xls
+        {case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}
+        aui-iconfont-file-xls
+        {case 'application/vnd.ms-excel.template.macroEnabled.12'}
+        aui-iconfont-file-xls
+        {case 'application/vnd.openxmlformats-officedocument.spreadsheetml.template'}
+        aui-iconfont-file-xls
+
+        {case 'application/vnd.ms-powerpoint'}
+        aui-iconfont-file-ppt
+        {case 'application/vnd.ms-powerpoint.template.macroEnabled.12'}
+        aui-iconfont-file-ppt
+        {case 'application/vnd.openxmlformats-officedocument.presentationml.template'}
+        aui-iconfont-file-ppt
+        {case 'application/vnd.ms-powerpoint.addin.macroEnabled.12'}
+        aui-iconfont-file-ppt
+        {case 'application/vnd.ms-powerpoint.slideshow.macroEnabled.12'}
+        aui-iconfont-file-ppt
+        {case 'application/vnd.openxmlformats-officedocument.presentationml.slideshow'}
+        aui-iconfont-file-ppt
+        {case 'application/vnd.ms-powerpoint.presentation.macroEnabled.12'}
+        aui-iconfont-file-ppt
+        {case 'application/vnd.openxmlformats-officedocument.presentationml.presentation'}
+        aui-iconfont-file-ppt
+
+        {case 'text/x-java'}
+        aui-iconfont-file-code
+        {case 'text/x-java-source'}
+        aui-iconfont-file-code
+        {case 'application/x-java-archive'}
+        aui-iconfont-file-zip
+        {default}
+        aui-iconfont-devtools-file
+    {/switch}
+{/template}

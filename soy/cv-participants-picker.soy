@@ -1,0 +1,11 @@
+{namespace ServiceDesk.Customer.Feature.ParticipantsPicker.templates}
+
+/**
+* @param fieldId to be used as id and name for input
+*/
+{template .field}
+<div>
+     <label for="{$fieldId}">{getText('sd.request.participants.portal.picker.placeholder')}</label>
+     <input type="hidden" class="js-selected-participants cv-participant-select" name="{$fieldId}" id="{$fieldId}" />
+</div>
+{/template}

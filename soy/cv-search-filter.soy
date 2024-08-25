@@ -1,0 +1,132 @@
+{namespace ServiceDesk.Customer.Feature.SearchFilter.Templates}
+
+/**
+* Renders for for filtering list of all user requests
+* @param id
+* @param dropdowns
+* @param textFilter
+*/
+{template .body}
+    <div class="cp-search-filter-container">
+        {call aui.form.form}
+            {param id: $id /}
+            {param action: '#' /}
+            {param content}
+                {foreach $dropdown in $dropdowns}
+                    <div class="cp-filter-container">
+                        {call .dropdown}
+                            {param id: $dropdown.id /}
+                            {param label: $dropdown.label /}
+                            {param options: $dropdown.options /}
+                            {param selectedValue: $dropdown.value /}
+                        {/call}
+                    </div>
+                {/foreach}
+                <div class="cp-filter-container">
+                    <div class="cp-filter-text-input-wrapper">
+                        <input
+                            class="text full-width-field js-filter-text cp-filter-text empty" type="text"
+                            {if $textFilter}value="{$textFilter}"{/if}
+                            placeholder="{getText('sd.requestslist.search.placeholder')}"
+                            autocomplete="off"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                        />
+                        {call aui.icons.icon}
+                            {param icon: 'search' /}
+                            {param useIconFont: true /}
+                            {param extraClasses: 'cp-filter-text-input-search-icon' /}
+                        {/call}
+                        {call aui.buttons.button}
+                            {param extraClasses: 'cp-filter-text-input-clear-icon js-filter-text-clear' /}
+                            {param extraAttributes: ['style': 'display: none;', 'type': 'button'] /}
+                            {param iconType: 'aui' /}
+                            {param iconClass: 'aui-icon aui-icon-small aui-iconfont-remove cp-clear-text-icon' /}
+                            {param iconText: getText('sd.common.words.remove') /}
+                            {param type: 'link' /}
+                            {param text: '' /}
+                        {/call}
+                    </div>
+                </div>
+            {/param}
+            {param extraClasses: ['cp-search-filter', 'js-all-requests-filter'] /}
+        {/call}
+    </div>
+{/template}
+
+/**
+* Renders a filter request dropdown (aui dropdown 2), with special handling to make sure that when it is hidden it
+* appends back to a child of this view so it is cleaned up.
+* @param id
+* @param label
+* @param selectedValue
+* @param options
+*/
+{template .dropdown}
+    {call aui.dropdown2.trigger}
+        {param extraClasses: 'aui-button js-' + $id + '-trigger ' + $id + '-trigger cp-filters' /}
+        {param extraAttributes: [
+            'data-dropdown2-hide-location': 'js-' + $id + '-dropdown-container',
+            'title': $label
+        ] /}
+        {param text: $label /}
+        {param menu: ['id': $id + '-dropdown']/}
+    {/call}
+    <div id="js-{$id}-dropdown-container">
+         {call aui.dropdown2.contents}
+            {param id: $id + '-dropdown' /}
+            {param extraClasses: 'filter-dropdown aui-style-default js-filter-dropdown' /}
+            {param extraAttributes: ['data-id': $id] /}
+            {param content}
+                <ul class="aui-list">
+                {foreach $option in $options}
+                    {if $option.options}
+                        {call aui.dropdown2.section}
+                            {param content}
+                                {if $option.heading}
+                                <div class="aui-dropdown2-heading">
+                                    <strong>{$option.heading}</strong>
+                                </div>
+                                {/if}
+                                 {foreach $subOption in $option.options}
+                                    {call .dropdownOption}
+                                        {param option: $subOption /}
+                                        {param selectedValue: $selectedValue /}
+                                    {/call}
+                                 {/foreach}
+                            {/param}
+                        {/call}
+                    {else}
+                        {call .dropdownOption}
+                            {param option: $option /}
+                            {param selectedValue: $selectedValue /}
+                        {/call}
+                    {/if}
+                {/foreach}
+                </ul>
+            {/param}
+        {/call}
+    </div>
+{/template}
+
+/**
+* @param selectedValue
+* @param option
+*/
+{template .dropdownOption}
+    <li>
+        <aui-item-link
+            class="js-filter-item {if $option.extraClasses}{$option.extraClasses}{/if} {if $selectedValue == $option.value}selected-item{/if}"
+            href="#"
+            data-value="{$option.value}">
+                {if $option.iconId}
+                    {call ServiceDesk.Templates.Components.RequestTypeIcons.smallIcon}
+                        {param iconId: $option.iconId /}
+                        {param useCustomerShim: true /}
+                    {/call}
+                {/if}
+                {$option.label}
+        </aui-item-link>
+    <li>
+{/template}

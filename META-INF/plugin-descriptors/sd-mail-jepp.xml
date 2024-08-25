@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-mail-jepp description="Service Desk JEPP modules">
+
+    <!--================================
+        EMAIL PLATFORM FOR JEPP
+    =================================-->
+    <mail-filter i18n-name-key="sd.email.filter.bulk.name" key="sdBulkFilter" scope="PROJECT" class="com.atlassian.servicedesk.internal.feature.emailchannel.emailplatform.filter.SDBulkFilter">
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </mail-filter>
+    <mail-filter i18n-name-key="sd.email.filter.sent.from.jira.name" key="sdJiraFilter" scope="PROJECT" class="com.atlassian.servicedesk.internal.feature.emailchannel.emailplatform.filter.SDSentFromJIRAFilter">
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </mail-filter>
+    <mail-filter i18n-name-key="sd.email.filter.auto.reply.name" key="sdAutoReplyFilter" scope="PROJECT" class="com.atlassian.servicedesk.internal.feature.emailchannel.emailplatform.filter.SDAutoReplyFilter">
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </mail-filter>
+    <mail-handler i18n-name-key="sd.email.handler.name" key="sdMailHandler" scope="PROJECT" class="com.atlassian.servicedesk.internal.feature.emailchannel.emailplatform.handler.SDMailHandler">
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </mail-handler>
+
+</sd-mail-jepp>

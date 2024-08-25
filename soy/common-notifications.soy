@@ -1,0 +1,19 @@
+{namespace Viewport.Templates.CommonNotifications}
+
+/**
+ * Template plain text footnote for all service desk notification
+ * @param wacLink
+ */
+{template .sdFootnote_text}
+--{\n}
+{getText('sd.email.footnote.line1')}{\n}
+{getText('sd.email.footnote.line2')}{\n}
+{getText('sd.email.footnote.line3')} {$wacLink}{\n}
+{/template}
+
+/**
+ * separate line between text
+ */
+{template .separateLine}
+-----------------------------------------------------------------------------------------------------------{\n}
+{/template}

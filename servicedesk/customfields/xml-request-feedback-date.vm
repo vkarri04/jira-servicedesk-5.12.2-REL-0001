@@ -1,0 +1,6 @@
+#disable_html_escaping()
+#if ($value)
+    <customfieldvalue>$iso8601Formatter.format($value)</customfieldvalue>
+#else
+    <customfieldvalue></customfieldvalue>
+#end

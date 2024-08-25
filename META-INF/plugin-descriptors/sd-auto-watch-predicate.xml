@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-auto-watch-predicate description="Service project permission">
+
+    <auto-watch-predicate key="sd-auto-watch-predicate-impl"
+                          class="com.atlassian.servicedesk.internal.notifications.watchers.override.AutoWatchOverrideImpl">
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition"/>
+    </auto-watch-predicate>
+
+</sd-auto-watch-predicate>

@@ -1,0 +1,23 @@
+{namespace ServiceDesk.Templates.Customer.InlineAttach}
+
+/**
+* warning
+* @param warningMessage
+* @param closeable
+* @param title
+*/
+{template .simpleWarningMessage}
+<div class="aui-message aui-message-warning {if $closeable}closeable{/if}" title="{$warningMessage}">
+    {if $title}
+    <p class="title">{$title}</p>
+    {/if}
+    {$warningMessage}
+    {if $closeable}
+    <button type="button"
+            class="aui-close-button js-simple-warning-message-close"
+            aria-label="{getText('sd.common.words.close')}"
+    ></button>
+    {/if}
+</div>
+{/template}
+

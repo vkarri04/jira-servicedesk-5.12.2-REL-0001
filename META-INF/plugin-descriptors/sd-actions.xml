@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-actions description="Service project webwork actions">
+
+    <!--================================
+    ACTIONS
+    =================================-->
+    <webwork1 key="servicedesk-webwork-actions" class="java.lang.Object">
+        <actions>
+            <!-- Admin configuration -->
+            <action name="com.atlassian.servicedesk.internal.actions.admin.AdminConfigurationAction"
+                    alias="AdminConfigurationAction">
+                <command name="view" alias="SDConfiguration" />
+            </action>
+            <action name="com.atlassian.servicedesk.internal.actions.admin.AdminEmailViewAction"
+                    alias="AdminEmailViewAction">
+                <command name="view" alias="SDMailInfo" />
+            </action>
+            <action name="com.atlassian.servicedesk.internal.actions.admin.AdminEmailChannelsAction"
+                    alias="AdminEmailChannelsAction">
+                <command name="view" alias="SDMailChannels" />
+            </action>
+
+            <!-- Service project -->
+            <action name="com.atlassian.servicedesk.internal.actions.agent.EditRequestTypeAction"
+                    alias="EditRequestType">
+                <command name="editRequestType" alias="EditRequestType" />
+            </action>
+
+            <action name="com.atlassian.servicedesk.internal.actions.agent.ServiceDeskHomeAction"
+                    alias="ServiceDeskHome">
+                <command name="redirectToHome" alias="SDHome" />
+            </action>
+
+            <action name="com.atlassian.servicedesk.internal.actions.agent.AcceptInvitationAction"
+                    alias="AgentAcceptInvitation">
+                <command name="view" alias="AcceptInvitation" />
+            </action>
+
+            <action name="com.atlassian.servicedesk.internal.actions.FieldDefaultValuesAction"
+                    alias="FieldDefaultValues"/>
+
+            <action name="com.atlassian.servicedesk.internal.actions.jira.mail.EditSDMailHandlerInJiraAction"
+                    alias="SDMailHandlerDetail" roles-required="admin">
+                <command name="view" alias="SDMailHandlerDetail"/>
+            </action>
+
+            <action name="com.atlassian.servicedesk.internal.actions.error.FirstLoginCannotViewAnyProjectAction"
+                    alias="SDFirstLoginCannotViewAnyProject">
+                <command name="view" alias="SDFirstLoginCannotViewAnyProject" />
+            </action>
+
+            <action name="com.atlassian.servicedesk.internal.actions.admin.OpsgenieSetupAction"
+                    alias="OpsgenieSetupAction">
+                <command name="view" alias="SDOpsgenieConfiguration" />
+            </action>
+
+            <action name="com.atlassian.servicedesk.internal.actions.admin.ConfluenceCloudSetupAction"
+                    alias="ConfluenceCloudSetupAction">
+                <command name="view" alias="SDConfluenceCloudConfiguration" />
+            </action>
+
+            <action name="com.atlassian.servicedesk.internal.actions.admin.SlaSetupAction"
+                    alias="SlaSetupAction">
+                <command name="view" alias="SDSlaConfiguration" />
+            </action>
+
+            <action name="com.atlassian.servicedesk.internal.actions.admin.EmailAllowListSetupAction"
+                    alias="EmailAllowListSetupAction">
+                <command name="view" alias="SDEmailAllowListConfiguration" />
+            </action>
+
+            <action name="com.atlassian.servicedesk.internal.actions.admin.EmailBlockListSetupAction"
+                    alias="EmailBlockListSetupAction">
+                <command name="view" alias="SDEmailBlockListConfiguration" />
+            </action>
+        </actions>
+    </webwork1>
+
+</sd-actions>

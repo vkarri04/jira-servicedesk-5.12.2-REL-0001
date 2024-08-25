@@ -1,0 +1,14 @@
+{namespace ServiceDesk.Templates.Customer.Request}
+
+/**
+* Render issue archived banner.
+*/
+{template .issueArchivedBanner}
+    <div class="cv-request-details-issue-archival-banner">
+        <span class="cv-archival-icon aui-icon aui-icon-small aui-iconfont-folder-filled"></span>
+        <span class="cv-archival-message">
+            <strong>{getText('sd.request.details.issue.archived')}</strong>
+            {getText('sd.request.details.issue.archived-action')}
+        </span>
+    </div>
+{/template}

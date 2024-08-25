@@ -1,0 +1,17 @@
+{namespace ServiceDesk.Templates.Customer.SmartPortal}
+
+/**
+ * @param recentRequestTypes
+ * @param? includeGroupTagTargets Includes a target element on list items that group tags will be rendered into
+ */
+{template .recentRequestTypes}
+    <h3 class="cv-smart-portal-browse-list-title">
+        {getText('sd.customerview.smart.portal.recent.request.types.header')}
+    </h3>
+    {call ServiceDesk.Templates.Customer.Common.Request.requestTypeList}
+        {param requestTypes: $recentRequestTypes /}
+        {param contextPath: contextPath() /}
+        {param queryParams: ['origin': 'recent'] /}
+        {param includeGroupTagTargets: $includeGroupTagTargets /}
+    {/call}
+{/template}

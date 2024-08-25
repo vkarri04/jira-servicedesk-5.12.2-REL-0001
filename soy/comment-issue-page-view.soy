@@ -1,0 +1,199 @@
+{namespace ServiceDesk.Comment.IssuePage.View}
+//This is a copy of system-comment-issue-page-view.vm. We want to look almost like it, with minor tweeks... for now
+
+/**
+ * @param commentId
+ * @param suffix
+ * @param prettyCreateDate
+ * @param iso8601CreateDate
+ * @param authorKey
+ * @param isOutsider
+ * @param isReporter
+ * @param isInternal
+ * @param outsiderContext
+ * @param hasVisibilityLevel
+ * @param visibilityLevel
+ * @param isCommentUpdated
+ * @param updaterName
+ * @param formattedUpdateDate
+ * @param baseUrl
+ * @param issueKey
+ */
+{template .sdActionDetailsBody}
+
+    {let $createdDate}
+         {sp}- <span class="commentdate_{$commentId}_{$suffix} subText"><span class="date user-tz" title="{$prettyCreateDate}"><time class="livestamp" datetime="{$iso8601CreateDate}">{$prettyCreateDate}</time></span></span>
+    {/let}
+
+    <div class="sd-comment-primary-details">
+        {getText('issue.tabpanels.comment.action.header', $authorKey, $createdDate)|noAutoescape}
+
+        <a href="{$baseUrl}/browse/{$issueKey}?focusedCommentId={$commentId}&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-{$commentId}"
+           title="{getText('viewissue.permlink.title')|noAutoescape}"
+           class="activitymodule-link sd-comment-permalink">
+          <span class="icon-default aui-icon aui-icon-small aui-iconfont-link">
+              {getText('viewissue.permlink')|noAutoescape}
+          </span>
+        </a>
+
+        {if $isCommentUpdated}
+            <span
+                    class="sd-comment-action-details-item sd-comment-action-details-subtext subText"
+                    title="{$updaterName|noAutoescape} - {$formattedUpdateDate|noAutoescape}"
+            >
+                - {getText('common.concepts.edited')|noAutoescape}
+            </span>
+        {/if}
+    </div>
+
+    <div class="sd-comment-secondary-details">
+        {if $hasVisibilityLevel}
+            <span class="sd-comment-action-details-item sd-comment-action-details-subtext subText" data-restricted-comment="true">
+                <span class="aui-icon aui-icon-small aui-iconfont-locked"></span>
+                {getText('viewissue.comment.visibleby')} {$visibilityLevel|noAutoescape}
+            </span>
+        {/if}
+
+        {if $isOutsider}
+            {call ServiceDesk.Templates.Components.Outsider.Comments.shareRequestLozenge}
+                {param canAddAuthorAsParticipant: $outsiderContext.canAddAuthorAsParticipant /}
+                {param authorUsername: $outsiderContext.authorUsername /}
+                {param commentId: $outsiderContext.commentId /}
+                {param extraLozengeClasses: $outsiderContext.extraLozengeClasses /}
+            {/call}
+        {/if}
+
+        {if $isReporter}
+            <span class="sd-comment-action-details-item">
+                {call SOY_REACT_BRIDGE_AUILozenge}
+                    {param subtle: true /}
+                    {param type: 'new' /}
+                    {param message: getText('sd.comment.tag.reporter') /}
+                {/call}
+            </span>
+        {/if}
+
+        {if $isInternal}
+            <span class="sd-comment-action-details-item sd-comment-internal" data-comment-internal-only>
+                {call SOY_REACT_BRIDGE_AUILozenge}
+                    {param subtle: true /}
+                    {param message: getText('sd.comment.tag.internal') /}
+                {/call}
+            </span>
+        {/if}
+    </div>
+{/template}
+
+/**
+ * @param commentId
+ * @param prettyCreateDate
+ * @param iso8601CreateDate
+ * @param isOutsider
+ * @param isReporter
+ * @param isInternal
+ * @param outsiderContext
+ * @param hasVisibilityLevel
+ * @param visibilityLevel
+ * @param isCommentUpdated
+ * @param updaterName
+ * @param formattedUpdateDate
+ * @param authorKeyConcise
+ * @param contentConcise
+ * @param authorKeyVerbose
+ * @param contentVerbose
+ * @param isFocused
+ * @param isCollapsed
+ * @param baseUrl
+ * @param issueKey
+ * @param issueId
+ * @param canEditComment
+ * @param canDeleteComment
+ * @param commentReactionsEnabled
+ * @param canReact
+ */
+{template .commentIssuePageView}
+    {let $focusedClass: $isFocused ? 'focused' : '' /}
+    {let $collapsedClass: $isCollapsed ? 'collapsed' : 'expanded' /}
+    <div class="sd-activity-comment issue-data-block twixi-block {$collapsedClass} {$focusedClass}">
+        <div class="twixi-wrap verbose actionContainer">
+            <div class="action-head">
+                <h3>
+                    <a href="#" class="twixi" role="button" tabindex="0">
+                        <span class="icon twixi-opened">
+                            <span>
+                                {getText('admin.common.words.hide')|noAutoescape}
+                            </span>
+                        </span>
+                    </a>
+                </h3>
+                <div class="sd-comment-action-details action-details">
+                    <div class="sd-action-details-verbose">
+                        {call .sdActionDetailsBody data="all"}
+                            {param suffix: 'verbose' /}
+                            {param authorKey:$authorKeyVerbose /}
+                            {param baseUrl:$baseUrl /}
+                            {param issueKey:$issueKey /}
+                        {/call}
+                    </div>
+                </div>
+            </div>
+            <div class="action-body flooded">
+                {$contentVerbose|noAutoescape}
+            </div>
+            <div class="sd-comment-action-links action-links">
+                {if $canEditComment}
+                    <a id="edit_comment_{$commentId}"
+                        href="{$baseUrl}/secure/EditComment!default.jspa?id={$issueId}&commentId={$commentId}"
+                        title="{getText('common.words.edit')}"
+                        class="edit-comment sd-edit-comment"
+                        data-comment-is-internal="{$isInternal}"
+                        data-comment-id="{$commentId}">
+                        {getText('common.words.edit')}
+                    </a>
+                {/if}
+                {if $canEditComment and $canDeleteComment}
+                    <span class="action-links__divider"></span>
+                {/if}
+                {if $canDeleteComment}
+                    <a id="delete_comment_{$commentId}"
+                        href="{$baseUrl}/secure/DeleteComment!default.jspa?id={$issueId}&commentId={$commentId}"
+                        title="{getText('common.words.delete')|noAutoescape}">
+                        {getText('common.words.delete')}
+                    </a>
+                {/if}
+                {if $canDeleteComment and $commentReactionsEnabled}
+                    <span class="action-links__divider"></span>
+                {/if}
+                {if $commentReactionsEnabled}
+                    <jira-comment-reactions data-commentid="{$commentId}" data-canreact="{$canReact}"></jira-comment-reactions>
+                {/if}
+            </div>
+        </div>
+        <div class="twixi-wrap concise actionContainer">
+            <div class="action-head">
+                <h3>
+                    <a href="#" class="twixi" role="button" tabindex="0">
+                        <span class="icon twixi-closed">
+                            <span>
+                                {getText('admin.common.words.show')|noAutoescape}
+                            </span>
+                        </span>
+                    </a>
+                </h3>
+                <div class="sd-comment-action-details action-details flooded">
+                    <div class="sd-action-details-concise">
+                        {call .sdActionDetailsBody data="all"}
+                            {param suffix: 'concise' /}
+                            {param authorKey:$authorKeyConcise /}
+                            {param baseUrl:$baseUrl /}
+                            {param issueKey:$issueKey /}
+                        {/call}
+                        <div class="sd-comment-action-body">
+                            {$contentConcise|noAutoescape}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/template}

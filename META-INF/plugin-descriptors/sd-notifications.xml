@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-notifications description="Service Desk notifications">
+
+    <!--================================
+    NOTIFICATIONS
+    =================================-->
+
+    <notification-filter key="notification-filter-impl"
+                         class="com.atlassian.servicedesk.internal.notifications.filter.ServiceDeskNotificationFilter"/>
+
+</sd-notifications>

@@ -1,0 +1,45 @@
+{namespace ServiceDesk.Templates.Shared.AvatarPicker}
+
+/**
+ * @param? imageSrc Source of image if it's to be supplied initially
+ * @param? description
+ * @param? fallbackDescription Description to use when using the iframe uploader. If it's not supplied, $description will be used.
+ * @param? maskMode Image cropping shape, square or circle.
+ * @param? uploadText Text for the upload image button
+ */
+{template .imageUploadAndCrop}
+    <div class="image-upload-and-crop-container">
+        {call .imageExplorer}
+            {param imageSrc: $imageSrc/}
+            {param maskMode: $maskMode/}
+        {/call}
+        <form class="aui image-upload-and-crop-form">
+            // also need to add `aria-labelledby` for this in JSDS-4593?
+            <input type="file" id="image-upload-and-crop-upload-field" class="image-upload-field" accept="image/{'*'}"/>
+            <button class="image-upload-field-replacement aui-button" tabindex="1">
+                {$uploadText}
+            </button>
+            {if $description}
+                <div class="description">{$description}</div>
+            {/if}
+            {if $fallbackDescription or $description}
+                <div class="description fallback">{$fallbackDescription ? $fallbackDescription : $description}</div>
+            {/if}
+        </form>
+    </div>
+{/template}
+
+/**
+ * Container for the error messages
+ */
+{template .errorContainer}
+        <div class="error-container"></div>
+{/template}
+
+
+/**
+ * @param message the text to show in the error message
+ */
+{template .errorMessage}
+    <span>{$message}</span>
+{/template}

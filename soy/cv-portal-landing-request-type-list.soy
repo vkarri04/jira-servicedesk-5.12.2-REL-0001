@@ -1,0 +1,37 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* Renders the main content
+* @param portal serialized portal model
+* @param requestTypes the list of forms in the customer view
+*/
+{template .requestTypeList}
+    <div id="cv-request-content">
+        {if $portal.createPermission}
+            {if length($requestTypes) > 0}
+                <ul class="cv-landing-list">
+                    {foreach $requestType in $requestTypes}
+                        <li>
+                            <span class="cv-request-type js-cv-request-type{if not $requestType.introHtml} no-description{/if}" data-id="{$requestType.id}">
+                                {call ServiceDesk.Templates.Components.RequestTypeIcons.icon}
+                                    {param iconId: $requestType.icon ?: 0 /}
+                                    {param useCustomerShim: true /}
+                                {/call}
+                                <a href="{$portal.portalBaseUrl}/create/{$requestType.id}"><strong>{if $requestType.callToAction}{$requestType.callToAction}{else}{$requestType.name}{/if}</strong></a>
+                                {if $requestType.introHtml}
+                                    <span class="cv-request-type-description">
+                                        {$requestType.introHtml|noAutoescape}
+                                    </span>
+                                {/if}
+                            </span>
+                        </li>
+                    {/foreach}
+                </ul>
+            {else}
+                <p>{getText('sd.home.empty')}</p>
+            {/if}
+        {else}
+            <p>{getText('sd.home.nocreatepermission')}</p>
+        {/if}
+    </div>
+{/template}

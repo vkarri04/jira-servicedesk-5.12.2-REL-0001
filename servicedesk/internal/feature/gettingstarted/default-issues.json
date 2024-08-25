@@ -1,0 +1,31 @@
+{
+    "projects": [
+        {
+            "key": "${projectKey}",
+            "name": "${projectName}",
+            "versions": [],
+            "issues": [
+                {
+                    "history": [],
+                    "summary": "${summaryAsHtml}",
+                    "description": "${descriptionAsHtml}",
+                    "issueType": "${issueTypeAsHtml}",
+                    "status": "${statusAsHtml}",
+                    "assignee": "${assignee}",
+                    "reporter": "${reporter}",
+                    "priority": "${priority}",
+                    "customFieldValues": [
+                        {
+                            "fieldName": "${requestTypeFieldname}",
+                            "value": "${requestTypeValue}",
+                            "fieldType": "com.atlassian.servicedesk:vp-origin",
+                            "searcherType": "com.atlassian.servicedesk.internal.customfields.origin.VpOriginSearcher"
+                        }
+                    ],
+                    "updated": "P-0DT-0H-0M",
+                    "created": "P-0DT-0H-0M"
+                }
+            ]
+        }
+    ]
+}

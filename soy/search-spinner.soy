@@ -1,0 +1,11 @@
+{namespace ServiceDesk.Templates.Shared.Components}
+
+/**
+ * A spinner with customizable size
+ * @param size the size of the spinner, available options are "small", "medium", "large".
+ */
+{template .searchSpinner}
+    <div class="sd-spinner-container">
+        <aui-spinner size="{$size}"></aui-spinner>
+    </div>
+{/template}

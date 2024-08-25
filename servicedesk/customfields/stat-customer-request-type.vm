@@ -1,0 +1,3 @@
+#if ($customField && $value)
+    $customField.customFieldType.getDisplayedValue($value).name
+#end

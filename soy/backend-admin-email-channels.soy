@@ -1,0 +1,92 @@
+{namespace ServiceDesk.Templates.Admin.email}
+
+/**
+ * This draws in the mostly static email admin page
+ *
+ * @param emailSettingsByServiceDesk the rows of the table
+ */
+{template .adminEmailChannels}
+    <html>
+        <head>
+            <title>{getText('sd.admin.email.address.heading')}</title>
+        </head>
+        <body>
+            <div class="sd-email-channels-container sd-settings-container">
+                <h2>{getText('sd.admin.email.address.heading')}</h2>
+                <p>{getText('sd.admin.email.info.description')}</p>
+                {if length($emailSettingsByServiceDesk) == 0}
+                    <div class="aui-message">
+                        <p class="title">{getText('sd.admin.email.empty.title')}</p>
+                        <p>{getText('sd.admin.email.empty.body')}</p>
+                    </div>
+                {else}
+                    <table class="aui aui-table-interactive">
+                        <thead>
+                            <tr>
+                                <th class="sd-col">{getText('sd.admin.email.table.column.sd')}</th>
+                                <th class="sd-address-col">{getText('sd.admin.email.table.column.address')}</th>
+                                <th class="sd-request-type-col">{getText('sd.admin.email.table.column.request.type')}</th>
+                                <th class="sd-status-col">{getText('sd.admin.email.table.column.status')}</th>
+                                <th class="sd-actions-col">{getText('sd.admin.email.table.column.actions')}</th>
+                            </tr>
+                        </thead>
+                        {foreach $emailSetting in $emailSettingsByServiceDesk}
+                            <tbody>
+                                {foreach $entry in $emailSetting.entries}
+                                <tr class="sd-email-setting" data-id="{$entry.emailSettingsId}"
+                                    data-project-id="{$entry.projectId}"
+                                    data-email="{$entry.email}"
+                                    data-channel-key="{$entry.channelKey}">
+
+                                    {if isFirst($entry) and length($emailSetting.entries) > 1}
+                                        <th  headers="sd-col" rowspan="{length($emailSetting.entries)}" class="font-normal">
+                                            {$emailSetting.serviceDeskName}
+                                        </th>
+                                    {elseif length($emailSetting.entries) == 1}
+                                        <td headers="sd-col">
+                                            {$emailSetting.serviceDeskName}
+                                        </td>
+                                    {/if}
+                                    <td headers="sd-address-col">
+                                        {$entry.email}
+                                    </td>
+                                    <td headers="sd-request-type-col">
+                                        {if $entry.requestName}
+                                            <div>{$entry.requestName}</div>
+                                        {else}
+                                            <div class="sd-status-bad">{getText('sd.admin.email.invalid.request')}</div>
+                                        {/if}
+                                    </td>
+                                    <td headers="sd-status-col" class="js-test-server-status">
+                                        {if $entry.lastSentRaw == 0}
+                                            <div class="sd-status-bad">{$entry.lastSentMessage}</div>
+                                        {else}
+                                            <div>{$entry.lastSentMessage}</div>
+                                        {/if}
+                                    </td>
+                                    <td headers="sd-test-server-col">
+                                        <div class="js-action-buttons">
+                                            <button class="aui-button aui-button-compact js-test-server">
+                                                    {getText('sd.admin.email.table.column.test')}
+                                            </button>
+                                            <button class="aui-button aui-button-compact aui-button-link js-view-log">
+                                                    {getText('sd.admin.email.table.column.log')}
+                                            </button>
+                                            <button class="js-tooltip aui-button aui-button-compact aui-button-link js-delete-settings"
+                                                title="{getText('sd.admin.email.confirm.delete.tipsy')}">
+                                                {getText('sd.admin.email.table.column.delete')}
+                                            </button>
+                                            <span class="cv-sd-status js-status"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                            </tbody>
+                        {/foreach}
+                    </table>
+                {/if}
+            </div>
+        </body>
+    </html>
+{/template}
+

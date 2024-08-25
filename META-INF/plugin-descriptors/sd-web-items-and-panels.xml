@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-web-items-and-panels description="Service project web items and panels">
+
+    <!--================================
+        HELP MENU ITEMS
+    =================================-->
+    <web-item
+            key="service-desk-view-help"
+            name="Service project Help Link"
+            section="system.user.options/jira-help"
+            i18n-name-key="sd.online.help.label"
+            weight="28">
+        <label key="sd.online.help.label"/>
+        <tooltip key="sd.online.help.tooltip"/>
+        <link linkId="service-desk-view-help">$helpUrls.getUrl('help').getUrl()</link>
+        <context-provider class="com.atlassian.servicedesk.internal.web.contextprovider.HelpContextProvider"/>
+        <param name="target" value="_blank"/>
+        <conditions type="AND">
+            <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+            <condition class="com.atlassian.servicedesk.internal.conditions.LicensedAgentCondition"/>
+        </conditions>
+    </web-item>
+
+
+    <!--================================
+        PLUGIN CONFIGURATION TABS
+    =================================-->
+    <web-section key="sd-plugin-admin-section" location="admin_applications_section" i18n-name-key="sd.admin.plugin.section.name" weight="90">
+        <label key="sd.admin.plugin.section.name"/>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-section>
+    <web-item key="sd-configuration" i18n-name-key="sd.admin.plugin.config.name" section="admin_applications_section/sd-plugin-admin-section" weight="60">
+        <label key="sd.admin.plugin.config.name"/>
+        <link linkId="sd-configuration-link"><![CDATA[/secure/admin/SDConfiguration.jspa]]></link>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-item>
+    <web-item key="sd-admin-mail-info" i18n-name-key="sd.admin.email.info" section="admin_applications_section/sd-plugin-admin-section" weight="70">
+        <label key="sd.admin.email.info"/>
+        <link linkId="sd-admin-mail-info-link"><![CDATA[/secure/admin/SDMailInfo.jspa]]></link>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-item>
+    <web-item key="sd-admin-mail-channels" section="admin_applications_section/sd-plugin-admin-section" weight="71">
+        <label key="sd.admin.email.address.heading"/>
+        <link linkId="sd-admin-mail-channels-link"><![CDATA[/secure/admin/SDMailChannels.jspa]]></link>
+        <conditions type="OR">
+            <condition class="com.atlassian.servicedesk.internal.api.condition.EmailAllowListAvailableCondition" />
+            <condition class="com.atlassian.servicedesk.internal.api.condition.EmailBlockListAvailableCondition" />
+        </conditions>
+    </web-item>
+    <!-- Note: This is a duplicate of the above for the case where Allow and blocklist are hidden. This is to fix
+     a CSS behaviour on the frontend-->
+    <web-item key="sd-admin-mail-channels-end" section="admin_applications_section/sd-plugin-admin-section" weight="71">
+        <label key="sd.admin.email.address.heading"/>
+        <link linkId="sd-admin-mail-channels-link-end"><![CDATA[/secure/admin/SDMailChannels.jspa]]></link>
+        <conditions type="AND">
+            <condition class="com.atlassian.servicedesk.internal.api.condition.EmailAllowListAvailableCondition" invert="true"/>
+            <condition class="com.atlassian.servicedesk.internal.api.condition.EmailBlockListAvailableCondition" invert="true"/>
+        </conditions>
+    </web-item>
+    <web-item key="sd-admin-allowlist-email" section="admin_applications_section/sd-plugin-admin-section" weight="72">
+        <label key="sd.admin.details.tab.email.allowlist" />
+        <link linkId="sd-admin-allowlist-email-link"><![CDATA[/secure/admin/SDEmailAllowListConfiguration.jspa]]></link>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.EmailAllowListAvailableCondition" />
+    </web-item>
+
+    <web-item key="sd-admin-blocklist-email" section="admin_applications_section/sd-plugin-admin-section" weight="73">
+        <label key="sd.admin.details.tab.email.blocklist" />
+        <link linkId="sd-admin-blocklist-email-link"><![CDATA[/secure/admin/SDEmailBlockListConfiguration.jspa]]></link>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.EmailBlockListAvailableCondition" />
+    </web-item>
+
+    <web-item key="sd-opsgenie-integration" i18n-name-key="sd.opsgenie.admin.config.name" section="admin_applications_section/sd-plugin-admin-section" weight="80">
+        <label key="sd.opsgenie.admin.config.name"/>
+        <link linkId="sd-opsgenie-integration-link"><![CDATA[/secure/admin/SDOpsgenieConfiguration.jspa]]></link>
+        <conditions type="AND">
+            <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition"/>
+            <condition class="com.atlassian.servicedesk.internal.api.condition.IncidentManagementAvailableCondition"/>
+        </conditions>
+    </web-item>
+    <web-item key="sd-confluence-cloud-integration" i18n-name-key="sd.confluence.cloud.admin.config.name" section="admin_applications_section/sd-plugin-admin-section" weight="90">
+        <label key="sd.confluence.cloud.admin.config.name"/>
+        <link linkId="sd-confluence-cloud-integration-link"><![CDATA[/secure/admin/SDConfluenceCloudConfiguration.jspa]]></link>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-item>
+    <web-item key="sd-sla-admin-configuration" i18n-name-key="sd.sla.admin.config.name" section="admin_applications_section/sd-plugin-admin-section" weight="65">
+        <label key="sd.sla.admin.config.name"/>
+        <link linkId="sd-sla-admin-configuration-link"><![CDATA[/secure/admin/SDSlaConfiguration.jspa]]></link>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.SlaConfigurationAvailableCondition"/>
+    </web-item>
+
+    <!--================================
+        CUSTOMER VIEW WEB ITEMS
+    =================================-->
+
+    <web-section key="customer-request-actions" location="customer-request-links" weight="10">
+        <param name="styleClass">customer-request-actions</param>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition"/>
+    </web-section>
+
+    <web-item key="cr-subscribe-notification" section="customer-request-actions" weight="10">
+        <param name="iconClass">unwatch</param>
+        <label key="sd.request.notification.turn.on.new"/>
+        <link>${hash}</link>
+        <styleClass>js-subscribe-notification</styleClass>
+
+        <conditions type="AND">
+            <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+            <condition class="com.atlassian.servicedesk.internal.feature.reqparticipants.notification.condition.CanDisplaySubscribeLinkCondition"/>
+        </conditions>
+    </web-item>
+
+    <web-item key="cr-unsubscribe-notification" section="customer-request-actions" weight="10">
+        <param name="iconClass">watch</param>
+        <label key="sd.request.notification.turn.off.new"/>
+        <link>${hash}</link>
+        <styleClass>js-unsubscribe-notification</styleClass>
+
+        <conditions type="AND">
+            <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+            <condition class="com.atlassian.servicedesk.internal.feature.reqparticipants.notification.condition.CanDisplayUnsubscribeLinkCondition"/>
+        </conditions>
+    </web-item>
+
+    <web-item key="cr-share-request" section="customer-request-actions" weight="10">
+        <param name="iconClass">share</param>
+        <label key="sd.common.words.share"/>
+        <link>${hash}</link>
+        <styleClass>js-share-request</styleClass>
+
+        <conditions type="AND">
+            <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+            <condition class="com.atlassian.servicedesk.internal.api.condition.CanShareRequestCondition" />
+            <condition class="com.atlassian.servicedesk.internal.api.condition.ShareRequestWithGroupsCondition" invert="true" />
+        </conditions>
+    </web-item>
+
+    <web-item-provider
+            key="sd-jira-customer-transitions-provider"
+            section="customer-request-actions"
+            class="com.atlassian.servicedesk.internal.feature.customer.transitions.CustomerTransitionWebItemProvider">
+        <conditions type="AND">
+            <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+        </conditions>
+    </web-item-provider>
+
+    <!--================================
+        SET MY JIRA HOME
+    =================================-->
+
+    <!-- Please also update ServiceDeskMyJiraHomeUpdateService if changing the key for service project home -->
+    <web-item key="set_my_jira_home_dashboard" name="Set my Jira home to service project" i18n-name-key="sd.my.jira.home.label" section="system.user.options/set_my_jira_home" weight="20">
+        <label key="sd.my.jira.home.label"/>
+        <description key="sd.my.jira.home.desc"/>
+        <tooltip key="sd.my.jira.home.desc"/>
+        <link linkId="set_my_jira_home_default">/servicedesk/agent/home</link>
+        <conditions type="AND">
+            <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+            <condition class="com.atlassian.servicedesk.internal.conditions.LicensedAgentCondition" />
+        </conditions>
+    </web-item>
+
+
+    <!--================================
+        PROJECT SETTINGS
+    =================================-->
+
+
+    <!-- customer requests -->
+    <web-section key="sd-project-settings-customer-requests" location="sd-project-settings" weight="10">
+        <label key="sd.admin.details.customer.request.nav.header"/>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-section>
+
+    <web-item key="sd-project-settings-customer-requests-requesttypes" section="sd-project-settings-customer-requests" weight="10">
+        <label key="sd.admin.details.tab.requesttypes" />
+        <link>${projectUrls.requestTypeSettings()}</link>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-item>
+
+    <!-- channels -->
+    <web-section key="sd-project-settings-channels" location="sd-project-settings" weight="20">
+        <label key="sd.admin.details.channel.nav.header" />
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-section>
+
+    <web-item key="sd-project-settings-channels-portal" section="sd-project-settings-channels" weight="10">
+        <label key="sd.admin.details.tab.portal.settings" />
+        <link>${projectUrls.portalSettings()}</link>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-item>
+
+    <web-item key="sd-project-settings-channels-email" section="sd-project-settings-channels" weight="20">
+        <label key="sd.admin.details.tab.email.settings" />
+        <link>${projectUrls.emailSettings()}</link>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-item>
+
+    <web-item key="sd-project-settings-channels-theme" section="sd-project-settings-channels" weight="30">
+        <label key="sd.admin.details.tab.theme.and.branding" />
+        <link>${projectUrls.themeSettings()}</link>
+        <conditions type="AND">
+            <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+            <condition class="com.atlassian.jira.plugin.webfragment.conditions.FeatureEnabledCondition" invert="true">
+                <param name="feature-key">sd.shared.portals.redo</param>
+            </condition>
+        </conditions>
+    </web-item>
+
+    <!-- knowledge base -->
+    <web-section key="sd-project-settings-kb" location="sd-project-settings" weight="30">
+        <label key="sd.admin.details.knowledge.base.nav.header" />
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-section>
+
+    <web-item key="sd-project-settings-kb-settings" section="sd-project-settings-kb" weight="10">
+        <label key="sd.admin.details.tab.confluence.kb" />
+        <link>${projectUrls.kbSettings()}</link>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-item>
+
+    <!-- Advanced -->
+    <web-section key="sd-project-settings-advanced" location="sd-project-settings" weight="40">
+        <label key="sd.admin.details.advanced.nav.header" />
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-section>
+
+    <web-item key="sd-project-settings-advanced-automation" section="sd-project-settings-advanced" weight="10">
+        <label key="sd.admin.details.tab.automation" />
+        <link>${projectUrls.automationSettings()}</link>
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </web-item>
+
+</sd-web-items-and-panels>

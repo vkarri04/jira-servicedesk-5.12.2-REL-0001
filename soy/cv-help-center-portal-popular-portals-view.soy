@@ -1,0 +1,38 @@
+{namespace ServiceDesk.Templates.Customer.SmartPortal}
+
+/**
+ * Renders a list of popular portals for the Service Desk smart portal landing page.
+ * @param popularPortals
+ */
+{template .popularPortals}
+    <h3 class="cv-smart-portal-browse-list-title">
+        {getText('sd.customerview.smart.portal.popular.portals.header')}
+    </h3>
+
+    // This wrapper exists because there appears to be bug in Chrome that causes additional padding (specifically, it doubles the padding)
+    // if the element has -webkit-columns css attribute. (Firefox and IE renders it correctly).
+    <div class="cv-popular-portals-list-wrapper">
+        <div class="cv-popular-portals-list">
+            {foreach $portal in $popularPortals}
+                {call .popularPortalListItem}
+                    {param portal: $portal /}
+                {/call}
+            {/foreach}
+        </div>
+    </div>
+    {call aui.buttons.button}
+        {param text: getText('sd.customerview.smart.portal.view.portals') /}
+        {param type: 'link' /}
+        {param extraClasses: 'cv-smart-portal-browse-portals js-cv-smart-portal-browse-portals' /}
+    {/call}
+{/template}
+
+/**
+ * A single list item for the popular portals list.
+ * @param portal
+ */
+{template .popularPortalListItem}
+    <div class="cv-popular-portals-list-item js-cv-popular-portals-list-item" data-id="{$portal.id}">
+        <a class="cv-popular-portals-list-item-link" href="{$portal.portalBaseUrl}">{$portal.name}</a>
+    </div>
+{/template}

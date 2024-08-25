@@ -1,0 +1,54 @@
+{namespace ServiceDesk.Templates.Agent.Settings.Automation.Blueprints.Help}
+
+/**
+ * Help details for the 'Re-open on customer comment' blueprint
+ */
+{template .reopenHelp}
+	{call ServiceDesk.Templates.Agent.Settings.Blueprints.Help.Default.helpDetail}
+		{param title1: getText('sd.automation.blueprint.reopen.help.panel.title.1') /}
+		{param title2: getText('sd.automation.blueprint.reopen.help.panel.title.2') /}
+		{param title3: getText('sd.automation.blueprint.reopen.help.panel.title.3') /}
+		{param description1: getText('sd.automation.blueprint.reopen.help.panel.description.1') /}
+		{param description2: getText('sd.automation.blueprint.reopen.help.panel.description.2') /}
+		{param description3: getText('sd.automation.blueprint.reopen.help.panel.description.3') /}
+		{param imageClass1: 'blueprint-help-add-then-img' /}
+		{param imageClass2: 'blueprint-help-alert-then-img' /}
+		{param imageClass3: 'blueprint-help-search-if-4-img' /}
+	{/call}
+{/template}
+
+/**
+ * Help details for the 'Keep on top of SLAs' blueprint
+ */
+{template .slaHelp}
+	{call ServiceDesk.Templates.Agent.Settings.Blueprints.Help.Default.helpDetail}
+		{param blueprintKey: 'sla' /}
+		{param title1: getText('sd.automation.blueprint.sla.help.panel.title.1') /}
+		{param title2: getText('sd.automation.blueprint.sla.help.panel.title.2') /}
+		{param title3: getText('sd.automation.blueprint.sla.help.panel.title.3') /}
+		{param description1: getText('sd.automation.blueprint.sla.help.panel.description.1') /}
+		{param description2: getText('sd.automation.blueprint.sla.help.panel.description.2') /}
+		{param description3: getText('sd.automation.blueprint.sla.help.panel.description.3') /}
+		{param imageClass1: 'blueprint-help-alert-then-2-img' /}
+		{param imageClass2: 'blueprint-help-important-if-img' /}
+		{param imageClass3: 'blueprint-help-sla-when-img' /}
+	{/call}
+{/template}
+
+/**
+ * Help details for the 'Transition on comment' blueprint
+ */
+{template .transitionHelp}
+	{call ServiceDesk.Templates.Agent.Settings.Blueprints.Help.Default.helpDetail}
+		{param blueprintKey: 'transition' /}
+		{param title1: getText('sd.automation.blueprint.transition.help.panel.title.1') /}
+		{param title2: getText('sd.automation.blueprint.transition.help.panel.title.2') /}
+		{param title3: getText('sd.automation.blueprint.transition.help.panel.title.3') /}
+		{param description1: getText('sd.automation.blueprint.transition.help.panel.description.1') /}
+		{param description2: getText('sd.automation.blueprint.transition.help.panel.description.2') /}
+		{param description3: getText('sd.automation.blueprint.transition.help.panel.description.3') /}
+		{param imageClass1: 'blueprint-help-share-then-2-img' /}
+		{param imageClass2: 'blueprint-help-important-if-2-img' /}
+		{param imageClass3: 'blueprint-help-approve-if-img' /}
+	{/call}
+{/template}

@@ -1,0 +1,18 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* @param user
+* @param profileWebFragments
+*/
+{template .profileActions}
+<h4 class="profile-options-title">{getText('cv.profile.options')}</h4>
+<ul class="request-actions">
+    <li><a href="#" class="js-edit-profile edit-profile">{getText('cv.profile.edit.your.profile')}</a></li>
+    {if $user.canChangePassword}
+        <li><a href="#" class="js-change-password">{getText('cv.profile.change.password')}</a></li>
+    {/if}
+    {foreach $action in $profileWebFragments.actions}
+        <li><a href="{$action.href}" id="{$action.key}" class="{$action.styleClass}">{$action.label}</a></li>
+    {/foreach}
+</ul>
+{/template}

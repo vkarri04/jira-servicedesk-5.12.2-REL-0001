@@ -1,0 +1,8 @@
+
+<soy>
+    <client-resource key="soy">
+        <dependency>com.atlassian.auiplugin:soy</dependency>
+        <dependency>com.atlassian.servicedesk.plugins.automation.servicedesk-automation-plugin:admin-automation-resources</dependency>
+        <directory location="soy" />
+    </client-resource>
+</soy>

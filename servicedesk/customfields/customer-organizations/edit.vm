@@ -1,0 +1,29 @@
+#disable_html_escaping()
+<script>resourcePhaseCheckpoint.defer.then(() => WRM.require('wrc!custom_field_jsd-organizations-field'));</script>
+
+#if( $action.actionName == "BulkEdit")
+
+    #customControlHeader ($action $customField.id $i18n.getText($field.nameKey) $fieldLayoutItem.required $displayParameters $auiparams)
+
+    <select class="long-field hidden js-request-organizations-field"
+            id="${customField.id}"
+            name="${customField.id}"
+            data-project-id="$issue.projectObject.id"
+            data-container-class="long-field"
+            multiple="multiple"
+    >
+    </select>
+
+    #customControlFooter ($action $customField.id $fieldLayoutItem.getFieldDescription() $displayParameters $auiparams)
+
+#else
+    #if ($isFieldEnabled)
+        #customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
+        <select class="js-request-organizations-field" multiple="multiple" id="$customField.id" name="$customField.id" data-project-id="$projectId">
+            #foreach ($org in $value)
+                <option selected="selected" value="$org.id">$textutils.htmlEncode($org.name)</option>
+            #end
+        </select>
+        #customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)
+    #end
+#end

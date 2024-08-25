@@ -1,0 +1,43 @@
+{namespace ServiceDesk.Templates.Agent.Settings.Automation.Modules.When}
+
+/**
+ * Form for SLA when handler
+ * @param timeMetrics
+ * @param? selectedMetricId
+ */
+{template .SLAForm}
+    <div class="error-bar"></div>
+    <fieldset>
+        <div class="field-group">
+            <label for="sla-time-metric">{getText('sd.sla.threshold.when.form.field.metric')}</label>
+			<select class="select" id="sla-time-metric-select" name="sla-time-metric">
+                {foreach $metric in $timeMetrics}
+                    <option value="{$metric.id}" {if $selectedMetricId and $metric.id == $selectedMetricId}selected="selected"{/if}>{$metric.name}</option>
+                {/foreach}
+			</select>
+        </div>
+        <div class="field-group js-sla-threshold-group">
+        </div>
+    </fieldset>
+{/template}
+
+/**
+ * Draw in the options for thesholds based on the time metric
+ * @param thresholds
+ * @param? selectedThresholdTime
+ */
+{template .thresholdOptions}
+    <label for="sla-threshold">{getText('sd.sla.threshold.when.form.field.threshold')}</label>
+    <select class="select" id="sla-threshold-select" name="sla-threshold">
+        {foreach $threshold in $thresholds}
+            <option value="{$threshold.timeRemaining}" {if $selectedThresholdTime and $threshold.timeRemaining == $selectedThresholdTime}selected="selected"{/if}>{$threshold.label}</option>
+        {/foreach}
+    </select>
+{/template}
+
+/**
+ * Draw in the error state for
+ */
+{template .emptySLAForm}
+    <span class="automation error">{getText('sd.sla.threshold.when.empty.message')}</span>
+{/template}

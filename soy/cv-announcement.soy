@@ -1,0 +1,17 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* Render global styling title view
+* @param announcementHeader - the announcement header (text) set by admin
+* @param announcementMessageHtml - the announcement message (wiki html) set by admin
+*/
+{template .portalAnnouncement}
+    {if $announcementHeader or $announcementMessageHtml}
+        <div class="cv-portal-announcement">
+            <div class="cv-portal-announcement-inner">
+                <h3 class="announcement-header">{($announcementHeader ?: '')}</h3>
+                <div class="announcement-message">{($announcementMessageHtml ?: '') |noAutoescape}</div>
+            </div>
+        </div>
+    {/if}
+{/template}

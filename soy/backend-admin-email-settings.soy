@@ -1,0 +1,42 @@
+{namespace ServiceDesk.Templates.Admin.email}
+
+/**
+ * This draws in the mostly static email admin page
+ *
+ * @param emailParseSettings the saved parse settings
+ */
+{template .emailSettings}
+    <html>
+        <head>
+            <title>{getText('sd.admin.email.info')}</title>
+        </head>
+        <body>
+            <div class="sd-email-settings-container sd-settings-container">
+                <h2>{getText('sd.admin.email.info')}</h2>
+                <div class="js-parse-settings-container" data-formatting-enabled="{$emailParseSettings.formattingEnabled}">
+                    <div class="sd-email-settings-section">
+                        {call .emailTrimmingSection}
+                            {param trimmingOptions: $emailParseSettings.trimmingModeOptions /}
+                        {/call}
+                        {call .emailCustomFilterAttachment}
+                            {param customFilterAttachmentsEnabled: $emailParseSettings.customFilterAttachmentsEnabled /}
+                        {/call}
+                        {call .emailFormattingSection}
+                            {param formattingEnabled: $emailParseSettings.formattingEnabled /}
+                        {/call}
+                        {call .publicEmailSection}
+                            {param outsiderCommentsEnabled: $emailParseSettings.outsiderCommentsEnabled /}
+                        {/call}
+                        {call .customerCreationSection}
+                            {param createCustomerModeOptions: $emailParseSettings.createCustomerModeOptions /}
+                        {/call}
+                        <div class="email-filter-settings-container"
+                             data-bulk-filter="{$emailParseSettings.bulkMailFilterEnabled}"
+                             data-auto-reply-filter="{$emailParseSettings.autoReplyMailFilterEnabled}"></div>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>
+{/template}
+

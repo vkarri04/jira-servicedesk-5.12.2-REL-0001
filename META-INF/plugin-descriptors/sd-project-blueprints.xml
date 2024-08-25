@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-project-blueprints description="Project blueprints">
+    <project-blueprint key="basic-service-desk-project" weight="46">
+        <label key="sd.project.template.basic.template.label"/>
+        <description key="sd.project.template.basic.template.description"/>
+        <longDescription key="sd.project.template.basic.template.long.description"/>
+
+        <icon location="img/project-template/project-template-service-desk-icon.png" content-type="image/png" />
+        <backgroundIcon location="img/project-template/transparent-background.gif"/>
+
+        <projectTypeKey>service_desk</projectTypeKey>
+
+        <add-project>
+            <hook class="com.atlassian.servicedesk.internal.project.template.hook.BasicServiceDeskAddProjectHook"/>
+            <descriptor file="/project-templates-config/sd-basic.json"/>
+        </add-project>
+    </project-blueprint>
+
+    <project-blueprint key="itil-v2-service-desk-project" weight="59">
+        <label key="sd.project.template.itil.v2.template.label"/>
+        <description key="sd.project.template.itil.v2.template.description"/>
+        <longDescription key="sd.project.template.itil.v2.template.description.long"/>
+
+        <icon location="img/project-template/project-template-itil-service-desk-icon.png" content-type="image/png" />
+        <backgroundIcon location="img/project-template/transparent-background.gif"/>
+
+        <projectTypeKey>service_desk</projectTypeKey>
+
+        <add-project>
+            <hook class="com.atlassian.servicedesk.internal.project.template.hook.ItilV2ServiceDeskAddProjectHook"/>
+            <descriptor file="/project-templates-config/sd-itil-v2.json"/>
+        </add-project>
+    </project-blueprint>
+
+    <project-blueprint key="customer-service-desk-project" weight="60">
+        <label key="sd.project.template.customer.support.template.label"/>
+        <description key="sd.project.template.customer.support.template.description"/>
+        <longDescription key="sd.project.template.customer.support.template.description.long.generic"/>
+
+        <icon location="img/project-template/project-template-customer-icon.png" />
+        <backgroundIcon location="img/project-template/transparent-background.gif"/>
+
+        <projectTypeKey>service_desk</projectTypeKey>
+
+        <add-project>
+            <hook class="com.atlassian.servicedesk.internal.project.template.hook.CustomerSupportAddProjectHook"/>
+            <descriptor file="/project-templates-config/sd-customer-support.json"/>
+        </add-project>
+    </project-blueprint>
+
+
+
+</sd-project-blueprints>

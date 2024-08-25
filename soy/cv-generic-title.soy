@@ -1,0 +1,20 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* @param title - title text
+* @param avatar - url of optional avatar
+*/
+{template .genericTitle}
+{if $avatar}
+    <div class="page-title-avatar aui-item">
+        {call aui.avatar.avatar}
+            {param size: 'large' /}
+            {param avatarImageUrl: $avatar /}
+            {param imageClasses: 'cv-avatar' /}
+        {/call}
+    </div>
+{/if}
+<div class="page-title-contents aui-item">
+    <h1 class="page-title-name">{$title}</h1>
+</div>
+{/template}

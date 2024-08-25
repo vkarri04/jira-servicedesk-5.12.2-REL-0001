@@ -1,0 +1,21 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+* @param portal
+*/
+{template .requestGroups}
+    <ul class="cv-request-groups">
+        {foreach $group in $portal.reqGroups}
+            <li class="cv-request-group {if $group.selected} cv-active{/if}">
+                <a class="cv-request-group-name js-cv-request-group-name"
+                   href="{$portal.portalBaseUrl}/group/{$group.id}"
+                   data-group-id="{$group.id}"
+                   role="button"
+                   aria-current="{if $group.selected}true{else}false{/if}"
+                >
+                    {$group.name}
+                </a>
+            </li>
+        {/foreach}
+    </ul>
+{/template}

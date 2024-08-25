@@ -1,0 +1,2493 @@
+{
+    "browser.metrics.navigation": [
+        {
+            "key": [
+                "servicedesk.automation",
+                "servicedesk.automation.blueprint",
+                "servicedesk.automation.ruleset",
+                "servicedesk.confluence-kb",
+                "servicedesk.customers",
+                "servicedesk.cv.all.requests",
+                "servicedesk.cv.atlassian.id.login",
+                "servicedesk.cv.customer.profile",
+                "servicedesk.cv.forgot.password",
+                "servicedesk.cv.kb.portal.view",
+                "servicedesk.cv.login",
+                "servicedesk.cv.portal.landing",
+                "servicedesk.cv.request.create",
+                "servicedesk.cv.request.details",
+                "servicedesk.cv.reset.password",
+                "servicedesk.cv.service.request.feedback",
+                "servicedesk.cv.shared.portal",
+                "servicedesk.cv.user.atlassianid.login.redirect",
+                "servicedesk.cv.user.invite.setpassword",
+                "servicedesk.cv.user.signup",
+                "servicedesk.email-settings",
+                "servicedesk.feedback-settings",
+                "servicedesk.portal-settings",
+                "servicedesk.queues",
+                "servicedesk.queues.edit",
+                "servicedesk.queues.issue",
+                "servicedesk.queues.new",
+                "servicedesk.queues.view",
+                "servicedesk.reports.custom",
+                "servicedesk.reports.custom.edit",
+                "servicedesk.reports.custom.new",
+                "servicedesk.reports.sla",
+                "servicedesk.reports.workload",
+                "servicedesk.request-security",
+                "servicedesk.request-types",
+                "servicedesk.request-types.view",
+                "servicedesk.request.created",
+                "servicedesk.sla",
+                "servicedesk.sla.custom.edit",
+                "servicedesk.sla.custom.new",
+                "servicedesk.sla.custom.view",
+                "servicedesk.welcome-guide"
+            ]
+        }
+    ],
+    "servicedesk.action.csat.email.rendered": ["projectId", "sdVersion"],
+    "servicedesk.action.date.range.changed": ["projectId", "sdVersion"],
+    "servicedesk.action.email.reply.detection.custom": ["sdVersion"],
+    "servicedesk.action.email.reply.detection.error": ["sdVersion"],
+    "servicedesk.action.email.reply.detection.issue.create.custom": ["sdVersion"],
+    "servicedesk.action.email.reply.detection.issue.create.error": ["sdVersion"],
+    "servicedesk.action.email.reply.detection.issue.create.marker": ["sdVersion"],
+    "servicedesk.action.email.reply.detection.issue.create.none": ["sdVersion"],
+    "servicedesk.action.email.reply.detection.issue.create.pattern": ["sdVersion"],
+    "servicedesk.action.email.reply.detection.marker": ["sdVersion"],
+    "servicedesk.action.email.reply.detection.none": ["sdVersion"],
+    "servicedesk.action.email.reply.detection.pattern": ["sdVersion"],
+    "servicedesk.action.issue.resolved": [
+        "customerResolved",
+        "issueId",
+        { "metSLA": ["true", "false", "NA"] },
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.action.issueview.agent.assign": ["projectId", "sdVersion"],
+    "servicedesk.action.issueview.agent.comment.private": ["projectId", "sdVersion"],
+    "servicedesk.action.issueview.agent.comment.public": ["projectId", "sdVersion"],
+    "servicedesk.action.issueview.agent.edit": ["projectId", "sdVersion"],
+    "servicedesk.action.issueview.agent.status.transition": ["projectId", "sdVersion"],
+    "servicedesk.action.issueview.collaborator.comment.private": ["projectId", "sdVersion"],
+    "servicedesk.action.itil.request.created.via.email": ["portalId", "projectId", "requestTypeId", "sdVersion"],
+    "servicedesk.action.itil.request.created.via.portal": ["portalId", "projectId", "requestTypeId", "sdVersion"],
+    "servicedesk.action.notification.reduced": ["projectId", "sdVersion"],
+    "servicedesk.action.portal.opened.via.email": ["projectId", "sdVersion"],
+    "servicedesk.action.question.changed": ["projectId", "sdVersion"],
+    "servicedesk.action.report.viewed": ["projectId", "sdVersion"],
+    "servicedesk.action.request.commented.non.sd.via.email": ["projectId", "sdVersion"],
+    "servicedesk.action.request.commented.outsider.via.email": ["projectId", "sdVersion"],
+    "servicedesk.action.request.commented.via.email": ["projectId", "sdVersion"],
+    "servicedesk.action.request.created.via.email": ["portalId", "projectId", "requestTypeId", "sdVersion"],
+    "servicedesk.action.request.created.via.portal": ["portalId", "projectId", "requestTypeId", "sdVersion"],
+    "servicedesk.action.request.created.via.anonymous.portal": ["portalId", "projectId", "requestTypeId", "sdVersion"],
+    "servicedesk.action.request.opened.via.email": ["projectId", "sdVersion"],
+    "servicedesk.action.request.opened.via.markup.variable": ["projectId", "sdVersion"],
+    "servicedesk.action.request.raised.via.email": ["projectId", "sdVersion"],
+    "servicedesk.action.ticket.closed": ["projectId", "sdVersion"],
+    "servicedesk.action.ticket.commented.negative": ["rating", "issueId", "projectId", "sdVersion"],
+    "servicedesk.action.ticket.commented.neutral": ["rating", "issueId", "projectId", "sdVersion"],
+    "servicedesk.action.ticket.commented.positive": ["rating", "issueId", "projectId", "sdVersion"],
+    "servicedesk.action.ticket.rated": ["rating", "issueId", "projectId", "sdVersion"],
+    "servicedesk.admin.agentview.portalsettings.failed.turn.off.allow.agent.announcements": ["projectId", "sdVersion"],
+    "servicedesk.admin.agentview.portalsettings.failed.turn.on.allow.agent.announcements": ["projectId", "sdVersion"],
+    "servicedesk.admin.agentview.portalsettings.portalannouncement.discover": ["projectId", "sdVersion"],
+    "servicedesk.admin.agentview.portalsettings.success.turn.off.allow.agent.announcements": ["projectId", "sdVersion"],
+    "servicedesk.admin.agentview.portalsettings.success.turn.on.allow.agent.announcements": ["projectId", "sdVersion"],
+    "servicedesk.admin.configuration.agent-announcements.disable": ["projectId", "sdVersion"],
+    "servicedesk.admin.configuration.agent-announcements.enable": ["projectId", "sdVersion"],
+    "servicedesk.admin.configuration.agent.can.manage.organisation.disable": ["sdVersion"],
+    "servicedesk.admin.configuration.agent.can.manage.organisation.enable": ["sdVersion"],
+    "servicedesk.admin.configuration.should.dismiss.all.warnings.disable": ["projectId", "sdVersion"],
+    "servicedesk.admin.configuration.should.dismiss.all.warnings.enable": ["projectId", "sdVersion"],
+    "servicedesk.admin.configuration.email.verification.toggled": ["sdVersion", "enabled"],
+    "servicedesk.admin.configuration.organization.share.toggled": ["sdVersion", "enabled"],
+    "servicedesk.admin.configuration.confluence.knowledge.base.toggled": ["sdVersion", "enabled"],
+    "servicedesk.admin.configuration.email.verification.toggle.failed": ["sdVersion"],
+    "servicedesk.admin.customerview.requesttypes.create": ["projectId", "sdVersion"],
+    "servicedesk.admin.customerview.requesttypes.deleteconfirmation.cancel": ["projectId", "sdVersion"],
+    "servicedesk.admin.customerview.requesttypes.deleteconfirmation.removefromgroup": ["projectId", "sdVersion"],
+    "servicedesk.admin.customerview.requesttypes.edit.delete": ["projectId", "sdVersion"],
+    "servicedesk.admin.customerview.requesttypes.edit.reorder": ["projectId", "sdVersion"],
+    "servicedesk.admin.customerview.requesttypes.edit.selectGroup": ["projectId", "sdVersion"],
+    "servicedesk.admin.customerview.requesttypes.edit.update": ["projectId", "sdVersion"],
+    "servicedesk.admin.customerview.requesttypes.group.add.dialog.cancel": ["projectId", "sdVersion"],
+    "servicedesk.admin.customerview.requesttypes.group.add.dialog.open": ["projectId", "sdVersion"],
+    "servicedesk.admin.customerview.requesttypes.group.add.dialog.save": ["projectId", "sdVersion"],
+    "servicedesk.admin.customerview.requesttypes.group.edit.header.save": ["projectId", "sdVersion"],
+    "servicedesk.admin.legacy.transition.disabled": ["projectId", "sdVersion"],
+    "servicedesk.admin.requesttype.group.delete": ["projectId", "sdVersion"],
+    "servicedesk.admin.requesttype.group.delete.undo": ["projectId", "sdVersion"],
+    "servicedesk.admin.requesttype.group.reorder": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.calendars.calendar.cancel": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.calendars.calendar.delete": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.calendars.calendar.discard": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.calendars.calendar.import.holidays": [
+        "existingHolidays",
+        "importedHolidays",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.admin.settings.calendars.calendar.save": [
+        "newHolidays",
+        "importedHolidays",
+        "manuallyAddedHolidays",
+        "projectId",
+        "recurringHolidays",
+        "sdVersion",
+        "totalHolidays"
+    ],
+    "servicedesk.admin.settings.calendars.edit": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.calendars.list.view": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.calendars.workingdayhours.workingday.shift": [
+        {
+            "day": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+            "action": ["created", "removed"]
+        }
+    ],
+    "servicedesk.admin.settings.calendars.workingdayhours.workingday.activation": [
+        {
+            "day": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+            "action": ["activated", "disabled"]
+        }
+    ],
+    "servicedesk.admin.settings.incomingemail.delete": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.incomingemail.delete.cancel": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.incomingemail.delete.confirm": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.incomingemail.edit": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.incomingemail.edit.inline.searchrequesttype": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.requesttype.icon.changed.to.custom": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.requesttype.icon.changed.to.system": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.requesttype.icon.custom.icon.deleted": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.requesttype.icon.custom.icon.uploaded": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.requesttype.icon.dialog.popup": ["projectId", "sdVersion"],
+    "servicedesk.admin.settings.requesttype.page.view": ["projectId", "sdVersion"],
+    "servicedesk.agent.attachments.dialog.button.clicked.cancel": ["projectId", "sdVersion"],
+    "servicedesk.agent.attachments.dialog.button.clicked.private": [
+        "attachmentWikiMarkupCount",
+        "commentCharLength",
+        "fileExtensionsCount",
+        "linkWikiMarkupCount",
+        "numFilesToBeAttached",
+        "projectId",
+        "sdVersion",
+        "temporaryAttachmentWikiMarkupCount"
+    ],
+    "servicedesk.agent.attachments.dialog.button.clicked.public": [
+        "attachmentWikiMarkupCount",
+        "commentCharLength",
+        "fileExtensionsCount",
+        "linkWikiMarkupCount",
+        "numFilesToBeAttached",
+        "projectId",
+        "sdVersion",
+        "temporaryAttachmentWikiMarkupCount"
+    ],
+    "servicedesk.agent.attachments.dialog.loaded": ["projectId", "sdVersion"],
+    "servicedesk.agentview.ia": ["newIA", "projectId", "sdVersion"],
+    "servicedesk.agentview.people.customers.invitecustomerdialog.admin.invite.validation.errors": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.agentview.people.customers.invitecustomerdialog.admin.invite.validation.no.errors": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.agentview.people.customers.invitecustomerdialog.agent.cancel": ["projectId", "sdVersion"],
+    "servicedesk.agentview.people.customers.invitecustomerdialog.agent.invite": ["projectId", "sdVersion"],
+    "servicedesk.agentview.people.customers.invitecustomerdialog.agent.invite.failed": ["projectId", "sdVersion"],
+    "servicedesk.agentview.people.customers.invitecustomerdialog.agent.invite.succeeded": ["projectId", "sdVersion"],
+    "servicedesk.agentview.people.customers.invitecustomerdialog.agent.invite.validation.errors": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.agentview.people.customers.invitecustomerdialog.agent.invite.validation.no.errors": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.agentview.people.customers.invitecustomerdialog.agent.open": ["projectId", "sdVersion"],
+    "servicedesk.agentview.queue.poll.forceupdate": ["consecutiveForceUpdates", "projectId", "sdVersion"],
+    "servicedesk.agentview.queue.poll.modified": ["projectId", "sdVersion"],
+    "servicedesk.agentview.queue.poll.notmodified": ["projectId", "sdVersion"],
+    "servicedesk.agentview.queue.update.modified": ["projectId", "sdVersion"],
+    "servicedesk.agentview.queue.update.notmodified": ["projectId", "sdVersion"],
+    "servicedesk.atlassianid.login.customerview.link.error": ["projectId", "sdVersion"],
+    "servicedesk.atlassianid.login.customerview.link.main": ["projectId", "sdVersion"],
+    "servicedesk.atlassianid.login.customerview.link.note": ["projectId", "sdVersion"],
+    "servicedesk.atlassianid.login.customerview.link.unknown": ["projectId", "sdVersion"],
+    "servicedesk.atlassianid.login.customerview.tier": ["projectId", "sdVersion"],
+    "servicedesk.automation.rule.executed": ["issueId", "projectId", "ruleId", "sdVersion"],
+    "servicedesk.automation.webhook.then.action.executed": [
+        "durationMs",
+        "hostHash",
+        "numHeaders",
+        "payloadSent",
+        "projectId",
+        "responseHttpStatusCode",
+        "ruleSetId",
+        "sdVersion",
+        "urlHash",
+        "isCustomPayload"
+    ],
+    "servicedesk.custom.filter.attachments.disable": ["projectId", "sdVersion"],
+    "servicedesk.custom.filter.attachments.enable": ["projectId", "sdVersion"],
+    "servicedesk.customer.invite.participants.portal.admin": ["projectId", "sdVersion", "success"],
+    "servicedesk.customer.invite.participants.portal.admin.error": ["projectId", "sdVersion"],
+    "servicedesk.customer.invite.participants.portal.admin.failures": ["failed", "projectId", "sdVersion", "success"],
+    "servicedesk.customer.invite.participants.portal.agent": ["projectId", "sdVersion", "success"],
+    "servicedesk.customer.invite.participants.portal.agent.error": ["projectId", "sdVersion"],
+    "servicedesk.customer.invite.participants.portal.agent.failures": ["failed", "projectId", "sdVersion", "success"],
+    "servicedesk.customer.invite.participants.portal.customer": ["projectId", "sdVersion", "success"],
+    "servicedesk.customer.invite.participants.portal.customer.error": ["projectId", "sdVersion"],
+    "servicedesk.customer.invite.participants.portal.customer.failures": [
+        "failed",
+        "projectId",
+        "sdVersion",
+        "success"
+    ],
+    "servicedesk.customer.invite.reporter.portal.admin": ["projectId", "sdVersion"],
+    "servicedesk.customer.invite.reporter.portal.admin.error": ["projectId", "sdVersion"],
+    "servicedesk.customer.invite.reporter.portal.agent": ["projectId", "sdVersion"],
+    "servicedesk.customer.invite.reporter.portal.agent.error": ["projectId", "sdVersion"],
+    "servicedesk.customer.page.add.organisation.dialog.submitted": ["projectId", "sdVersion"],
+    "servicedesk.customer.page.pagination.request": ["projectId", "sdVersion"],
+    "servicedesk.customer.page.pagination.response.error": [
+        "foundTotal",
+        "hasQuery",
+        "paging",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customer.page.pagination.response.failed": ["projectId", "sdVersion"],
+    "servicedesk.customer.page.pagination.response.noresults": [
+        "foundTotal",
+        "hasQuery",
+        "paging",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customer.page.pagination.response.success": [
+        "foundTotal",
+        "hasQuery",
+        "paging",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customer.page.viewed": ["pagination", "projectId", "sdVersion"],
+    "servicedesk.customer.transition.submit.error": ["projectId", "sdVersion"],
+    "servicedesk.customer.transition.submit.success": ["projectId", "sdVersion"],
+    "servicedesk.customerview.add.attachment.clicked": ["projectId", "sdVersion"],
+    "servicedesk.customerview.add.comment.clicked": ["projectId", "sdVersion"],
+    "servicedesk.customerview.approvals.action.email.button.clicked": [
+        {
+            "action": ["approve", "reject"]
+        },
+        "sdVersion"
+    ],
+    "servicedesk.customerview.approvals.standalone.page.loaded": [
+        {
+            "action": ["approve", "reject"]
+        },
+        "sdVersion"
+    ],
+    "servicedesk.customerview.approvals.action.performed.standalone.page": [
+        {
+            "action": ["APPROVED", "REJECTED"]
+        },
+        "projectId",
+        "sdVersion",
+        "withComment"
+    ],
+    "servicedesk.customerview.approvals.filter.requesttype.changed": ["projectId", "sdVersion"],
+    "servicedesk.customerview.approvals.filter.status.changed": [
+        "projectId",
+        "sdVersion",
+        {
+            "status": ["myApproval", "myPending"]
+        }
+    ],
+    "servicedesk.customerview.approvals.search.changed": ["projectId", "sdVersion"],
+    "servicedesk.customerview.attachment.icon.in.comment.box.clicked": ["projectId", "sdVersion"],
+    "servicedesk.customerview.createRequest.agent.invited.new.customer": ["projectId", "sdVersion"],
+    "servicedesk.customerview.createRequest.agent.not.invited.new.customer": ["projectId", "sdVersion"],
+    "servicedesk.customerview.createRequest.save.from.search": ["hashedQuery", "numberOfWords", "sdVersion"],
+    "servicedesk.customerview.createRequest.view.from.search": ["hashedQuery", "numberOfWords", "sdVersion"],
+    "servicedesk.customerview.richeditor.rendered": ["projectId", "sdVersion", "isWysiwygEditorEnabled"],
+    "servicedesk.customerview.helpcenterbranding.savechanges.success": [
+        "canAdministerJIRA",
+        {
+            "changedAttributes": [
+                "announcementHeader",
+                "announcementMessage",
+                "helpCenterTitle",
+                "sharedPortalName",
+                "headerBGColor",
+                "headerLinkColor",
+                "headerLinkHoverColor",
+                "headerLinkHoverBGColor",
+                "temporaryLogoId",
+                "logoId"
+            ]
+        },
+        "projectId",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.issue.opened": ["isIncident", "issueId", "projectId", "sdVersion", "archived"],
+    "servicedesk.customerview.kbDialogView.helpful.clicked": ["sdVersion", "pageId", "pageNumber"],
+    "servicedesk.customerview.kbDialogView.not.helpful.clicked": ["sdVersion", "pageId", "pageNumber"],
+    "servicedesk.customerview.kbPortalView.back.to.results.clicked": ["sdVersion"],
+    "servicedesk.customerview.kbPortalView.helpful.clicked": ["sdVersion", "pageId"],
+    "servicedesk.customerview.kbPortalView.helpful.clicked.from.search": [
+        "hashQuery",
+        "numberOfWords",
+        "sdVersion",
+        "pageId",
+        "pageNumber"
+    ],
+    "servicedesk.customerview.kbPortalView.not.helpful.clicked": ["sdVersion", "pageId"],
+    "servicedesk.customerview.kbPortalView.not.helpful.clicked.from.search": [
+        "hashQuery",
+        "numberOfWords",
+        "sdVersion",
+        "pageId",
+        "pageNumber"
+    ],
+    "servicedesk.customerview.kb.search.help.clicked": ["projectId", "sdVersion"],
+    "servicedesk.customerview.portalbranding.savechanges.success": [
+        "canAdministerJIRA",
+        {
+            "changedAttributes": ["announcementHeader", "announcementMessage"]
+        },
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.request.notification.turn.off.clicked": ["projectId", "sdVersion"],
+    "servicedesk.customerview.request.notification.turn.on.clicked": ["projectId", "sdVersion"],
+    "servicedesk.customerview.request.reference.clicked": ["projectId", "sdVersion"],
+    "servicedesk.customerview.request.remove.organisation.clicked": ["organisationId", "projectId", "sdVersion"],
+    "servicedesk.customerview.request.remove.participant.clicked": ["projectId", "sdVersion"],
+    "servicedesk.unshare.request.with.group.clicked": ["projectId", "sdVersion"],
+    "servicedesk.customerview.requests.search.filter.changed": ["projectId", "sdVersion"],
+    "servicedesk.customerview.requests.search.reporter.changed": [
+        "projectId",
+        {
+            "reporter": ["", "all", "all-orgs", "others"]
+        },
+        "sdVersion"
+    ],
+    "servicedesk.customerview.requests.search.requesttype.changed": ["projectId", "sdVersion"],
+    "servicedesk.customerview.requests.search.status.changed": [
+        "projectId",
+        "sdVersion",
+        {
+            "status": ["closed", "open"]
+        }
+    ],
+    "servicedesk.customerview.signup.helpcenter.failure": ["projectId", "sdVersion"],
+    "servicedesk.customerview.signup.helpcenter.success": ["projectId", "sdVersion"],
+    "servicedesk.customerview.signup.portal.failure": ["projectId", "sdVersion"],
+    "servicedesk.customerview.signup.portal.success": ["projectId", "sdVersion"],
+    "servicedesk.customerview.smartportal.browse.all.portals.portal.clicked": ["sdVersion"],
+    "servicedesk.customerview.smartportal.browse.popular.portals.browse.all.clicked": ["sdVersion"],
+    "servicedesk.customerview.smartportal.browse.popular.portals.portal.clicked": ["index", "sdVersion"],
+    "servicedesk.customerview.smartportal.browse.recent.requesttypes.portal.clicked": ["index", "sdVersion"],
+    "servicedesk.customerview.smartportal.browse.recent.requesttypes.requesttype.clicked": ["index", "sdVersion"],
+    "servicedesk.customerview.smartportal.first.action.browse.all.portal": ["portalCardsViewFlagOn", "sdVersion"],
+    "servicedesk.customerview.smartportal.first.action.browse.popular.portal": ["portalCardsViewFlagOn", "sdVersion"],
+    "servicedesk.customerview.smartportal.first.action.browse.recent.requesttype.portal": [
+        "portalCardsViewFlagOn",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.first.action.browse.recent.requesttype.requesttype": [
+        "portalCardsViewFlagOn",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.first.action.search": ["portalCardsViewFlagOn", "sdVersion"],
+    "servicedesk.customerview.smartportal.no.viewable.portals": ["projectId", "sdVersion"],
+    "servicedesk.customerview.smartportal.search.completed": [
+        "hashedQuery",
+        "numberOfWords",
+        "sdVersion",
+        "resultsCount"
+    ],
+    "servicedesk.customerview.smartportal.search.completed.with.kb": ["hashedQuery", "numberOfWords", "sdVersion"],
+    "servicedesk.customerview.smartportal.search.result.first.clicked.kb": [
+        "hashedQuery",
+        "numberOfWords",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.search.result.first.clicked.requesttype": [
+        "hashedQuery",
+        "numberOfWords",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.search.result.kb.clicked": [
+        "hashedQuery",
+        "index",
+        "numberOfWords",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.search.result.kb.pagination.browse.clicked": [
+        "hashedQuery",
+        "numberOfWords",
+        "sdVersion",
+        "projectId",
+        "currentPage",
+        "destinationPage",
+        "totalPages"
+    ],
+    "servicedesk.customerview.smartportal.search.result.none.helped.clicked": [
+        "hashedQuery",
+        "numberOfWords",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.search.result.requesttype.clicked": [
+        "hashedQuery",
+        "index",
+        "numberOfWords",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.search.result.requesttype.portalname.clicked": [
+        "hashedQuery",
+        "index",
+        "numberOfWords",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.search.result.subsequent.clicked.kb": [
+        "hashedQuery",
+        "numberOfWords",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.search.result.subsequent.clicked.requesttype": [
+        "hashedQuery",
+        "numberOfWords",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.single.portal.browse.request.group.clicked": ["projectId", "sdVersion"],
+    "servicedesk.customerview.smartportal.single.portal.browse.request.type.clicked": ["projectId", "sdVersion"],
+    "servicedesk.customerview.smartportal.single.portal.first.action.browse.requestgroup": ["projectId", "sdVersion"],
+    "servicedesk.customerview.smartportal.single.portal.first.action.browse.requesttype": ["projectId", "sdVersion"],
+    "servicedesk.customerview.smartportal.single.portal.first.action.search": ["projectId", "sdVersion"],
+    "servicedesk.customerview.smartportal.single.portal.no.search.result.create.request.clicked": [
+        "hashedQuery",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.single.portal.search.completed": [
+        "hashedQuery",
+        "numberOfWords",
+        "projectId",
+        "sdVersion",
+        "resultsCount"
+    ],
+    "servicedesk.customerview.smartportal.single.portal.search.completed.with.kb": [
+        "hashedQuery",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.single.portal.search.result.first.clicked.kb": [
+        "hashedQuery",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.single.portal.search.result.first.clicked.requesttype": [
+        "hashedQuery",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.single.portal.search.result.kb.clicked": [
+        "hashedQuery",
+        "index",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.single.portal.search.result.none.helped.clicked": [
+        "hashedQuery",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.single.portal.search.result.requesttype.clicked": [
+        "hashedQuery",
+        "index",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.single.portal.search.result.subsequent.clicked.kb": [
+        "hashedQuery",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.single.portal.search.result.subsequent.clicked.requesttype": [
+        "hashedQuery",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.customerview.smartportal.single.portal.search.result.kb.pagination.browse.clicked": [
+        "hashedQuery",
+        "numberOfWords",
+        "sdVersion",
+        "projectId",
+        "currentPage",
+        "destinationPage",
+        "totalPages"
+    ],
+    "servicedesk.customerview.smartportal.viewed": ["portalCardsViewFlagOn", "sdVersion"],
+    "servicedesk.email.agentinvite.send": ["sdVersion"],
+    "servicedesk.email.approvalrequest.send": ["sdVersion"],
+    "servicedesk.email.cannotresetpassword.send": ["sdVersion"],
+    "servicedesk.email.customer.signup.send": ["sdVersion"],
+    "servicedesk.email.inviteanonymouscustomer.send": ["sdVersion"],
+    "servicedesk.email.generic.send": ["sdVersion"],
+    "servicedesk.email.invitecustomer.send": ["sdVersion"],
+    "servicedesk.email.resetpassword.send": ["sdVersion"],
+    "servicedesk.email.setting.customer.create.no.never": ["projectId", "sdVersion"],
+    "servicedesk.email.setting.customer.create.yes.always.agents.or.public.signup": ["projectId", "sdVersion"],
+    "servicedesk.email.setting.customer.create.yes.only.public.signup": ["projectId", "sdVersion"],
+    "servicedesk.event.issue.created": [
+        {
+            "channel": ["api", "email", "error", "jira", "portal", "unknown"]
+        },
+        "isIncident",
+        "issueId",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.event.sla.import.calendar.prefixed": ["isTruncated", "projectId", "sdVersion"],
+    "servicedesk.featuretour.keyconcept.close.dialog": ["atPage", "projectId", "sdVersion"],
+    "servicedesk.featuretour.keyconcept.finish": ["projectId", "sdVersion"],
+    "servicedesk.featuretour.keyconcept.navigate": ["fromPage", "projectId", "sdVersion", "toPage"],
+    "servicedesk.featuretour.keyconcept.next": ["fromPage", "projectId", "sdVersion", "toPage"],
+    "servicedesk.featuretour.keyconcept.open": ["projectId", "sdVersion"],
+    "servicedesk.featuretour.keyconcept.previous": ["fromPage", "projectId", "sdVersion", "toPage"],
+    "servicedesk.global.title.customize.portal.announcement.clicked": ["projectId", "sdVersion"],
+    "servicedesk.incoming.email.parser.custom.filtered.attachments": ["projectId", "sdVersion"],
+    "servicedesk.incoming.email.parser.no.filtered.attachments": ["projectId", "sdVersion"],
+    "servicedesk.infohelpbubble.innerlink.click": [
+        "bubbleId",
+        {
+            "bubbleShowMode": ["automatic", "manual"]
+        },
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.infohelpbubble.shown": [
+        "bubbleId",
+        {
+            "bubbleShowMode": ["automatic", "manual"]
+        },
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.issue.create.incident.clicked": ["sdVersion", "projectId", "issueId"],
+    "servicedesk.issue.customer.organisations.list.contracted": ["projectId", "sdVersion"],
+    "servicedesk.issue.customer.organisations.list.expanded": ["projectId", "sdVersion"],
+    "servicedesk.issue.link.incident.clicked": ["sdVersion", "projectId", "issueId"],
+    "servicedesk.issueview.issue.opened": ["isIncident", "issueId", "projectId", "sdVersion", "source"],
+    "servicedesk.knowledge.base.settings.confluence.feature.unavailable": ["projectId", "sdVersion"],
+    "servicedesk.knowledge.base.settings.confluence.generic.error": [
+        {
+            "error": [
+                "sd.admin.details.tab.kb.agent.admin.permissions.error",
+                "sd.admin.details.tab.knowledge.base.cannot.contact",
+                "sd.admin.servicedesk.error.missingproject",
+                "sd.applinks.config.error",
+                "sd.applinks.error.bad.request",
+                "sd.applinks.error.corrupt",
+                "sd.applinks.error.creation",
+                "sd.applinks.error.generic.confluence.communication",
+                "sd.applinks.error.generic.remote.communication",
+                "sd.applinks.error.invalid.response.generic",
+                "sd.applinks.error.missing",
+                "sd.applinks.error.no.permission",
+                "sd.error.vporigin.missing",
+                "sd.kb.link.error.generic.db.error.try.refreshing",
+                "sd.kb.link.error.invalid.jira.configuration",
+                "sd.kb.link.error.kb.plugin.generic",
+                "sd.kb.link.error.missing.issue",
+                "sd.kb.link.error.rt.not.found",
+                "sd.kb.link.error.stored.invalid.space",
+                "sd.kb.page.not.found"
+            ]
+        },
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.knowledge.base.settings.confluence.permission.status.retrieved.successful": ["projectId", "sdVersion"],
+    "servicedesk.knowledge.base.settings.confluence.space.permission.access.view.clicked": ["projectId", "sdVersion"],
+    "servicedesk.knowledge.base.settings.confluence.space.permission.anonymous.on.clicked": ["projectId", "sdVersion"],
+    "servicedesk.knowledge.base.settings.confluence.space.permission.authoring.view.clicked": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.knowledge.base.settings.confluence.unlicensed.disabled": ["projectId", "sdVersion"],
+    "servicedesk.knowledge.base.settings.confluence.unlicensed.enabled": ["projectId", "sdVersion"],
+    "servicedesk.knowledge.base.settings.confluence.unlicensed.permission.fix.attempted": ["projectId", "sdVersion"],
+    "servicedesk.knowledge.base.settings.confluence.unreachable": ["projectId", "sdVersion"],
+    "servicedesk.knowledge.base.settings.confluence.unreachable.retry.clicked": ["projectId", "sdVersion"],
+    "servicedesk.outsider.comments.addparticipants": [
+        "projectId",
+        "sdVersion",
+        {
+            "sourceView": ["agentView", "customerView"]
+        }
+    ],
+    "servicedesk.outsider.comments.disable": ["projectId", "sdVersion"],
+    "servicedesk.outsider.comments.enable": ["projectId", "sdVersion"],
+    "servicedesk.outsider.comments.share": [
+        "projectId",
+        "sdVersion",
+        {
+            "sourceView": ["agentView", "customerView"]
+        }
+    ],
+    "servicedesk.page.view.admin.agentmanagement": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.assignservicedesk": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.assignservicedesk.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.assignservicedesk.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.invite.setpassword": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.invite.setpassword.login": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.invite.setpassword.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.newagent": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.newagent.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.newagent.create": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.promoteuser": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.promoteuser.promote": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.promoteuser.userselected": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.promoteuser.userunselected": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.revokeagent": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.revokeagent.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.revokeagent.revoke": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.agentmanagement.searchAgents": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.alert.custom.notification.misconfiguration.fix": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.alert.custom.notification.misconfiguration.view": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.configuration.configure.user.directory": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.configuration.configure.workflow.approvals": [
+        "projectId",
+        "sdVersion",
+        "approvalCustomFieldId",
+        "insightApprovalCustomFieldId"
+    ],
+    "servicedesk.page.view.admin.configuration.notifications.disable": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.configuration.notifications.enable": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.configuration.projectadminslafieldcreation.disable": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.configuration.projectadminslafieldcreation.enable": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.configuration.publicsignup.disable": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.configuration.publicsignup.enable": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customer.invite.setpassword": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customer.invite.setpassword.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customer.invite.setpassword.togglepassword": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.looknfeel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.looknfeel.customizelook": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.looknfeel.defaultlook": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.looknfeel.discardchanges.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.looknfeel.discardchanges.confirm": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.looknfeel.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.looknfeel.saveFailed": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.portal.settings.announcement.header.fail": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.portal.settings.announcement.header.none": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.portal.settings.announcement.header.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.portal.settings.announcement.message.fail": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.portal.settings.announcement.message.none": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.portal.settings.announcement.message.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.create": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.delete": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.details.formHelp": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.fields": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.fields.add.supported": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.fields.add.unsupported": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.fields.hidden.reorder": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.fields.hide": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.fields.remove": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.fields.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.fields.setDefaultValue": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.fields.show": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.fields.visible.reorder": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.header.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.preview": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.reorder": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.update": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.workflow": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.workflow.clear": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.workflow.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.customerview.requesttypes.edit.workflow.set": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.emailsettings": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.emailsettings.delete": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.emailsettings.delete.failure": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.emailsettings.delete.success": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.emailsettings.test": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.emailsettings.test.error": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.emailsettings.test.failure": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.emailsettings.test.success": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.emailsettings.viewlog": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.delete": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.delete.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.learn": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.newspace.create": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.newspace.form": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.newspace.form.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.search.application": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.search.application.invalidAuth": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.search.application.valid": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.search.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.search.space": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.search.unsupported.applink": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.applink.setup": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.configuration.error": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.confluence.advertise": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.od-trial.cancelled": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.od-trial.clicked": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.od-trial.confirmed": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.od-trial.learn.more.clicked": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.search.requesttype.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.knowledgebase.search.requesttype.saved": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.enable.existing": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.enable.new": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.agents.addagentdialog.addAgentToProject": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.agents.addagentdialog.addNewAgentByEmail": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.agents.addagentdialog.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.agents.addagentdialog.makeUserAnAgent": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.agents.addagentdialog.open": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.agents.makeProjectAdmin": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.agents.removeAccess": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.agents.removeAccess.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.agents.removeAccess.confirm": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.agents.revokeProjectAdmin": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.agents.searchAgents": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.agents.view": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.collaborators.addcollaboratordialog.add": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.collaborators.addcollaboratordialog.cancel": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.collaborators.addcollaboratordialog.gotoAgentsTab": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.collaborators.addcollaboratordialog.open": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.collaborators.removeCollaborator": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.collaborators.searchCollaborators": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.collaborators.view": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.customeraccessdialog.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.customeraccessdialog.open": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.deskAccessMessage.link.changeOpenSetting.clicked": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.customers.deskAccessMessage.link.changePublicSetting.clicked": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.customers.deskAccessMessage.link.removeUsers.clicked": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.customers.globalpublicsignup.enable": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.globalpublicsignup.enableCompleted": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.customers.globalpublicsignup.enableFailed": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.customers.globalpublicsignup.enableSucceeded": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.customers.invitecustomerdialog.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.invitecustomerdialog.invite": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.invitecustomerdialog.invite.failed": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.customers.invitecustomerdialog.invite.succeeded": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.people.customers.invitecustomerdialog.open": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.publicaccessonly.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.publicaccessonly.select": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.publicsignup.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.publicsignup.select": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.removeCustomer": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.restrictedaccess.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.restrictedaccess.select": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.searchCustomers": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.customers.view": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.migrate-permissions": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.migrate-view-permission-scheme": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.permission.edit.admin": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.permission.edit.customer": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.people.permission.edit.team": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.portallogo.avatarpickerdialog.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.portallogo.avatarpickerdialog.done": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.portallogo.avatarpickerdialog.selectimage.drag": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.portallogo.avatarpickerdialog.selectimage.invalid": [
+        "projectId",
+        {
+            "reason": ["filesizeexceeded", "invalidfileextension", "invalidfileresolution", "others"]
+        },
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.portallogo.avatarpickerdialog.selectimage.valid": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.portallogo.avatarpickerdialog.selectimage.zoom": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.servicedesk.portallogo.chooselogo": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.portallogo.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.portallogo.save.succeed": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.settings.email.view": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.settings.kb.view": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.settings.participants.view": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.settings.portal.view": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.servicedesk.settings.requesttypes.view": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.add": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.add.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.add.goback": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.add.next": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.add.protocol": [
+        "projectId",
+        {
+            "protocol": ["imap", "imaps", "pop3", "pop3s", "graph"]
+        },
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.settings.incomingemail.add.provider": [
+        "projectId",
+        {
+            "provider": ["gmail", "other", "yahoo", "microsoft"]
+        },
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.settings.incomingemail.add.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.add.searchrequesttype": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.delete": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.delete.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.delete.confirm": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.2fa.clicked.gmail": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.2fa.clicked.yahoo": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.changepassword": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.goback": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.inline.email": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.inline.requesttype": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.inline.requesttype.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.inline.requesttype.complete": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.next": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.protocol": [
+        "projectId",
+        {
+            "protocol": ["imap", "imaps", "pop3", "pop3s", "graph"]
+        },
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.provider": [
+        "projectId",
+        {
+            "provider": ["gmail", "yahoo", "microsoft"]
+        },
+        "sdVersion"
+    ],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.edit.searchrequesttype": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.off": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.off.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.off.confirm": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.on": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.validate.genericerror": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.incomingemail.validate.inboxnotempty": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.participants.add.disabled": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.participants.add.enabled": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.participants.autocomplete.disabled": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.participants.autocomplete.enabled": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.settings.portalsettings": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.sharedportalsettings": ["projectId", "sdVersion"],
+    "servicedesk.page.view.admin.sla.configuration": ["sdVersion"],
+    "servicedesk.page.view.customerview": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.allrequests": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.allrequests.ownselected": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.allrequests.pagechanged": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.allrequests.participatingselected": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.allrequests.search": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.attachment": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.attachment.request.create.browse": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.attachment.request.create.drop": ["numFiles", "projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.attachment.request.create.image.paste": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.attachment.request.view.browse": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.attachment.request.view.drop": ["numFiles", "projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.attachment.request.view.image.paste": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.comment": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.comment.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.createRequest": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.createRequest.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.createRequest.raiseonbehalf.changed": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.createRequest.raiseonbehalf.unchanged": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.createRequest.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.createRequest.saveFailed": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.feedback": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.helpcenterbranding.close.discardunsavedchanges": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.helpcenterbranding.discover.editfromportal": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.helpcenterbranding.discover.individualportalsettings": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.discover.sdadminconfiguration": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.helpcenterbranding.frontpagetitle.edit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.color.change.headerbgcolor": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.color.change.headerlinkcolor": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.color.change.headerlinkhoverbgcolor": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.color.change.headerlinkhovercolor": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.generatethemefromlogo.click": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.helpcenter.announcement.header.edit.success": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.helpcenter.announcement.message.edit.fail": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.helpcenter.announcement.message.edit.success": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.helpcenter.loginannouncement.header.edit.success": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.helpcenter.loginannouncement.message.edit.fail": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.helpcenter.loginannouncement.message.edit.success": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.helpcentername.edit": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.uselogo.check": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.uselogo.uncheck": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.helpcenterbranding.headeroptions.uselogo.uploadlogo.success": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.customerview.kb.context.view.landing": ["projectId", "sdVersion", "pageId"],
+    "servicedesk.page.view.customerview.kb.context.view.request": ["projectId", "sdVersion", "pageId"],
+    "servicedesk.page.view.customerview.kb.pagination.browse.clicked": [
+        "hashedQuery",
+        "numberOfWords",
+        "sdVersion",
+        "projectId",
+        "currentPage",
+        "destinationPage",
+        "totalPages"
+    ],
+    "servicedesk.page.view.customerview.kb.search.request": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.kb.search.request.dismiss": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.kbView": ["sdVersion", "pageId", "pageNumber"],
+    "servicedesk.page.view.customerview.login": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.login.gapps": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.login.not.gapps": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.participants.add.cancelled": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.participants.add.invalid": ["count", "projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.participants.add.non-email": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.participants.add.opened": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.participants.add.submitted": ["count", "projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.participants.add.valid": ["count", "projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.portals.all": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.profile": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.profile.avatar.edit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.profile.edit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.profile.edit.success": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.profile.passwordchange": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.profile.passwordchange.success": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.requestDetails": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.requestDetails.leave.cancelled": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.requestDetails.leave.clicked": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.requestDetails.leave.confirmed": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.requestList": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.requesttype.with.no.groups": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.session": ["count", "path", "projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.signup": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.signup.backtologin": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.signup.refreshcaptcha": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.signup.submit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.customerview.signup.togglepassword": ["projectId", "sdVersion"],
+    "servicedesk.page.view.disable.servicedesk.button.clicked": ["projectId", "sdVersion"],
+    "servicedesk.page.view.enable.servicedesk.button.clicked": ["projectId", "sdVersion"],
+    "servicedesk.page.view.evaluation.tour.close.dialog": ["projectId", "sdVersion"],
+    "servicedesk.page.view.evaluation.tour.completed": ["projectId", "sdVersion"],
+    "servicedesk.page.view.evaluation.tour.queue": ["projectId", "sdVersion"],
+    "servicedesk.page.view.evaluation.tour.request.submit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.evaluation.tour.request.type": ["projectId", "sdVersion"],
+    "servicedesk.page.view.evaluation.tour.resolve": ["projectId", "sdVersion"],
+    "servicedesk.page.view.evaluation.tour.started": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.customer.kb": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.customer.looknfeel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.customer.portalsettings": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.customer.requesttypes": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.customer.requesttypes.fields": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.customer.requesttypes.workflow": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.people.agents": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.people.collaborators": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.people.customers": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.people.preabp": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.queues": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.queues.issue": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.reports": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.settings.email": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.settings.kb": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.settings.looknfeel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.settings.portal": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.settings.portalsettings": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.settings.requesttypes": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.settings.requesttypes.fields": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.settings.requesttypes.workflow": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.sla": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.disable.help.sla.calendars": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.customer.kb": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.customer.looknfeel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.customer.portalsettings": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.customer.requesttypes": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.customer.requesttypes.fields": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.customer.requesttypes.workflow": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.people.agents": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.people.collaborators": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.people.customers": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.people.preabp": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.queues": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.queues.issue": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.reports": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.settings.email": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.settings.kb": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.settings.looknfeel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.settings.portal": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.settings.portalsettings": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.settings.requesttypes": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.settings.requesttypes.fields": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.settings.requesttypes.workflow": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.enable.help.sla": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.customer.kb": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.customer.looknfeel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.customer.portalsettings": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.customer.requesttypes": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.customer.requesttypes.fields": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.customer.requesttypes.workflow": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.people.agents": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.people.collaborators": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.people.customers": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.queues": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.queues.issue": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.reports": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.settings.email": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.settings.kb": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.settings.looknfeel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.settings.portal": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.settings.portalsettings": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.settings.requesttypes": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.settings.requesttypes.fields": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.settings.requesttypes.workflow": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.sla": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.start.tour.sla.calendars": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.customer.kb": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.customer.looknfeel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.customer.portalsettings": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.customer.requesttypes": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.customer.requesttypes.fields": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.customer.requesttypes.workflow": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.people.agents": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.people.collaborators": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.people.customers": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.queues": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.queues.issue": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.reports": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.settings.email": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.settings.kb": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.settings.looknfeel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.settings.portal": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.settings.portalsettings": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.settings.requesttypes": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.settings.requesttypes.fields": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.settings.requesttypes.workflow": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.sla": ["projectId", "sdVersion"],
+    "servicedesk.page.view.featuretour.stop.tour.sla.calendars": ["projectId", "sdVersion"],
+    "servicedesk.page.view.firstloginerror.cannotviewanyproject": ["projectId", "sdVersion"],
+    "servicedesk.page.view.firstloginerror.cannotviewanyproject.button.clicked.acknowledge": ["projectId", "sdVersion"],
+    "servicedesk.page.view.global.banner.agentsoverlimit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.global.banner.agentsoverlimit.max": ["projectId", "sdVersion"],
+    "servicedesk.page.view.global.banner.agentsoverlimit.ondemand": ["projectId", "sdVersion"],
+    "servicedesk.page.view.header.create.dropdown": ["projectId", "sdVersion"],
+    "servicedesk.page.view.header.create.dropdown.ticket": ["projectId", "sdVersion"],
+    "servicedesk.page.view.header.sd.create": ["projectId", "sdVersion"],
+    "servicedesk.page.view.header.sd.list": ["projectId", "sdVersion"],
+    "servicedesk.page.view.header.sd.ticket": ["projectId", "sdVersion"],
+    "servicedesk.page.view.header.sd.topmenu": ["projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.admin.configurations.resolve.permission.error.misconfig": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.help.docs.agent.precondition.error.legacytransition": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.agent.precondition.error.permission.misconfig": [
+        "docsUrl",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.help.docs.agentallocation.addagent.error.preexistinggroup": [
+        "docsUrl",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.help.docs.agentallocation.promoteagent.error.preexistinggroup": [
+        "docsUrl",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.help.docs.agentallocation.promoteagent.error.readonly": [
+        "docsUrl",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.help.docs.customer.channels.dialog.email.link.learn": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.customer.request.type.error": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.email.setting.inbox.not.empty": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.email.settings.troubleshooting": ["projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.global.banner.agentsoverlimit": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.incoming.email.setup": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.knowledge.base.settings.confluence.feature.unavailable.upgrade.link.click": [
+        "docsUrl",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.help.docs.onboarding.bubble.customers": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.onboarding.bubble.email": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.onboarding.bubble.queues": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.onboarding.bubble.reports": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.people.addagent.error.preexistinggroup": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.people.addagent.error.readonly": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.people.customers.access.publicsignup": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.people.customers.invite.error.readonly": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.request.settings.help.bubble": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.settings.knowledgebase.applink": ["docsUrl", "projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.sla.import": ["projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.sla.setup": ["projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.welcome.guide.agent.documentation": ["projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.welcome.guide.agent.documentation.key.concepts": ["projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.welcome.guide.agent.documentation.knowledge.base": ["projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.welcome.guide.agent.documentation.workspace": ["projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.welcome.guide.checklist.documentation": ["projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.welcome.guide.documentation": ["projectId", "sdVersion"],
+    "servicedesk.page.view.help.docs.knowledge.setup": ["projectId", "sdVersion"],
+    "servicedesk.page.view.jira.bulkedit.requesttype": ["projectId", "sdVersion"],
+    "servicedesk.page.view.jira.field.requesttype": ["projectId", "sdVersion"],
+    "servicedesk.page.view.kb": ["projectId", "sdVersion"],
+    "servicedesk.page.view.manage.agents.add.agentsoverlimit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.manage.agents.add.agentsoverlimit.max": ["projectId", "sdVersion"],
+    "servicedesk.page.view.manage.agents.add.agentsoverlimit.ondemand": ["projectId", "sdVersion"],
+    "servicedesk.page.view.manage.agents.promote.agentsoverlimit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.manage.agents.promote.agentsoverlimit.max": ["projectId", "sdVersion"],
+    "servicedesk.page.view.manage.agents.promote.agentsoverlimit.ondemand": ["projectId", "sdVersion"],
+    "servicedesk.page.view.project.sidebar.customer.channels.dialog.manageaddress.clicked": ["projectId", "sdVersion"],
+    "servicedesk.page.view.project.sidebar.customer.channels.dialog.previewportal.clicked": ["projectId", "sdVersion"],
+    "servicedesk.page.view.project.sidebar.customer.channels.dialog.setupemailrequests.clicked": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.queue": [
+        "asc",
+        "hasAgentSorting",
+        "isBulkActionFlagOn",
+        "isReactQueueTableFlagOn",
+        {
+            "orderBy": [
+                "aggregateprogress",
+                "aggregatetimeestimate",
+                "aggregatetimeoriginalestimate",
+                "aggregatetimespent",
+                "assignee",
+                "components",
+                "created",
+                "creator",
+                "description",
+                "duedate",
+                "environment",
+                "fixVersions",
+                "issuekey",
+                "issuelinks",
+                "issuetype",
+                "labels",
+                "lastViewed",
+                "priority",
+                "progress",
+                "project",
+                "reporter",
+                "resolution",
+                "resolutiondate",
+                "security",
+                "status",
+                "subtasks",
+                "summary",
+                "thumbnail",
+                "timeestimate",
+                "timeoriginalestimate",
+                "timespent",
+                "updated",
+                "versions",
+                "votes",
+                "watches",
+                "workratio"
+            ]
+        },
+        "projectId",
+        "queueId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.queues": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.agent.customer.portal": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.agent.dismiss": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.agent.queues": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.agent.restore": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.customer.portal.preview": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.dismiss": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.email.settings.link": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.invite.team": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.knowledge.link": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.projectpicker": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.projectpicker.basic.button.click": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.projectpicker.it.button.click": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.projectpicker.skip.link.click": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.reports.link": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.requests.link": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.restore": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.slas.link": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.unknowntype.dismiss": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.unknowntype.restore": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.viewed.admin": ["projectId", "sdVersion"],
+    "servicedesk.page.view.renaissance.onboarding.viewed.agent": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.create-welcome": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla": ["projectId", "sdVersion", "slaId"],
+    "servicedesk.page.view.servicedesk.agent.sla.calendar.add": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.calendar.add.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.calendar.add.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.calendar.delete": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.calendar.delete.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.calendar.delete.confirm": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.calendar.edit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.calendar.edit.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.calendar.edit.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.calendar.view": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.calendars": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.delete": ["projectId", "sdVersion", "slaId"],
+    "servicedesk.page.view.servicedesk.agent.sla.delete.confirm": ["projectId", "sdVersion", "slaId"],
+    "servicedesk.page.view.servicedesk.agent.sla.edit": ["projectId", "sdVersion", "slaId"],
+    "servicedesk.page.view.servicedesk.agent.sla.edit.cancel": ["projectId", "sdVersion", "slaId"],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.pause.select.com-atlassian-servicedesk:assignee-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.pause.select.com-atlassian-servicedesk:due-date-passed-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.pause.select.com-atlassian-servicedesk-internal-conditions:fix-version-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.pause.select.com-atlassian-servicedesk:resolution-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.pause.select.com-atlassian-servicedesk:status-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.pause.unselect.com-atlassian-servicedesk:assignee-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.pause.unselect.com-atlassian-servicedesk:due-date-passed-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.pause.unselect.com-atlassian-servicedesk-internal-conditions:fix-version-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.pause.unselect.com-atlassian-servicedesk:resolution-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.pause.unselect.com-atlassian-servicedesk:status-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.select.com-atlassian-servicedesk-internal-conditions:fix-version-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.select.com-atlassian-servicedesk:assignee-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.select.com-atlassian-servicedesk:comment-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.select.com-atlassian-servicedesk:due-date-passed-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.select.com-atlassian-servicedesk:issue-created-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.select.com-atlassian-servicedesk:resolution-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.select.com-atlassian-servicedesk:status-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.unselect.com-atlassian-servicedesk-internal-conditions:fix-version-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.unselect.com-atlassian-servicedesk:assignee-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.unselect.com-atlassian-servicedesk:comment-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.unselect.com-atlassian-servicedesk:due-date-passed-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.unselect.com-atlassian-servicedesk:issue-created-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.unselect.com-atlassian-servicedesk:resolution-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.start.unselect.com-atlassian-servicedesk:status-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.stop.select.com-atlassian-servicedesk-internal-conditions:fix-version-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.stop.select.com-atlassian-servicedesk:assignee-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.stop.select.com-atlassian-servicedesk:comment-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.stop.select.com-atlassian-servicedesk:due-date-passed-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.stop.select.com-atlassian-servicedesk:resolution-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.stop.select.com-atlassian-servicedesk:status-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.stop.unselect.com-atlassian-servicedesk-internal-conditions:fix-version-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.stop.unselect.com-atlassian-servicedesk:assignee-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.stop.unselect.com-atlassian-servicedesk:comment-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.stop.unselect.com-atlassian-servicedesk:due-date-passed-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.stop.unselect.com-atlassian-servicedesk:resolution-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.edit.condition.stop.unselect.com-atlassian-servicedesk:status-sla-condition-factory": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.agent.sla.edit.deleteMetric.review.seeReport": [
+        "projectId",
+        "sdVersion",
+        "slaId"
+    ],
+    "servicedesk.page.view.servicedesk.agent.sla.edit.discardChange": ["projectId", "sdVersion", "slaId"],
+    "servicedesk.page.view.servicedesk.agent.sla.edit.review.seeReport": ["projectId", "sdVersion", "slaId"],
+    "servicedesk.page.view.servicedesk.agent.sla.edit.reviewChange": ["projectId", "sdVersion", "slaId"],
+    "servicedesk.page.view.servicedesk.agent.sla.edit.save": ["projectId", "sdVersion", "isCustomerVisible", "slaId"],
+    "servicedesk.page.view.servicedesk.agent.sla.empty": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.empty.import": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.empty.new": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.goal.add": ["projectId", "sdVersion", "slaId", "goalId"],
+    "servicedesk.page.view.servicedesk.agent.sla.goal.delete": ["projectId", "sdVersion", "slaId", "goalId"],
+    "servicedesk.page.view.servicedesk.agent.sla.goal.edit": ["projectId", "sdVersion", "slaId", "goalId"],
+    "servicedesk.page.view.servicedesk.agent.sla.goal.edit.cancel": ["projectId", "sdVersion", "slaId"],
+    "servicedesk.page.view.servicedesk.agent.sla.goal.edit.save": ["projectId", "sdVersion", "slaId", "goalId"],
+    "servicedesk.page.view.servicedesk.agent.sla.import": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.import.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.import.confirm.no": [
+        "calendarCount",
+        "projectId",
+        "sdVersion",
+        "slaCount"
+    ],
+    "servicedesk.page.view.servicedesk.agent.sla.import.confirm.yes": [
+        "calendarCount",
+        "projectId",
+        "sdVersion",
+        "slaCount"
+    ],
+    "servicedesk.page.view.servicedesk.agent.sla.import.project.select": [
+        "projectId",
+        "sdVersion",
+        "selectedProjectId"
+    ],
+    "servicedesk.page.view.servicedesk.agent.sla.import.replace.checked": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.import.replace.unchecked": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.import.submit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.import.validated": [
+        "blockerCount",
+        "projectId",
+        "sdVersion",
+        "warningCount"
+    ],
+    "servicedesk.page.view.servicedesk.agent.sla.new": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.agent.sla.new.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.pause.select.com-atlassian-servicedesk:assignee-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.pause.select.com-atlassian-servicedesk:due-date-passed-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.pause.select.com-atlassian-servicedesk-internal-conditions:fix-version-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.pause.select.com-atlassian-servicedesk:resolution-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.pause.select.com-atlassian-servicedesk:status-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.pause.unselect.com-atlassian-servicedesk:assignee-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.pause.unselect.com-atlassian-servicedesk:due-date-passed-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.pause.unselect.com-atlassian-servicedesk-internal-conditions:fix-version-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.pause.unselect.com-atlassian-servicedesk:resolution-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.pause.unselect.com-atlassian-servicedesk:status-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.select.com-atlassian-servicedesk-internal-conditions:fix-version-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.select.com-atlassian-servicedesk:assignee-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.select.com-atlassian-servicedesk:comment-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.select.com-atlassian-servicedesk:due-date-passed-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.select.com-atlassian-servicedesk:issue-created-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.select.com-atlassian-servicedesk:resolution-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.select.com-atlassian-servicedesk:status-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.unselect.com-atlassian-servicedesk-internal-conditions:fix-version-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.unselect.com-atlassian-servicedesk:assignee-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.unselect.com-atlassian-servicedesk:comment-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.unselect.com-atlassian-servicedesk:due-date-passed-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.unselect.com-atlassian-servicedesk:issue-created-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.unselect.com-atlassian-servicedesk:resolution-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.start.unselect.com-atlassian-servicedesk:status-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.stop.select.com-atlassian-servicedesk-internal-conditions:fix-version-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.stop.select.com-atlassian-servicedesk:assignee-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.stop.select.com-atlassian-servicedesk:comment-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.stop.select.com-atlassian-servicedesk:due-date-passed-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.stop.select.com-atlassian-servicedesk:resolution-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.stop.select.com-atlassian-servicedesk:status-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.stop.unselect.com-atlassian-servicedesk-internal-conditions:fix-version-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.stop.unselect.com-atlassian-servicedesk:assignee-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.stop.unselect.com-atlassian-servicedesk:comment-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.stop.unselect.com-atlassian-servicedesk:due-date-passed-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.stop.unselect.com-atlassian-servicedesk:resolution-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.internal.pages.sla.new.condition.stop.unselect.com-atlassian-servicedesk:status-sla-condition-factory": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.agent.sla.new.save": ["projectId", "sdVersion", "isCustomerVisible", "slaId"],
+    "servicedesk.page.view.servicedesk.agent.sla.warning": [
+        "conditionWarningCount",
+        "jqlWarningCount",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.agentlicense.exceeded.banner": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.gettingstarted.customer": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.gettingstarted.reports": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.gettingstarted.sla": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.issue.requestparticipants.contracted": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.issue.requestparticipants.expanded": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.issue.requestparticipants.inlineedit.saved": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.issue.requestparticipants.inlineedit.started": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.queue.issue.linked.view.newtab": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.queue.issue.llinked.view": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.queue.issue.view": [
+        "asc",
+        "hasAgentSorting",
+        {
+            "orderBy": [
+                "aggregateprogress",
+                "aggregatetimeestimate",
+                "aggregatetimeoriginalestimate",
+                "aggregatetimespent",
+                "assignee",
+                "components",
+                "created",
+                "creator",
+                "description",
+                "duedate",
+                "environment",
+                "fixVersions",
+                "issuekey",
+                "issuelinks",
+                "issuetype",
+                "labels",
+                "lastViewed",
+                "priority",
+                "progress",
+                "project",
+                "reporter",
+                "resolution",
+                "resolutiondate",
+                "security",
+                "status",
+                "subtasks",
+                "summary",
+                "thumbnail",
+                "timeestimate",
+                "timeoriginalestimate",
+                "timespent",
+                "updated",
+                "versions",
+                "votes",
+                "watches",
+                "workratio"
+            ]
+        },
+        "projectId",
+        "queueId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.queue.issue.view.newtab": [
+        "asc",
+        "hasAgentSorting",
+        {
+            "orderBy": [
+                "aggregateprogress",
+                "aggregatetimeestimate",
+                "aggregatetimeoriginalestimate",
+                "aggregatetimespent",
+                "assignee",
+                "components",
+                "created",
+                "creator",
+                "description",
+                "duedate",
+                "environment",
+                "fixVersions",
+                "issuekey",
+                "issuelinks",
+                "issuetype",
+                "labels",
+                "lastViewed",
+                "priority",
+                "progress",
+                "project",
+                "reporter",
+                "resolution",
+                "resolutiondate",
+                "security",
+                "status",
+                "subtasks",
+                "summary",
+                "thumbnail",
+                "timeestimate",
+                "timeoriginalestimate",
+                "timespent",
+                "updated",
+                "versions",
+                "votes",
+                "watches",
+                "workratio"
+            ]
+        },
+        "projectId",
+        "queueId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.queue.page": [
+        "asc",
+        "hasAgentSorting",
+        {
+            "orderBy": [
+                "aggregateprogress",
+                "aggregatetimeestimate",
+                "aggregatetimeoriginalestimate",
+                "aggregatetimespent",
+                "assignee",
+                "components",
+                "created",
+                "creator",
+                "description",
+                "duedate",
+                "environment",
+                "fixVersions",
+                "issuekey",
+                "issuelinks",
+                "issuetype",
+                "labels",
+                "lastViewed",
+                "priority",
+                "progress",
+                "project",
+                "reporter",
+                "resolution",
+                "resolutiondate",
+                "security",
+                "status",
+                "subtasks",
+                "summary",
+                "thumbnail",
+                "timeestimate",
+                "timeoriginalestimate",
+                "timespent",
+                "updated",
+                "versions",
+                "votes",
+                "watches",
+                "workratio"
+            ]
+        },
+        "pageNumber",
+        "projectId",
+        "queueId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.queue.sort.apply": [
+        "asc",
+        "hasAgentSorting",
+        {
+            "orderBy": [
+                "aggregateprogress",
+                "aggregatetimeestimate",
+                "aggregatetimeoriginalestimate",
+                "aggregatetimespent",
+                "assignee",
+                "components",
+                "created",
+                "creator",
+                "description",
+                "duedate",
+                "environment",
+                "fixVersions",
+                "issuekey",
+                "issuelinks",
+                "issuetype",
+                "labels",
+                "lastViewed",
+                "priority",
+                "progress",
+                "project",
+                "reporter",
+                "resolution",
+                "resolutiondate",
+                "security",
+                "status",
+                "subtasks",
+                "summary",
+                "thumbnail",
+                "timeestimate",
+                "timeoriginalestimate",
+                "timespent",
+                "updated",
+                "versions",
+                "votes",
+                "watches",
+                "workratio"
+            ]
+        },
+        "projectId",
+        "queueId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.queue.sort.remove": [
+        {
+            "orderBy": [
+                "aggregateprogress",
+                "aggregatetimeestimate",
+                "aggregatetimeoriginalestimate",
+                "aggregatetimespent",
+                "assignee",
+                "components",
+                "created",
+                "creator",
+                "description",
+                "duedate",
+                "environment",
+                "fixVersions",
+                "issuekey",
+                "issuelinks",
+                "issuetype",
+                "labels",
+                "lastViewed",
+                "priority",
+                "progress",
+                "project",
+                "reporter",
+                "resolution",
+                "resolutiondate",
+                "security",
+                "status",
+                "subtasks",
+                "summary",
+                "thumbnail",
+                "timeestimate",
+                "timeoriginalestimate",
+                "timespent",
+                "updated",
+                "versions",
+                "votes",
+                "watches",
+                "workratio"
+            ]
+        },
+        "projectId",
+        "queueId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.queue.bulk.action.submitted": [
+        {
+            "actionType": ["watch", "delete", "link", "assign", "comment"]
+        },
+        "hasIssuesFromOtherPage",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.queue.issue.view.returnlink": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.create": ["projectId", "sdVersion", "target"],
+    "servicedesk.page.view.servicedesk.report.datapoint.click": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.delete": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.edit": ["projectId", "sdVersion", "target"],
+    "servicedesk.page.view.servicedesk.report.issue.view.returnlink": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.series.create": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.series.create.dialog.opened": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.series.delete": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.series.dialog.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.series.edit": [
+        {
+            "modifiedFields": ["color", "jql", "label", "seriesKey"]
+        },
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.page.view.servicedesk.report.series.edit.dialog.opened": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.sladiscovery.close": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.sladiscovery.readmore": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.timescale.": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.timescale.custom": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.timescale.past12bymonth": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.timescale.past12byweek": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.timescale.past14": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.timescale.past30": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.timescale.past3byday": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.timescale.past3byweek": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.timescale.past48": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.report.timescale.past7": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.reports": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.settings.queues.create": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.settings.queues.create.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.settings.queues.create.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.settings.queues.delete": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.settings.queues.delete.confirm": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.settings.queues.edit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.settings.queues.inline-edit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.settings.queues.inline-edit.cancel": ["projectId", "sdVersion"],
+    "servicedesk.page.view.servicedesk.settings.queues.inline-edit.save": ["projectId", "sdVersion"],
+    "servicedesk.page.view.viewissue.kb.createdraft.opendialog": ["projectId", "sdVersion"],
+    "servicedesk.page.view.viewissue.kb.createdraft.submit": ["projectId", "sdVersion"],
+    "servicedesk.page.view.welcome.dismissed": ["projectId", "sdVersion"],
+    "servicedesk.portal.comment.reactions.toggled": ["sdVersion", "projectId", "isEnabled"],
+    "servicedesk.portal.customer.signup.honeypot": ["projectId", "sdVersion"],
+    "servicedesk.portal.global.title.announcement.view.header.and.message": ["projectId", "sdVersion"],
+    "servicedesk.portal.global.title.announcement.view.header.only": ["projectId", "sdVersion"],
+    "servicedesk.portal.global.title.announcement.view.message.only": ["projectId", "sdVersion"],
+    "servicedesk.portal.global.title.announcement.view.none": ["projectId", "sdVersion"],
+    "servicedesk.portal.search.bar.toggled": ["sdVersion", "projectId", "isEnabled"],
+    "servicedesk.project.created.from.template": [
+        "projectId",
+        "sdVersion",
+        {
+            "templateType": ["BASIC", "CUSTOMER_SUPPORT", "ITILV2"]
+        }
+    ],
+    "servicedesk.project.sidebar.challenge.dismiss": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.customer.channels.dialog.emailaddress.copied": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.customer.channels.dialog.portalurl.copied": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.customer.channels.dialog.shown": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.customer.channels.dialog.turnonemail.clicked": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.customer.channels.dialog.turnonemail.failed": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.customer.channels.dialog.turnonemail.successful": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.invite.team.agent.allocated": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.invite.team.agent.email.new": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.invite.team.agent.email.used": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.invite.team.agent.promoted": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.invite.team.agent.removed": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.invite.team.dialog.billing.error.received": [
+        {
+            "error": ["unknown"]
+        },
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.project.sidebar.invite.team.dialog.billing.notification.received": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.invite.team.dialog.cancel": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.invite.team.dialog.open": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.invite.team.dialog.submit": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.invite.team.dialog.submit.success.roles.link.clicked": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.article.dialog.copy.clicked": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.article.dialog.edit.clicked": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.create.article.clicked": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.create.space.clicked": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.dismissed": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.dismissible.inline.dialog.shown": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.dismissible.inline.dialog.try.confluence.clicked": [
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.project.sidebar.kb.primary.nav.go.to.confluence.clicked": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.inline.dialog.shown": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.link.existing.space.clicked": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.link.existing.space.selected": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.restored": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.search.completed": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.search.completed.with.kb": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.search.none": [
+        "hashedQuery",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.project.sidebar.kb.primary.nav.search.result.clicked.newtab": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.search.result.clicked.notnewtab": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.kb.primary.nav.search.result.first.clicked.kb": [
+        "hashedQuery",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.project.sidebar.kb.primary.nav.search.result.kb.clicked": [
+        "hashedQuery",
+        "index",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.project.sidebar.kb.primary.nav.search.result.subsequent.clicked.kb": [
+        "hashedQuery",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.project.sidebar.kb.primary.nav.search.some": [
+        "hashedQuery",
+        "numberOfWords",
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.project.sidebar.optin": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.optout": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.raise.request.clicked": ["projectId", "sdVersion"],
+    "servicedesk.project.sidebar.raise.request.clicked.newtab": ["projectId", "sdVersion"],
+    "servicedesk.project.unlicensed.pageview": ["projectId", "sdVersion"],
+    "servicedesk.project.email.channel.setting": ["projectId", "numberOfEmailChannels", "multipleEmailChannelsEnabled"],
+    "servicedesk.public.rest.api.call": [
+        "httpMethodName",
+        "httpResponseCode",
+        "path",
+        "projectId",
+        "resourceMethodName",
+        "resourceName",
+        "sdVersion",
+        "userAgent"
+    ],
+    "servicedesk.queue.settings.resource.global.cache.count.disabled": ["sdVersion"],
+    "servicedesk.queue.settings.resource.global.cache.count.enabled": ["sdVersion"],
+    "servicedesk.queue.settings.resource.global.include.count.disabled": ["sdVersion"],
+    "servicedesk.queue.settings.resource.global.include.count.enabled": ["sdVersion"],
+    "servicedesk.queue.settings.resource.project.cache.count.disabled": ["projectId", "sdVersion"],
+    "servicedesk.queue.settings.resource.project.cache.count.enabled": ["projectId", "sdVersion"],
+    "servicedesk.queue.settings.resource.project.count.status.retrieved": ["projectId", "sdVersion"],
+    "servicedesk.queue.settings.resource.project.include.count.disabled": ["projectId", "sdVersion"],
+    "servicedesk.queue.settings.resource.project.include.count.enabled": ["projectId", "sdVersion"],
+    "servicedesk.queues.incident.linked.exclude.filter.used": ["sdVersion", "projectId"],
+    "servicedesk.report.target.enabled": ["projectId", "sdVersion"],
+    "servicedesk.reports.custom.series.selector.change": ["projectId", "sdVersion"],
+    "servicedesk.request.created.shared.with.organisation.via.email": ["projectId", "sdVersion"],
+    "servicedesk.request.created.shared.with.organisation.via.portal": ["projectId", "sdVersion"],
+    "servicedesk.requests.created.with.request.participants.field.not.used": ["projectId", "sdVersion"],
+    "servicedesk.requests.created.with.request.participants.field.used": ["projectId", "sdVersion"],
+    "servicedesk.request.shared.with.organisation": ["projectId", "sdVersion"],
+    "servicedesk.request.type.search.used.deprecated": ["sdVersion"],
+    "servicedesk.requests.global.title.announcement.view.header.and.message": ["projectId", "sdVersion"],
+    "servicedesk.requests.global.title.announcement.view.header.only": ["projectId", "sdVersion"],
+    "servicedesk.requests.global.title.announcement.view.message.only": ["projectId", "sdVersion"],
+    "servicedesk.requests.global.title.announcement.view.none": ["projectId", "sdVersion"],
+    "servicedesk.smartportal.title.announcement.view.header.and.message": ["projectId", "sdVersion"],
+    "servicedesk.smartportal.title.announcement.view.header.only": ["projectId", "sdVersion"],
+    "servicedesk.smartportal.title.announcement.view.message.only": ["projectId", "sdVersion"],
+    "servicedesk.smartportal.title.announcement.view.none": ["projectId", "sdVersion"],
+    "servicedesk.soy.improper.plugin.template.access": ["completeModuleKey", "sdVersion", "templateName"],
+    "servicedesk.state.scheduled.report": [
+        "hasConfluenceSystemAppLink",
+        "numberOfConfiguredSlaTimeMetrics",
+        "numberOfConfluenceAppLink",
+        "numberOfKbLinked",
+        "numberOfServiceDesks",
+        "sdVersion",
+        "hasConfluenceCloudConfigured",
+        "isSerializedProcessingEnabled",
+        "isStopUnnecessaryJiraCoreSoftwareEventsProcessingEnabled",
+        "hasEnableSlaRecalculationFromUi",
+        "isIssueHistoryBasedSlaCalculationEnabled"
+    ],
+    "servicedesk.welcome-guide": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.checklist.be.awesome.clicked": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.checklist.create.request.clicked": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.checklist.create.request.tour.raise.request.clicked": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.checklist.documentation.clicked": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.checklist.documentation.tour.clicked": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.checklist.item.completed": [
+        {
+            "itemName": ["create-request", "key-concepts", "project-settings", "view-issue"]
+        },
+        "projectId",
+        "sdVersion"
+    ],
+    "servicedesk.welcome.guide.checklist.key.concepts.clicked": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.checklist.project.settings.clicked": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.checklist.project.settings.tour.clicked": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.checklist.view.issue.clicked": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.checklist.view.issue.tour.issue.summary.clicked": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.checklist.view.issue.tour.welcome.guide.clicked": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.portal.tour.one": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.portal.tour.one.skip": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.portal.tour.three": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.portal.tour.three.back": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.portal.tour.three.close": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.portal.tour.three.queues": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.portal.tour.two": ["projectId", "sdVersion"],
+    "servicedesk.welcome.guide.portal.tour.two.skip": ["projectId", "sdVersion"],
+    "servicedesk.workload.page.pagination.request": ["projectId", "sdVersion"],
+    "servicedesk.sla.recalculation.for.single.issue.ui.triggered": [
+        "sdVersion",
+        "projectId",
+        "duration",
+        "changed",
+        {
+            "permissionType": [
+                "NO_ONE_IS_PERMITTED",
+                "JIRA_ADMIN_IS_PERMITTED",
+                "JIRA_ADMIN_AND_PROJECT_ADMIN_ARE_PERMITTED",
+                "JIRA_ADMIN_AND_PROJECT_ADMIN_AND_AGENT_ARE_PERMITTED"
+            ]
+        },
+        "issueHasLastProcessedTimeProperty"
+    ],
+    "servicedesk.sla.recalculation.manually.triggered": [
+        "projectIds",
+        "sdVersion",
+        "issues",
+        "duration",
+        "forced",
+        "changed",
+        "numberOfIssuesWithLastProcessedTimeProperty"
+    ],
+    "servicedesk.sla.recalculation.performance.old": ["projectId", "sdVersion", "issues", "duration"],
+    "servicedesk.sla.recalculation.performance.parallel": ["projectId", "sdVersion", "issues", "duration", "threads"],
+    "servicedesk.sla.recalculation.performance.old.cancelled": [
+        "projectId",
+        "sdVersion",
+        "issues",
+        "duration",
+        {
+            "reason": ["CANCELLED", "FAILED", "INTERRUPTED"]
+        }
+    ],
+    "servicedesk.sla.recalculation.performance.parallel.cancelled": [
+        "projectId",
+        "sdVersion",
+        "issues",
+        "duration",
+        "threads",
+        {
+            "reason": ["CANCELLED", "FAILED", "INTERRUPTED"]
+        }
+    ],
+    "servicedesk.anonymization.affected.entities.count": [
+        "projectId",
+        "sdVersion",
+        "count",
+        {
+            "entityName": [
+                "sd.queue.jql.affected.entity",
+                "sd.sla.goal.jqlquery.affected.entity",
+                "sd.reports.series.jql.affected.entity"
+            ]
+        }
+    ],
+    "servicedesk.page.view.queue.bulk.action.finished": [
+        "projectId",
+        "sdVersion",
+        "queueId",
+        "requestCount",
+        {
+            "actionType": ["watch", "delete", "link", "assign", "comment", "linkMajorIncidents", "deleteMajorIncidents"]
+        },
+        "duration",
+        "errorCount"
+    ],
+    "servicedesk.email.attachment.duplicate": ["issueId", "sdVersion", "fileSize"],
+    "servicedesk.email.attachment.unique": ["issueId", "sdVersion", "fileSize"],
+    "servicedesk.action.inbound.email.configuration.new": [
+        "projectId",
+        "sdVersion",
+        {
+            "authenticationMethod": ["BASIC", "OAUTH"]
+        },
+        {
+            "protocol": ["pop3", "pop3s", "imap", "imaps", "graph"]
+        },
+        "success"
+    ],
+    "servicedesk.action.inbound.email.configuration.update": [
+        "projectId",
+        "sdVersion",
+        {
+            "authenticationMethod": ["BASIC", "OAUTH"]
+        },
+        {
+            "protocol": ["pop3", "pop3s", "imap", "imaps", "graph"]
+        },
+        "success"
+    ],
+    "servicedesk.action.inbound.email.admin.delete": ["projectId", "sdVersion", "success"],
+    "servicedesk.action.oauth.inbound.email.validation": [
+        "projectId",
+        "sdVersion",
+        "success",
+        {
+            "protocol": ["pop3", "pop3s", "imap", "imaps", "graph"]
+        },
+        {
+            "provider": ["google", "microsoft", "generic"]
+        }
+    ],
+    "servicedesk.action.oauth.inbound.email.initiate.authentication": [
+        "projectId",
+        "sdVersion",
+        {
+            "provider": ["google", "microsoft", "generic"]
+        },
+        "success"
+    ],
+    "servicedesk.action.inbound.email.delete": ["projectId", "sdVersion", "success"],
+    "servicedesk.knowledge.base.settings.confluence.cloud.create": ["sdVersion", "success"],
+    "servicedesk.knowledge.base.settings.confluence.cloud.update": ["sdVersion", "success"],
+    "servicedesk.knowledge.base.settings.confluence.link.create": [
+        "sdVersion",
+        "serviceDeskId",
+        "projectId",
+        "success",
+        {
+            "platform": ["CLOUD", "SERVER"]
+        }
+    ],
+    "servicedesk.knowledge.base.settings.confluence.link.update": [
+        "sdVersion",
+        "serviceDeskId",
+        "projectId",
+        "success",
+        {
+            "platform": ["CLOUD", "SERVER"]
+        }
+    ],
+    "servicedesk.knowledge.base.project.summary": [
+        "serviceDeskId",
+        "projectId",
+        {
+            "platform": ["CLOUD", "SERVER"]
+        },
+        "linkedSpacesCount",
+        "linkedSpaceHashes[*]"
+    ],
+    "servicedesk.customer.portal.voting.enabled": ["projectId", "serviceDeskId"],
+    "servicedesk.customerview.request.mention.participant": [
+        "projectId",
+        "serviceDeskId",
+        "isAgent",
+        "mentionCount",
+        {
+            "requestFieldType": ["comment", "description"]
+        }
+    ],
+    "servicedesk.statistic.event": [
+        "sdVersion",
+        "projectId",
+        "timeMetricCount",
+        "timeMetricGoalCount",
+        "ruleSetsCount",
+        "rulesCount",
+        "whensCount",
+        "ifsCount",
+        "thensCount",
+        "queuesCount",
+        "reportsCount"
+    ],
+    "servicedesk.customerview.admin.requests.customize.opened": ["sdVersion", "projectId"],
+    "servicedesk.customerview.admin.requests.customize.saved": ["sdVersion", "projectId"],
+    "servicedesk.customerview.helpseeker.requests.customize.opened": ["sdVersion", "projectId"],
+    "servicedesk.customerview.helpseeker.requests.customize.saved": ["sdVersion", "projectId"],
+    "servicedesk.customerview.helpseeker.requests.customize.sorted": ["sdVersion", "projectId"],
+    "servicedesk.queue.heartbeat.renewed": ["queueId"],
+    "servicedesk.sla.admin.configuration.rendering.config": [
+        {
+            "renderingMode": ["HOUR_MINUTE", "HUMAN_READABLE"]
+        },
+        "sdVersion"
+    ],
+    "servicedesk.sla.admin.configuration.thread.processing.config": [
+        {
+            "processingMode": ["ON_THREAD", "SERIALISED_OFF_THREAD", "NON_SERIALISED_OFF_THREAD"]
+        },
+        "sdVersion",
+        "threadCount"
+    ],
+    "servicedesk.sla.admin.configuration.auditlog.config": ["enable", "smartCleanUpEnable", "cleanUpDays", "sdVersion"],
+    "servicedesk.admin.configuration.anonymous.portal.toggled": ["sdVersion", "enabled"],
+    "servicedesk.customerview.createRequest.save.anonymous": ["sdVersion", "isAnonymous"],
+    "organisation.add.member.event": ["sdVersion", "organisationId", "hashedUserKey"],
+    "organisation.statistic.event": ["sdVersion", "organisationId", "numOfMembers"],
+    "servicedesk.anonymous.kb.view": ["sdVersion", "serviceDeskIds"],
+    "servicedesk.anonymous.kb.search": [
+        "sdVersion",
+        "projectIds",
+        {
+            "searchType": ["SHARED_PORTAL", "PROJECT"]
+        }
+    ],
+    "servicedesk.project.public.signup.setting": ["sdVersion", "projectId", "publicSignupEnabled", "openAccessEnabled"],
+    "servicedesk.jep.mailfilter.toggle": [
+        "sdVersion",
+        {
+            "filterType": ["AUTO_REPLY", "BULK"]
+        },
+        "enabled"
+    ],
+    "servicedesk.approval.comment.setting": [
+        "sdVersion",
+        "projectId",
+        "workflowNameHash",
+        "stepId",
+        {
+            "commentsRequiredForApprove": ["true", "false"]
+        },
+        {
+            "commentsRequiredForDecline": ["true", "false"]
+        }
+    ],
+    "servicedesk.share.request.with.group.toggle.success": ["sdVersion", "projectId", "enabled"],
+    "servicedesk.share.request.with.group.toggle.failure": ["sdVersion", "projectId", "enabled"],
+    "servicedesk.share.request.with.group": [
+        "sdVersion",
+        "projectId",
+        "issueId",
+        "groupsHash",
+        {
+            "location": ["JIRA_VIEW_CREATE", "JIRA_VIEW_SHARE", "PORTAL_CREATE", "PORTAL_SHARE"]
+        }
+    ],
+    "servicedesk.unshare.request.with.group": [
+        "sdVersion",
+        "projectId",
+        "issueId",
+        "groupsHash",
+        {
+            "location": ["JIRA_VIEW_SHARE", "PORTAL_SHARE"]
+        }
+    ],
+    "servicedesk.group.statistic.event": [
+        "sdVersion",
+        "groupHash",
+        "projectIds",
+        "numOfMembers",
+        "numMembersWithJiraLicence"
+    ],
+    "servicedesk.share.request.with.organisations": [
+        "sdVersion",
+        "projectId",
+        "issueId",
+        "organisationIds",
+        {
+            "location": ["JIRA_VIEW_CREATE", "JIRA_VIEW_SHARE", "PORTAL_CREATE", "PORTAL_SHARE"]
+        }
+    ],
+    "servicedesk.unshare.request.with.organisations": [
+        "sdVersion",
+        "projectId",
+        "issueId",
+        "organisationIds",
+        {
+            "location": ["JIRA_VIEW_SHARE", "PORTAL_SHARE"]
+        }
+    ],
+    "servicedesk.latest.customer.notification.settings": [
+        "sdVersion",
+        "projectId",
+        {
+            "ruleName": [
+                "sd.notification.default.rule.issue.created.name",
+                "sd.notification.default.rule.comment.added.name",
+                "sd.notification.default.rule.comment.edited.name",
+                "sd.notification.default.rule.issue.resolved.name",
+                "sd.notification.default.rule.issue.reopened.name",
+                "sd.notification.default.rule.request.participant.added.name",
+                "sd.notification.default.rule.request.group.added.name",
+                "sd.notification.default.rule.request.organisation.added.name",
+                "sd.notification.default.rule.approval.required.name",
+                "sd.notification.default.rule.customer.visible.status.change.name"
+            ]
+        },
+        "enabled",
+        "includesRecipientNameVariable",
+        "excludeReporter",
+        {
+            "toFieldNames[*]": [
+                "reporter",
+                "new_participants",
+                "new_approvers",
+                "all_customers",
+                "new_organizations",
+                "new_groups"
+            ]
+        }
+    ],
+    "servicedesk.add.groups.to.project": ["sdVersion", "groupsHash", "projectId"],
+    "servicedesk.remove.groups.from.project": ["sdVersion", "groupsHash", "projectId"],
+    "servicedesk.share.request.with.participants": [
+        "sdVersion",
+        "projectId",
+        "issueId",
+        "nParticipants",
+        {
+            "location": ["JIRA_VIEW_CREATE", "JIRA_VIEW_SHARE", "PORTAL_CREATE", "PORTAL_SHARE"]
+        }
+    ],
+    "servicedesk.unshare.request.with.participants": [
+        "sdVersion",
+        "projectId",
+        "issueId",
+        "nParticipants",
+        {
+            "location": ["JIRA_VIEW_SHARE", "PORTAL_SHARE"]
+        }
+    ],
+    "servicedesk.share.request.with.groups.onboarding.viewonly": ["projectId", "sdVersion"],
+    "servicedesk.share.request.with.groups.onboarding.clickthrough": ["projectId", "sdVersion"],
+    "servicedesk.share.request.with.groups.custom.field.onboarding.viewonly": ["projectId", "sdVersion"],
+    "servicedesk.share.request.with.groups.custom.field.onboarding.clickthrough": ["projectId", "sdVersion"],
+    "servicedesk.admin.queue.table.actions.clone.success": ["projectId", "sdVersion"],
+    "servicedesk.admin.queue.table.actions.clone.failure": ["projectId", "sdVersion", "reason"]
+}

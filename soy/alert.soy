@@ -1,0 +1,278 @@
+{namespace ServiceDesk.Templates.Shared.Precondition}
+
+/**
+ * Alert for a misconfigured issue create screen.
+ * @param screenId
+ * @param missingFieldNames
+ * @param requestTypes
+ * @param screenSchemeName
+ * @param globalAdmin
+ */
+{template .missingFields}
+    <div class="missing-fields-alert">
+        <p>
+            {getText('sd.agent.alert.createScreenFieldsPrecondition.description', length($missingFieldNames), length($requestTypes))}
+        </p>
+
+        <ul>
+            {foreach $requestType in $requestTypes}
+                <li>{$requestType.name} <span class="issueType">({$requestType.issueTypeName})</span></li>
+            {/foreach}
+        </ul>
+
+        <p class="call-to-action">
+            {let $link}<a href="{contextPath()}/secure/admin/ConfigureFieldScreen.jspa?id={$screenId}">{/let}
+            {if $globalAdmin}
+                {getText('sd.agent.alert.createScreenFieldsPrecondition.callToAction.globalAdmin', $link, '</a>') |noAutoescape}
+            {else}
+                {getText('sd.agent.alert.createScreenFieldsPrecondition.callToAction.projectAdmin', $link, '</a>', $screenSchemeName) |noAutoescape}
+            {/if}
+        </p>
+
+        <ul>
+            {foreach $field in $missingFieldNames}
+                <li>{$field}</li>
+            {/foreach}
+        </ul>
+    </div>
+{/template}
+
+
+/**
+ * Alert that there is a field which is required but without a default value.
+ * @param fieldNames
+ * @param requestTypeId
+ * @param canEditPortal
+ * @param requestTypeUrl
+ */
+{template .missingValueAlert}
+    <div class="field-missing-value-alert">
+        <p>
+            {getText('sd.agent.alert.fieldMissingValueAlert.description')}
+        </p>
+
+        <ul>
+            {foreach $fieldName in $fieldNames}
+                <li>{$fieldName}</li>
+            {/foreach}
+        </ul>
+
+        <p class="call-to-action">
+            {let $link}<a href="{$requestTypeUrl}" class="js-alerts-dialog-closer" data-requesttype-id="{$requestTypeId}">{/let}
+            {if $canEditPortal}
+                {getText('sd.agent.alert.fieldMissingValueAlert.callToAction.projectAdmin', $link, '</a>') |noAutoescape}
+            {else}
+                {getText('sd.agent.alert.fieldMissingValueAlert.callToAction.agent')}
+            {/if}
+        </p>
+    </div>
+{/template}
+
+
+/**
+ * Alert that there are required fields without any options to select from.
+ * @param callToAction the action the user must perform to fix the problem
+ * @param customFieldId if a custom field needs fixing we include it's ID here (otherwise is null)
+ * @param fieldNames
+ * @param projectKey
+ * @param requestTypeNames
+ * @param globalAdmin
+ */
+{template .fieldMissingOptionsAlert}
+    <div class="field-missing-value-alert">
+        <p>{getText('sd.agent.alert.fieldMissingOptionsAlert.description')}</p>
+        <ul>
+            {foreach $fieldName in $fieldNames}
+                <li>{$fieldName}</li>
+            {/foreach}
+        </ul>
+
+        <p>{getText('sd.agent.alert.fieldMissingOptionsAlert.requestTypes')}</p>
+        <ul>
+            {foreach $name in $requestTypeNames}
+                <li>{$name}</li>
+            {/foreach}
+        </ul>
+
+        <p class="call-to-action">
+            {if $callToAction == 'version'}
+                {let $link}<a href="{contextPath()}/plugins/servlet/project-config/{$projectKey}/versions">{/let}
+                {getText('sd.agent.alert.fieldMissingOptionsAlert.callToAction.versions', $link, '</a>') |noAutoescape}
+            {elseif $callToAction == 'components'}
+                {let $link}<a href="{contextPath()}/plugins/servlet/project-config/{$projectKey}/components">{/let}
+                {getText('sd.agent.alert.fieldMissingOptionsAlert.callToAction.components', $link, '</a>') |noAutoescape}
+            {elseif $customFieldId != null}
+                {let $link}<a href="{contextPath()}/secure/admin/ConfigureCustomField!default.jspa?customFieldId={$customFieldId}">{/let}
+                {if $globalAdmin}
+                    {getText('sd.agent.alert.fieldMissingOptionsAlert.callToAction.customfield.globalAdmin', $link, '</a>') |noAutoescape}
+                {else}
+                    {getText('sd.agent.alert.fieldMissingOptionsAlert.callToAction.customfield.projectAdmin', $link, '</a>') |noAutoescape}
+                {/if}
+            {/if}
+        </p>
+    </div>
+{/template}
+
+/**
+ * Renders the description text for a PermissionConfiguration error
+ * @param errorsMap
+ * @param canUserAdministerJira
+ * @param canBeDismissed
+ */
+{template .permissionSchemeMisconfigAlert}
+    <p>
+        {if $canUserAdministerJira}
+            <p class="sd-fix-permissions-info">
+                {getText('sd.agent.alert.permission.misconfig.info')}
+                {call ServiceDesk.Templates.Shared.Utils.helpLink}
+                    {param helpLinkKey: 'resolve.permission.scheme.errors' /}
+                    {param analyticsKey: 'agent.precondition.error.permission.misconfig' /}
+                    {param linkText: getText('sd.agent.alert.permission.misconfig.info.link') /}
+                {/call}
+            </p>
+        {else}
+            <p>{getText('sd.agent.alert.permission.misconfig.note')}</p>
+        {/if}
+    </p>
+
+    {call aui.expander.trigger}
+        {param id: 'replace-text-trigger'/}
+        {param contentId: 'permission-error-content'/}
+        {param tag: 'a'/}
+        {param content: getText('sd.agent.alert.permission.misconfig.details.show')/}
+        {param replaceText: getText('sd.agent.alert.permission.misconfig.details.hide')/}
+    {/call}
+
+    {call aui.expander.content}
+        {param id: 'permission-error-content'/}
+        {param content}
+            <ul>
+                {foreach $error in $errorsMap}
+                    {if not isFirst($error)}
+                        <br />
+                    {/if}
+                    <li>
+                        {$error.message}
+                        <ul>
+                            {foreach $perm in $error.permissions}
+                                <li>{$perm}</li>
+                            {/foreach}
+                        </ul>
+                    </li>
+                {/foreach}
+            </ul>
+        {/param}
+    {/call}
+
+    {if $canUserAdministerJira}
+        <div class="sd-fix-permissions-errors"></div>
+        <form class="sd-permission-warning-form" action="">
+            <button type="submit" class="aui-button sd-fix-permissions-button" autocomplete="off">
+                {getText('sd.agent.alert.permission.misconfig.button')}
+            </button>
+            {if $canBeDismissed}
+                <button type="button" class="aui-button aui-button-link sd-dismiss-permission-errors-button" autocomplete="off">
+                    {getText('sd.agent.alert.permission.misconfig.dismiss.button')}
+                </button>
+            {/if}
+            <span class="sd-progress sd-fix-permissions-spinner js-status"></span>
+        </form>
+    {/if}
+
+{/template}
+
+/**
+ * Renders the description text in case of the "Run as" user setting for project in Automation is invalid
+ * @param userCanAdministerServiceDesk
+ * @param automationUrl
+ */
+{template .invalidProjectRunAsUserConfigAlert}
+    <p>
+        <p>
+            {getText('sd.automation.precondition.invalid.run.as.user.for.project.description')}
+        </p>
+
+        {if $userCanAdministerServiceDesk}
+        <a href="{$automationUrl}" class="aui-button aui-button-link js-alerts-dialog-closer">
+            {getText('sd.automation.precondition.invalid.run.as.user.for.project.link.text')}
+        </a>
+        {/if}
+    </p>
+{/template}
+
+/**
+ * Alert for legacy transition deprecation
+ * @param userCanAdministerServiceDesk
+ * @param automationUrl
+ */
+{template .legacyTransitionDeprecatedAlert}
+    <p>
+        <p>
+            {getText('sd.automation.precondition.legacy.transition.deprecated.description')}
+        </p>
+            {if $userCanAdministerServiceDesk}
+            <p>
+                {let $automationButton}<a href="{$automationUrl}" class="aui-button aui-button-link js-alerts-dialog-closer">{/let}
+                {getText('sd.automation.precondition.legacy.transition.deprecated.automation.link.admin', $automationButton, '</a>')|noAutoescape}
+            </p>
+            <p>
+                {getText('sd.automation.precondition.legacy.transition.deprecated.disable.description')}
+            </p>
+            <div class="sd-disable-legacy-transition-error"></div>
+            <form action="">
+                <button type="submit" class="aui-button sd-disable-legacy-transition-button">
+                    {getText('sd.automation.precondition.legacy.transition.deprecated.disable')}
+                </button>
+                <span class="sd-progress sd-disable-legacy-transition-spinner js-status"></span>
+            </form>
+            {else}
+            <p>
+                {getText('sd.automation.precondition.legacy.transition.deprecated.automation.link.agent')}
+            </p>
+            {/if}
+        <p class="sd-disable-legacy-transition-info">
+            {getText('sd.automation.precondition.legacy.transition.deprecated.moreinfo')}
+            {call ServiceDesk.Templates.Shared.Utils.helpKBLink}
+                {param helpLinkKey: 'legacytransition' /}
+                {param analyticsKey: 'agent.precondition.error.legacytransition' /}
+                {param linkText: getText('sd.automation.precondition.legacy.transition.deprecated.clickhere') /}
+            {/call}
+        </p>
+    </p>
+{/template}
+
+/**
+ * Alert for default notification rules
+ */
+{template .defaultNotificationRuleAlert}
+    <p>
+        {getText('sd.admin.alert.notification.misconfig.info')}
+    </p>
+    <br>
+    <p>
+        <div class="sd-fix-notification-rules-error"></div>
+    </p>
+    <p>
+        {call aui.buttons.button}
+            {param text: getText('sd.admin.alert.notification.misconfig.button')/}
+            {param extraClasses: 'js-fix-notification-rule' /}
+        {/call}
+    </p>
+{/template}
+
+/**
+ * Alert for invalid outgoing email/public signup configuration
+ * @param message
+ */
+{template .publicSignupAlert}
+    <p>
+        {$message|noAutoescape}
+    </p>
+{/template}
+
+/**
+ * Template to be used by default if the alert type is not found
+ */
+{template .defaultTemplate}
+    <p></p>
+{/template}

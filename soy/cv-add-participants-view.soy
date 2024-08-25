@@ -1,0 +1,29 @@
+{namespace ServiceDesk.Templates.Customer.AddParticipants}
+
+/**
+ * Renders the form in the inline dialog
+ * @param reqDetails
+ */
+{template .content}
+    {call aui.form.form}
+        {param method: 'POST' /}
+        {param extraClasses: 'cv-add-participants-control' /}
+        {param action: '' /}
+        {param content}
+            <div class="cv-participant-error-container js-error-container"></div>
+            <h4 class="cv-add-participant-header">
+                {getText('sd.request.participants.portal.share.title')}
+            </h4>
+
+            <sd-participants-picker data-field-id="participants" data-issue-key="{$reqDetails.key}" data-allow-signup="{$reqDetails.canSignupParticipants}" data-can-submit-email="{$reqDetails.canSubmitWithEmailAddress}"></sd-participants-picker>
+
+            <div class="cv-add-participants-buttons">
+                {call ServiceDesk.Templates.Shared.Form.submitButtons}
+                    {param submitButtonLabel: getText('sd.common.words.share') /}
+                    {param submitExtraClasses: 'js-add-button aui-button-primary' /}
+                    {param cancelExtraClasses: 'js-cancel-button' /}
+                {/call}
+            </div>
+        {/param}
+    {/call}
+{/template}

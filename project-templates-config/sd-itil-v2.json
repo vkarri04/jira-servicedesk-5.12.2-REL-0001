@@ -1,0 +1,310 @@
+{
+    "issue-type-scheme": {
+        "name": "sd.premade.issuetype.scheme.name",
+        "description": "sd.premade.issuetype.scheme.description",
+        "issue-types": [
+            {
+                "key": "incident",
+                "name": "sd.project.template.itil.issuetype.incident.name",
+                "description": "sd.project.template.itil.issuetype.incident.description",
+                "icon": "/img/issue-type-icons/incident.png",
+                "screen-scheme": "incidentScreenScheme"
+            },
+            {
+                "key": "service-request",
+                "name": "sd.project.template.itil.issuetype.service.request.name",
+                "description": "sd.project.template.itil.issuetype.service.request.description",
+                "icon": "/img/issue-type-icons/service_request.png",
+                "screen-scheme": "requestScreenScheme"
+            },
+            {
+                "key": "service-request-approvals",
+                "name": "sd.premade.project.servicedesk.issuetype.service.request.approvals.name",
+                "description": "sd.premade.project.servicedesk.issuetype.service.request.approvals.description",
+                "icon": "/img/issue-type-icons/request_with_approvals.png",
+                "screen-scheme": "requestScreenScheme"
+            },
+            {
+                "key": "change",
+                "name": "sd.project.template.itil.issuetype.change.name",
+                "description": "sd.project.template.itil.issuetype.change.description",
+                "icon": "/img/issue-type-icons/change.png",
+                "screen-scheme": "changeScreenScheme"
+            },
+            {
+                "key": "problem",
+                "name": "sd.project.template.itil.issuetype.problem.name",
+                "description": "sd.project.template.itil.issuetype.problem.description",
+                "icon": "/img/issue-type-icons/problem.png",
+                "screen-scheme": "problemScreenScheme"
+            },
+            {
+                "key": "task",
+                "name": "sd.premade.project.servicedesk.issuetype.task.name",
+                "description": "sd.premade.project.servicedesk.issuetype.task.description",
+                "icon": "/img/issue-type-icons/task.png",
+                "screen-scheme": "requestScreenScheme"
+            },
+            {
+                "key": "sub-task",
+                "name": "sd.premade.project.servicedesk.issuetype.subtask.name",
+                "description": "sd.premade.project.servicedesk.issuetype.subtask.description",
+                "icon": "/img/issue-type-icons/subtask.png",
+                "screen-scheme": "requestScreenScheme",
+                "sub-task": true
+            }
+        ]
+    },
+    "issue-type-screen-scheme": {
+        "name": "sd.premade.issuetype.screen.scheme.name",
+        "description": "sd.premade.issuetype.screen.scheme.description",
+        "default-screen-scheme": "defaultScreenScheme",
+        "screens": [
+            {
+                "key": "defaultScreen",
+                "name": "sd.premade.screen.name",
+                "description": "sd.premade.screen.description",
+                "tabs": [
+                    {
+                        "name": "sd.premade.screen.default.tab",
+                        "fields": [
+                            "summary",
+                            "description",
+                            "issuetype",
+                            "priority",
+                            "attachment",
+                            "components",
+                            "labels",
+                            "assignee",
+                            "reporter",
+                            "issuelinks",
+                            "duedate"
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "changeCreateScreen",
+                "name": "sd.project.template.itil.v2.screens.change.create.name",
+                "tabs": [
+                    {
+                        "name": "sd.premade.screen.default.tab",
+                        "fields": [
+                            "summary",
+                            "description",
+                            "issuetype",
+                            "components",
+                            "priority",
+                            "labels",
+                            "assignee",
+                            "attachment",
+                            "reporter",
+                            "issuelinks"
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "changeEditScreen",
+                "name": "sd.project.template.itil.v2.screens.change.edit.name",
+                "tabs": [
+                    {
+                        "name": "sd.premade.screen.default.tab",
+                        "fields": [
+                            "summary",
+                            "description",
+                            "issuetype",
+                            "priority",
+                            "attachment",
+                            "components",
+                            "labels",
+                            "assignee",
+                            "reporter",
+                            "issuelinks"
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "incidentCreateScreen",
+                "name": "sd.project.template.itil.v2.screens.incident.create.name",
+                "tabs": [
+                    {
+                        "name": "sd.premade.screen.default.tab",
+                        "fields": [
+                            "summary",
+                            "description",
+                            "issuetype",
+                            "priority",
+                            "attachment",
+                            "components",
+                            "labels",
+                            "assignee",
+                            "reporter",
+                            "issuelinks"
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "incidentEditScreen",
+                "name": "sd.project.template.itil.v2.screens.incident.edit.name",
+                "tabs": [
+                    {
+                        "name": "sd.premade.screen.default.tab",
+                        "fields": [
+                            "summary",
+                            "description",
+                            "issuetype",
+                            "priority",
+                            "attachment",
+                            "components",
+                            "labels",
+                            "assignee",
+                            "reporter",
+                            "issuelinks"
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "problemCreateScreen",
+                "name": "sd.project.template.itil.v2.screens.problem.create.name",
+                "tabs": [
+                    {
+                        "name": "sd.premade.screen.default.tab",
+                        "fields": [
+                            "summary",
+                            "description",
+                            "issuetype",
+                            "priority",
+                            "attachment",
+                            "components",
+                            "labels",
+                            "assignee",
+                            "reporter",
+                            "issuelinks"
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "problemEditScreen",
+                "name": "sd.project.template.itil.v2.screens.problem.edit.name",
+                "tabs": [
+                    {
+                        "name": "sd.premade.screen.default.tab",
+                        "fields": [
+                            "summary",
+                            "description",
+                            "issuetype",
+                            "priority",
+                            "attachment",
+                            "components",
+                            "labels",
+                            "assignee",
+                            "reporter",
+                            "issuelinks"
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "requestCreateScreen",
+                "name": "sd.project.template.itil.v2.screens.request.create.name",
+                "tabs": [
+                    {
+                        "name": "sd.premade.screen.default.tab",
+                        "fields": [
+                            "summary",
+                            "description",
+                            "issuetype",
+                            "priority",
+                            "attachment",
+                            "components",
+                            "labels",
+                            "assignee",
+                            "reporter",
+                            "issuelinks"
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "requestEditScreen",
+                "name": "sd.project.template.itil.v2.screens.request.edit.name",
+                "tabs": [
+                    {
+                        "name": "sd.premade.screen.default.tab",
+                        "fields": [
+                            "summary",
+                            "description",
+                            "issuetype",
+                            "priority",
+                            "attachment",
+                            "components",
+                            "labels",
+                            "assignee",
+                            "reporter",
+                            "issuelinks"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "screen-schemes": [
+            {
+                "key": "defaultScreenScheme",
+                "name": "sd.premade.screen.scheme.name",
+                "description": "sd.premade.screen.scheme.description",
+                "default-screen": "defaultScreen"
+            },
+            {
+                "key": "changeScreenScheme",
+                "name": "sd.project.template.itil.v2.screen.scheme.change.name",
+                "default-screen": "changeCreateScreen",
+                "create-screen": "changeCreateScreen",
+                "edit-screen": "changeEditScreen",
+                "view-screen": "changeEditScreen"
+            },
+            {
+                "key": "incidentScreenScheme",
+                "name": "sd.project.template.itil.v2.screen.scheme.incident.name",
+                "default-screen": "incidentCreateScreen",
+                "create-screen": "incidentCreateScreen",
+                "edit-screen": "incidentEditScreen",
+                "view-screen": "incidentEditScreen"
+            },
+            {
+                "key": "problemScreenScheme",
+                "name": "sd.project.template.itil.v2.screen.scheme.problem.name",
+                "default-screen": "problemCreateScreen",
+                "create-screen": "problemCreateScreen",
+                "edit-screen": "problemEditScreen",
+                "view-screen": "problemEditScreen"
+            },
+            {
+                "key": "requestScreenScheme",
+                "name": "sd.project.template.itil.v2.screen.scheme.request.name",
+                "default-screen": "requestCreateScreen",
+                "create-screen": "requestCreateScreen",
+                "edit-screen": "requestEditScreen",
+                "view-screen": "requestEditScreen"
+            }
+        ]
+    },
+    "resolutions": [
+        {
+            "name": "jira.translation.resolution.done.name",
+            "description": "jira.translation.resolution.done.desc"
+        },
+        {
+            "name": "jira.translation.resolution.will.not.do.name",
+            "description": "jira.translation.resolution.will.not.do.desc"
+        },
+        {
+            "name": "jira.translation.resolution.duplicate.name",
+            "description": "jira.translation.resolution.duplicate.desc"
+        }
+    ]
+}

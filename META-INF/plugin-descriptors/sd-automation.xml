@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sd-automation description="Modules for the service project automation plugin">
+
+    <automation-rule-execution-preprocessor key="customer-context-preprocessor"
+                                            name="Customer Context Preprocessor"
+                                            class="com.atlassian.servicedesk.internal.automation.CustomerContextRuleExecutionPreprocessor">
+    </automation-rule-execution-preprocessor>
+
+    <automation-rule-execution-interceptor key="customer-context-interceptor"
+                                           name="Customer Context Interceptor"
+                                           class="com.atlassian.servicedesk.internal.automation.CustomerContextRuleExecutionInterceptor">
+    </automation-rule-execution-interceptor>
+
+    <automation-rule-execution-preprocessor key="outside-customer-context-preprocessor"
+                                            name="Outside Customer Context Preprocessor"
+                                            class="com.atlassian.servicedesk.internal.automation.OutsideCustomerContextRuleRuleExecutionPreprocessor">
+    </automation-rule-execution-preprocessor>
+
+    <automation-rule-execution-interceptor key="outside-customer-context-interceptor"
+                                           name="Outside Customer Context Interceptor"
+                                           class="com.atlassian.servicedesk.internal.automation.OutsideCustomerContextRuleRuleExecutionInterceptor">
+    </automation-rule-execution-interceptor>
+
+    <!--
+        SLA When handler
+    -->
+    <automation-rule-when-handler key="sla-threshold-when-handler"
+                                  name="SLA time remaining"
+                                  name-i18n-key="sd.sla.threshold.when.name"
+                                  unique="false">
+        <icon-class>time</icon-class>
+
+        <provides>
+            <provide>issue</provide>
+        </provides>
+
+        <visualiser
+                class="com.atlassian.servicedesk.internal.automation.rulewhen.SLAThresholdEventWhenHandlerVisualiser"/>
+        <validator
+                class="com.atlassian.servicedesk.internal.automation.rulewhen.SLAThresholdEventWhenHandlerValidator"/>
+        <web-form-module>servicedesk/components/sla-when-handler/sla-when-condition</web-form-module>
+
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </automation-rule-when-handler>
+
+    <automation-rule-event-when-handler key="sla-threshold-event-when-handler"
+                                        class="com.atlassian.servicedesk.internal.automation.rulewhen.SLAThresholdEventWhenHandler">
+        <!-- deliberately using complete key here - ensure both work properly -->
+        <automation-rule-when-handler complete-key="com.atlassian.servicedesk:sla-threshold-when-handler"/>
+    </automation-rule-event-when-handler>
+
+    <client-resource key="automation-blueprint-images">
+        <context>sd.project.admin</context>
+        <directory location="img/automation" />
+    </client-resource>
+
+    <automation-blueprint key="sd-automation-keep-on-top-of-sla" name="Keep on top of SLAs"
+                          i18n-name-key="sd.sla.threshold.when.blueprint.name"
+                          class="com.atlassian.servicedesk.internal.automation.blueprints.KeepOnTopOfSLABlueprint"
+                          weight="40" >
+
+        <description key="sd.sla.threshold.when.blueprint.description"/>
+        <help-description key="sd.automation.blueprint.help.description" />
+        <help-template>com.atlassian.servicedesk:soy/ServiceDesk.Templates.Agent.Settings.Automation.Blueprints.Help.slaHelp</help-template>
+
+        <condition class="com.atlassian.servicedesk.internal.conditions.TimeMetricsExistWithThresholdsCondition" />
+        <resource name="automation-blueprint-images">
+            <icon>ontop-of-sla.svg</icon>
+        </resource>
+
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </automation-blueprint>
+
+    <automation-blueprint key="sd-automation-transition-on-comment-blueprint" name="Transition on comment"
+                          i18n-name-key="sd.automation.blueprint.comment.transition.name"
+                          class="com.atlassian.servicedesk.internal.automation.blueprints.TransitionOnCommentBlueprint"
+                          weight="10" >
+
+        <description key="sd.automation.blueprint.comment.transition.description" />
+        <help-description key="sd.automation.blueprint.help.description" />
+        <help-template>com.atlassian.servicedesk:soy/ServiceDesk.Templates.Agent.Settings.Automation.Blueprints.Help.transitionHelp</help-template>
+        <resource name="automation-blueprint-images">
+            <icon>transition-on-comment.svg</icon>
+        </resource>
+
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </automation-blueprint>
+
+    <automation-blueprint key="sd-automation-reopen-on-comment-blueprint" name="Re-open on customer comment"
+                          i18n-name-key="sd.automation.blueprint.comment.reopen.name"
+                          class="com.atlassian.servicedesk.internal.automation.blueprints.ReopoenOnCommentBlueprint"
+                          weight="20" >
+
+        <description key="sd.automation.blueprint.comment.reopen.description" />
+        <help-description key="sd.automation.blueprint.help.description" />
+        <help-template>com.atlassian.servicedesk:soy/ServiceDesk.Templates.Agent.Settings.Automation.Blueprints.Help.reopenHelp</help-template>
+        <resource name="automation-blueprint-images">
+            <icon>reopen-on-comment.svg</icon>
+        </resource>
+
+        <condition class="com.atlassian.servicedesk.internal.api.condition.ServiceDeskOperationalCondition" />
+    </automation-blueprint>
+
+</sd-automation>

@@ -1,0 +1,25 @@
+{namespace ServiceDesk.Templates.Admin.config}
+
+/**
+* Renders popup dialog that will show a list of unused SLA custom fields.
+* @param unusedCustomFields
+*/
+{template .cleanUpSlaFieldsDialog}
+<h2 class="dialog-title">{getText('sd.admin.plugin.config.sla.unused.fields.dialog.title')}</h2>
+<form class="aui" action="#" method="post">
+    <div class="form-body">
+        <p>{getText('sd.admin.plugin.config.sla.unused.fields.dialog.message')}</p>
+        <ul>
+            {foreach $unusedCustomField in $unusedCustomFields}
+                <li>{$unusedCustomField.name}</li>
+            {/foreach}
+        </ul>
+    </div>
+    <div class="form-footer buttons-container">
+        <div class="buttons">
+            <input type="submit" class="aui-button sd-clean-up-sla-custom-fields" value="{getText('sd.admin.plugin.config.confirm')}" />
+            <a href='#' class="cancel">{getText('sd.common.words.cancel')}</a>
+        </div>
+    </div>
+</form>
+{/template}

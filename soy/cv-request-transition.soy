@@ -1,0 +1,49 @@
+{namespace ServiceDesk.Templates.Customer}
+
+/**
+ * Renders form prior to executing a portal transition
+ * @param transitionName
+ * @param canAddComment
+ * @param submitName
+ */
+{template .requestTransitionDialog}
+{call aui.form.form}
+    {param action: '#' /}
+    {param isTopLabels: true /}
+    {param extraClasses: 'sd-transition-action-form' /}
+    {param content}
+        {call aui.dialog.dialog2Content}
+            {param visible: true /}
+            {param titleText: $transitionName /}
+            {param content}
+                {if $canAddComment == true}
+                    <label for="sd-transition-action-comment">{getText('sd.customer.transition.action.comment.title')}</label>
+                    {call aui.form.fieldGroup}
+                        {param id: 'sd-transition-action-form-fieldgroup' /}
+                        {param content}
+                            {call aui.form.textarea}
+                                {param id: 'sd-transition-action-comment' /}
+                                {param rows: 4 /}
+                                {param isAutofocus: true /}
+                                {param name: 'comment' /}
+                                {param extraAttributes: ['placeholder': getText('sd.customer.transition.action.comment')] /}
+                                {param extraClasses: 'full-width-field' /}
+                            {/call}
+                        {/param}
+                    {/call}
+                {else}
+                    {getText('sd.customer.transition.action.no.comment.message')}
+                {/if}
+            {/param}
+            {param footerActionContent}
+                {call ServiceDesk.Templates.Shared.Form.submitButtons}
+                    {param submitExtraClasses: 'aui-button-primary' /}
+                    {param submitButtonLabel: $submitName /}
+                    {param cancelExtraClasses: 'sd-transition-action-cancel' /}
+                    {param alignment: 'left' /}
+                {/call}
+            {/param}
+        {/call}
+    {/param}
+{/call}
+{/template}
